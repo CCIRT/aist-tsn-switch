@@ -6,13 +6,13 @@ We aim to provide an open platform that can be used as a reference design so sci
 This repository includes two flavors of an L2 TSN switch supporting two different scheduling algorithms. Both designes are implemented and validated on an AMD Xilinx KC705 FPGA evaluation board:
 
 - L2 switch supporting CBS:
-  - [Specification]
-  - [FPGA design docs]
+  - [Specification]()
+  - [FPGA design docs]()
 
 
 - L2 switch supporting ATS:
-  - [Specification]
-  - [FPGA design docs]
+  - [Specification]()
+  - [FPGA design docs]()
 
 ## Licensing
 Copyright (c) 2024 National Institute of Advanced Industrial Science and Technology (AIST)
