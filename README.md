@@ -25,7 +25,7 @@ This repository includes two flavors of an L2 TSN switch supporting two differen
 ## Licensing
 Copyright (c) 2024 National Institute of Advanced Industrial Science and Technology (AIST)
 All rights reserved.
-This software is released under the MIT License.
+This software is released under the [MIT License](https://github.com/CCIRT/aist-tsn/blob/main/LICENSE).
 
 When using the provided designs in this repository, please refer to the following citations:
 - CBS:
