@@ -9,6 +9,7 @@ This repository includes two flavors of an L2 TSN switch supporting two differen
 - L2 switch supporting CBS:
   - [Specification]()
   - [FPGA design docs]()
+![alt text](https://github.com/CCIRT/aist-tsn/blob/main/overwiew_ats-switch.drawio.svg)
 
 - L2 switch supporting ATS:
   - [Specification]()
