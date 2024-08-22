@@ -50,15 +50,10 @@ Bitstreams will be generated below.
   -build-device/vivado/cbs-switch/cbs-switch.prj/cbs-switch.runs/impl_1/design_1_wrapper.bit
 
 ## Directories
-├── 3rdparty   : 3rd-party projects
-
-├── cmake      : Common CMake files
-
-├── device     : Source code for device including FPGA
-
-├── docs       : Documentation
-
-├── evaluation : Evaluation data for paper
-
-└── util       : Scripts for FPGA register modification
+├── 3rdparty   : 3rd-party projects  
+├── cmake      : Common CMake files  
+├── device     : Source code for device including FPGA  
+├── docs       : Documentation  
+├── evaluation : Evaluation experiments and results  
+└── util       : Scripts for FPGA register modification  
 
