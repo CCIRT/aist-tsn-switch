@@ -35,7 +35,7 @@ When using the provided designs in this repository, please refer to the followin
 > _Akram BEN AHMED, Takahiro HIROFUCHI, and Takaaki FUKAI, "Hardware design and Evaluation of an FPGA-based Network Switch Supporting Asynchronous Traffic Shaping for Time Sensitive Networking", IEEE Access, Sep 2024_
  
 ## Build device
-**NOTE:** ⚠️ A license is required to synthesize Vivado project for KC705.
+**NOTE:** ⚠️ A license is required to synthesize Vivado project for KC705.  
 The design was implemented and validated using the following environment:
 - Ubuntu 20.04.3 LTS
 - CMake 3.14 or later
