@@ -51,9 +51,14 @@ Bitstreams will be generated below.
 
 ## Directories
 ├── 3rdparty   : 3rd-party projects
+
 ├── cmake      : Common CMake files
+
 ├── device     : Source code for device including FPGA
+
 ├── docs       : Documentation
+
 ├── evaluation : Evaluation data for paper
+
 └── util       : Scripts for FPGA register modification
 
