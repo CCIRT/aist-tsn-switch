@@ -4,7 +4,7 @@ It introduces the hardware design of an L2 network switch design supporting Time
 We aim to provide an open platform that can be used as a reference design so scientists can implement their desired functionalities and make the different evaluations and comparisons to highlight the appropriate design choices for a given TSN system.
 
 ## Designs
-This repository includes two flavors of an L2 TSN switch supporting two different scheduling algorithms. Both designes are implemented and validated on an AMD Xilinx KC705 FPGA evaluation board which was attached to an [Opsero OP031 Ethernet FMC] (https://ethernetfmc.com/docs/ethernet-fmc/compatibility/) via the “FMC HPC" connector:
+This repository includes two flavors of an L2 TSN switch supporting two different scheduling algorithms. Both designes are implemented and validated on an AMD Xilinx KC705 FPGA evaluation board which was attached to an [Opsero OP031 Ethernet FMC](https://ethernetfmc.com/docs/ethernet-fmc/compatibility/) via the “FMC HPC" connector:
 
 - L2 switch supporting CBS:
   - [Specification]()
