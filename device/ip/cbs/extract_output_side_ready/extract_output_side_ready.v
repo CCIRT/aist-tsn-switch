@@ -1,0 +1,1 @@
+../../../rtl/src/cbs/extract_output_side_ready.v
