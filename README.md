@@ -42,13 +42,13 @@ It will be our encouragement.
 
 The design was implemented and validated using the following environment
 
-## Hardware
+### Hardware
 
 - AMD Kintex 7 FPGA KC705 Evaluation Kit
 - Opsero OP031 Ethernet FMC
   - Connect to the "FMC HPC" connector on KC705
 
-## Software
+### Software
 
 - Ubuntu 20.04.3 LTS
 - Vivado v2022.1
@@ -90,7 +90,7 @@ The Continuum Computing Infrastructure Research Team (CCIRT), the Digital Archit
 
 E-mail: <M-digiarc-ccirt-contact-ml@aist.go.jp>
 
-We are hiring posdocs and technical staffs. Collaborations are also welcome.
+We are hiring postdocs and technical staffs. Collaborations are also welcome.
 
 ## Acknowledgment
 
