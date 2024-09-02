@@ -1,7 +1,7 @@
 # AIST-TSN
 
 AIST-TSN is an open source project developed by the National Institute of Advanced Industrial Science and Technology (AIST), Japan.
-It introduces the hardware design of an L2 network switch design supporting Time Sensitive Networks (TSN).
+It introduces the hardware design of an L2 network switch supporting Time Sensitive Networks (TSN).
 We aim to provide an open platform that can be used as a reference design so scientists can implement their desired functionalities and make the different evaluations and comparisons to highlight the appropriate design choices for a given TSN system.
 
 ## Designs
@@ -33,7 +33,7 @@ CBS:
 > Akram BEN AHMED, Takahiro HIROFUCHI, and Takaaki FUKAI "FPGA-based Network Switch Architecture Supporting Credit Based Shaper for Time Sensitive Networks", The 29th IEEE International Conference on Emerging Technologies and Factory Automation (ETFA2024), Sep 2024
 
 ATS:
-> Akram BEN AHMED, Takahiro HIROFUCHI, and Takaaki FUKAI, [Hardware design and Evaluation of an FPGA-based Network Switch Supporting Asynchronous Traffic Shaping for Time Sensitive Networking](https://ieeexplore.ieee.org/document/10658978), IEEE Access, Sep 2024
+> Akram BEN AHMED, Takahiro HIROFUCHI, and Takaaki FUKAI, "Hardware design and Evaluation of an FPGA-based Network Switch Supporting Asynchronous Traffic Shaping for Time Sensitive Networking", [IEEE Access](https://ieeexplore.ieee.org/document/10658978), Aug 2024
 
 We would be happy to hear from you when you use the deliverables from this repository in your project.
 It will be our encouragement.
