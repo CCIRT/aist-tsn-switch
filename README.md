@@ -33,7 +33,7 @@ CBS:
 > Akram BEN AHMED, Takahiro HIROFUCHI, and Takaaki FUKAI "FPGA-based Network Switch Architecture Supporting Credit Based Shaper for Time Sensitive Networks", The 29th IEEE International Conference on Emerging Technologies and Factory Automation (ETFA2024), Sep 2024
 
 ATS:
-> Akram BEN AHMED, Takahiro HIROFUCHI, and Takaaki FUKAI, "Hardware design and Evaluation of an FPGA-based Network Switch Supporting Asynchronous Traffic Shaping for Time Sensitive Networking", IEEE Access, Sep 2024
+> Akram BEN AHMED, Takahiro HIROFUCHI, and Takaaki FUKAI, [Hardware design and Evaluation of an FPGA-based Network Switch Supporting Asynchronous Traffic Shaping for Time Sensitive Networking](https://ieeexplore.ieee.org/document/10658978), IEEE Access, Sep 2024
 
 We would be happy to hear from you when you use the deliverables from this repository in your project.
 It will be our encouragement.
