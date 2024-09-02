@@ -1,7 +1,7 @@
 # AIST-TSN
 
 AIST-TSN is an open source project developed by the National Institute of Advanced Industrial Science and Technology (AIST), Japan.
-It introduces the hardware design of an L2 network switch design supporting Time Sensitive Networks (TSN).
+It introduces the hardware design of an L2 network switch supporting Time Sensitive Networks (TSN).
 We aim to provide an open platform that can be used as a reference design so scientists can implement their desired functionalities and make the different evaluations and comparisons to highlight the appropriate design choices for a given TSN system.
 
 ## Designs
