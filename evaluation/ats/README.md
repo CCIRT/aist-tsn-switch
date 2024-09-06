@@ -110,7 +110,7 @@ $ sudo ip link set dev enp4s0.5 up
 ```
 
 ## Build plget
-Please refer [../ats/README.md](../ats/README.md)
+Please refer [../cbs/README.md](../cbs/README.md)
 
 ## Supplementary information
 
