@@ -6,7 +6,7 @@ We aim to provide an open platform that can be used as a reference design so sci
 
 ## Designs
 
-This repository includes two flavors of an L2 TSN switch supporting two different scheduling algorithms. Both designs are implemented and validated on an AMD Xilinx KC705 FPGA evaluation board which was attached to an [Opsero OP031 Ethernet FMC](https://ethernetfmc.com/docs/ethernet-fmc/compatibility/) via the "FMC HPC" connector:
+This repository includes two flavors of an L2 TSN switch supporting two different scheduling algorithms. Both designs are implemented and validated on an AMD Xilinx KC705 FPGA evaluation board which was attached to an [Opsero OP031-2V5 Ethernet FMC](https://ethernetfmc.com/docs/ethernet-fmc/compatibility/) via the "FMC HPC" connector:
 
 - L2 switch supporting CBS:
   - [Specification](./docs/cbs-switch/specification.md)
