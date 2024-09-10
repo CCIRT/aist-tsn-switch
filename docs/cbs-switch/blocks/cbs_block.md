@@ -1,6 +1,6 @@
 # CBS block
 
-![cbs_block_overview](./img/cbs_block_overview.drawio.svg)
+![cbs_block_overview](./cbs_block_overview.drawio.svg)
 
 - This block has 8 inputs, which is priority 0 to 7
 - All inputs has FIFO for storing Ethernet frame
