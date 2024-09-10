@@ -1,6 +1,6 @@
 # Switch with FDB block
 
-![switch_with_fdb_block_overview](./img/switch_with_fdb_block_overview.drawio.svg)
+![switch_with_fdb_block_overview](./switch_with_fdb_block_overview.drawio.svg)
 
 - This block provides Ethernet frame switching based on Destination MAC Address
   - When Destination MAC Address is already registered in FDB, output the Ethernet frame only to the registered port
