@@ -30,11 +30,45 @@ This software is released under the [MIT License](LICENSE).
 When using the provided designs in this repository, please refer to the following citations:
 
 CBS:
-> Akram BEN AHMED, Takahiro HIROFUCHI, and Takaaki FUKAI "FPGA-based Network Switch Architecture Supporting Credit Based Shaper for Time Sensitive Networks", The 29th IEEE International Conference on Emerging Technologies and Factory Automation (ETFA2024), Sep 2024
+> Akram BEN AHMED, Takahiro HIROFUCHI, and Takaaki FUKAI "FPGA-based Network Switch Architecture Supporting Credit Based Shaper for Time Sensitive Networks", The 29th IEEE International Conference on Emerging Technologies and Factory Automation - [ETFA2024](./docs/IEEEAccess_June2024_Published_corrected.pdf), pp. 1-8, Sep 2024
 
 ATS:
 > Akram BEN AHMED, Takahiro HIROFUCHI, and Takaaki FUKAI, "Hardware design and Evaluation of an FPGA-based Network Switch Supporting Asynchronous Traffic Shaping for Time Sensitive Networking", [IEEE Access](https://ieeexplore.ieee.org/document/10658978), vol. 12, pp. 123149-123165, Aug 2024 
 
+### Erratum Notice
+Unfortunately, we have discovered the presence of a couple of typos in the above published IEEE Access article.
+We urge readers to pay attention to these typos and refer to the [Corrected version](./docs/IEEEAccess_June2024_Published_corrected.pdf) as they may compromise the correct understanding of our proposed approach. The discovered typos are summarized as follow:
+
+**Page 5, Section IV.A:** 
+> Physical Coding Sublayer (PCS) <br>
+
+Must be corrected to:<br>
+
+> Frame Check Sequence (FCS)
+
+**Page 6, Algoithm 1:** 
+> BucketFullTime = BucketEmptyTime **/** EmptyToFullDuration; <br>
+> SchedulerEligibilityTime = BucketEmptyTime **/** LengthRecoveryDuration; <br>
+
+Must be corrected to:<br>
+
+> BucketFullTime = BucketEmptyTime **+** EmptyToFullDuration; <br>
+> SchedulerEligibilityTime = BucketEmptyTime **+** LengthRecoveryDuration; 
+
+**Page 7, End of Section IV-C-2:**
+> In our prototype, ... the Input Ethernet frame embedded in the **Ethernet** Header, <br>
+
+Must be corrected to:<br>
+
+> In our prototype, ... the Input Ethernet frame embedded in the **IP** Header 
+
+**Page 8, End of Section IV-E:**
+> If EligibilityTime **<** (t), ... <br>
+> EligibilityTime **≥** (t), ...
+
+Must be corrected to:
+> If  (t) **<** EligibilityTime, ... <br>
+>  (t) **≥** EligibilityTime, ...
 
 We would be happy to hear from you when you use the deliverables from this repository in your project.
 It will be our encouragement.
