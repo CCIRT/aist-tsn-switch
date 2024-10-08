@@ -39,21 +39,21 @@ ATS:
 Unfortunately, we have discovered the presence of a couple of typos in the above published [IEEE Access](https://ieeexplore.ieee.org/document/10658978) article.
 We urge readers to pay attention to these typos as they may compromise the correct understanding of our proposed approach:
 
-- Page 6, Algoithm 1:
+**Page 6, Algoithm 1:** 
 > SchedulerEligibilityTime = BucketEmptyTime **/** LengthRecoveryDuration; <br>
 
 Must be corrected to:<br>
 
 > SchedulerEligibilityTime = BucketEmptyTime **+** LengthRecoveryDuration; 
-  
-- Page 7, End of Section IV-C-2:
+
+**Page 7, End of Section IV-C-2:**
 > In our prototype, ... the Input Ethernet frame embedded in the **Ethernet** Header, <br>
 
 Must be corrected to:<br>
 
 > In our prototype, ... the Input Ethernet frame embedded in the **IP** Header 
 
-- Page 8, End of Section IV-E:
+**Page 8, End of Section IV-E:**
 > If EligibilityTime **<** (t), ... <br>
 > EligibilityTime **≥** (t), ...
 
