@@ -40,11 +40,9 @@ Unfortunately, we have discovered the presence of a couple of typos in the above
 We urge readers to pay attention to these typos as they may compromise the correct understanding of our proposed approach:
 
 - Page 6, Algoithm 1:
-  > SchedulerEligibilityTime = BucketEmptyTime **/** LengthRecoveryDuration; (Incorrect!)
-
-Must be correct to:
-
-  > SchedulerEligibilityTime = BucketEmptyTime **+** LengthRecoveryDuration; (Correct!)
+> - SchedulerEligibilityTime = BucketEmptyTime **/** LengthRecoveryDuration; (Incorrect!)<br>
+Must be corrected to:<br>
+> - SchedulerEligibilityTime = BucketEmptyTime **+** LengthRecoveryDuration; (Correct!)
   
 - Page 7, End of Section IV-C-2:
     > In our prototype, ... the Input Ethernet frame embedded in the **Ethernet** Header, (Incorrect!)
