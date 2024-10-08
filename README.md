@@ -43,16 +43,21 @@ We urge readers to pay attention to these typos as they may compromise the corre
   > SchedulerEligibilityTime = BucketEmptyTime **/** LengthRecoveryDuration; (Incorrect!)
 
 Must be correct to:
+
   > SchedulerEligibilityTime = BucketEmptyTime **+** LengthRecoveryDuration; (Correct!)
   
 - Page 7, End of Section IV-C-2:
     > In our prototype, ... the Input Ethernet frame embedded in the **Ethernet** Header, (Incorrect!)
 
 Must be correct to:
+
     > In our prototype, ... the Input Ethernet frame embedded in the **IP** Header (Correct!)
 
 - Page 8, End of Section IV-E:
     >If EligibilityTime < (t), ...
+
+Must be correct to:
+
     >EligibilityTime ≥ (t),
 
 Must be corrected to:
