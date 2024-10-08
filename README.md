@@ -47,19 +47,19 @@ Must be corrected to:<br>
 > SchedulerEligibilityTime = BucketEmptyTime **+** LengthRecoveryDuration; 
   
 - Page 7, End of Section IV-C-2:
-> - In our prototype, ... the Input Ethernet frame embedded in the **Ethernet** Header, <br>
+> In our prototype, ... the Input Ethernet frame embedded in the **Ethernet** Header, <br>
 
 Must be corrected to:<br>
 
-> - In our prototype, ... the Input Ethernet frame embedded in the **IP** Header 
+> In our prototype, ... the Input Ethernet frame embedded in the **IP** Header 
 
 - Page 8, End of Section IV-E:
-> - If EligibilityTime **<** (t), ... <br>
-> - EligibilityTime **≥** (t),
+> If EligibilityTime **<** (t), ... <br>
+> EligibilityTime **≥** (t),
 
 Must be corrected to:
-> - If EligibilityTime **≤** (t), ...
-> - EligibilityTime **>** (t),
+> If EligibilityTime **≤** (t), ... <br>
+>  EligibilityTime **>** (t),
 
 We would be happy to hear from you when you use the deliverables from this repository in your project.
 It will be our encouragement.
