@@ -41,7 +41,9 @@ We urge readers to pay attention to these typos as they may compromise the corre
 
 - Page 6, Algoithm 1:
 > - SchedulerEligibilityTime = BucketEmptyTime **/** LengthRecoveryDuration; (Incorrect!)<br>
+
 Must be corrected to:<br>
+
 > - SchedulerEligibilityTime = BucketEmptyTime **+** LengthRecoveryDuration; (Correct!)
   
 - Page 7, End of Section IV-C-2:
