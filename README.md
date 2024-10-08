@@ -40,29 +40,26 @@ Unfortunately, we have discovered the presence of a couple of typos in the above
 We urge readers to pay attention to these typos as they may compromise the correct understanding of our proposed approach:
 
 - Page 6, Algoithm 1:
-> - SchedulerEligibilityTime = BucketEmptyTime **/** LengthRecoveryDuration; (Incorrect!)<br>
+> - SchedulerEligibilityTime = BucketEmptyTime **/** LengthRecoveryDuration; <br>
 
 Must be corrected to:<br>
 
-> - SchedulerEligibilityTime = BucketEmptyTime **+** LengthRecoveryDuration; (Correct!)
+> - SchedulerEligibilityTime = BucketEmptyTime **+** LengthRecoveryDuration; 
   
 - Page 7, End of Section IV-C-2:
-    > In our prototype, ... the Input Ethernet frame embedded in the **Ethernet** Header, (Incorrect!)
+> - In our prototype, ... the Input Ethernet frame embedded in the **Ethernet** Header, <br>
 
-Must be correct to:
+Must be corrected to:<br>
 
-    > In our prototype, ... the Input Ethernet frame embedded in the **IP** Header (Correct!)
+> - In our prototype, ... the Input Ethernet frame embedded in the **IP** Header 
 
 - Page 8, End of Section IV-E:
-    >If EligibilityTime < (t), ...
-
-Must be correct to:
-
-    >EligibilityTime ≥ (t),
+> - If EligibilityTime < (t), ... <br>
+> - EligibilityTime ≥ (t),
 
 Must be corrected to:
-    > If EligibilityTime < (t), ...
-    > EligibilityTime ≥ (t),
+> - If EligibilityTime ≤ (t), ...
+> - EligibilityTime > (t),
 
 We would be happy to hear from you when you use the deliverables from this repository in your project.
 It will be our encouragement.
