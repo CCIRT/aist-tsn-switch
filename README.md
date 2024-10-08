@@ -41,15 +41,10 @@ We urge readers to pay attention to these typos as they may compromise the corre
 
 - Page 6, Algoithm 1:
   - SchedulerEligibilityTime = BucketEmptyTime **/** LengthRecoveryDuration; (Incorrect!)
-
--->
-
   - SchedulerEligibilityTime = BucketEmptyTime **+** LengthRecoveryDuration; (Correct!)
   
 - Page 7, End of Section IV-C-2:
     - In our prototype, ... the Input Ethernet frame embedded in the **Ethernet** Header, (Incorrect!)
-
--->  
     - In our prototype, ... the Input Ethernet frame embedded in the **IP** Header (Correct!)
 
 We would be happy to hear from you when you use the deliverables from this repository in your project.
