@@ -35,6 +35,9 @@ CBS:
 ATS:
 > Akram BEN AHMED, Takahiro HIROFUCHI, and Takaaki FUKAI, "Hardware design and Evaluation of an FPGA-based Network Switch Supporting Asynchronous Traffic Shaping for Time Sensitive Networking", [IEEE Access](https://ieeexplore.ieee.org/document/10658978), vol. 12, pp. 123149-123165, Aug 2024 
 
+```diff
+Errata notice:
+```
 
 We would be happy to hear from you when you use the deliverables from this repository in your project.
 It will be our encouragement.
