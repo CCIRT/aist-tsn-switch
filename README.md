@@ -44,7 +44,7 @@ We urge readers to pay attention to these typos as they may compromise the corre
 
 Must be corrected to:<br>
 
-  > SchedulerEligibilityTime = BucketEmptyTime **+** LengthRecoveryDuration; 
+    > SchedulerEligibilityTime = BucketEmptyTime **+** LengthRecoveryDuration; 
   
 - Page 7, End of Section IV-C-2:
 > - In our prototype, ... the Input Ethernet frame embedded in the **Ethernet** Header, <br>
