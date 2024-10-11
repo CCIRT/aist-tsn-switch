@@ -40,10 +40,12 @@ Unfortunately, we have discovered the presence of a couple of typos in the above
 We urge readers to pay attention to these typos as they may compromise the correct understanding of our proposed approach:
 
 **Page 6, Algoithm 1:** 
+> BucketFullTime = BucketEmptyTime **/** EmptyToFullDuration; <br>
 > SchedulerEligibilityTime = BucketEmptyTime **/** LengthRecoveryDuration; <br>
 
 Must be corrected to:<br>
 
+> BucketFullTime = BucketEmptyTime **+** EmptyToFullDuration; <br>
 > SchedulerEligibilityTime = BucketEmptyTime **+** LengthRecoveryDuration; 
 
 **Page 7, End of Section IV-C-2:**
@@ -58,8 +60,8 @@ Must be corrected to:<br>
 > EligibilityTime **≥** (t), ...
 
 Must be corrected to:
-> If EligibilityTime **≤** (t), ... <br>
->  EligibilityTime **>** (t), ...
+> If  (t) **<** EligibilityTime, ... <br>
+>  (t) **≥** EligibilityTime, ...
 
 We would be happy to hear from you when you use the deliverables from this repository in your project.
 It will be our encouragement.
