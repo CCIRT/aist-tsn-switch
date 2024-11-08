@@ -37,7 +37,7 @@ ATS:
 
 ### Erratum Notice
 Unfortunately, we have discovered the presence of a couple of typos in the above published IEEE Access article.
-We urge readers to pay attention to these typos and refer to the [Corrected version](https://ieeexplore.ieee.org/document/10658978) as they may compromise the correct understanding of our proposed approach. The discovered typos are summarized as follow:
+We urge readers to pay attention to these typos and refer to the [Corrected version](./docs/IEEEAccess_June2024_Published_corrected.pdf) as they may compromise the correct understanding of our proposed approach. The discovered typos are summarized as follow:
 
 **Page 5, Section IV.A:** 
 > Physical Coding Sublayer (PCS) <br>
