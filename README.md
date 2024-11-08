@@ -30,14 +30,14 @@ This software is released under the [MIT License](LICENSE).
 When using the provided designs in this repository, please refer to the following citations:
 
 CBS:
-> Akram BEN AHMED, Takahiro HIROFUCHI, and Takaaki FUKAI "FPGA-based Network Switch Architecture Supporting Credit Based Shaper for Time Sensitive Networks", The 29th IEEE International Conference on Emerging Technologies and Factory Automation - [ETFA2024](https://ieeexplore.ieee.org/document/10710853), pp. 1-8, Sep 2024
+> Akram BEN AHMED, Takahiro HIROFUCHI, and Takaaki FUKAI "FPGA-based Network Switch Architecture Supporting Credit Based Shaper for Time Sensitive Networks", The 29th IEEE International Conference on Emerging Technologies and Factory Automation - [ETFA2024](./docs/IEEEAccess_June2024_Published_corrected.pdf), pp. 1-8, Sep 2024
 
 ATS:
 > Akram BEN AHMED, Takahiro HIROFUCHI, and Takaaki FUKAI, "Hardware design and Evaluation of an FPGA-based Network Switch Supporting Asynchronous Traffic Shaping for Time Sensitive Networking", [IEEE Access](https://ieeexplore.ieee.org/document/10658978), vol. 12, pp. 123149-123165, Aug 2024 
 
 ### Erratum Notice
-Unfortunately, we have discovered the presence of a couple of typos in the above published [IEEE Access](https://ieeexplore.ieee.org/document/10658978) article.
-We urge readers to pay attention to these typos as they may compromise the correct understanding of our proposed approach:
+Unfortunately, we have discovered the presence of a couple of typos in the above published IEEE Access article.
+We urge readers to pay attention to these typos and refer to the [Corrected version](https://ieeexplore.ieee.org/document/10658978) as they may compromise the correct understanding of our proposed approach. The discovered typos are summarized as follow:
 
 **Page 5, Section IV.A:** 
 > Physical Coding Sublayer (PCS) <br>
