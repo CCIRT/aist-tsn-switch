@@ -40,6 +40,13 @@ Unfortunately, we have discovered the presence of a couple of typos in the above
 We urge readers to pay attention to these typos as they may compromise the correct understanding of our proposed approach:
 
 **Page 6, Algoithm 1:** 
+> Physical Coding Sublayer (PCS) <br>
+
+Must be corrected to:<br>
+
+> Frame Check Sequence (FCS)
+
+**Page 6, Algoithm 1:** 
 > BucketFullTime = BucketEmptyTime **/** EmptyToFullDuration; <br>
 > SchedulerEligibilityTime = BucketEmptyTime **/** LengthRecoveryDuration; <br>
 
