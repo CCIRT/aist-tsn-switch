@@ -39,7 +39,7 @@ ATS:
 Unfortunately, we have discovered the presence of a couple of typos in the above published [IEEE Access](https://ieeexplore.ieee.org/document/10658978) article.
 We urge readers to pay attention to these typos as they may compromise the correct understanding of our proposed approach:
 
-**Page 6, Algoithm 1:** 
+**Page 5, Section IV.A:** 
 > Physical Coding Sublayer (PCS) <br>
 
 Must be corrected to:<br>
