@@ -8,7 +8,11 @@ This document describes design of the 4-port L2 switch with ATS implemented on F
 
 - Solid lines indicate data flow
   - Inside FPGA, data bus is AXI4-Stream 8 bit
+<<<<<<< HEAD
 -Dashed lines indicate clock domain boundaries
+=======
+- Dashed lines indicate clock domain boundaries
+>>>>>>> dbb0d5b (AIST-TSN Switch V2.0 First commit)
   - Inside FPGA, clock frequency is 125 MHz
 
 ### MAC block
@@ -24,14 +28,21 @@ This document describes design of the 4-port L2 switch with ATS implemented on F
 - The inside consists of the following modules
   - TEMAC: AMD/Xilinx official IP for MAC layer of Ethernet
   - eth_driver: The contoller for the MAC IP.
+<<<<<<< HEAD
+=======
+  - FIFO + Frame Dropper: AMD/Xilinx AXI4-Stream Data FIFO IP and our own Frame Dropper IP. This is used to drop the entire frame if the FIFO has no space to store the frame.
+>>>>>>> dbb0d5b (AIST-TSN Switch V2.0 First commit)
 
 ### FIFO block
 
 - The FIFO for clock conversion between MAC side and FPGA core side
+<<<<<<< HEAD
 - They are set to Packet Mode
   - The Packet Mode configuration delays the start of packet (burst) transmission until the end (LAST beat) of the packet is received
 - So, latency increases depending on the length of the stream (it is same as frame length)
 - Note: It seems that Packet Mode is not required, so change the settings if you want to reduce latency
+=======
+>>>>>>> dbb0d5b (AIST-TSN Switch V2.0 First commit)
 
 ### Ref. Timer block
 
@@ -41,6 +52,7 @@ This document describes design of the 4-port L2 switch with ATS implemented on F
     - i.e. 1 count per 1 ps @ 125 MHz
   - So, overflow will occur 149 years ago after the power is turned on
 
+<<<<<<< HEAD
 ### Scheduler block
 
 ![scheduler_block](./img/scheduler_block.drawio.svg)
@@ -49,6 +61,28 @@ This document describes design of the 4-port L2 switch with ATS implemented on F
   - Arbitrate algorithm is fixed priority, and Ethernet frames with higher priority are output first
 
 ### Set A.T. block
+=======
+### ATS Preprocess block
+
+- This block has different functionality between KC705 and ZedBoard
+
+#### ATS Preprocess block (KC705)
+
+![scheduler_block](./img/scheduler_block_kc705.drawio.svg)
+
+- This block divides the input by priority and arbitrates all traffic classes after performing Set A.T. processing only for traffic class 7 and traffic class 6
+  - Arbitrate algorithm is fixed priority, and Ethernet frames with higher priority are output first
+
+#### ATS Preprocess block (ZedBoard)
+
+![scheduler_block](./img/scheduler_block_zedboard.drawio.svg)
+
+- This block divides the input by priority and arbitrates all traffic classes after performing Set A.T. and Calc E.T. processing only for traffic class 7 and traffic class 6
+  - Arbitrate algorithm is fixed priority, and Ethernet frames with higher priority are output first
+- For ZedBoard, TC0-TC4 are disabled. They are treated as TC5.
+
+#### Set A.T. block
+>>>>>>> dbb0d5b (AIST-TSN Switch V2.0 First commit)
 
 ![set_at_block](./img/set_at_block.drawio.svg)
 
@@ -58,7 +92,11 @@ This document describes design of the 4-port L2 switch with ATS implemented on F
 - The set value is the value of Ref. Timer block when the last beat of Ethernet frame passed
   - i.e. when the tlast of AXI4-Stream input is asserted
 
+<<<<<<< HEAD
 ### Calc. E.T. block
+=======
+#### Calc. E.T. block
+>>>>>>> dbb0d5b (AIST-TSN Switch V2.0 First commit)
 
 ![calc_et_block](./img/calc_et_block.drawio.svg)
 
@@ -70,6 +108,10 @@ This document describes design of the 4-port L2 switch with ATS implemented on F
   - However, MaxResidenceTime is shared between flows
 - If 'Eligibility Time - Arrival Time' is longer than MaxResidenceTime, the relevant Ethernet frame is discarded in this block.
   - i.e. not output to subsequent blocks
+<<<<<<< HEAD
+=======
+- For KC705, this function is moved to ATS block.
+>>>>>>> dbb0d5b (AIST-TSN Switch V2.0 First commit)
 
 ### Switch with FDB block
 
@@ -86,9 +128,24 @@ This document describes design of the 4-port L2 switch with ATS implemented on F
 
 ### ATS block
 
+<<<<<<< HEAD
 ![ats_block](./img/ats_block.drawio.svg)
 
 - The block that controls output of Ethernet frame based on the comparison result of Eligibility Time and Ref. Timer
+=======
+![ats_block](./img/ats_block_kc705.drawio.svg)
+
+- Input frame is a frame with Arrival Time in KC705.
+- Eligibility Time calculation is done in ATS block.
+
+![ats_block](./img/ats_block_zedboard.drawio.svg)
+
+- Input frame is a frame with with Eligibility Time in ZedBoard.
+
+---
+
+- For both design, ATS block controls output of Ethernet frame based on the comparison result of Eligibility Time and Ref. Timer
+>>>>>>> dbb0d5b (AIST-TSN Switch V2.0 First commit)
   - When 'Eligibility Time < Ref.Timer', store Ethernet frame in FIFO until 'Eligibility Time >= Ref.Timer'
   - When 'Eligibility Time >= Ref.Timer', output Ethernet frame directly
 - The above output control mechanism and FIFO exist independently for each input port and priority
@@ -101,3 +158,39 @@ This document describes design of the 4-port L2 switch with ATS implemented on F
 - This block works as a simple clock converter.
 - Unlike FIFO, it does not hold data internally, so latency is very low.
 
+<<<<<<< HEAD
+=======
+## Feature Matrix
+
+| group         | feature                                 | KC705                     | ZedBoard                 |
+|---------------|-----------------------------------------|---------------------------|--------------------------|
+| Common spec   |                                         |                           |                          |
+|               | Link modes                              | 1000Base-T                | 1000Base-T               |
+|               | Clock frequency                         | 125 MHz                   | 125 MHz                  |
+|               | Max MTU                                 | 1500                      | 1500                     |
+|               | Supported TCs                           | **TC0-TC7**               | **TC5-TC7** (\*1)        |
+|               | TC Scheduling (TC6, TC7)                | ATS                       | ATS                      |
+|               | TC Scheduling (Others)                  | Strict Priority           | Strict Priority          |
+| Internal FIFO |                                         |                           |                          |
+|               | MAC block (\*2)                         | 4096 bytes (default)      | 4096 bytes (default)     |
+|               | FIFO block (\*2)                        | 4096 bytes (default)      | 4096 bytes (default)     |
+|               | ATS Preprocess block (\*2)              | **0 bytes (default)**     | **2048 bytes (packet)**  |
+|               | Switch with FDB block (\*2)             | **3072 bytes (default)**  | **2048 bytes (default)** |
+|               | ATS block TC7 (\*2)                     | **6144 bytes (packet)**   | **4096 bytes (packet)**  |
+|               | ATS block TC6 (\*2)                     | **6144 bytes (packet)**   | **4096 bytes (packet)**  |
+|               | ATS block TC5 (\*2)                     | 8192 bytes (default)      | 8192 bytes (default)     |
+|               | ATS block TC4 (\*2)                     | **8192 bytes (default)**  | **0 bytes (default)**    |
+|               | ATS block TC3 (\*2)                     | **8192 bytes (default)**  | **0 bytes (default)**    |
+|               | ATS block TC2 (\*2)                     | **16384 bytes (default)** | **0 bytes (default)**    |
+|               | ATS block TC1 (\*2)                     | **16384 bytes (default)** | **0 bytes (default)**    |
+|               | ATS block TC0 (\*2)                     | **16384 bytes (default)** | **0 bytes (default)**    |
+| ATS logic     |                                         |                           |                          |
+|               | Sorter between input ports              | **ET order**              | **Round-Robin**          |
+|               | Accuracy of Eligibility Timestamp (\*3) | **More accurate**         | **Less accurate**        |
+| FDB           |                                         |                           |                          |
+|               | num of entries                          | **256**                   | **64**                   |
+
+- \*1: TC0-TC4 is treated as TC5 in switch.
+- \*2: The FIFO mode is described in parentheses: "default" means no delay. "packet" means that an entire frame is first stored into FIFO and then forwarded.
+- \*3: ZedBoard may compute wrong Eligibility Time in some situations. For details, please see [Eligibility Timestamp calculation](./design_consideration.md#eligibility-timestamp-calculation)
+>>>>>>> dbb0d5b (AIST-TSN Switch V2.0 First commit)

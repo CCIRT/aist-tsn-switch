@@ -6,20 +6,34 @@ We aim to provide an open platform that can be used as a reference design so sci
 
 ## Designs
 
+<<<<<<< HEAD
 This repository includes two flavors of an L2 TSN switch supporting two different scheduling algorithms. Both designs are implemented and validated on an AMD Xilinx KC705 FPGA evaluation board which was attached to an [Opsero OP031-2V5 Ethernet FMC](https://ethernetfmc.com/docs/ethernet-fmc/compatibility/#series-7-boards) via the "FMC HPC" connector:
 
 - L2 switch supporting CBS:
+=======
+This repository includes two flavors of an L2 TSN switch supporting two different scheduling algorithms. Both designs are implemented and validated on an AMD Xilinx KC705 FPGA evaluation board and an Avnet ZedBoard which were attached to an [Opsero OP031-2V5 Ethernet FMC](https://ethernetfmc.com/docs/ethernet-fmc/compatibility/#series-7-boards) via FMC connector:
+
+- 1GbE L2 switch supporting CBS:
+>>>>>>> dbb0d5b (AIST-TSN Switch V2.0 First commit)
   - [Specification](./docs/cbs-switch/specification.md)
   - [FPGA design docs](./docs/cbs-switch/design_top.md)
 
 ![alt text](./docs/cbs-switch/img/overwiew_cbs-switch.drawio.svg)
 
+<<<<<<< HEAD
 - L2 switch supporting ATS:
+=======
+- 1GbE L2 switch supporting ATS:
+>>>>>>> dbb0d5b (AIST-TSN Switch V2.0 First commit)
   - [Specification](./docs/ats-switch/specification.md)
   - [FPGA design docs](./docs/ats-switch/design_top.md)
 
 ![alt text](./docs/ats-switch/img/overwiew_ats-switch.drawio.svg)
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> dbb0d5b (AIST-TSN Switch V2.0 First commit)
 ## Licensing
 
 Copyright (c) 2024 National Institute of Advanced Industrial Science and Technology (AIST)
@@ -30,11 +44,16 @@ This software is released under the [MIT License](LICENSE).
 When using the provided designs in this repository, please refer to the following citations:
 
 CBS:
+<<<<<<< HEAD
 > Akram BEN AHMED, Takahiro HIROFUCHI, and Takaaki FUKAI "FPGA-based Network Switch Architecture Supporting Credit Based Shaper for Time Sensitive Networks", The 29th IEEE International Conference on Emerging Technologies and Factory Automation - [ETFA2024](./docs/IEEEAccess_June2024_Published_corrected.pdf), pp. 1-8, Sep 2024
+=======
+> Akram BEN AHMED, Takahiro HIROFUCHI, and Takaaki FUKAI "FPGA-based Network Switch Architecture Supporting Credit Based Shaper for Time Sensitive Networks", The 29th IEEE International Conference on Emerging Technologies and Factory Automation (ETFA2024), Sep 2024
+>>>>>>> dbb0d5b (AIST-TSN Switch V2.0 First commit)
 
 ATS:
 > Akram BEN AHMED, Takahiro HIROFUCHI, and Takaaki FUKAI, "Hardware design and Evaluation of an FPGA-based Network Switch Supporting Asynchronous Traffic Shaping for Time Sensitive Networking", [IEEE Access](https://ieeexplore.ieee.org/document/10658978), vol. 12, pp. 123149-123165, Aug 2024 
 
+<<<<<<< HEAD
 ### Erratum Notice
 Unfortunately, we have discovered the presence of a couple of typos in the above published IEEE Access article.
 We urge readers to pay attention to these typos and refer to the [Corrected version](./docs/IEEEAccess_June2024_Published_corrected.pdf) as they may compromise the correct understanding of our proposed approach. The discovered typos are summarized as follow:
@@ -69,6 +88,8 @@ Must be corrected to:<br>
 Must be corrected to:
 > If  (t) **<** EligibilityTime, ... <br>
 >  (t) **≥** EligibilityTime, ...
+=======
+>>>>>>> dbb0d5b (AIST-TSN Switch V2.0 First commit)
 
 We would be happy to hear from you when you use the deliverables from this repository in your project.
 It will be our encouragement.
@@ -77,11 +98,21 @@ It will be our encouragement.
 
 The design was implemented and validated using the following environment
 
+<<<<<<< HEAD
 ### Hardware
 
 - AMD Kintex 7 FPGA KC705 Evaluation Kit
 - Opsero OP031 Ethernet FMC
   - Connect to the "FMC HPC" connector on KC705
+=======
+### Hardware (1G)
+
+- AMD Kintex 7 FPGA KC705 Evaluation Kit or Avnet ZedBoard
+- Opsero OP031-2V5 Ethernet FMC
+  - Connect to the "FMC HPC" connector (KC705)
+  - Connect to the "FMC LPC" connector (ZedBoard)
+
+>>>>>>> dbb0d5b (AIST-TSN Switch V2.0 First commit)
 
 ### Software
 
@@ -100,15 +131,47 @@ All designs will be built by running the command below.
 
 ```sh
 cd <Repository top>
+<<<<<<< HEAD
 ./build_device.sh impl_all
+=======
+# KC705 design
+./build_device.sh impl_all
+# ZedBoard design
+./build_device.sh impl_all-zedboard
+>>>>>>> dbb0d5b (AIST-TSN Switch V2.0 First commit)
 ```
 
 Bitstreams will be generated below.
 
 - L2 switch with ATS
+<<<<<<< HEAD
   - `./build-device/vivado/ats-switch/ats-switch.prj/ats-switch.runs/impl_1/design_1_wrapper.bit`
 - L2 switch with CBS
   - `build-device/vivado/cbs-switch/cbs-switch.prj/cbs-switch.runs/impl_1/design_1_wrapper.bit`
+=======
+  - `./build-device/vivado/ats-switch/ats-switch.prj/ats-switch.runs/impl_1/design_1_wrapper.bit` (KC705)
+  - `./build-device/vivado/ats-switch/ats-switch-zedboard.prj/ats-switch-zedboard.runs/impl_1/design_1_wrapper.bit` (ZedBoard)
+- L2 switch with CBS
+  - `build-device/vivado/cbs-switch/cbs-switch.prj/cbs-switch.runs/impl_1/design_1_wrapper.bit` (KC705)
+  - `build-device/vivado/cbs-switch/cbs-switch-zedboard.prj/cbs-switch-zedboard.runs/impl_1/design_1_wrapper.bit` (ZedBoard)
+
+## Notes for each FPGA board
+- KC705
+  - Switch settings
+    - Set DIP switch 2, labeled SW11, to the upper position as shown in the photo.
+    - The status of the other switches does not matter.
+
+      <img src="./docs/img/sw_settings_kc705.jpg" width="25%">
+
+- Zedboard
+  - Switch settings
+    - To match VADJ to OP031-2V5, please short the jumper on J18 to the 2V5 position.
+    - Set the SW1 toggle switch to the upper position as shown in the photo.
+    - The status of the other switches does not matter.
+
+      <img src="./docs/img/sw_settings_zedboard.jpg" width="25%">
+
+>>>>>>> dbb0d5b (AIST-TSN Switch V2.0 First commit)
 
 ## Directories
 
@@ -117,11 +180,37 @@ Bitstreams will be generated below.
 - [device](device): Source code. See [device/README.md](device/README.md).
 - [docs](docs): Documentation (e.g., design overviews and register maps)
 - [evaluation](evaluation): Evaluation data for the papers. See [evaluation/README.md](evaluation/README.md) for more info.
+<<<<<<< HEAD
 - [util](util): Scripts for FPGA register modification
 
 ## Contact
 
 The Continuum Computing Infrastructure Research Team (CCIRT), the Digital Architecture Research Center (DigiARC), the National Institute of Advanced Industrial Science and Technology (AIST), Japan.
+=======
+- [evaluation2](evaluation2): Evaluation data with TSN-EFCC (TODO: link). See [evaluation2/README.md](evaluation2/README.md) for more info.
+- [util](util): Scripts for FPGA register modification and python modules to use our switches.
+
+## Release notes
+
+- v2.0_10-2025
+  - Added FPGA design of 1GbE, L2 switch with CBS for ZedBoard
+  - Added FPGA design of 1GbE, L2 switch with ATS for ZedBoard
+  - Added python modules to make our switches easier to use.
+    - Added python scripts to perform register settings that are more useful than TCL scripts.
+    - Obsoleted TCL scripts
+  - Added evaluation scripts and results with our another project called TSN-EFCC. The evaluation is done in more complicated input patterns, and is easier to reproduce.
+  - Optimized RTL implementation to reduce resources and latency.
+- v1.0_09-2024
+  - Initial release
+  - FPGA design of 1GbE, L2 switch with CBS for KC705
+  - FPGA design of 1GbE, L2 switch with ATS for KC705
+  - Evaluation scripts and results for the papers
+  - TCL script to perform register settings
+
+## Contact
+
+The Continuum Computing Architcture Research Group (CCARG), Inteligent Platforms Research Insititute (IPRI), the National Institute of Advanced Industrial Science and Technology (AIST), Japan.
+>>>>>>> dbb0d5b (AIST-TSN Switch V2.0 First commit)
 
 E-mail: <M-digiarc-ccirt-contact-ml@aist.go.jp>
 

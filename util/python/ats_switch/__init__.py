@@ -1,0 +1,6 @@
+# Copyright (c) 2025 National Institute of Advanced Industrial Science and Technology (AIST)
+# All rights reserved.
+# This software is released under the MIT License.
+# http://opensource.org/licenses/mit-license.php
+
+from ats_switch.ats_switch import AtsSwitch, DEFAULT_PRIO

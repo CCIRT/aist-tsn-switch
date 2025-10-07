@@ -6,7 +6,10 @@ proc init_gui { IPINST } {
   ipgui::add_param $IPINST -name "COMMIT_VALUE_WIDTH" -parent ${Page_0}
   ipgui::add_param $IPINST -name "C_S_AXI_ADDR_WIDTH" -parent ${Page_0}
   ipgui::add_param $IPINST -name "C_S_AXI_DATA_WIDTH" -parent ${Page_0}
+<<<<<<< HEAD
   ipgui::add_param $IPINST -name "DATA_WIDTH" -parent ${Page_0}
+=======
+>>>>>>> dbb0d5b (AIST-TSN Switch V2.0 First commit)
   ipgui::add_param $IPINST -name "FLOW_NUM" -parent ${Page_0}
   ipgui::add_param $IPINST -name "FLOW_WIDTH" -parent ${Page_0}
   ipgui::add_param $IPINST -name "FRAME_LENGTH_WIDTH" -parent ${Page_0}
@@ -43,6 +46,7 @@ proc validate_PARAM_VALUE.C_S_AXI_DATA_WIDTH { PARAM_VALUE.C_S_AXI_DATA_WIDTH } 
 	return true
 }
 
+<<<<<<< HEAD
 proc update_PARAM_VALUE.DATA_WIDTH { PARAM_VALUE.DATA_WIDTH } {
 	# Procedure called to update DATA_WIDTH when any of the dependent parameters in the arguments change
 }
@@ -52,6 +56,8 @@ proc validate_PARAM_VALUE.DATA_WIDTH { PARAM_VALUE.DATA_WIDTH } {
 	return true
 }
 
+=======
+>>>>>>> dbb0d5b (AIST-TSN Switch V2.0 First commit)
 proc update_PARAM_VALUE.FLOW_NUM { PARAM_VALUE.FLOW_NUM } {
 	# Procedure called to update FLOW_NUM when any of the dependent parameters in the arguments change
 }
@@ -98,11 +104,14 @@ proc validate_PARAM_VALUE.TIMESTAMP_WIDTH { PARAM_VALUE.TIMESTAMP_WIDTH } {
 }
 
 
+<<<<<<< HEAD
 proc update_MODELPARAM_VALUE.DATA_WIDTH { MODELPARAM_VALUE.DATA_WIDTH PARAM_VALUE.DATA_WIDTH } {
 	# Procedure called to set VHDL generic/Verilog parameter value(s) based on TCL parameter value
 	set_property value [get_property value ${PARAM_VALUE.DATA_WIDTH}] ${MODELPARAM_VALUE.DATA_WIDTH}
 }
 
+=======
+>>>>>>> dbb0d5b (AIST-TSN Switch V2.0 First commit)
 proc update_MODELPARAM_VALUE.FLOW_NUM { MODELPARAM_VALUE.FLOW_NUM PARAM_VALUE.FLOW_NUM } {
 	# Procedure called to set VHDL generic/Verilog parameter value(s) based on TCL parameter value
 	set_property value [get_property value ${PARAM_VALUE.FLOW_NUM}] ${MODELPARAM_VALUE.FLOW_NUM}

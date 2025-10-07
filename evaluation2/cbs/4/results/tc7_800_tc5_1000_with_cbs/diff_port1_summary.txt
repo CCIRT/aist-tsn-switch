@@ -1,0 +1,6 @@
+--------------------------------
+TimestampStat(): id range = [0x20000000:0x200003b2]
+Minimum Timestamp: 25792.00 ns
+Maximum Timestamp: 617920.00 ns
+Average Timestamp: 597917.84 ns
+Stddev Timestamp: 89017.04 ns

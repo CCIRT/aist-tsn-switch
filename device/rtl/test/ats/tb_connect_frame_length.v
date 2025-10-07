@@ -6,21 +6,36 @@
 `timescale 1ns / 1ns
 
 `default_nettype none
+<<<<<<< HEAD
+=======
+`include "fatal.vh"
+>>>>>>> dbb0d5b (AIST-TSN Switch V2.0 First commit)
 
 module tb_connect_frame_length;
   parameter PCAP_FILENAME = "";
   parameter VCD_FILENAME = "";
   parameter integer REPEAT_NUM = 1;
+<<<<<<< HEAD
+=======
+  parameter integer DATA_WIDTH = 8;
+  parameter integer FRAME_LENGTH_WIDTH = 16;            // Must be aligned to DATA_WIDTH
+  parameter integer TIMESTAMP_WIDTH = 72;               // Must be aligned to DATA_WIDTH
+>>>>>>> dbb0d5b (AIST-TSN Switch V2.0 First commit)
 
   localparam integer TIMEOUT_CYCLE = 20000;
   localparam integer RESET_CYCLE = 10;
   localparam integer M_AXIS_TVALID_OUT_CYCLE = 20;
   localparam integer S_AXIS_TREADY_OUT_CYCLE = 50;
 
+<<<<<<< HEAD
   localparam DATA_WIDTH = 8;
   localparam FRAME_LENGTH_WIDTH = 16;                   // Must be aligned to DATA_WIDTH
   localparam ETHERNET_FRAME_WIDTH = 1600 * DATA_WIDTH;  // Must be aligned to DATA_WIDTH
   localparam TIMESTAMP_WIDTH = 72;                      // Must be aligned to DATA_WIDTH
+=======
+  localparam integer KEEP_WIDTH = DATA_WIDTH / 8;
+  localparam ETHERNET_FRAME_WIDTH = 1600 * DATA_WIDTH;  // Must be aligned to DATA_WIDTH
+>>>>>>> dbb0d5b (AIST-TSN Switch V2.0 First commit)
   localparam FRAME_LENGTH_BEAT_NUM = FRAME_LENGTH_WIDTH / DATA_WIDTH;
   localparam FRAME_LENGTH_COUNTER_WIDTH = $clog2(FRAME_LENGTH_BEAT_NUM);
 
@@ -37,6 +52,10 @@ module tb_connect_frame_length;
   // AXI4-Stream In without frame_length
   // [Ethernet Frame]
   wire [DATA_WIDTH-1:0] s_axis_tdata;
+<<<<<<< HEAD
+=======
+  wire [KEEP_WIDTH-1:0] s_axis_tkeep;
+>>>>>>> dbb0d5b (AIST-TSN Switch V2.0 First commit)
   wire                  s_axis_tvalid;
   wire                  s_axis_tready;
   wire                  s_axis_tlast;
@@ -51,6 +70,10 @@ module tb_connect_frame_length;
   // AXI4-Stream Out with frame_length
   // [Frame length]/[Ethernet Frame]
   wire [DATA_WIDTH-1:0] m_axis_tdata;
+<<<<<<< HEAD
+=======
+  wire [KEEP_WIDTH-1:0] m_axis_tkeep;
+>>>>>>> dbb0d5b (AIST-TSN Switch V2.0 First commit)
   wire                  m_axis_tvalid;
   wire                  m_axis_tready;
   wire                  m_axis_tlast;
@@ -71,7 +94,11 @@ module tb_connect_frame_length;
     end
 
     $display("Error: Timeout");
+<<<<<<< HEAD
     $fatal();
+=======
+    `FATAL;
+>>>>>>> dbb0d5b (AIST-TSN Switch V2.0 First commit)
   end
 
   //-------------------------
@@ -97,6 +124,10 @@ module tb_connect_frame_length;
     clk,
     rstn,
     s_axis_tdata,
+<<<<<<< HEAD
+=======
+    s_axis_tkeep,
+>>>>>>> dbb0d5b (AIST-TSN Switch V2.0 First commit)
     s_axis_tvalid,
     s_axis_tready,
     s_axis_tlast
@@ -140,6 +171,10 @@ module tb_connect_frame_length;
     clk,
     rstn,
     m_axis_tdata,
+<<<<<<< HEAD
+=======
+    m_axis_tkeep,
+>>>>>>> dbb0d5b (AIST-TSN Switch V2.0 First commit)
     m_axis_tvalid,
     m_axis_tready,
     m_axis_tlast
@@ -149,11 +184,20 @@ module tb_connect_frame_length;
   // Test module
   //-------------------------
   connect_frame_length #(
+<<<<<<< HEAD
     .DATA_WIDTH(DATA_WIDTH)
+=======
+    .C_AXIS_TDATA_WIDTH(DATA_WIDTH),
+    .C_AXIS_TKEEP_WIDTH(KEEP_WIDTH)
+>>>>>>> dbb0d5b (AIST-TSN Switch V2.0 First commit)
   ) connect_frame_length_i (
     clk,
     rstn,
     s_axis_tdata,
+<<<<<<< HEAD
+=======
+    s_axis_tkeep,
+>>>>>>> dbb0d5b (AIST-TSN Switch V2.0 First commit)
     s_axis_tvalid,
     s_axis_tready,
     s_axis_tlast,
@@ -162,6 +206,10 @@ module tb_connect_frame_length;
     s_axis_frame_length_tready,
     s_axis_frame_length_tlast,
     m_axis_tdata,
+<<<<<<< HEAD
+=======
+    m_axis_tkeep,
+>>>>>>> dbb0d5b (AIST-TSN Switch V2.0 First commit)
     m_axis_tvalid,
     m_axis_tready,
     m_axis_tlast

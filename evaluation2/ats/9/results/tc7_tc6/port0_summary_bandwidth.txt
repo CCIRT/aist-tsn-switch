@@ -1,0 +1,8 @@
+--------------------------------
+TimestampStat(): id range = [0x00000000:0x000007f2]
+# of sent frames: 1018
+send rate: 96.738 Mbps
+# of recvd frames: 1018
+recv rate: 96.738 Mbps
+# of dropped frames: 0
+drop rate: 0.000 %

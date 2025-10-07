@@ -1,0 +1,409 @@
+41c41
+< module mactable_dpcam #(
+---
+> module mactable_dpcam_mod #(
+119c119
+< mactable_dpcam_line_array #(
+---
+> mactable_dpcam_line_array_mod #(
+136c136
+< mactable_dpcam_line_encoder #(
+---
+> mactable_dpcam_line_encoder_mod #(
+148c148
+< mactable_dpcam_line_encoder #(
+---
+> mactable_dpcam_line_encoder_mod #(
+160c160
+< mactable_dpcam_dpram #(
+---
+> mactable_dpcam_dpram_mod #(
+184c184
+< module mactable_dpcam_line_array #(
+---
+> module mactable_dpcam_line_array_mod #(
+269c269,646
+< module mactable_dpcam_line_encoder #(
+---
+> module mactable_dpcam_line_encoder_mod #(
+> 	parameter ADDR_WIDTH = 8
+> )
+> (
+> 	input wire clk,
+> 	input wire rst,
+> 	input wire [2**ADDR_WIDTH-1:0]line_match,
+> 	input wire line_valid,
+> 	output wire [ADDR_WIDTH-1:0]addr,
+> 	output wire addr_valid,
+> 	output wire addr_null
+> );
+> 
+> generate
+>   if (ADDR_WIDTH == 6) begin
+>     mactable_dpcam_line_encoder_a6
+>       #(.ADDR_WIDTH(ADDR_WIDTH))
+>     mactable_dpcam_line_encoder_a6_inst
+>       (
+> 	   .clk(clk),
+> 	   .rst(rst),
+> 	   .line_match(line_match),
+> 	   .line_valid(line_valid),
+> 	   .addr(addr),
+> 	   .addr_valid(addr_valid),
+> 	   .addr_null(addr_null)
+>        );
+> 
+>   end else if (ADDR_WIDTH == 5) begin
+>     mactable_dpcam_line_encoder_a5
+>       #(.ADDR_WIDTH(ADDR_WIDTH))
+>     mactable_dpcam_line_encoder_a5_inst
+>       (
+> 	   .clk(clk),
+> 	   .rst(rst),
+> 	   .line_match(line_match),
+> 	   .line_valid(line_valid),
+> 	   .addr(addr),
+> 	   .addr_valid(addr_valid),
+> 	   .addr_null(addr_null)
+>        );
+> 
+>   end else begin
+>     mactable_dpcam_line_encoder_generic
+>       #(.ADDR_WIDTH(ADDR_WIDTH))
+>     mactable_dpcam_line_encoder_generic_inst
+>       (
+> 	   .clk(clk),
+> 	   .rst(rst),
+> 	   .line_match(line_match),
+> 	   .line_valid(line_valid),
+> 	   .addr(addr),
+> 	   .addr_valid(addr_valid),
+> 	   .addr_null(addr_null)
+>        );
+>   end // else: !if(ADDR_WIDTH == 8)
+> endgenerate
+> 
+> endmodule
+> 
+> module mactable_dpcam_line_encoder_a6 #(
+> 	parameter ADDR_WIDTH = 6
+> )
+> (
+> 	input wire clk,
+> 	input wire rst,
+> 	input wire [2**ADDR_WIDTH-1:0]line_match,
+> 	input wire line_valid,
+> 	output wire [ADDR_WIDTH-1:0]addr,
+> 	output wire addr_valid,
+> 	output wire addr_null
+> );
+> 
+> reg encode;
+> reg [63:0]line0;
+> reg [31:0]line1;
+> reg [15:0]line2;
+> reg [7:0]line3;
+> reg [3:0]line4;
+> reg [1:0]line5;
+> 
+> reg [63:0]line0_tmp;
+> reg [31:0]line1_tmp;
+> reg [15:0]line2_tmp;
+> reg [7:0]line3_tmp;
+> reg [3:0]line4_tmp;
+> reg [1:0]line5_tmp;
+> 
+> wire [63:0] line_in = (encode == 1'b0) ? line_match : line0_tmp;
+> 
+> integer i;
+> always @(line_in) begin
+>   for (i = 0; i < 32; i = i + 1) begin
+>     line1_tmp[i] = |line_in[i*2 +: 2];
+>   end
+>   for (i = 0; i < 16; i = i + 1) begin
+>     line2_tmp[i] = |line_in[i*4 +: 4];
+>   end
+>   for (i = 0; i < 8; i = i + 1) begin
+>     line3_tmp[i] = |line_in[i*8 +: 8];
+>   end
+>   for (i = 0; i < 4; i = i + 1) begin
+>     line4_tmp[i] = |line_in[i*16 +: 16];
+>   end
+>   for (i = 0; i < 2; i = i + 1) begin
+>     line5_tmp[i] = |line_in[i*32 +: 32];
+>   end
+> end
+> 
+> reg [ADDR_WIDTH-1:0]addr_out;
+> reg valid_out;
+> reg null_out;
+> 
+> assign addr = addr_out;
+> assign addr_valid = valid_out;
+> assign addr_null = null_out;
+> 
+> always @(posedge clk) begin
+> 	if (rst == 1'b1) begin
+> 		encode <= 1'b0;
+> 	end else begin
+> 		if (encode == 1'b0) begin
+> 			if (line_valid) begin
+>               line0 <= line_match;
+>               line1 <= line1_tmp;
+>               line2 <= line2_tmp;
+>               line3 <= line3_tmp;
+>               line4 <= line4_tmp;
+>               line5 <= line5_tmp;
+> 			  encode <= 1'b1;
+> 			end
+> 		end else begin
+> 			if (line0 == 0) begin
+> 				encode <= 1'b0;
+> 			end else begin
+> 			  if (line0) begin
+>                 line0 <= line0_tmp;
+>                 line1 <= line1_tmp;
+>                 line2 <= line2_tmp;
+>                 line3 <= line3_tmp;
+>                 line4 <= line4_tmp;
+>                 line5 <= line5_tmp;
+> 			  end else begin
+> 				encode <= 1'b0;
+> 			  end
+> 			end
+> 		end
+> 	end
+> end
+> 
+> always @(encode, line0) begin
+> 	addr_out = 0;
+> 	valid_out = 1'b0;
+> 	null_out = 1'b0;
+> 	if (encode == 1'b1) begin
+> 		if (line0 == 0) begin
+> 			valid_out = 1'b1;
+> 			null_out = 1'b1;
+> 		end else begin
+> 			for (i = 2**ADDR_WIDTH - 1; i >= 0; i = i - 1) begin
+> 				if (line0[i] == 1'b1) begin
+> 					addr_out = i;
+> 					valid_out = 1'b1;
+> 				end
+> 			end
+> 		end
+> 	end
+> end
+> 
+> always @(*) begin
+> line0_tmp[0] = 1'b0;
+> line0_tmp[1] = line0[1] & (line0[0]);
+> line0_tmp[2] = line0[2] & (line1[0]);
+> line0_tmp[3] = line0[3] & (line0[2] | line1[0]);
+> line0_tmp[4] = line0[4] & (line2[0]);
+> line0_tmp[5] = line0[5] & (line0[4] | line2[0]);
+> line0_tmp[6] = line0[6] & (line1[2] | line2[0]);
+> line0_tmp[7] = line0[7] & (line0[6] | line1[2] | line2[0]);
+> line0_tmp[8] = line0[8] & (line3[0]);
+> line0_tmp[9] = line0[9] & (line0[8] | line3[0]);
+> line0_tmp[10] = line0[10] & (line1[4] | line3[0]);
+> line0_tmp[11] = line0[11] & (line0[10] | line1[4] | line3[0]);
+> line0_tmp[12] = line0[12] & (line2[2] | line3[0]);
+> line0_tmp[13] = line0[13] & (line0[12] | line2[2] | line3[0]);
+> line0_tmp[14] = line0[14] & (line1[6] | line2[2] | line3[0]);
+> line0_tmp[15] = line0[15] & (line0[14] | line1[6] | line2[2] | line3[0]);
+> line0_tmp[16] = line0[16] & (line4[0]);
+> line0_tmp[17] = line0[17] & (line0[16] | line4[0]);
+> line0_tmp[18] = line0[18] & (line1[8] | line4[0]);
+> line0_tmp[19] = line0[19] & (line0[18] | line1[8] | line4[0]);
+> line0_tmp[20] = line0[20] & (line2[4] | line4[0]);
+> line0_tmp[21] = line0[21] & (line0[20] | line2[4] | line4[0]);
+> line0_tmp[22] = line0[22] & (line1[10] | line2[4] | line4[0]);
+> line0_tmp[23] = line0[23] & (line0[22] | line1[10] | line2[4] | line4[0]);
+> line0_tmp[24] = line0[24] & (line3[2] | line4[0]);
+> line0_tmp[25] = line0[25] & (line0[24] | line3[2] | line4[0]);
+> line0_tmp[26] = line0[26] & (line1[12] | line3[2] | line4[0]);
+> line0_tmp[27] = line0[27] & (line0[26] | line1[12] | line3[2] | line4[0]);
+> line0_tmp[28] = line0[28] & (line2[6] | line3[2] | line4[0]);
+> line0_tmp[29] = line0[29] & (line0[28] | line2[6] | line3[2] | line4[0]);
+> line0_tmp[30] = line0[30] & (line1[14] | line2[6] | line3[2] | line4[0]);
+> line0_tmp[31] = line0[31] & (line0[30] | line1[14] | line2[6] | line3[2] | line4[0]);
+> line0_tmp[32] = line0[32] & (line5[0]);
+> line0_tmp[33] = line0[33] & (line0[32] | line5[0]);
+> line0_tmp[34] = line0[34] & (line1[16] | line5[0]);
+> line0_tmp[35] = line0[35] & (line0[34] | line1[16] | line5[0]);
+> line0_tmp[36] = line0[36] & (line2[8] | line5[0]);
+> line0_tmp[37] = line0[37] & (line0[36] | line2[8] | line5[0]);
+> line0_tmp[38] = line0[38] & (line1[18] | line2[8] | line5[0]);
+> line0_tmp[39] = line0[39] & (line0[38] | line1[18] | line2[8] | line5[0]);
+> line0_tmp[40] = line0[40] & (line3[4] | line5[0]);
+> line0_tmp[41] = line0[41] & (line0[40] | line3[4] | line5[0]);
+> line0_tmp[42] = line0[42] & (line1[20] | line3[4] | line5[0]);
+> line0_tmp[43] = line0[43] & (line0[42] | line1[20] | line3[4] | line5[0]);
+> line0_tmp[44] = line0[44] & (line2[10] | line3[4] | line5[0]);
+> line0_tmp[45] = line0[45] & (line0[44] | line2[10] | line3[4] | line5[0]);
+> line0_tmp[46] = line0[46] & (line1[22] | line2[10] | line3[4] | line5[0]);
+> line0_tmp[47] = line0[47] & (line0[46] | line1[22] | line2[10] | line3[4] | line5[0]);
+> line0_tmp[48] = line0[48] & (line4[2] | line5[0]);
+> line0_tmp[49] = line0[49] & (line0[48] | line4[2] | line5[0]);
+> line0_tmp[50] = line0[50] & (line1[24] | line4[2] | line5[0]);
+> line0_tmp[51] = line0[51] & (line0[50] | line1[24] | line4[2] | line5[0]);
+> line0_tmp[52] = line0[52] & (line2[12] | line4[2] | line5[0]);
+> line0_tmp[53] = line0[53] & (line0[52] | line2[12] | line4[2] | line5[0]);
+> line0_tmp[54] = line0[54] & (line1[26] | line2[12] | line4[2] | line5[0]);
+> line0_tmp[55] = line0[55] & (line0[54] | line1[26] | line2[12] | line4[2] | line5[0]);
+> line0_tmp[56] = line0[56] & (line3[6] | line4[2] | line5[0]);
+> line0_tmp[57] = line0[57] & (line0[56] | line3[6] | line4[2] | line5[0]);
+> line0_tmp[58] = line0[58] & (line1[28] | line3[6] | line4[2] | line5[0]);
+> line0_tmp[59] = line0[59] & (line0[58] | line1[28] | line3[6] | line4[2] | line5[0]);
+> line0_tmp[60] = line0[60] & (line2[14] | line3[6] | line4[2] | line5[0]);
+> line0_tmp[61] = line0[61] & (line0[60] | line2[14] | line3[6] | line4[2] | line5[0]);
+> line0_tmp[62] = line0[62] & (line1[30] | line2[14] | line3[6] | line4[2] | line5[0]);
+> line0_tmp[63] = line0[63] & (line0[62] | line1[30] | line2[14] | line3[6] | line4[2] | line5[0]);
+> end
+> 
+> endmodule
+> 
+> module mactable_dpcam_line_encoder_a5 #(
+> 	parameter ADDR_WIDTH = 5
+> )
+> (
+> 	input wire clk,
+> 	input wire rst,
+> 	input wire [2**ADDR_WIDTH-1:0]line_match,
+> 	input wire line_valid,
+> 	output wire [ADDR_WIDTH-1:0]addr,
+> 	output wire addr_valid,
+> 	output wire addr_null
+> );
+> 
+> reg encode;
+> reg [31:0]line0;
+> reg [15:0]line1;
+> reg [7:0]line2;
+> reg [3:0]line3;
+> reg [1:0]line4;
+> 
+> reg [31:0]line0_tmp;
+> reg [15:0]line1_tmp;
+> reg [7:0]line2_tmp;
+> reg [3:0]line3_tmp;
+> reg [1:0]line4_tmp;
+> 
+> wire [31:0] line_in = (encode == 1'b0) ? line_match : line0_tmp;
+> 
+> integer i;
+> always @(line_in) begin
+>   for (i = 0; i < 16; i = i + 1) begin
+>     line1_tmp[i] = |line_in[i*2 +: 2];
+>   end
+>   for (i = 0; i < 8; i = i + 1) begin
+>     line2_tmp[i] = |line_in[i*4 +: 4];
+>   end
+>   for (i = 0; i < 4; i = i + 1) begin
+>     line3_tmp[i] = |line_in[i*8 +: 8];
+>   end
+>   for (i = 0; i < 2; i = i + 1) begin
+>     line4_tmp[i] = |line_in[i*16 +: 16];
+>   end
+> end
+> 
+> reg [ADDR_WIDTH-1:0]addr_out;
+> reg valid_out;
+> reg null_out;
+> 
+> assign addr = addr_out;
+> assign addr_valid = valid_out;
+> assign addr_null = null_out;
+> 
+> always @(posedge clk) begin
+> 	if (rst == 1'b1) begin
+> 		encode <= 1'b0;
+> 	end else begin
+> 		if (encode == 1'b0) begin
+> 			if (line_valid) begin
+>               line0 <= line_match;
+>               line1 <= line1_tmp;
+>               line2 <= line2_tmp;
+>               line3 <= line3_tmp;
+>               line4 <= line4_tmp;
+> 			  encode <= 1'b1;
+> 			end
+> 		end else begin
+> 			if (line0 == 0) begin
+> 				encode <= 1'b0;
+> 			end else begin
+> 			  if (line0) begin
+>                 line0 <= line0_tmp;
+>                 line1 <= line1_tmp;
+>                 line2 <= line2_tmp;
+>                 line3 <= line3_tmp;
+>                 line4 <= line4_tmp;
+> 			  end else begin
+> 				encode <= 1'b0;
+> 			  end
+> 			end
+> 		end
+> 	end
+> end
+> 
+> always @(encode, line0) begin
+> 	addr_out = 0;
+> 	valid_out = 1'b0;
+> 	null_out = 1'b0;
+> 	if (encode == 1'b1) begin
+> 		if (line0 == 0) begin
+> 			valid_out = 1'b1;
+> 			null_out = 1'b1;
+> 		end else begin
+> 			for (i = 2**ADDR_WIDTH - 1; i >= 0; i = i - 1) begin
+> 				if (line0[i] == 1'b1) begin
+> 					addr_out = i;
+> 					valid_out = 1'b1;
+> 				end
+> 			end
+> 		end
+> 	end
+> end
+> 
+> always @(*) begin
+> line0_tmp[0] = 1'b0;
+> line0_tmp[1] = line0[1] & (line0[0]);
+> line0_tmp[2] = line0[2] & (line1[0]);
+> line0_tmp[3] = line0[3] & (line0[2] | line1[0]);
+> line0_tmp[4] = line0[4] & (line2[0]);
+> line0_tmp[5] = line0[5] & (line0[4] | line2[0]);
+> line0_tmp[6] = line0[6] & (line1[2] | line2[0]);
+> line0_tmp[7] = line0[7] & (line0[6] | line1[2] | line2[0]);
+> line0_tmp[8] = line0[8] & (line3[0]);
+> line0_tmp[9] = line0[9] & (line0[8] | line3[0]);
+> line0_tmp[10] = line0[10] & (line1[4] | line3[0]);
+> line0_tmp[11] = line0[11] & (line0[10] | line1[4] | line3[0]);
+> line0_tmp[12] = line0[12] & (line2[2] | line3[0]);
+> line0_tmp[13] = line0[13] & (line0[12] | line2[2] | line3[0]);
+> line0_tmp[14] = line0[14] & (line1[6] | line2[2] | line3[0]);
+> line0_tmp[15] = line0[15] & (line0[14] | line1[6] | line2[2] | line3[0]);
+> line0_tmp[16] = line0[16] & (line4[0]);
+> line0_tmp[17] = line0[17] & (line0[16] | line4[0]);
+> line0_tmp[18] = line0[18] & (line1[8] | line4[0]);
+> line0_tmp[19] = line0[19] & (line0[18] | line1[8] | line4[0]);
+> line0_tmp[20] = line0[20] & (line2[4] | line4[0]);
+> line0_tmp[21] = line0[21] & (line0[20] | line2[4] | line4[0]);
+> line0_tmp[22] = line0[22] & (line1[10] | line2[4] | line4[0]);
+> line0_tmp[23] = line0[23] & (line0[22] | line1[10] | line2[4] | line4[0]);
+> line0_tmp[24] = line0[24] & (line3[2] | line4[0]);
+> line0_tmp[25] = line0[25] & (line0[24] | line3[2] | line4[0]);
+> line0_tmp[26] = line0[26] & (line1[12] | line3[2] | line4[0]);
+> line0_tmp[27] = line0[27] & (line0[26] | line1[12] | line3[2] | line4[0]);
+> line0_tmp[28] = line0[28] & (line2[6] | line3[2] | line4[0]);
+> line0_tmp[29] = line0[29] & (line0[28] | line2[6] | line3[2] | line4[0]);
+> line0_tmp[30] = line0[30] & (line1[14] | line2[6] | line3[2] | line4[0]);
+> line0_tmp[31] = line0[31] & (line0[30] | line1[14] | line2[6] | line3[2] | line4[0]);
+> end
+> 
+> endmodule
+> 
+> module mactable_dpcam_line_encoder_generic #(
+345c722
+< module mactable_dpcam_dpram #(
+---
+> module mactable_dpcam_dpram_mod #(

@@ -1,0 +1,5 @@
+# Ignore changes in result directory.
+*.csv -diff
+*_summary.txt -diff
+*.png -diff
+*_summary_bandwidth.txt -diff

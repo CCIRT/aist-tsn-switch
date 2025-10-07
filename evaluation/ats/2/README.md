@@ -48,7 +48,11 @@ none.
   $ sudo ip netns exec ns1 iperf3 -s -p 5201
   ```
 - Host A: iperf3 client
+<<<<<<< HEAD
   - Set CommittedBurstSize for Port0 input and Port1 output flows.
+=======
+  - Set CommittedBurstSize for flows from Port0 to Port1.
+>>>>>>> dbb0d5b (AIST-TSN Switch V2.0 First commit)
   - Run iperf3 client to obtain the frame reception time from the tcpdump log.
     ```shell
     $ iperf3 -c 10.0.0.2 -u -b 1000M -l 1472 -p 5201 -t 1

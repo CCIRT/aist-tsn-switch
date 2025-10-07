@@ -109,11 +109,19 @@
 412c485
 <             axi_wr_data    <= 32'h90000000;
 ---
+<<<<<<< HEAD
 >             axi_wr_data    <= 32'hB8000000;  // disable FCS removal, support VLAN
 422c495
 <             axi_wr_data    <= 32'h90000000;
 ---
 >             axi_wr_data    <= 32'hB8000000;  // receive frames with FCS, support VLAN
+=======
+>             axi_wr_data    <= 32'h98000000;  // support VLAN
+422c495
+<             axi_wr_data    <= 32'h90000000;
+---
+>             axi_wr_data    <= 32'h98000000;  // support VLAN
+>>>>>>> dbb0d5b (AIST-TSN Switch V2.0 First commit)
 446c519
 <             axi_wr_data    <= 32'h0;
 ---

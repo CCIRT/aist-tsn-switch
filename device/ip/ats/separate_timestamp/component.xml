@@ -21,6 +21,17 @@
         </spirit:portMap>
         <spirit:portMap>
           <spirit:logicalPort>
+<<<<<<< HEAD
+=======
+            <spirit:name>TKEEP</spirit:name>
+          </spirit:logicalPort>
+          <spirit:physicalPort>
+            <spirit:name>m_axis_tkeep</spirit:name>
+          </spirit:physicalPort>
+        </spirit:portMap>
+        <spirit:portMap>
+          <spirit:logicalPort>
+>>>>>>> dbb0d5b (AIST-TSN Switch V2.0 First commit)
             <spirit:name>TLAST</spirit:name>
           </spirit:logicalPort>
           <spirit:physicalPort>
@@ -93,6 +104,17 @@
         </spirit:portMap>
         <spirit:portMap>
           <spirit:logicalPort>
+<<<<<<< HEAD
+=======
+            <spirit:name>TKEEP</spirit:name>
+          </spirit:logicalPort>
+          <spirit:physicalPort>
+            <spirit:name>s_axis_tkeep</spirit:name>
+          </spirit:physicalPort>
+        </spirit:portMap>
+        <spirit:portMap>
+          <spirit:logicalPort>
+>>>>>>> dbb0d5b (AIST-TSN Switch V2.0 First commit)
             <spirit:name>TLAST</spirit:name>
           </spirit:logicalPort>
           <spirit:physicalPort>
@@ -118,6 +140,7 @@
       </spirit:portMaps>
     </spirit:busInterface>
     <spirit:busInterface>
+<<<<<<< HEAD
       <spirit:name>s_axis_frame_length</spirit:name>
       <spirit:busType spirit:vendor="xilinx.com" spirit:library="interface" spirit:name="axis" spirit:version="1.0"/>
       <spirit:abstractionType spirit:vendor="xilinx.com" spirit:library="interface" spirit:name="axis_rtl" spirit:version="1.0"/>
@@ -150,6 +173,8 @@
       </spirit:portMaps>
     </spirit:busInterface>
     <spirit:busInterface>
+=======
+>>>>>>> dbb0d5b (AIST-TSN Switch V2.0 First commit)
       <spirit:name>rstn</spirit:name>
       <spirit:busType spirit:vendor="xilinx.com" spirit:library="signal" spirit:name="reset" spirit:version="1.0"/>
       <spirit:abstractionType spirit:vendor="xilinx.com" spirit:library="signal" spirit:name="reset_rtl" spirit:version="1.0"/>
@@ -189,7 +214,11 @@
       <spirit:parameters>
         <spirit:parameter>
           <spirit:name>ASSOCIATED_BUSIF</spirit:name>
+<<<<<<< HEAD
           <spirit:value spirit:id="BUSIFPARAM_VALUE.CLK.ASSOCIATED_BUSIF">m_axis:m_axis_timestamp:s_axis:s_axis_frame_length</spirit:value>
+=======
+          <spirit:value spirit:id="BUSIFPARAM_VALUE.CLK.ASSOCIATED_BUSIF">m_axis:m_axis_timestamp:s_axis</spirit:value>
+>>>>>>> dbb0d5b (AIST-TSN Switch V2.0 First commit)
         </spirit:parameter>
         <spirit:parameter>
           <spirit:name>ASSOCIATED_RESET</spirit:name>
@@ -212,7 +241,11 @@
         <spirit:parameters>
           <spirit:parameter>
             <spirit:name>viewChecksum</spirit:name>
+<<<<<<< HEAD
             <spirit:value>fed0f437</spirit:value>
+=======
+            <spirit:value>f52436f5</spirit:value>
+>>>>>>> dbb0d5b (AIST-TSN Switch V2.0 First commit)
           </spirit:parameter>
         </spirit:parameters>
       </spirit:view>
@@ -228,7 +261,11 @@
         <spirit:parameters>
           <spirit:parameter>
             <spirit:name>viewChecksum</spirit:name>
+<<<<<<< HEAD
             <spirit:value>fed0f437</spirit:value>
+=======
+            <spirit:value>f52436f5</spirit:value>
+>>>>>>> dbb0d5b (AIST-TSN Switch V2.0 First commit)
           </spirit:parameter>
         </spirit:parameters>
       </spirit:view>
@@ -242,7 +279,25 @@
         <spirit:parameters>
           <spirit:parameter>
             <spirit:name>viewChecksum</spirit:name>
+<<<<<<< HEAD
             <spirit:value>a6c6c873</spirit:value>
+=======
+            <spirit:value>43d86915</spirit:value>
+          </spirit:parameter>
+        </spirit:parameters>
+      </spirit:view>
+      <spirit:view>
+        <spirit:name>xilinx_utilityxitfiles</spirit:name>
+        <spirit:displayName>Utility XIT/TTCL</spirit:displayName>
+        <spirit:envIdentifier>:vivado.xilinx.com:xit.util</spirit:envIdentifier>
+        <spirit:fileSetRef>
+          <spirit:localName>xilinx_utilityxitfiles_view_fileset</spirit:localName>
+        </spirit:fileSetRef>
+        <spirit:parameters>
+          <spirit:parameter>
+            <spirit:name>viewChecksum</spirit:name>
+            <spirit:value>2017aa26</spirit:value>
+>>>>>>> dbb0d5b (AIST-TSN Switch V2.0 First commit)
           </spirit:parameter>
         </spirit:parameters>
       </spirit:view>
@@ -279,7 +334,11 @@
         <spirit:wire>
           <spirit:direction>in</spirit:direction>
           <spirit:vector>
+<<<<<<< HEAD
             <spirit:left spirit:format="long" spirit:resolve="dependent" spirit:dependency="(spirit:decode(id(&apos;MODELPARAM_VALUE.DATA_WIDTH&apos;)) - 1)">7</spirit:left>
+=======
+            <spirit:left spirit:format="long" spirit:resolve="dependent" spirit:dependency="(spirit:decode(id(&apos;MODELPARAM_VALUE.C_AXIS_TDATA_WIDTH&apos;)) - 1)">7</spirit:left>
+>>>>>>> dbb0d5b (AIST-TSN Switch V2.0 First commit)
             <spirit:right spirit:format="long">0</spirit:right>
           </spirit:vector>
           <spirit:wireTypeDefs>
@@ -295,6 +354,29 @@
         </spirit:wire>
       </spirit:port>
       <spirit:port>
+<<<<<<< HEAD
+=======
+        <spirit:name>s_axis_tkeep</spirit:name>
+        <spirit:wire>
+          <spirit:direction>in</spirit:direction>
+          <spirit:vector>
+            <spirit:left spirit:format="long" spirit:resolve="dependent" spirit:dependency="(spirit:decode(id(&apos;MODELPARAM_VALUE.C_AXIS_TKEEP_WIDTH&apos;)) - 1)">0</spirit:left>
+            <spirit:right spirit:format="long">0</spirit:right>
+          </spirit:vector>
+          <spirit:wireTypeDefs>
+            <spirit:wireTypeDef>
+              <spirit:typeName>wire</spirit:typeName>
+              <spirit:viewNameRef>xilinx_anylanguagesynthesis</spirit:viewNameRef>
+              <spirit:viewNameRef>xilinx_anylanguagebehavioralsimulation</spirit:viewNameRef>
+            </spirit:wireTypeDef>
+          </spirit:wireTypeDefs>
+          <spirit:driver>
+            <spirit:defaultValue spirit:format="long">1</spirit:defaultValue>
+          </spirit:driver>
+        </spirit:wire>
+      </spirit:port>
+      <spirit:port>
+>>>>>>> dbb0d5b (AIST-TSN Switch V2.0 First commit)
         <spirit:name>s_axis_tvalid</spirit:name>
         <spirit:wire>
           <spirit:direction>in</spirit:direction>
@@ -337,6 +419,7 @@
         </spirit:wire>
       </spirit:port>
       <spirit:port>
+<<<<<<< HEAD
         <spirit:name>s_axis_frame_length_tdata</spirit:name>
         <spirit:wire>
           <spirit:direction>in</spirit:direction>
@@ -383,16 +466,43 @@
         </spirit:wire>
       </spirit:port>
       <spirit:port>
+=======
+>>>>>>> dbb0d5b (AIST-TSN Switch V2.0 First commit)
         <spirit:name>m_axis_tdata</spirit:name>
         <spirit:wire>
           <spirit:direction>out</spirit:direction>
           <spirit:vector>
+<<<<<<< HEAD
             <spirit:left spirit:format="long" spirit:resolve="dependent" spirit:dependency="(spirit:decode(id(&apos;MODELPARAM_VALUE.DATA_WIDTH&apos;)) - 1)">7</spirit:left>
+=======
+            <spirit:left spirit:format="long" spirit:resolve="dependent" spirit:dependency="(spirit:decode(id(&apos;MODELPARAM_VALUE.C_AXIS_TDATA_WIDTH&apos;)) - 1)">7</spirit:left>
+>>>>>>> dbb0d5b (AIST-TSN Switch V2.0 First commit)
             <spirit:right spirit:format="long">0</spirit:right>
           </spirit:vector>
           <spirit:wireTypeDefs>
             <spirit:wireTypeDef>
+<<<<<<< HEAD
               <spirit:typeName>wire</spirit:typeName>
+=======
+              <spirit:typeName>reg</spirit:typeName>
+              <spirit:viewNameRef>xilinx_anylanguagesynthesis</spirit:viewNameRef>
+              <spirit:viewNameRef>xilinx_anylanguagebehavioralsimulation</spirit:viewNameRef>
+            </spirit:wireTypeDef>
+          </spirit:wireTypeDefs>
+        </spirit:wire>
+      </spirit:port>
+      <spirit:port>
+        <spirit:name>m_axis_tkeep</spirit:name>
+        <spirit:wire>
+          <spirit:direction>out</spirit:direction>
+          <spirit:vector>
+            <spirit:left spirit:format="long" spirit:resolve="dependent" spirit:dependency="(spirit:decode(id(&apos;MODELPARAM_VALUE.C_AXIS_TKEEP_WIDTH&apos;)) - 1)">0</spirit:left>
+            <spirit:right spirit:format="long">0</spirit:right>
+          </spirit:vector>
+          <spirit:wireTypeDefs>
+            <spirit:wireTypeDef>
+              <spirit:typeName>reg</spirit:typeName>
+>>>>>>> dbb0d5b (AIST-TSN Switch V2.0 First commit)
               <spirit:viewNameRef>xilinx_anylanguagesynthesis</spirit:viewNameRef>
               <spirit:viewNameRef>xilinx_anylanguagebehavioralsimulation</spirit:viewNameRef>
             </spirit:wireTypeDef>
@@ -405,7 +515,11 @@
           <spirit:direction>out</spirit:direction>
           <spirit:wireTypeDefs>
             <spirit:wireTypeDef>
+<<<<<<< HEAD
               <spirit:typeName>wire</spirit:typeName>
+=======
+              <spirit:typeName>reg</spirit:typeName>
+>>>>>>> dbb0d5b (AIST-TSN Switch V2.0 First commit)
               <spirit:viewNameRef>xilinx_anylanguagesynthesis</spirit:viewNameRef>
               <spirit:viewNameRef>xilinx_anylanguagebehavioralsimulation</spirit:viewNameRef>
             </spirit:wireTypeDef>
@@ -434,7 +548,11 @@
           <spirit:direction>out</spirit:direction>
           <spirit:wireTypeDefs>
             <spirit:wireTypeDef>
+<<<<<<< HEAD
               <spirit:typeName>wire</spirit:typeName>
+=======
+              <spirit:typeName>reg</spirit:typeName>
+>>>>>>> dbb0d5b (AIST-TSN Switch V2.0 First commit)
               <spirit:viewNameRef>xilinx_anylanguagesynthesis</spirit:viewNameRef>
               <spirit:viewNameRef>xilinx_anylanguagebehavioralsimulation</spirit:viewNameRef>
             </spirit:wireTypeDef>
@@ -451,7 +569,11 @@
           </spirit:vector>
           <spirit:wireTypeDefs>
             <spirit:wireTypeDef>
+<<<<<<< HEAD
               <spirit:typeName>wire</spirit:typeName>
+=======
+              <spirit:typeName>reg</spirit:typeName>
+>>>>>>> dbb0d5b (AIST-TSN Switch V2.0 First commit)
               <spirit:viewNameRef>xilinx_anylanguagesynthesis</spirit:viewNameRef>
               <spirit:viewNameRef>xilinx_anylanguagebehavioralsimulation</spirit:viewNameRef>
             </spirit:wireTypeDef>
@@ -464,7 +586,11 @@
           <spirit:direction>out</spirit:direction>
           <spirit:wireTypeDefs>
             <spirit:wireTypeDef>
+<<<<<<< HEAD
               <spirit:typeName>wire</spirit:typeName>
+=======
+              <spirit:typeName>reg</spirit:typeName>
+>>>>>>> dbb0d5b (AIST-TSN Switch V2.0 First commit)
               <spirit:viewNameRef>xilinx_anylanguagesynthesis</spirit:viewNameRef>
               <spirit:viewNameRef>xilinx_anylanguagebehavioralsimulation</spirit:viewNameRef>
             </spirit:wireTypeDef>
@@ -490,6 +616,7 @@
     </spirit:ports>
     <spirit:modelParameters>
       <spirit:modelParameter xsi:type="spirit:nameValueTypeType" spirit:dataType="integer">
+<<<<<<< HEAD
         <spirit:name>DATA_WIDTH</spirit:name>
         <spirit:displayName>Data Width</spirit:displayName>
         <spirit:value spirit:format="long" spirit:resolve="generated" spirit:id="MODELPARAM_VALUE.DATA_WIDTH">8</spirit:value>
@@ -503,16 +630,42 @@
         <spirit:name>ETHERNET_FRAME_WIDTH</spirit:name>
         <spirit:displayName>Ethernet Frame Width</spirit:displayName>
         <spirit:value spirit:format="long" spirit:resolve="generated" spirit:id="MODELPARAM_VALUE.ETHERNET_FRAME_WIDTH" spirit:dependency="(1600 * spirit:decode(id(&apos;MODELPARAM_VALUE.DATA_WIDTH&apos;)))">12800</spirit:value>
+=======
+        <spirit:name>C_AXIS_TDATA_WIDTH</spirit:name>
+        <spirit:displayName>C Axis Tdata Width</spirit:displayName>
+        <spirit:value spirit:format="long" spirit:resolve="generated" spirit:id="MODELPARAM_VALUE.C_AXIS_TDATA_WIDTH">8</spirit:value>
+      </spirit:modelParameter>
+      <spirit:modelParameter spirit:dataType="integer">
+        <spirit:name>C_AXIS_TKEEP_WIDTH</spirit:name>
+        <spirit:displayName>C Axis Tkeep Width</spirit:displayName>
+        <spirit:value spirit:format="long" spirit:resolve="generated" spirit:id="MODELPARAM_VALUE.C_AXIS_TKEEP_WIDTH" spirit:dependency="(spirit:decode(id(&apos;MODELPARAM_VALUE.C_AXIS_TDATA_WIDTH&apos;)) / 8)">1</spirit:value>
+>>>>>>> dbb0d5b (AIST-TSN Switch V2.0 First commit)
       </spirit:modelParameter>
       <spirit:modelParameter spirit:dataType="integer">
         <spirit:name>TIMESTAMP_WIDTH</spirit:name>
         <spirit:displayName>Timestamp Width</spirit:displayName>
         <spirit:value spirit:format="long" spirit:resolve="generated" spirit:id="MODELPARAM_VALUE.TIMESTAMP_WIDTH">72</spirit:value>
       </spirit:modelParameter>
+<<<<<<< HEAD
+=======
+      <spirit:modelParameter spirit:dataType="integer">
+        <spirit:name>OPT_LEVEL</spirit:name>
+        <spirit:displayName>Opt Level</spirit:displayName>
+        <spirit:value spirit:format="long" spirit:resolve="generated" spirit:id="MODELPARAM_VALUE.OPT_LEVEL">0</spirit:value>
+      </spirit:modelParameter>
+>>>>>>> dbb0d5b (AIST-TSN Switch V2.0 First commit)
     </spirit:modelParameters>
   </spirit:model>
   <spirit:choices>
     <spirit:choice>
+<<<<<<< HEAD
+=======
+      <spirit:name>choice_list_98b8ce5c</spirit:name>
+      <spirit:enumeration>0</spirit:enumeration>
+      <spirit:enumeration>1</spirit:enumeration>
+    </spirit:choice>
+    <spirit:choice>
+>>>>>>> dbb0d5b (AIST-TSN Switch V2.0 First commit)
       <spirit:name>choice_list_9d8b0d81</spirit:name>
       <spirit:enumeration>ACTIVE_HIGH</spirit:enumeration>
       <spirit:enumeration>ACTIVE_LOW</spirit:enumeration>
@@ -524,7 +677,11 @@
       <spirit:file>
         <spirit:name>separate_timestamp.v</spirit:name>
         <spirit:fileType>verilogSource</spirit:fileType>
+<<<<<<< HEAD
         <spirit:userFileType>CHECKSUM_fed0f437</spirit:userFileType>
+=======
+        <spirit:userFileType>CHECKSUM_f52436f5</spirit:userFileType>
+>>>>>>> dbb0d5b (AIST-TSN Switch V2.0 First commit)
       </spirit:file>
     </spirit:fileSet>
     <spirit:fileSet>
@@ -539,14 +696,29 @@
       <spirit:file>
         <spirit:name>xgui/separate_timestamp_v1_0.tcl</spirit:name>
         <spirit:fileType>tclSource</spirit:fileType>
+<<<<<<< HEAD
         <spirit:userFileType>CHECKSUM_a6c6c873</spirit:userFileType>
         <spirit:userFileType>XGUI_VERSION_2</spirit:userFileType>
       </spirit:file>
     </spirit:fileSet>
+=======
+        <spirit:userFileType>CHECKSUM_43d86915</spirit:userFileType>
+        <spirit:userFileType>XGUI_VERSION_2</spirit:userFileType>
+      </spirit:file>
+    </spirit:fileSet>
+    <spirit:fileSet>
+      <spirit:name>xilinx_utilityxitfiles_view_fileset</spirit:name>
+      <spirit:file>
+        <spirit:name>gui/separate_timestamp_v1_0.gtcl</spirit:name>
+        <spirit:userFileType>GTCL</spirit:userFileType>
+      </spirit:file>
+    </spirit:fileSet>
+>>>>>>> dbb0d5b (AIST-TSN Switch V2.0 First commit)
   </spirit:fileSets>
   <spirit:description>separate_timestamp_v1_0</spirit:description>
   <spirit:parameters>
     <spirit:parameter>
+<<<<<<< HEAD
       <spirit:name>DATA_WIDTH</spirit:name>
       <spirit:displayName>Data Width</spirit:displayName>
       <spirit:value spirit:format="long" spirit:resolve="user" spirit:id="PARAM_VALUE.DATA_WIDTH">8</spirit:value>
@@ -560,6 +732,23 @@
       <spirit:name>ETHERNET_FRAME_WIDTH</spirit:name>
       <spirit:displayName>Ethernet Frame Width</spirit:displayName>
       <spirit:value spirit:format="long" spirit:resolve="user" spirit:id="PARAM_VALUE.ETHERNET_FRAME_WIDTH">12800</spirit:value>
+=======
+      <spirit:name>C_AXIS_TDATA_WIDTH</spirit:name>
+      <spirit:displayName>C Axis Tdata Width</spirit:displayName>
+      <spirit:value spirit:format="long" spirit:resolve="user" spirit:id="PARAM_VALUE.C_AXIS_TDATA_WIDTH">8</spirit:value>
+    </spirit:parameter>
+    <spirit:parameter>
+      <spirit:name>C_AXIS_TKEEP_WIDTH</spirit:name>
+      <spirit:displayName>C Axis Tkeep Width</spirit:displayName>
+      <spirit:value spirit:format="long" spirit:resolve="user" spirit:id="PARAM_VALUE.C_AXIS_TKEEP_WIDTH">1</spirit:value>
+      <spirit:vendorExtensions>
+        <xilinx:parameterInfo>
+          <xilinx:enablement>
+            <xilinx:isEnabled xilinx:id="PARAM_ENABLEMENT.C_AXIS_TKEEP_WIDTH">false</xilinx:isEnabled>
+          </xilinx:enablement>
+        </xilinx:parameterInfo>
+      </spirit:vendorExtensions>
+>>>>>>> dbb0d5b (AIST-TSN Switch V2.0 First commit)
     </spirit:parameter>
     <spirit:parameter>
       <spirit:name>TIMESTAMP_WIDTH</spirit:name>
@@ -567,6 +756,14 @@
       <spirit:value spirit:format="long" spirit:resolve="user" spirit:id="PARAM_VALUE.TIMESTAMP_WIDTH">72</spirit:value>
     </spirit:parameter>
     <spirit:parameter>
+<<<<<<< HEAD
+=======
+      <spirit:name>OPT_LEVEL</spirit:name>
+      <spirit:displayName>Opt Level</spirit:displayName>
+      <spirit:value spirit:format="long" spirit:resolve="user" spirit:id="PARAM_VALUE.OPT_LEVEL" spirit:choiceRef="choice_list_98b8ce5c">0</spirit:value>
+    </spirit:parameter>
+    <spirit:parameter>
+>>>>>>> dbb0d5b (AIST-TSN Switch V2.0 First commit)
       <spirit:name>Component_Name</spirit:name>
       <spirit:value spirit:resolve="user" spirit:id="PARAM_VALUE.Component_Name" spirit:order="1">separate_timestamp_v1_0</spirit:value>
     </spirit:parameter>
@@ -610,19 +807,32 @@
         <xilinx:xpmLibrary>XPM_FIFO</xilinx:xpmLibrary>
         <xilinx:xpmLibrary>XPM_MEMORY</xilinx:xpmLibrary>
       </xilinx:xpmLibraries>
+<<<<<<< HEAD
       <xilinx:coreRevision>2</xilinx:coreRevision>
       <xilinx:coreCreationDateTime>2024-01-29T02:08:43Z</xilinx:coreCreationDateTime>
+=======
+      <xilinx:coreRevision>8</xilinx:coreRevision>
+      <xilinx:coreCreationDateTime>2025-06-23T08:24:51Z</xilinx:coreCreationDateTime>
+>>>>>>> dbb0d5b (AIST-TSN Switch V2.0 First commit)
       <xilinx:tags>
         <xilinx:tag xilinx:name="nopcore"/>
       </xilinx:tags>
     </xilinx:coreExtensions>
     <xilinx:packagingInfo>
       <xilinx:xilinxVersion>2022.1</xilinx:xilinxVersion>
+<<<<<<< HEAD
       <xilinx:checksum xilinx:scope="busInterfaces" xilinx:value="95118fd5"/>
       <xilinx:checksum xilinx:scope="fileGroups" xilinx:value="b6c640ea"/>
       <xilinx:checksum xilinx:scope="ports" xilinx:value="3f58d5e5"/>
       <xilinx:checksum xilinx:scope="hdlParameters" xilinx:value="e6462645"/>
       <xilinx:checksum xilinx:scope="parameters" xilinx:value="5a622bd3"/>
+=======
+      <xilinx:checksum xilinx:scope="busInterfaces" xilinx:value="cbc17a1a"/>
+      <xilinx:checksum xilinx:scope="fileGroups" xilinx:value="7a1db31a"/>
+      <xilinx:checksum xilinx:scope="ports" xilinx:value="a897929f"/>
+      <xilinx:checksum xilinx:scope="hdlParameters" xilinx:value="35929cf6"/>
+      <xilinx:checksum xilinx:scope="parameters" xilinx:value="8a3ea23e"/>
+>>>>>>> dbb0d5b (AIST-TSN Switch V2.0 First commit)
     </xilinx:packagingInfo>
   </spirit:vendorExtensions>
 </spirit:component>

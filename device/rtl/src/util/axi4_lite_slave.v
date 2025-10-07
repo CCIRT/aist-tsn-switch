@@ -118,12 +118,21 @@ module axi4_lite_slave #(
     for (byte_index = 0; byte_index <= ((C_S_AXI_DATA_WIDTH*NUM_OF_REGISTERS)/8)-1; byte_index = byte_index+1) begin
       if (byte_index <= (C_S_AXI_DATA_WIDTH/8)-1) begin
         if (S_AXI_WSTRB[byte_index] == 1) begin
+<<<<<<< HEAD
           write_mask[(byte_index*8) +: 8] <= 8'hFF;
         end else begin
           write_mask[(byte_index*8) +: 8] <= 8'h00;
         end
       end else begin
         write_mask[(byte_index*8) +: 8] <= 8'h00;
+=======
+          write_mask[(byte_index*8) +: 8] = 8'hFF;
+        end else begin
+          write_mask[(byte_index*8) +: 8] = 8'h00;
+        end
+      end else begin
+        write_mask[(byte_index*8) +: 8] = 8'h00;
+>>>>>>> dbb0d5b (AIST-TSN Switch V2.0 First commit)
       end
     end
   end

@@ -10,7 +10,11 @@ The subdirectories are of the following 7 experiments. See Section V.
 
 1. Clarify the limitation of the measurement tool used in our experiments (i.e., plget)
 2. Measure the basic latency of the network switch.
+<<<<<<< HEAD
 3. Confirm the capability of a CBS traffic class to adjust packet intervals.
+=======
+3. Confirm the capability of a CBS traffic class to adjust frame intervals.
+>>>>>>> dbb0d5b (AIST-TSN Switch V2.0 First commit)
 4. Confirm strict priority control among traffic classes.
 5. Measure the latency of a priority flow competing with a best-effort flow.
 6. Measure the latency of the 1st priority flow competing with the 2nd priority flow and the best-effort flow.

@@ -8,3 +8,7 @@ set(UTIL_FILES "${CMAKE_SOURCE_DIR}/rtl/test/util/pcap_to_stream.v"
 
 add_subdirectory(ats)
 add_subdirectory(cbs)
+<<<<<<< HEAD
+=======
+add_subdirectory(util)
+>>>>>>> dbb0d5b (AIST-TSN Switch V2.0 First commit)

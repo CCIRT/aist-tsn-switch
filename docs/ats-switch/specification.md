@@ -1,6 +1,12 @@
+<<<<<<< HEAD
 # Specifications of ats-switch
 
 This document describes specifications of the 4-port L2 switch with ATS implemented on FPGA.
+=======
+# Specifications of 1GbE ats-switch
+
+This document describes specifications of the 1GbE, 4-port L2 switch with ATS implemented on FPGA.
+>>>>>>> dbb0d5b (AIST-TSN Switch V2.0 First commit)
 
 ## Basic specifications
 
@@ -14,6 +20,10 @@ This document describes specifications of the 4-port L2 switch with ATS implemen
 - Support FDB
 - Detect flow from IPv4 header
 - Support ATS
+<<<<<<< HEAD
+=======
+- Support auto negotiation
+>>>>>>> dbb0d5b (AIST-TSN Switch V2.0 First commit)
 
 ### Flow detection
 
@@ -28,6 +38,7 @@ This document describes specifications of the 4-port L2 switch with ATS implemen
   - Match confirmation is performed in order from flows 1 to 15, and when matched, the flow is confirmed
     - In other words, if multiple flow conditions are matched, the flow will have the lowest number
   - When it does not match any flow, it is determined to be flow 0
+<<<<<<< HEAD
 - When the value 0 is set in the register, it is always detected to be matched regardless of the input frame value
 - Frames without IPv4 header like ARP are always detected to flow 0
 
@@ -79,6 +90,11 @@ This document describes specifications of the 4-port L2 switch with ATS implemen
   - dst_ip = 192.168.1.2
   - dst_port = 5203
 
+=======
+- Wildcard matching is supported. If a field is set as wildcard, it can match any IP or port value.
+- Frames without IPv4 header like ARP are always detected to flow 0
+
+>>>>>>> dbb0d5b (AIST-TSN Switch V2.0 First commit)
 ### ATS behavior
 
 - ATS means Asynchronous Traffic Shaping algorithm
@@ -94,6 +110,7 @@ This document describes specifications of the 4-port L2 switch with ATS implemen
   - Overflow will occur, but only 149 years after the power is turned on
     - 2^72 ps = 4.72+21 ps = 4.72+9 s = 54,657 days = 149 years
 
+<<<<<<< HEAD
 ### Table of PCP vs priority
 
 | PCP in vlan tag | Priority (= Traffic class) |
@@ -206,3 +223,35 @@ This document describes specifications of the 4-port L2 switch with ATS implemen
   - 0x20004: Middle 32 bit
   - 0x20008: Upper   8 bit
 
+=======
+## How to perform register settings
+
+Please use [our utility scripts](../../util).
+
+# Specifications of 10GbE ats-switch
+
+This document describes specifications of the 10GbE, 8-port L2 switch with ATS implemented on FPGA.
+
+## Basic specifications
+
+Same as the 1GbE version except for the following.
+- Support 10000BASE-R
+  - Maximum designed speed is 10 Gbps
+- Does not support auto negotiation
+
+### Flow detection
+
+Same as the 1GbE version.
+
+### ATS behavior
+
+Same as the 1GbE version except for the following.
+- Internally, time is managed as unsigned integer 72 bit
+  - The value is zero when the power is turned on, and is incremented by 6,400 every 6.4 ns
+  - Overflow will occur, but only 149 years after the power is turned on
+    - 2^72 ps = 4.72+21 ps = 4.72+9 s = 54,657 days = 149 years
+
+## How to perform register settings
+
+Please use [our utility scripts](../../util).
+>>>>>>> dbb0d5b (AIST-TSN Switch V2.0 First commit)

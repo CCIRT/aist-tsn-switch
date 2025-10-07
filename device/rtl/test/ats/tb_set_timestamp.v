@@ -6,23 +6,39 @@
 `timescale 1ns / 1ns
 
 `default_nettype none
+<<<<<<< HEAD
+=======
+`include "fatal.vh"
+>>>>>>> dbb0d5b (AIST-TSN Switch V2.0 First commit)
 
 module tb_set_timestamp;
   parameter PCAP_FILENAME = "";
   parameter VCD_FILENAME = "";
   parameter integer REPEAT_NUM = 1;
+<<<<<<< HEAD
+=======
+  parameter integer DATA_WIDTH = 8;
+  parameter integer FRAME_LENGTH_WIDTH = 16;            // Must be aligned to DATA_WIDTH
+  parameter integer TIMESTAMP_WIDTH = 72;               // Must be aligned to DATA_WIDTH
+  parameter integer CLOCK_PERIOD_PS = 8000;
+>>>>>>> dbb0d5b (AIST-TSN Switch V2.0 First commit)
 
   localparam integer TIMEOUT_CYCLE = 20000;
   localparam integer RESET_CYCLE = 10;
   localparam integer M_AXIS_TVALID_OUT_CYCLE = 20;
   localparam integer S_AXIS_TREADY_OUT_CYCLE = 50;
 
+<<<<<<< HEAD
   localparam [TIMESTAMP_WIDTH-1:0] CLOCK_PERIOD_PS = 'd8000;
 
   localparam DATA_WIDTH = 8;
   localparam FRAME_LENGTH_WIDTH = 16;                   // Must be aligned to DATA_WIDTH
   localparam ETHERNET_FRAME_WIDTH = 1600 * DATA_WIDTH;  // Must be aligned to DATA_WIDTH
   localparam TIMESTAMP_WIDTH = 72;                      // Must be aligned to DATA_WIDTH
+=======
+  localparam KEEP_WIDTH = DATA_WIDTH / 8;
+  localparam ETHERNET_FRAME_WIDTH = 1600 * DATA_WIDTH;  // Must be aligned to DATA_WIDTH
+>>>>>>> dbb0d5b (AIST-TSN Switch V2.0 First commit)
 
   //-------------------------
   // Port definition
@@ -38,6 +54,10 @@ module tb_set_timestamp;
   // AXI4-Stream Data In
   // [Ethernet Frame]
   wire [DATA_WIDTH-1:0] s_axis_tdata;
+<<<<<<< HEAD
+=======
+  wire [KEEP_WIDTH-1:0] s_axis_tkeep;
+>>>>>>> dbb0d5b (AIST-TSN Switch V2.0 First commit)
   wire                  s_axis_tvalid;
   wire                  s_axis_tready;
   wire                  s_axis_tlast;
@@ -45,6 +65,10 @@ module tb_set_timestamp;
   // AXI4-Stream Data Out
   // [Ethernet Frame]/[Timestamp]
   wire [DATA_WIDTH-1:0] m_axis_tdata;
+<<<<<<< HEAD
+=======
+  wire [KEEP_WIDTH-1:0] m_axis_tkeep;
+>>>>>>> dbb0d5b (AIST-TSN Switch V2.0 First commit)
   wire                  m_axis_tvalid;
   wire                  m_axis_tready;
   wire                  m_axis_tlast;
@@ -65,7 +89,11 @@ module tb_set_timestamp;
     end
 
     $display("Error: Timeout");
+<<<<<<< HEAD
     $fatal();
+=======
+    `FATAL;
+>>>>>>> dbb0d5b (AIST-TSN Switch V2.0 First commit)
   end
 
   //-------------------------
@@ -91,6 +119,10 @@ module tb_set_timestamp;
     clk,
     rstn,
     s_axis_tdata,
+<<<<<<< HEAD
+=======
+    s_axis_tkeep,
+>>>>>>> dbb0d5b (AIST-TSN Switch V2.0 First commit)
     s_axis_tvalid,
     s_axis_tready,
     s_axis_tlast
@@ -113,6 +145,10 @@ module tb_set_timestamp;
     clk,
     rstn,
     m_axis_tdata,
+<<<<<<< HEAD
+=======
+    m_axis_tkeep,
+>>>>>>> dbb0d5b (AIST-TSN Switch V2.0 First commit)
     m_axis_tvalid,
     m_axis_tready,
     m_axis_tlast
@@ -130,17 +166,30 @@ module tb_set_timestamp;
   // Test module
   //-------------------------
   set_timestamp #(
+<<<<<<< HEAD
     .DATA_WIDTH(DATA_WIDTH),
+=======
+    .C_AXIS_TDATA_WIDTH(DATA_WIDTH),
+    .C_AXIS_TKEEP_WIDTH(KEEP_WIDTH),
+>>>>>>> dbb0d5b (AIST-TSN Switch V2.0 First commit)
     .TIMESTAMP_WIDTH(TIMESTAMP_WIDTH)
   ) set_timestamp_i (
     clk,
     rstn,
     ats_scheduler_timer,
     s_axis_tdata,
+<<<<<<< HEAD
+=======
+    s_axis_tkeep,
+>>>>>>> dbb0d5b (AIST-TSN Switch V2.0 First commit)
     s_axis_tvalid,
     s_axis_tready,
     s_axis_tlast,
     m_axis_tdata,
+<<<<<<< HEAD
+=======
+    m_axis_tkeep,
+>>>>>>> dbb0d5b (AIST-TSN Switch V2.0 First commit)
     m_axis_tvalid,
     m_axis_tready,
     m_axis_tlast
