@@ -12,14 +12,14 @@ This repository includes two flavors of an L2 TSN switch supporting two differen
   - [Specification](./docs/cbs-switch/specification.md)
   - [FPGA design docs](./docs/cbs-switch/design_top.md)
 
-![1GbE L2 switch supporting CBS](docs/cbs-switch/img/overwiew_cbs-switch.drawio.svg)
+![alt text](https://github.com/CCIRT/aist-tsn-switch/blob/v1.0_09-2024/docs/cbs-switch/img/overwiew_cbs-switch.drawio.svg)
 
 
 - 1GbE L2 switch supporting ATS:
   - [Specification](./docs/ats-switch/specification.md)
   - [FPGA design docs](./docs/ats-switch/design_top.md)
 
-![1GbE L2 switch supporting ATS](docs/ats-switch/img/overwiew_ats-switch.drawio.svg)
+![alt text](https://github.com/CCIRT/aist-tsn-switch/blob/v1.0_09-2024/docs/ats-switch/img/overwiew_ats-switch.drawio.svg)
 
 
 ## Licensing
