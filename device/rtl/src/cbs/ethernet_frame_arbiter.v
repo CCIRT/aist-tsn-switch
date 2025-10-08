@@ -5,7 +5,6 @@
 
 `default_nettype none
 
-<<<<<<< HEAD
 module ethernet_frame_arbiter (
   // clock, negative-reset
   input  wire clk,
@@ -83,7 +82,6 @@ module ethernet_frame_arbiter (
   // Utility wires
   wire stream_outgoing = m_axis_tvalid & m_axis_tready;
   wire [2:0] arbitrate = (is_first_beat)? arbitrate_tmp: arbitrate_reg;
-=======
 module ethernet_frame_arbiter #(
   parameter FRAME_GAP = 0,
   parameter C_AXIS_TDATA_WIDTH = 8,
@@ -167,12 +165,10 @@ module ethernet_frame_arbiter #(
   wire [3:0] arbitrate = (is_first_beat[0]) ? arbitrate_tmp :
                          (|is_first_beat) ? 4'd15 :
                          arbitrate_reg;
->>>>>>> dbb0d5b (AIST-TSN Switch V2.0 First commit)
 
   // AXI4-Stream connection
   always @ (*) begin
     case (arbitrate)
-<<<<<<< HEAD
       3'd7:
         begin
           m_axis_tdata    <= s_axis_7_tdata;
@@ -307,7 +303,6 @@ module ethernet_frame_arbiter #(
           s_axis_2_tready <= 1'b0;
           s_axis_1_tready <= 1'b0;
           s_axis_0_tready <= 1'b0;
-=======
       4'd7:
         begin
           m_axis_tdata    = s_axis_7_tdata;
@@ -442,7 +437,6 @@ module ethernet_frame_arbiter #(
           s_axis_2_tready = 1'b0;
           s_axis_1_tready = 1'b0;
           s_axis_0_tready = 1'b0;
->>>>>>> dbb0d5b (AIST-TSN Switch V2.0 First commit)
         end
     endcase
   end
@@ -450,7 +444,6 @@ module ethernet_frame_arbiter #(
   // Decide arbitrate_tmp
   always @ (*) begin
     if (s_axis_7_tvalid) begin
-<<<<<<< HEAD
       arbitrate_tmp <= 3'd7;
     end else if (s_axis_6_tvalid) begin
       arbitrate_tmp <= 3'd6;
@@ -468,7 +461,6 @@ module ethernet_frame_arbiter #(
       arbitrate_tmp <= 3'd0;
     end else begin
       arbitrate_tmp <= 3'd7;
-=======
       arbitrate_tmp = 4'd7;
     end else if (s_axis_6_tvalid) begin
       arbitrate_tmp = 4'd6;
@@ -486,24 +478,20 @@ module ethernet_frame_arbiter #(
       arbitrate_tmp = 4'd0;
     end else begin
       arbitrate_tmp = 4'd15;
->>>>>>> dbb0d5b (AIST-TSN Switch V2.0 First commit)
     end
   end
 
   // Control arbitrate_reg
   always @ (posedge clk) begin
     if (!rstn) begin
-<<<<<<< HEAD
       arbitrate_reg <= 3'd7;
     end else begin
       if (stream_outgoing) begin
         if (is_first_beat) begin
-=======
       arbitrate_reg <= 4'd7;
     end else begin
       if (stream_outgoing) begin
         if (is_first_beat[0]) begin
->>>>>>> dbb0d5b (AIST-TSN Switch V2.0 First commit)
           arbitrate_reg <= arbitrate_tmp;
         end else begin
           // Do nothing
@@ -517,7 +505,6 @@ module ethernet_frame_arbiter #(
   // Control is_first_beat
   always @ (posedge clk) begin
     if (!rstn) begin
-<<<<<<< HEAD
       is_first_beat <= 1'b1;
     end else begin
       if (stream_outgoing) begin
@@ -528,7 +515,6 @@ module ethernet_frame_arbiter #(
         end
       end else begin
         // Do nothing
-=======
       is_first_beat <= 1;
     end else begin
       if (stream_outgoing) begin
@@ -539,7 +525,6 @@ module ethernet_frame_arbiter #(
         end
       end else begin
         is_first_beat <= (is_first_beat >> 1) | is_first_beat[0];
->>>>>>> dbb0d5b (AIST-TSN Switch V2.0 First commit)
       end
     end
   end

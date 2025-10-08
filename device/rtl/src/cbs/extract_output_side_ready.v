@@ -5,7 +5,6 @@
 
 `default_nettype none
 
-<<<<<<< HEAD
 module extract_output_side_ready (
   // clk, rstn
   input  wire clk,
@@ -27,7 +26,6 @@ module extract_output_side_ready (
 
   // Extracted output side ready
   output wire       output_side_ready
-=======
 module extract_output_side_ready #(
   parameter C_AXIS_TDATA_WIDTH = 8,
   parameter C_AXIS_TKEEP_WIDTH = C_AXIS_TDATA_WIDTH / 8
@@ -52,23 +50,19 @@ module extract_output_side_ready #(
 
   // Extracted output side ready
   output wire                          output_side_ready
->>>>>>> dbb0d5b (AIST-TSN Switch V2.0 First commit)
 );
   assign output_side_ready = m_axis_tready;
 
   // AXI4-Stream connection
   assign m_axis_tdata = s_axis_tdata;
-<<<<<<< HEAD
   assign m_axis_tvalid = s_axis_tvalid;
   assign s_axis_tready = m_axis_tready;
   assign m_axis_tlast = s_axis_tlast;
   assign m_axis_tuser = s_axis_tuser;
-=======
   assign m_axis_tkeep = s_axis_tkeep;
   assign m_axis_tvalid = s_axis_tvalid;
   assign s_axis_tready = m_axis_tready;
   assign m_axis_tlast = s_axis_tlast;
->>>>>>> dbb0d5b (AIST-TSN Switch V2.0 First commit)
 
 endmodule
 

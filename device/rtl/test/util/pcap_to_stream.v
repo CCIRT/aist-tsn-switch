@@ -6,24 +6,17 @@
 `timescale 1ns / 1ns
 
 `default_nettype none
-<<<<<<< HEAD
-=======
 `include "fatal.vh"
->>>>>>> dbb0d5b (AIST-TSN Switch V2.0 First commit)
 
 module pcap_to_stream #(
   parameter PCAP_FILENAME = "",
   parameter integer REPEAT_NUM = 1,
   parameter integer ENABLE_RANDAMIZE = 1,
-<<<<<<< HEAD
-=======
   parameter integer MAX_RAND_INTERVAL = 4,
->>>>>>> dbb0d5b (AIST-TSN Switch V2.0 First commit)
   parameter integer M_AXIS_TVALID_OUT_CYCLE = 20,
   parameter integer DATA_WIDTH = 8,
   parameter integer ENABLE_FRAME_LENGTH_HEADER = 0,
   parameter integer ENABLE_TIMESTAMP_FOOTER = 0,
-<<<<<<< HEAD
   parameter integer FRAME_LENGTH_WIDTH = 16,                  // Must be aligned to DATA_WIDTH
   parameter integer ETHERNET_FRAME_WIDTH = 1600 * DATA_WIDTH, // Must be aligned to DATA_WIDTH
   parameter integer TIMESTAMP_WIDTH = 72,                     // Must be aligned to DATA_WIDTH
@@ -64,7 +57,6 @@ module pcap_to_stream #(
                                                             (state == STATE_WRITE_ETHERNET_FRAME & ethernet_frame_counter == frame_length - 1);
 
   initial begin
-=======
   parameter integer FRAME_LENGTH_WIDTH = 16,
   parameter integer ETHERNET_FRAME_WIDTH = 1600 * 8,
   parameter integer TIMESTAMP_WIDTH = 72,
@@ -95,16 +87,12 @@ module pcap_to_stream #(
       frame_length = FRAME_LENGTH_WIDTH / 8;
     end
 
->>>>>>> dbb0d5b (AIST-TSN Switch V2.0 First commit)
     // Open pcap file
     fd = $fopen(PCAP_FILENAME, "rb");
     if (fd == 0) begin
       $display("Error: Cannot open pcap file '%s'", PCAP_FILENAME);
-<<<<<<< HEAD
       $finish;
-=======
       `FATAL;
->>>>>>> dbb0d5b (AIST-TSN Switch V2.0 First commit)
     end
 
     // Drop initial 40 Bytes
@@ -123,7 +111,6 @@ module pcap_to_stream #(
     // Close pcap file
     $fclose(fd);
 
-<<<<<<< HEAD
     // Control m_axis_tvalid_reg
     for (i = 0; 1; i++) begin
       @(posedge clk);
@@ -231,7 +218,6 @@ module pcap_to_stream #(
     end
   end
 
-=======
     // update header value
     if (ENABLE_FRAME_LENGTH_HEADER) begin
       // get true frame length
@@ -301,7 +287,6 @@ module pcap_to_stream #(
       end
     end
   end
->>>>>>> dbb0d5b (AIST-TSN Switch V2.0 First commit)
 endmodule
 
 `default_nettype wire

@@ -6,37 +6,27 @@
 `timescale 1ns / 1ns
 
 `default_nettype none
-<<<<<<< HEAD
-=======
 `include "fatal.vh"
->>>>>>> dbb0d5b (AIST-TSN Switch V2.0 First commit)
 
 module compare_stream_with_pcap #(
   parameter PCAP_FILENAME = "",
   parameter integer REPEAT_NUM = 1,
   parameter integer ENABLE_RANDAMIZE = 1,
-<<<<<<< HEAD
-=======
   parameter integer MAX_RAND_INTERVAL = 4,
->>>>>>> dbb0d5b (AIST-TSN Switch V2.0 First commit)
   parameter integer S_AXIS_TREADY_OUT_CYCLE = 20,
   parameter integer DATA_WIDTH = 8,
   parameter integer ENABLE_FRAME_LENGTH_HEADER = 0,
   parameter integer ENABLE_TIMESTAMP_FOOTER = 0,
-<<<<<<< HEAD
   parameter integer FRAME_LENGTH_WIDTH = 16,                  // Must be aligned to DATA_WIDTH
   parameter integer ETHERNET_FRAME_WIDTH = 1600 * DATA_WIDTH, // Must be aligned to DATA_WIDTH
   parameter integer TIMESTAMP_WIDTH = 72,                     // Must be aligned to DATA_WIDTH
-=======
   parameter integer FRAME_LENGTH_WIDTH = 16,
   parameter integer ETHERNET_FRAME_WIDTH = 1600 * 8,
   parameter integer TIMESTAMP_WIDTH = 72,
->>>>>>> dbb0d5b (AIST-TSN Switch V2.0 First commit)
   parameter integer COMPARE_WITH_FRAME_LENGTH = 0,
   parameter integer COMPARE_WITH_TIMESTAMP = 0,
   parameter [TIMESTAMP_WIDTH-1:0] TIMESTAMP_VAL = 0
 ) (
-<<<<<<< HEAD
   input  wire clk,
   input  wire rstn,
   input  wire [DATA_WIDTH-1:0] s_axis_tdata,
@@ -67,7 +57,6 @@ module compare_stream_with_pcap #(
   assign s_axis_tready = (ENABLE_RANDAMIZE == 0)? s_axis_tready_reg: s_axis_tready_reg & output_enable_reg;
 
   initial begin
-=======
   input wire                    clk,
   input wire                    rstn,
   input wire [DATA_WIDTH-1:0]   s_axis_tdata,
@@ -93,16 +82,12 @@ module compare_stream_with_pcap #(
       frame_length = FRAME_LENGTH_WIDTH / 8;
     end
 
->>>>>>> dbb0d5b (AIST-TSN Switch V2.0 First commit)
     // Open pcap file
     fd = $fopen(PCAP_FILENAME, "rb");
     if (fd == 0) begin
       $display("Error: Cannot open pcap file '%s'", PCAP_FILENAME);
-<<<<<<< HEAD
       $finish;
-=======
       `FATAL;
->>>>>>> dbb0d5b (AIST-TSN Switch V2.0 First commit)
     end
 
     // Drop initial 40 Bytes
@@ -113,22 +98,18 @@ module compare_stream_with_pcap #(
     // Store data until end of file
     while($feof(fd) == 0) begin
       num = $fread(data_buf, fd);
-<<<<<<< HEAD
       data[frame_length_ref] = data_buf;
       frame_length_ref++;
     end
     frame_length_ref--;
-=======
       data[frame_length] = data_buf;
       frame_length++;
     end
     frame_length--;
->>>>>>> dbb0d5b (AIST-TSN Switch V2.0 First commit)
 
     // Close pcap file
     $fclose(fd);
 
-<<<<<<< HEAD
     // Control s_axis_tready_reg
     for (i = 0; 1; i++) begin
       @(posedge clk);
@@ -314,7 +295,6 @@ module compare_stream_with_pcap #(
         end
       endcase
     end
-=======
     // update header value
     if (ENABLE_FRAME_LENGTH_HEADER) begin
       // get true frame length
@@ -410,7 +390,6 @@ module compare_stream_with_pcap #(
       @(posedge clk);
     end
     $finish();
->>>>>>> dbb0d5b (AIST-TSN Switch V2.0 First commit)
   end
 
 endmodule

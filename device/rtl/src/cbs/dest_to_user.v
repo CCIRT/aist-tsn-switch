@@ -5,7 +5,6 @@
 
 `default_nettype none
 
-<<<<<<< HEAD
 module dest_to_user (
   // clk, rstn
   input  wire clk,
@@ -27,7 +26,6 @@ module dest_to_user (
 );
   // AXI4-Stream connection
   assign m_axis_tdata = s_axis_tdata;
-=======
 module dest_to_user #(
   parameter C_AXIS_TDATA_WIDTH = 8,
   parameter C_AXIS_TKEEP_WIDTH = C_AXIS_TDATA_WIDTH / 8,
@@ -56,7 +54,6 @@ module dest_to_user #(
   // AXI4-Stream connection
   assign m_axis_tdata = s_axis_tdata;
   assign m_axis_tkeep = s_axis_tkeep;
->>>>>>> dbb0d5b (AIST-TSN Switch V2.0 First commit)
   assign m_axis_tvalid = s_axis_tvalid;
   assign s_axis_tready = m_axis_tready;
   assign m_axis_tlast = s_axis_tlast;

@@ -5,12 +5,10 @@
 
 `default_nettype none
 
-<<<<<<< HEAD
 module detect_flow_core #(
   parameter DATA_WIDTH = 8,
   parameter FLOW_NUM = 16,
   parameter FLOW_WIDTH = 8
-=======
 module detect_flow_parse_header #(
   parameter C_AXIS_TDATA_WIDTH = 8,
   parameter C_AXIS_TKEEP_WIDTH = C_AXIS_TDATA_WIDTH / 8,
@@ -273,7 +271,6 @@ module detect_flow_core_legacy #(
   parameter FLOW_NUM = 16,
   parameter FLOW_WIDTH = 8,
   parameter FLOW_BITS = 4
->>>>>>> dbb0d5b (AIST-TSN Switch V2.0 First commit)
 ) (
   // clock, negative-reset
   input  wire clk,
@@ -281,7 +278,6 @@ module detect_flow_core_legacy #(
 
   // Condition of flow detection
   // MSB [src_ip(32bit)]/[src_port(16bit)]/[dst_ip(32bit)]/[dst_port(16bit)] LSB
-<<<<<<< HEAD
   input  wire [95:0] cond_flow_1,
   input  wire [95:0] cond_flow_2,
   input  wire [95:0] cond_flow_3,
@@ -300,7 +296,6 @@ module detect_flow_core_legacy #(
 
   // AXI4-Stream Data In
   input  wire [DATA_WIDTH-1:0] s_axis_tdata,
-=======
   output wire [FLOW_BITS-1:0] flow_id,
   output wire                 flow_ren,
   input  wire [95:0]          cond_flow,
@@ -308,18 +303,14 @@ module detect_flow_core_legacy #(
   // AXI4-Stream Data In
   input  wire [C_AXIS_TDATA_WIDTH-1:0] s_axis_tdata,
   input  wire                  s_axis_tkeep,
->>>>>>> dbb0d5b (AIST-TSN Switch V2.0 First commit)
   input  wire                  s_axis_tvalid,
   output wire                  s_axis_tready,
   input  wire                  s_axis_tlast,
 
   // AXI4-Stream Data Out
-<<<<<<< HEAD
   output wire [DATA_WIDTH-1:0] m_axis_tdata,
-=======
   output wire [C_AXIS_TDATA_WIDTH-1:0] m_axis_tdata,
   output wire                  m_axis_tkeep,
->>>>>>> dbb0d5b (AIST-TSN Switch V2.0 First commit)
   output wire                  m_axis_tvalid,
   input  wire                  m_axis_tready,
   output wire                  m_axis_tlast,
@@ -331,22 +322,16 @@ module detect_flow_core_legacy #(
 );
 
   // Parameter for ethernet_frame
-<<<<<<< HEAD
   localparam ETHERNET_FRAME_WIDTH = 1600 * DATA_WIDTH; // Must be aligned to DATA_WIDTH
   localparam ETHERNET_FRAME_BEAT_NUM = ETHERNET_FRAME_WIDTH / DATA_WIDTH;
-=======
   localparam ETHERNET_FRAME_WIDTH = 1600 * C_AXIS_TDATA_WIDTH; // Must be aligned to C_AXIS_TDATA_WIDTH
   localparam ETHERNET_FRAME_BEAT_NUM = ETHERNET_FRAME_WIDTH / C_AXIS_TDATA_WIDTH;
->>>>>>> dbb0d5b (AIST-TSN Switch V2.0 First commit)
   localparam ETHERNET_FRAME_COUNTER_WIDTH = $clog2(ETHERNET_FRAME_BEAT_NUM);
 
   // AXI4-Stream connection
   //// Data
   assign m_axis_tdata  = s_axis_tdata;
-<<<<<<< HEAD
-=======
   assign m_axis_tkeep  = s_axis_tkeep;
->>>>>>> dbb0d5b (AIST-TSN Switch V2.0 First commit)
   assign m_axis_tvalid = (state == STATE_PASS_DATA_STREAM)? s_axis_tvalid: 1'b0;
   assign s_axis_tready = (state == STATE_PASS_DATA_STREAM)? m_axis_tready: 1'b0;
   assign m_axis_tlast  = s_axis_tlast;
@@ -470,7 +455,6 @@ module detect_flow_core_legacy #(
     end
   end
 
-<<<<<<< HEAD
   // Condition of flow detection
   wire [95:0] cond_flow[FLOW_NUM-1:0];  // MSB [src_ip(32bit)]/[src_port(16bit)]/[dst_ip(32bit)]/[dst_port(16bit)] LSB x FLOW_NUM pattern
   assign cond_flow[0] = 'd0; // Default flow
@@ -496,7 +480,6 @@ module detect_flow_core_legacy #(
   wire [15:0] src_port_ref = cond_flow[flow_counter][63:48];
   wire [31:0] dst_ip_ref   = cond_flow[flow_counter][47:16];
   wire [15:0] dst_port_ref = cond_flow[flow_counter][15: 0];
-=======
   // Read cond flow
   assign flow_id = ethernet_frame_counter - 'd42;
   assign flow_ren = !(ethernet_frame_counter < 41 || ethernet_frame_counter >= 41 + FLOW_NUM) && s_axis_tvalid && s_axis_tready;
@@ -507,7 +490,6 @@ module detect_flow_core_legacy #(
   wire [15:0] src_port_ref = cond_flow[63:48];
   wire [31:0] dst_ip_ref   = cond_flow[47:16];
   wire [15:0] dst_port_ref = cond_flow[15: 0];
->>>>>>> dbb0d5b (AIST-TSN Switch V2.0 First commit)
   wire src_ip_matched   = (src_ip_ref   == 'd0 || src_ip   == src_ip_ref);
   wire src_port_matched = (src_port_ref == 'd0 || src_port == src_port_ref);
   wire dst_ip_matched   = (dst_ip_ref   == 'd0 || dst_ip   == dst_ip_ref);
@@ -535,7 +517,6 @@ module detect_flow_core_legacy #(
       end
     end
   end
-<<<<<<< HEAD
 
 endmodule
 
@@ -655,7 +636,6 @@ module detect_flow #(
     .NUM_OF_REGISTERS(NUM_OF_REGISTERS),
     .C_S_AXI_ADDR_WIDTH(C_S_AXI_ADDR_WIDTH)
   ) axi4_lite_slave_i (
-=======
 endmodule
 
 
@@ -844,7 +824,6 @@ module detect_flow_register #(
     .REG_ADDR_BIT(REG_ADDR_BIT),
     .C_S_AXI_ADDR_WIDTH(C_S_AXI_ADDR_WIDTH)
   ) axi4_lite_slave_if_i (
->>>>>>> dbb0d5b (AIST-TSN Switch V2.0 First commit)
     clk,
     rstn,
     S_AXI_AWADDR,
@@ -866,10 +845,8 @@ module detect_flow_register #(
     S_AXI_RRESP,
     S_AXI_RVALID,
     S_AXI_RREADY,
-<<<<<<< HEAD
     init_val,
     val
-=======
     local_waddr,
     local_raddr,
     local_wen,
@@ -1082,7 +1059,6 @@ module detect_flow #(
     flow_id,
     flow_ren,
     flow_val
->>>>>>> dbb0d5b (AIST-TSN Switch V2.0 First commit)
   );
 
 endmodule

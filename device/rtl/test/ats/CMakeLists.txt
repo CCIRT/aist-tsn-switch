@@ -3,7 +3,6 @@
 # This software is released under the MIT License.
 # http://opensource.org/licenses/mit-license.php
 
-<<<<<<< HEAD
 module_test(connect_frame_length           ethernet_frame 3 ${RTL_DIR}/src/ats/ ${RTL_DIR}/test/ats/ "${UTIL_FILES}" "1518")
 module_test(connect_frame_length           vlan_frame     3 ${RTL_DIR}/src/ats/ ${RTL_DIR}/test/ats/ "${UTIL_FILES}" "1522")
 module_test(connect_timestamp              ethernet_frame 3 ${RTL_DIR}/src/ats/ ${RTL_DIR}/test/ats/ "${UTIL_FILES}" "1518")
@@ -30,7 +29,6 @@ module_test(separate_timestamp             ethernet_frame 3 ${RTL_DIR}/src/ats/ 
 module_test(separate_timestamp             vlan_frame     3 ${RTL_DIR}/src/ats/ ${RTL_DIR}/test/ats/ "${UTIL_FILES}" "1522")
 module_test(set_timestamp                  ethernet_frame 3 ${RTL_DIR}/src/ats/ ${RTL_DIR}/test/ats/ "${UTIL_FILES}" "1518")
 module_test(set_timestamp                  vlan_frame     3 ${RTL_DIR}/src/ats/ ${RTL_DIR}/test/ats/ "${UTIL_FILES}" "1522")
-=======
 module_test(connect_frame_length           ethernet_frame 3 ${RTL_DIR}/src/ats/ ${RTL_DIR}/test/ats/ "${UTIL_FILES}" "1518" "" "")
 module_test(connect_frame_length           vlan_frame     3 ${RTL_DIR}/src/ats/ ${RTL_DIR}/test/ats/ "${UTIL_FILES}" "1522" "" "")
 module_test(connect_timestamp              ethernet_frame 3 ${RTL_DIR}/src/ats/ ${RTL_DIR}/test/ats/ "${UTIL_FILES};${RTL_DIR}/src/ats/set_timestamp.v" "1518" "" "")
@@ -99,7 +97,6 @@ module_test(set_timestamp                  ethernet_frame 3 ${RTL_DIR}/src/ats/ 
 module_test(set_timestamp                  vlan_frame     3 ${RTL_DIR}/src/ats/ ${RTL_DIR}/test/ats/ "${UTIL_FILES}" "1522" "DATA_WIDTH;16" 16 "")
 module_test(set_timestamp                  ethernet_frame 3 ${RTL_DIR}/src/ats/ ${RTL_DIR}/test/ats/ "${UTIL_FILES}" "1518" "DATA_WIDTH;64;CLOCK_PERIOD_PS;6400" 64 "")
 module_test(set_timestamp                  vlan_frame     3 ${RTL_DIR}/src/ats/ ${RTL_DIR}/test/ats/ "${UTIL_FILES}" "1522" "DATA_WIDTH;64;CLOCK_PERIOD_PS;6400" 64 "")
->>>>>>> dbb0d5b (AIST-TSN Switch V2.0 First commit)
 
 add_custom_target(run_tb_ats_modules
   DEPENDS
@@ -109,7 +106,6 @@ add_custom_target(run_tb_ats_modules
     run_tb_connect_timestamp.vlan_frame
     run_tb_detect_flow.ethernet_frame
     run_tb_detect_flow.vlan_frame
-<<<<<<< HEAD
     run_tb_detect_flow.ethernet_tcp
     run_tb_detect_flow.vlan_tcp
     run_tb_detect_flow.ethernet_udp
@@ -118,7 +114,6 @@ add_custom_target(run_tb_ats_modules
     run_tb_get_frame_length.vlan_frame
     run_tb_get_frame_length_and_timestamp.ethernet_frame
     run_tb_get_frame_length_and_timestamp.vlan_frame
-=======
     run_tb_detect_flow.ethernet_frame_opt0
     run_tb_detect_flow.vlan_frame_opt0
     run_tb_detect_flow.ethernet_tcp
@@ -135,24 +130,18 @@ add_custom_target(run_tb_ats_modules
     run_tb_et_gate.vlan_frame
     run_tb_get_frame_length.ethernet_frame
     run_tb_get_frame_length.vlan_frame
->>>>>>> dbb0d5b (AIST-TSN Switch V2.0 First commit)
     run_tb_process_frame.ethernet_frame
     run_tb_process_frame.vlan_frame
     run_tb_reference_timer.ethernet_frame
     run_tb_reference_timer.vlan_frame
-<<<<<<< HEAD
     run_tb_scheduler.ethernet_frame
     run_tb_scheduler.vlan_frame
     run_tb_separate_frame_length.ethernet_frame
     run_tb_separate_frame_length.vlan_frame
-=======
->>>>>>> dbb0d5b (AIST-TSN Switch V2.0 First commit)
     run_tb_separate_timestamp.ethernet_frame
     run_tb_separate_timestamp.vlan_frame
     run_tb_set_timestamp.ethernet_frame
     run_tb_set_timestamp.vlan_frame
-<<<<<<< HEAD
-=======
     run_tb_connect_timestamp.ethernet_frame64
     run_tb_connect_timestamp.vlan_frame64
     run_tb_detect_flow.ethernet_frame64
@@ -167,5 +156,4 @@ add_custom_target(run_tb_ats_modules
     run_tb_separate_timestamp.vlan_frame64
     run_tb_set_timestamp.ethernet_frame64
     run_tb_set_timestamp.vlan_frame64
->>>>>>> dbb0d5b (AIST-TSN Switch V2.0 First commit)
 )

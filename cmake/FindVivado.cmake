@@ -149,12 +149,10 @@ function(define_vivado project)
     COMMAND
       bash ${CMAKE_SOURCE_DIR}/rtl/src/patch.sh ${TEMAC_EXAMPLE_PROJ}
     COMMAND
-<<<<<<< HEAD
       # Define global
       ENV_DESIGN=${ARG_DESIGN}
       ENV_RTL="${RTL_ABS}"
       ENV_CONSTRAINT="${CONSTRAINT_ABS}"
-=======
       bash ${CMAKE_SOURCE_DIR}/../cmake/scripts/build_xg_mac_ip.sh
     COMMAND
       bash ${CMAKE_SOURCE_DIR}/../cmake/scripts/generate_commit_id_xdc.sh ${CMAKE_CURRENT_BINARY_DIR}/commit_id.xdc
@@ -163,7 +161,6 @@ function(define_vivado project)
       ENV_DESIGN=${ARG_DESIGN}
       ENV_RTL="${RTL_ABS}"
       ENV_CONSTRAINT="${CONSTRAINT_ABS};${CMAKE_CURRENT_BINARY_DIR}/commit_id.xdc"
->>>>>>> dbb0d5b (AIST-TSN Switch V2.0 First commit)
       ENV_IP="${IP_ABS}"
       ENV_TCL0="${TCL0_ABS}"
       ENV_TCL1="${TCL1_ABS}"

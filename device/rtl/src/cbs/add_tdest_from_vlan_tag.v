@@ -5,7 +5,6 @@
 
 `default_nettype none
 
-<<<<<<< HEAD
 module add_tdest_from_vlan_tag_core (
   // clock, negative-reset
   input  wire clk,
@@ -145,7 +144,6 @@ module add_tdest_from_vlan_tag_core (
 endmodule
 
 module add_tdest_from_vlan_tag  #(
-=======
 module add_tdest_from_vlan_tag_core #(
   parameter C_AXIS_TDATA_WIDTH = 8,
   parameter C_AXIS_TKEEP_WIDTH = C_AXIS_TDATA_WIDTH / 8,
@@ -273,7 +271,6 @@ module add_tdest_from_vlan_tag_core #(
 endmodule
 
 module add_tdest_from_vlan_tag_register #(
->>>>>>> dbb0d5b (AIST-TSN Switch V2.0 First commit)
   parameter INIT_VAL_OF_PRIORITY_MAPPER_0 = 1,
   parameter INIT_VAL_OF_PRIORITY_MAPPER_1 = 0,
   parameter INIT_VAL_OF_PRIORITY_MAPPER_2 = 6,
@@ -312,7 +309,6 @@ module add_tdest_from_vlan_tag_register #(
   output wire                              S_AXI_RVALID,
   input  wire                              S_AXI_RREADY,
 
-<<<<<<< HEAD
   // AXI4-Stream In
   input  wire [7:0] s_axis_tdata,
   input  wire       s_axis_tvalid,
@@ -389,7 +385,6 @@ module add_tdest_from_vlan_tag_register #(
     .NUM_OF_REGISTERS(NUM_OF_REGISTERS),
     .C_S_AXI_ADDR_WIDTH(C_S_AXI_ADDR_WIDTH)
   ) axi4_lite_slave_i (
-=======
   // Settings
   output  wire [2:0] priority_mapper_0,
   output  wire [2:0] priority_mapper_1,
@@ -417,7 +412,6 @@ module add_tdest_from_vlan_tag_register #(
     .REG_ADDR_BIT(REG_ADDR_BIT),
     .C_S_AXI_ADDR_WIDTH(C_S_AXI_ADDR_WIDTH)
   ) axi4_lite_slave_if_i (
->>>>>>> dbb0d5b (AIST-TSN Switch V2.0 First commit)
     clk,
     rstn,
     S_AXI_AWADDR,
@@ -439,10 +433,8 @@ module add_tdest_from_vlan_tag_register #(
     S_AXI_RRESP,
     S_AXI_RVALID,
     S_AXI_RREADY,
-<<<<<<< HEAD
     init_val,
     val
-=======
     local_waddr,
     local_raddr,
     local_wen,
@@ -800,7 +792,6 @@ module add_tdest_from_vlan_tag  #(
     priority_mapper_6,
     priority_mapper_7,
     priority_mapper_default
->>>>>>> dbb0d5b (AIST-TSN Switch V2.0 First commit)
   );
 
 endmodule

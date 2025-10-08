@@ -5,7 +5,6 @@
 - This block has 3 inputs, which are from different input ports
 - First, input frame is switched to one of the eight Traffic Classes based on the Priority Code Point (PCP)
   - The higher the Traffic Class number, the higher the priority
-<<<<<<< HEAD
   - Traffic Class 7 is processed by the ATS scheduler as Priority 1
   - Traffic Class 6 is processed by the ATS scheduler as Priority 0
   - Traffic Class 5 and below are processed by the FIFO scheduler
@@ -13,7 +12,6 @@
   - Queues are independent by each inputs and priorities
 - ATS scheduler checks Eligibility Time of each frame, and if that value is earlier than the current time, output the frame to next module
 - Frames with the same priority are arbitrated with the Round-Robin algorithm
-=======
   - Traffic Class 7 (TC7) is processed by the ATS scheduler as Priority 1
   - TC6 is processed by the ATS scheduler as Priority 0
   - TC5 and below are processed by the FIFO scheduler
@@ -22,14 +20,12 @@
 - After switching, frames are processed differently by TCs.
   - TC7 and TC6: Processed by ATS Core Block (explained later of this document)
   - Other TCs: Queued to FIFO and output
->>>>>>> dbb0d5b (AIST-TSN Switch V2.0 First commit)
 - Finally, frames with different priorities are arbitrated with Fixed Priority and output
 
 ## Priority Switcher block
 
 - This block switches Ethernet frame according to Priority
 
-<<<<<<< HEAD
 ## Queue block (ATS)
 
 - This block is a simple packet-mode FIFO
@@ -45,7 +41,6 @@
 - This block controls whether to output frame based on Eligibility Time and current time
   - When Eligibility Time + ProcessingDelayMax < current time, output frame
 - Remove Eligibility Time field from output frame
-=======
 ## ATS Core block
 
 - This block has different functionality between KC705 and ZedBoard
@@ -77,7 +72,6 @@
 - This block is a simple FIFO
   - FIFO depth is 8,192 Byte
 - If a frame cannot be fit in FIFO, the frame is dropped.
->>>>>>> dbb0d5b (AIST-TSN Switch V2.0 First commit)
 
 ## Arbiter (Round-Robin) block
 

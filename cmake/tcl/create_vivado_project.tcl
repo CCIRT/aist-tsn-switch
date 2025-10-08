@@ -37,12 +37,10 @@ if { [string first "*" $board_part] != -1 } {
   }
   puts "INFO: Board parts: `$board_part` -> `$find_board_part`"
   set board_part $find_board_part
-<<<<<<< HEAD
 }
 
 create_project -force $project_name $project_directory
 set_property board $board_part [current_project]
-=======
 
   create_project -force $project_name $project_directory
   set_property board $board_part [current_project]
@@ -50,7 +48,6 @@ set_property board $board_part [current_project]
   create_project -force $project_name $project_directory
   set_property part $board_part [current_project]
 }
->>>>>>> dbb0d5b (AIST-TSN Switch V2.0 First commit)
 
 set ipdir [string trim [string map {";" " "} $env(ENV_IP)] ]
 if { "$ipdir" != "" } {

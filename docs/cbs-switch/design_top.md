@@ -24,23 +24,17 @@ This document describes design of the 4-port L2 switch with CBS implemented on F
 - The inside consists of the following modules
   - TEMAC: AMD/Xilinx official IP for MAC layer of Ethernet
   - eth_driver: The contoller for the MAC IP.
-<<<<<<< HEAD
-=======
   - FIFO + Frame Dropper: AMD/Xilinx AXI4-Stream Data FIFO IP and our own Frame Dropper IP. This is used to drop the entire frame if the FIFO has no space to store the frame.
     - FIFO depth is 4096
->>>>>>> dbb0d5b (AIST-TSN Switch V2.0 First commit)
 
 ### FIFO block
 
 - The FIFO for clock conversion between MAC side and FPGA core side
-<<<<<<< HEAD
 - They are set to Packet Mode
   - The Packet Mode configuration delays the start of packet (burst) transmission until the end (LAST beat) of the packet is received
-=======
   - FIFO depth is 4096
 - They are set to Packet Mode
   - The Packet Mode configuration delays the start of frame (burst) transmission until the end (LAST beat) of the frame is received
->>>>>>> dbb0d5b (AIST-TSN Switch V2.0 First commit)
 - So, latency increases depending on the length of the stream (it is same as frame length)
 - Note: It seems that Packet Mode is not required, so change the settings if you want to reduce latency
 
@@ -73,8 +67,6 @@ This document describes design of the 4-port L2 switch with CBS implemented on F
 - This block works as a simple clock converter.
 - Unlike FIFO, it does not hold data internally, so latency is very low.
 
-<<<<<<< HEAD
-=======
 ## Feature Matrix
 
 | group         | feature                     | KC705                      | ZedBoard                   |
@@ -95,4 +87,3 @@ This document describes design of the 4-port L2 switch with CBS implemented on F
 |               | num of entries              | **256**                    | **64**                     |
     
 - \*1: The FIFO mode is described in parentheses: "default" means no delay. "packet" means that an entire frame is first stored into FIFO and then forwarded.
->>>>>>> dbb0d5b (AIST-TSN Switch V2.0 First commit)

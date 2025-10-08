@@ -6,14 +6,11 @@
 `default_nettype none
 
 module set_timestamp #(
-<<<<<<< HEAD
   parameter DATA_WIDTH = 8,
   parameter TIMESTAMP_WIDTH = 72  // Must be aligned to DATA_WIDTH
-=======
   parameter C_AXIS_TDATA_WIDTH = 8,
   parameter C_AXIS_TKEEP_WIDTH = C_AXIS_TDATA_WIDTH / 8,
   parameter TIMESTAMP_WIDTH = 72  // Must be aligned to C_AXIS_TDATA_WIDTH
->>>>>>> dbb0d5b (AIST-TSN Switch V2.0 First commit)
 ) (
   // clock, negative-reset
   input  wire clk,
@@ -24,7 +21,6 @@ module set_timestamp #(
 
   // AXI4-Stream Data In
   // [Ethernet Frame]
-<<<<<<< HEAD
   input  wire [DATA_WIDTH-1:0] s_axis_tdata,
   input  wire                  s_axis_tvalid,
   output wire                  s_axis_tready,
@@ -82,7 +78,6 @@ module set_timestamp #(
     end
   end
 
-=======
   input  wire [C_AXIS_TDATA_WIDTH-1:0] s_axis_tdata,
   input  wire [C_AXIS_TKEEP_WIDTH-1:0] s_axis_tkeep,
   input  wire                          s_axis_tvalid,
@@ -275,7 +270,6 @@ module set_timestamp #(
       assign m_axis_tlast = !(|out_keeps[SHIFTREG_WIDTH/8-1:C_AXIS_TKEEP_WIDTH]);
     end
   endgenerate
->>>>>>> dbb0d5b (AIST-TSN Switch V2.0 First commit)
 endmodule
 
 `default_nettype wire

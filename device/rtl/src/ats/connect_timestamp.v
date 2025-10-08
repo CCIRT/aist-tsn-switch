@@ -6,14 +6,11 @@
 `default_nettype none
 
 module connect_timestamp #(
-<<<<<<< HEAD
   parameter DATA_WIDTH = 8,
   parameter TIMESTAMP_WIDTH = 72  // Must be aligned to DATA_WIDTH
-=======
   parameter C_AXIS_TDATA_WIDTH = 8,
   parameter C_AXIS_TKEEP_WIDTH = C_AXIS_TDATA_WIDTH / 8,
   parameter TIMESTAMP_WIDTH = 72  // Must be aligned to C_AXIS_TDATA_WIDTH
->>>>>>> dbb0d5b (AIST-TSN Switch V2.0 First commit)
 ) (
   // clock, negative-reset
   input  wire clk,
@@ -21,18 +18,15 @@ module connect_timestamp #(
 
   // AXI4-Stream In without timestamp
   // [Ethernet Frame]
-<<<<<<< HEAD
   input  wire [DATA_WIDTH-1:0] s_axis_tdata,
   input  wire                  s_axis_tvalid,
   output wire                  s_axis_tready,
   input  wire                  s_axis_tlast,
-=======
   input  wire [C_AXIS_TDATA_WIDTH-1:0] s_axis_tdata,
   input  wire [C_AXIS_TKEEP_WIDTH-1:0] s_axis_tkeep,
   input  wire                          s_axis_tvalid,
   output wire                          s_axis_tready,
   input  wire                          s_axis_tlast,
->>>>>>> dbb0d5b (AIST-TSN Switch V2.0 First commit)
 
   // AXI4-Stream Timestamp In
   input  wire [TIMESTAMP_WIDTH-1:0] s_axis_timestamp_tdata,
@@ -41,7 +35,6 @@ module connect_timestamp #(
 
   // AXI4-Stream Out with timestamp
   // [Ethernet Frame]/[Timestamp]
-<<<<<<< HEAD
   output wire [DATA_WIDTH-1:0] m_axis_tdata,
   output wire                  m_axis_tvalid,
   input  wire                  m_axis_tready,
@@ -64,7 +57,6 @@ module connect_timestamp #(
   // Important registers
   reg [TIMESTAMP_WIDTH-1:0] timestamp = 'd0;
   reg [TIMESTAMP_COUNTER_WIDTH-1:0] timestamp_counter = 'd0;
-=======
   output wire [C_AXIS_TDATA_WIDTH-1:0] m_axis_tdata,
   output wire [C_AXIS_TKEEP_WIDTH-1:0] m_axis_tkeep,
   output wire                          m_axis_tvalid,
@@ -74,18 +66,14 @@ module connect_timestamp #(
 
   reg [TIMESTAMP_WIDTH-1:0]    timestamp;
 
->>>>>>> dbb0d5b (AIST-TSN Switch V2.0 First commit)
   // State machine
   reg [STATE_WIDTH-1:0] state = 'd0;
   localparam STATE_WIDTH = 2;
   localparam STATE_READ_TIMESTAMP = 0;
   localparam STATE_TRANS_ETHERNET_FRAME = 1;
-<<<<<<< HEAD
   localparam STATE_WRITE_TIMESTAMP = 2;
   localparam STATE_DISCARD_FRAME = 3;
-=======
   localparam STATE_DISCARD_FRAME = 2;
->>>>>>> dbb0d5b (AIST-TSN Switch V2.0 First commit)
   always @ (posedge clk) begin
     if (!rstn) begin
       state <= STATE_READ_TIMESTAMP;
@@ -105,7 +93,6 @@ module connect_timestamp #(
           end
         end
         STATE_TRANS_ETHERNET_FRAME: begin
-<<<<<<< HEAD
           if (s_axis_tvalid & s_axis_tready & s_axis_tlast) begin
             state <= STATE_WRITE_TIMESTAMP;
           end else begin
@@ -120,21 +107,16 @@ module connect_timestamp #(
             end else begin
               timestamp_counter <= timestamp_counter + 'd1;
             end
-=======
           if (m_axis_tvalid & m_axis_tready & m_axis_tlast) begin
             // Wait MASTER port
             state <= STATE_READ_TIMESTAMP;
->>>>>>> dbb0d5b (AIST-TSN Switch V2.0 First commit)
           end else begin
             // Do nothing
           end
         end
         STATE_DISCARD_FRAME: begin
           if (s_axis_tvalid & s_axis_tready & s_axis_tlast) begin
-<<<<<<< HEAD
-=======
             // Wait SLAVE port
->>>>>>> dbb0d5b (AIST-TSN Switch V2.0 First commit)
             state <= STATE_READ_TIMESTAMP;
           end else begin
             // Do nothing
@@ -147,8 +129,6 @@ module connect_timestamp #(
     end
   end
 
-<<<<<<< HEAD
-=======
   wire [C_AXIS_TDATA_WIDTH-1:0] s0_axis_tdata;
   wire [C_AXIS_TKEEP_WIDTH-1:0] s0_axis_tkeep;
   wire                          s0_axis_tvalid;
@@ -186,7 +166,6 @@ module connect_timestamp #(
                    .m_axis_tready       (m_axis_tready));
 
 
->>>>>>> dbb0d5b (AIST-TSN Switch V2.0 First commit)
 endmodule
 
 `default_nettype wire

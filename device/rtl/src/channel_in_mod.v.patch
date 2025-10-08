@@ -51,7 +51,6 @@
 > 	end
 164a171
 > reg [47:0]vtag_tmp;
-<<<<<<< HEAD
 279a287
 > 		vtag_tmp <= 0;
 285a294
@@ -59,7 +58,6 @@
 288a298
 > 				vtag_tmp <= vtag_tmp;
 293a304,312
-=======
 233a241,250
 > /* Delay register */
 > reg [3:0] s_axis_table_response_tdata_d;
@@ -88,7 +86,6 @@
 288a308
 > 				vtag_tmp <= vtag_tmp;
 293a314,322
->>>>>>> dbb0d5b (AIST-TSN Switch V2.0 First commit)
 > wire [15:0] type_tmp = vtag_tmp[15:0];              // Ethernet Type (or payload)
 > wire [15:0] tci  = vtag_tmp[31:16];                 // Tag Control Information (or payload)
 > wire [15:0] tpid = vtag_tmp[47:32];                 // Tag Protocol Identifier (or Ethernet Type)
@@ -98,29 +95,22 @@
 > wire        cfi  = vlan_enable ? tci[12] : 0;       // Canonical Format Indicator
 > wire [11:0] vid  = vlan_enable ? tci[11:0] : 0;     // VLAN Identifier
 > assign debug_vlan_enable = vlan_enable;
-<<<<<<< HEAD
 341c360,363
-=======
 341c370,373
->>>>>>> dbb0d5b (AIST-TSN Switch V2.0 First commit)
 < 					if (byte_counter > FRAME_SIZE_MAX) begin
 ---
 > 					if (vlan_enable == 1'b1 && byte_counter > FRAME_SIZE_MAX + FRAME_VTAG_SIZE) begin
 > 						set_state(STATE_FLUSHING);
 > 						error_len_inc();
 > 					end else if (vlan_enable == 1'b0 && byte_counter > FRAME_SIZE_MAX) begin
-<<<<<<< HEAD
 355c377,380
-=======
 355c387,390
->>>>>>> dbb0d5b (AIST-TSN Switch V2.0 First commit)
 < 				end else if (frame_len > FRAME_SIZE_MAX) begin
 ---
 > 				end else if (vlan_enable == 1'b1 && frame_len > FRAME_SIZE_MAX + FRAME_VTAG_SIZE) begin
 > 					set_state(STATE_DROP);
 > 					error_len_inc();
 > 				end else if (vlan_enable == 1'b0 && frame_len > FRAME_SIZE_MAX) begin
-<<<<<<< HEAD
 457c482
 < 				
 ---
@@ -146,7 +136,6 @@
 ---
 > assign fifo_rden = m_axis_tvalid & m_axis_tready;
 1057,1058c1082
-=======
 457c492
 < 				
 ---
@@ -172,7 +161,6 @@
 ---
 > assign fifo_rden = m_axis_tvalid & m_axis_tready;
 1057,1058c1092
->>>>>>> dbb0d5b (AIST-TSN Switch V2.0 First commit)
 < endmodule 
 <   
 \ No newline at end of file

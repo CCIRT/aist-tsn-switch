@@ -40,11 +40,8 @@ if { [string first $scripts_vivado_version $current_vivado_version] == -1 } {
 
 # The design that will be created by this Tcl script contains the following 
 # module references:
-<<<<<<< HEAD
 # channel_in_mod, channel_in_mod, channel_in_mod, channel_in_mod, mactable, tri_mode_ethernet_mac_0_example_design_mod, tri_mode_ethernet_mac_0_example_design_mod, tri_mode_ethernet_mac_0_example_design_mod, tri_mode_ethernet_mac_0_example_design_mod
-=======
 # mactable_mod, tri_mode_ethernet_mac_0_example_design_mod, tri_mode_ethernet_mac_0_example_design_mod, tri_mode_ethernet_mac_0_example_design_mod, tri_mode_ethernet_mac_0_example_design_mod
->>>>>>> dbb0d5b (AIST-TSN Switch V2.0 First commit)
 
 # Please add the sources of those modules before sourcing this Tcl script.
 
@@ -135,11 +132,8 @@ set bCheckIPsPassed 1
 set bCheckIPs 1
 if { $bCheckIPs == 1 } {
    set list_check_ips "\ 
-<<<<<<< HEAD
-=======
 user.org:user:axi_gpio_parameters:1.0\
 xilinx.com:ip:axi_register_slice:2.1\
->>>>>>> dbb0d5b (AIST-TSN Switch V2.0 First commit)
 xilinx.com:ip:axis_clock_converter:1.1\
 xilinx.com:ip:axis_data_fifo:2.0\
 xilinx.com:ip:clk_wiz:6.0\
@@ -149,18 +143,15 @@ xilinx.com:ip:xlconstant:1.1\
 xilinx.com:ip:smartconnect:1.0\
 xilinx.com:ip:util_vector_logic:2.0\
 user.org:user:register_slice:1.0\
-<<<<<<< HEAD
 xilinx.com:ip:axis_switch:1.1\
 xilinx.com:ip:axi_gpio:2.0\
 xilinx.com:ip:fifo_generator:13.2\
-=======
 xilinx.com:ip:axis_register_slice:1.1\
 xilinx.com:ip:axis_switch:1.1\
 user.org:user:channel_in_opt:1.0\
 xilinx.com:ip:axi_gpio:2.0\
 xilinx.com:ip:fifo_generator:13.2\
 user.org:user:ethernet_frame_dropper:1.0\
->>>>>>> dbb0d5b (AIST-TSN Switch V2.0 First commit)
 xilinx.com:ip:tri_mode_ethernet_mac:9.0\
 user.org:user:add_tdest_from_vlan_tag:1.0\
 user.org:user:dest_to_user:1.0\
@@ -168,10 +159,7 @@ user.org:user:user_to_dest:1.0\
 user.org:user:ethernet_frame_arbiter:1.0\
 user.org:user:extract_output_side_ready:1.0\
 user.org:user:credit_based_shaper:1.0\
-<<<<<<< HEAD
 user.org:user:ethernet_frame_dropper:1.0\
-=======
->>>>>>> dbb0d5b (AIST-TSN Switch V2.0 First commit)
 "
 
    set list_ips_missing ""
@@ -197,15 +185,12 @@ user.org:user:ethernet_frame_dropper:1.0\
 set bCheckModules 1
 if { $bCheckModules == 1 } {
    set list_check_mods "\ 
-<<<<<<< HEAD
 channel_in_mod\
 channel_in_mod\
 channel_in_mod\
 channel_in_mod\
 mactable\
-=======
 mactable_mod\
->>>>>>> dbb0d5b (AIST-TSN Switch V2.0 First commit)
 tri_mode_ethernet_mac_0_example_design_mod\
 tri_mode_ethernet_mac_0_example_design_mod\
 tri_mode_ethernet_mac_0_example_design_mod\
@@ -403,7 +388,6 @@ proc create_hier_cell_packet_based_fifo_7_3 { parentCell nameHier } {
   create_bd_pin -dir I -type rst aresetn
   create_bd_pin -dir I drop_enable
 
-<<<<<<< HEAD
   # Create instance: axis_data_fifo_0, and set properties
   set axis_data_fifo_0 [ create_bd_cell -type ip -vlnv xilinx.com:ip:axis_data_fifo:2.0 axis_data_fifo_0 ]
   set_property -dict [ list \
@@ -426,7 +410,6 @@ proc create_hier_cell_packet_based_fifo_7_3 { parentCell nameHier } {
   connect_bd_net -net drop_enable_1 [get_bd_pins drop_enable] [get_bd_pins ethernet_frame_dropp_0/drop_enable]
   connect_bd_net -net proc_sys_reset_sw_peripheral_aresetn [get_bd_pins aresetn] [get_bd_pins axis_data_fifo_0/s_axis_aresetn] [get_bd_pins ethernet_frame_dropp_0/rstn]
   connect_bd_net -net temac_0_tx_mac_aclk [get_bd_pins aclk] [get_bd_pins axis_data_fifo_0/s_axis_aclk] [get_bd_pins ethernet_frame_dropp_0/clk]
-=======
   # Create instance: ethernet_frame_dropp_0, and set properties
   set ethernet_frame_dropp_0 [ create_bd_cell -type ip -vlnv user.org:user:ethernet_frame_dropper:1.0 ethernet_frame_dropp_0 ]
 
@@ -464,7 +447,6 @@ proc create_hier_cell_packet_based_fifo_7_3 { parentCell nameHier } {
   connect_bd_net -net fifo_generator_0_axis_prog_full [get_bd_pins ethernet_frame_dropp_0/fifo_is_almost_full] [get_bd_pins fifo_generator_0/axis_prog_full]
   connect_bd_net -net proc_sys_reset_sw_peripheral_aresetn [get_bd_pins aresetn] [get_bd_pins ethernet_frame_dropp_0/rstn] [get_bd_pins fifo_generator_0/s_aresetn]
   connect_bd_net -net temac_0_tx_mac_aclk [get_bd_pins aclk] [get_bd_pins ethernet_frame_dropp_0/clk] [get_bd_pins fifo_generator_0/s_aclk]
->>>>>>> dbb0d5b (AIST-TSN Switch V2.0 First commit)
 
   # Restore current instance
   current_bd_instance $oldCurInst
@@ -515,7 +497,6 @@ proc create_hier_cell_packet_based_fifo_6_3 { parentCell nameHier } {
   create_bd_pin -dir I -type rst aresetn
   create_bd_pin -dir I drop_enable
 
-<<<<<<< HEAD
   # Create instance: axis_data_fifo_0, and set properties
   set axis_data_fifo_0 [ create_bd_cell -type ip -vlnv xilinx.com:ip:axis_data_fifo:2.0 axis_data_fifo_0 ]
   set_property -dict [ list \
@@ -538,7 +519,6 @@ proc create_hier_cell_packet_based_fifo_6_3 { parentCell nameHier } {
   connect_bd_net -net drop_enable_1 [get_bd_pins drop_enable] [get_bd_pins ethernet_frame_dropp_0/drop_enable]
   connect_bd_net -net proc_sys_reset_sw_peripheral_aresetn [get_bd_pins aresetn] [get_bd_pins axis_data_fifo_0/s_axis_aresetn] [get_bd_pins ethernet_frame_dropp_0/rstn]
   connect_bd_net -net temac_0_tx_mac_aclk [get_bd_pins aclk] [get_bd_pins axis_data_fifo_0/s_axis_aclk] [get_bd_pins ethernet_frame_dropp_0/clk]
-=======
   # Create instance: ethernet_frame_dropp_0, and set properties
   set ethernet_frame_dropp_0 [ create_bd_cell -type ip -vlnv user.org:user:ethernet_frame_dropper:1.0 ethernet_frame_dropp_0 ]
 
@@ -576,7 +556,6 @@ proc create_hier_cell_packet_based_fifo_6_3 { parentCell nameHier } {
   connect_bd_net -net fifo_generator_0_axis_prog_full [get_bd_pins ethernet_frame_dropp_0/fifo_is_almost_full] [get_bd_pins fifo_generator_0/axis_prog_full]
   connect_bd_net -net proc_sys_reset_sw_peripheral_aresetn [get_bd_pins aresetn] [get_bd_pins ethernet_frame_dropp_0/rstn] [get_bd_pins fifo_generator_0/s_aresetn]
   connect_bd_net -net temac_0_tx_mac_aclk [get_bd_pins aclk] [get_bd_pins ethernet_frame_dropp_0/clk] [get_bd_pins fifo_generator_0/s_aclk]
->>>>>>> dbb0d5b (AIST-TSN Switch V2.0 First commit)
 
   # Restore current instance
   current_bd_instance $oldCurInst
@@ -627,7 +606,6 @@ proc create_hier_cell_packet_based_fifo_5_3 { parentCell nameHier } {
   create_bd_pin -dir I -type rst aresetn
   create_bd_pin -dir I drop_enable
 
-<<<<<<< HEAD
   # Create instance: axis_data_fifo_0, and set properties
   set axis_data_fifo_0 [ create_bd_cell -type ip -vlnv xilinx.com:ip:axis_data_fifo:2.0 axis_data_fifo_0 ]
   set_property -dict [ list \
@@ -650,7 +628,6 @@ proc create_hier_cell_packet_based_fifo_5_3 { parentCell nameHier } {
   connect_bd_net -net drop_enable_1 [get_bd_pins drop_enable] [get_bd_pins ethernet_frame_dropp_0/drop_enable]
   connect_bd_net -net proc_sys_reset_sw_peripheral_aresetn [get_bd_pins aresetn] [get_bd_pins axis_data_fifo_0/s_axis_aresetn] [get_bd_pins ethernet_frame_dropp_0/rstn]
   connect_bd_net -net temac_0_tx_mac_aclk [get_bd_pins aclk] [get_bd_pins axis_data_fifo_0/s_axis_aclk] [get_bd_pins ethernet_frame_dropp_0/clk]
-=======
   # Create instance: ethernet_frame_dropp_0, and set properties
   set ethernet_frame_dropp_0 [ create_bd_cell -type ip -vlnv user.org:user:ethernet_frame_dropper:1.0 ethernet_frame_dropp_0 ]
 
@@ -688,7 +665,6 @@ proc create_hier_cell_packet_based_fifo_5_3 { parentCell nameHier } {
   connect_bd_net -net fifo_generator_0_axis_prog_full [get_bd_pins ethernet_frame_dropp_0/fifo_is_almost_full] [get_bd_pins fifo_generator_0/axis_prog_full]
   connect_bd_net -net proc_sys_reset_sw_peripheral_aresetn [get_bd_pins aresetn] [get_bd_pins ethernet_frame_dropp_0/rstn] [get_bd_pins fifo_generator_0/s_aresetn]
   connect_bd_net -net temac_0_tx_mac_aclk [get_bd_pins aclk] [get_bd_pins ethernet_frame_dropp_0/clk] [get_bd_pins fifo_generator_0/s_aclk]
->>>>>>> dbb0d5b (AIST-TSN Switch V2.0 First commit)
 
   # Restore current instance
   current_bd_instance $oldCurInst
@@ -739,7 +715,6 @@ proc create_hier_cell_packet_based_fifo_4_3 { parentCell nameHier } {
   create_bd_pin -dir I -type rst aresetn
   create_bd_pin -dir I drop_enable
 
-<<<<<<< HEAD
   # Create instance: axis_data_fifo_0, and set properties
   set axis_data_fifo_0 [ create_bd_cell -type ip -vlnv xilinx.com:ip:axis_data_fifo:2.0 axis_data_fifo_0 ]
   set_property -dict [ list \
@@ -762,7 +737,6 @@ proc create_hier_cell_packet_based_fifo_4_3 { parentCell nameHier } {
   connect_bd_net -net drop_enable_1 [get_bd_pins drop_enable] [get_bd_pins ethernet_frame_dropp_0/drop_enable]
   connect_bd_net -net proc_sys_reset_sw_peripheral_aresetn [get_bd_pins aresetn] [get_bd_pins axis_data_fifo_0/s_axis_aresetn] [get_bd_pins ethernet_frame_dropp_0/rstn]
   connect_bd_net -net temac_0_tx_mac_aclk [get_bd_pins aclk] [get_bd_pins axis_data_fifo_0/s_axis_aclk] [get_bd_pins ethernet_frame_dropp_0/clk]
-=======
   # Create instance: ethernet_frame_dropp_0, and set properties
   set ethernet_frame_dropp_0 [ create_bd_cell -type ip -vlnv user.org:user:ethernet_frame_dropper:1.0 ethernet_frame_dropp_0 ]
 
@@ -800,7 +774,6 @@ proc create_hier_cell_packet_based_fifo_4_3 { parentCell nameHier } {
   connect_bd_net -net fifo_generator_0_axis_prog_full [get_bd_pins ethernet_frame_dropp_0/fifo_is_almost_full] [get_bd_pins fifo_generator_0/axis_prog_full]
   connect_bd_net -net proc_sys_reset_sw_peripheral_aresetn [get_bd_pins aresetn] [get_bd_pins ethernet_frame_dropp_0/rstn] [get_bd_pins fifo_generator_0/s_aresetn]
   connect_bd_net -net temac_0_tx_mac_aclk [get_bd_pins aclk] [get_bd_pins ethernet_frame_dropp_0/clk] [get_bd_pins fifo_generator_0/s_aclk]
->>>>>>> dbb0d5b (AIST-TSN Switch V2.0 First commit)
 
   # Restore current instance
   current_bd_instance $oldCurInst
@@ -851,7 +824,6 @@ proc create_hier_cell_packet_based_fifo_3_3 { parentCell nameHier } {
   create_bd_pin -dir I -type rst aresetn
   create_bd_pin -dir I drop_enable
 
-<<<<<<< HEAD
   # Create instance: axis_data_fifo_0, and set properties
   set axis_data_fifo_0 [ create_bd_cell -type ip -vlnv xilinx.com:ip:axis_data_fifo:2.0 axis_data_fifo_0 ]
   set_property -dict [ list \
@@ -874,7 +846,6 @@ proc create_hier_cell_packet_based_fifo_3_3 { parentCell nameHier } {
   connect_bd_net -net drop_enable_1 [get_bd_pins drop_enable] [get_bd_pins ethernet_frame_dropp_0/drop_enable]
   connect_bd_net -net proc_sys_reset_sw_peripheral_aresetn [get_bd_pins aresetn] [get_bd_pins axis_data_fifo_0/s_axis_aresetn] [get_bd_pins ethernet_frame_dropp_0/rstn]
   connect_bd_net -net temac_0_tx_mac_aclk [get_bd_pins aclk] [get_bd_pins axis_data_fifo_0/s_axis_aclk] [get_bd_pins ethernet_frame_dropp_0/clk]
-=======
   # Create instance: ethernet_frame_dropp_0, and set properties
   set ethernet_frame_dropp_0 [ create_bd_cell -type ip -vlnv user.org:user:ethernet_frame_dropper:1.0 ethernet_frame_dropp_0 ]
 
@@ -912,7 +883,6 @@ proc create_hier_cell_packet_based_fifo_3_3 { parentCell nameHier } {
   connect_bd_net -net fifo_generator_0_axis_prog_full [get_bd_pins ethernet_frame_dropp_0/fifo_is_almost_full] [get_bd_pins fifo_generator_0/axis_prog_full]
   connect_bd_net -net proc_sys_reset_sw_peripheral_aresetn [get_bd_pins aresetn] [get_bd_pins ethernet_frame_dropp_0/rstn] [get_bd_pins fifo_generator_0/s_aresetn]
   connect_bd_net -net temac_0_tx_mac_aclk [get_bd_pins aclk] [get_bd_pins ethernet_frame_dropp_0/clk] [get_bd_pins fifo_generator_0/s_aclk]
->>>>>>> dbb0d5b (AIST-TSN Switch V2.0 First commit)
 
   # Restore current instance
   current_bd_instance $oldCurInst
@@ -963,7 +933,6 @@ proc create_hier_cell_packet_based_fifo_2_3 { parentCell nameHier } {
   create_bd_pin -dir I -type rst aresetn
   create_bd_pin -dir I drop_enable
 
-<<<<<<< HEAD
   # Create instance: axis_data_fifo_0, and set properties
   set axis_data_fifo_0 [ create_bd_cell -type ip -vlnv xilinx.com:ip:axis_data_fifo:2.0 axis_data_fifo_0 ]
   set_property -dict [ list \
@@ -986,7 +955,6 @@ proc create_hier_cell_packet_based_fifo_2_3 { parentCell nameHier } {
   connect_bd_net -net drop_enable_1 [get_bd_pins drop_enable] [get_bd_pins ethernet_frame_dropp_0/drop_enable]
   connect_bd_net -net proc_sys_reset_sw_peripheral_aresetn [get_bd_pins aresetn] [get_bd_pins axis_data_fifo_0/s_axis_aresetn] [get_bd_pins ethernet_frame_dropp_0/rstn]
   connect_bd_net -net temac_0_tx_mac_aclk [get_bd_pins aclk] [get_bd_pins axis_data_fifo_0/s_axis_aclk] [get_bd_pins ethernet_frame_dropp_0/clk]
-=======
   # Create instance: ethernet_frame_dropp_0, and set properties
   set ethernet_frame_dropp_0 [ create_bd_cell -type ip -vlnv user.org:user:ethernet_frame_dropper:1.0 ethernet_frame_dropp_0 ]
 
@@ -1024,7 +992,6 @@ proc create_hier_cell_packet_based_fifo_2_3 { parentCell nameHier } {
   connect_bd_net -net fifo_generator_0_axis_prog_full [get_bd_pins ethernet_frame_dropp_0/fifo_is_almost_full] [get_bd_pins fifo_generator_0/axis_prog_full]
   connect_bd_net -net proc_sys_reset_sw_peripheral_aresetn [get_bd_pins aresetn] [get_bd_pins ethernet_frame_dropp_0/rstn] [get_bd_pins fifo_generator_0/s_aresetn]
   connect_bd_net -net temac_0_tx_mac_aclk [get_bd_pins aclk] [get_bd_pins ethernet_frame_dropp_0/clk] [get_bd_pins fifo_generator_0/s_aclk]
->>>>>>> dbb0d5b (AIST-TSN Switch V2.0 First commit)
 
   # Restore current instance
   current_bd_instance $oldCurInst
@@ -1075,7 +1042,6 @@ proc create_hier_cell_packet_based_fifo_1_3 { parentCell nameHier } {
   create_bd_pin -dir I -type rst aresetn
   create_bd_pin -dir I drop_enable
 
-<<<<<<< HEAD
   # Create instance: axis_data_fifo_0, and set properties
   set axis_data_fifo_0 [ create_bd_cell -type ip -vlnv xilinx.com:ip:axis_data_fifo:2.0 axis_data_fifo_0 ]
   set_property -dict [ list \
@@ -1098,7 +1064,6 @@ proc create_hier_cell_packet_based_fifo_1_3 { parentCell nameHier } {
   connect_bd_net -net drop_enable_1 [get_bd_pins drop_enable] [get_bd_pins ethernet_frame_dropp_0/drop_enable]
   connect_bd_net -net proc_sys_reset_sw_peripheral_aresetn [get_bd_pins aresetn] [get_bd_pins axis_data_fifo_0/s_axis_aresetn] [get_bd_pins ethernet_frame_dropp_0/rstn]
   connect_bd_net -net temac_0_tx_mac_aclk [get_bd_pins aclk] [get_bd_pins axis_data_fifo_0/s_axis_aclk] [get_bd_pins ethernet_frame_dropp_0/clk]
-=======
   # Create instance: ethernet_frame_dropp_0, and set properties
   set ethernet_frame_dropp_0 [ create_bd_cell -type ip -vlnv user.org:user:ethernet_frame_dropper:1.0 ethernet_frame_dropp_0 ]
 
@@ -1136,7 +1101,6 @@ proc create_hier_cell_packet_based_fifo_1_3 { parentCell nameHier } {
   connect_bd_net -net fifo_generator_0_axis_prog_full [get_bd_pins ethernet_frame_dropp_0/fifo_is_almost_full] [get_bd_pins fifo_generator_0/axis_prog_full]
   connect_bd_net -net proc_sys_reset_sw_peripheral_aresetn [get_bd_pins aresetn] [get_bd_pins ethernet_frame_dropp_0/rstn] [get_bd_pins fifo_generator_0/s_aresetn]
   connect_bd_net -net temac_0_tx_mac_aclk [get_bd_pins aclk] [get_bd_pins ethernet_frame_dropp_0/clk] [get_bd_pins fifo_generator_0/s_aclk]
->>>>>>> dbb0d5b (AIST-TSN Switch V2.0 First commit)
 
   # Restore current instance
   current_bd_instance $oldCurInst
@@ -1187,7 +1151,6 @@ proc create_hier_cell_packet_based_fifo_0_3 { parentCell nameHier } {
   create_bd_pin -dir I -type rst aresetn
   create_bd_pin -dir I drop_enable
 
-<<<<<<< HEAD
   # Create instance: axis_data_fifo_0, and set properties
   set axis_data_fifo_0 [ create_bd_cell -type ip -vlnv xilinx.com:ip:axis_data_fifo:2.0 axis_data_fifo_0 ]
   set_property -dict [ list \
@@ -1210,7 +1173,6 @@ proc create_hier_cell_packet_based_fifo_0_3 { parentCell nameHier } {
   connect_bd_net -net drop_enable_1 [get_bd_pins drop_enable] [get_bd_pins ethernet_frame_dropp_0/drop_enable]
   connect_bd_net -net proc_sys_reset_sw_peripheral_aresetn [get_bd_pins aresetn] [get_bd_pins axis_data_fifo_0/s_axis_aresetn] [get_bd_pins ethernet_frame_dropp_0/rstn]
   connect_bd_net -net temac_0_tx_mac_aclk [get_bd_pins aclk] [get_bd_pins axis_data_fifo_0/s_axis_aclk] [get_bd_pins ethernet_frame_dropp_0/clk]
-=======
   # Create instance: ethernet_frame_dropp_0, and set properties
   set ethernet_frame_dropp_0 [ create_bd_cell -type ip -vlnv user.org:user:ethernet_frame_dropper:1.0 ethernet_frame_dropp_0 ]
 
@@ -1248,7 +1210,6 @@ proc create_hier_cell_packet_based_fifo_0_3 { parentCell nameHier } {
   connect_bd_net -net fifo_generator_0_axis_prog_full [get_bd_pins ethernet_frame_dropp_0/fifo_is_almost_full] [get_bd_pins fifo_generator_0/axis_prog_full]
   connect_bd_net -net proc_sys_reset_sw_peripheral_aresetn [get_bd_pins aresetn] [get_bd_pins ethernet_frame_dropp_0/rstn] [get_bd_pins fifo_generator_0/s_aresetn]
   connect_bd_net -net temac_0_tx_mac_aclk [get_bd_pins aclk] [get_bd_pins ethernet_frame_dropp_0/clk] [get_bd_pins fifo_generator_0/s_aclk]
->>>>>>> dbb0d5b (AIST-TSN Switch V2.0 First commit)
 
   # Restore current instance
   current_bd_instance $oldCurInst
@@ -1451,10 +1412,8 @@ proc create_hier_cell_arbiter_0_3 { parentCell nameHier } {
   create_bd_pin -dir I -type rst aresetn
   create_bd_pin -dir O output_side_ready
 
-<<<<<<< HEAD
   # Create instance: ethernet_frame_arbit_0, and set properties
   set ethernet_frame_arbit_0 [ create_bd_cell -type ip -vlnv user.org:user:ethernet_frame_arbiter:1.0 ethernet_frame_arbit_0 ]
-=======
   # Create instance: axis_register_slice_0, and set properties
   set axis_register_slice_0 [ create_bd_cell -type ip -vlnv xilinx.com:ip:axis_register_slice:1.1 axis_register_slice_0 ]
 
@@ -1463,7 +1422,6 @@ proc create_hier_cell_arbiter_0_3 { parentCell nameHier } {
   set_property -dict [ list \
    CONFIG.FRAME_GAP {24} \
  ] $ethernet_frame_arbit_0
->>>>>>> dbb0d5b (AIST-TSN Switch V2.0 First commit)
 
   # Create instance: extract_output_side_0, and set properties
   set extract_output_side_0 [ create_bd_cell -type ip -vlnv user.org:user:extract_output_side_ready:1.0 extract_output_side_0 ]
@@ -1477,14 +1435,12 @@ proc create_hier_cell_arbiter_0_3 { parentCell nameHier } {
   connect_bd_intf_net -intf_net S05_AXIS_1 [get_bd_intf_pins S05_AXIS] [get_bd_intf_pins ethernet_frame_arbit_0/s_axis_5]
   connect_bd_intf_net -intf_net S06_AXIS_1 [get_bd_intf_pins S06_AXIS] [get_bd_intf_pins ethernet_frame_arbit_0/s_axis_6]
   connect_bd_intf_net -intf_net S07_AXIS_1 [get_bd_intf_pins S07_AXIS] [get_bd_intf_pins ethernet_frame_arbit_0/s_axis_7]
-<<<<<<< HEAD
   connect_bd_intf_net -intf_net ethernet_frame_arbit_0_m_axis [get_bd_intf_pins ethernet_frame_arbit_0/m_axis] [get_bd_intf_pins extract_output_side_0/s_axis]
   connect_bd_intf_net -intf_net extract_output_side_0_m_axis [get_bd_intf_pins M00_AXIS] [get_bd_intf_pins extract_output_side_0/m_axis]
 
   # Create port connections
   connect_bd_net -net aclk_1 [get_bd_pins aclk] [get_bd_pins ethernet_frame_arbit_0/clk] [get_bd_pins extract_output_side_0/clk]
   connect_bd_net -net aresetn_1 [get_bd_pins aresetn] [get_bd_pins ethernet_frame_arbit_0/rstn] [get_bd_pins extract_output_side_0/rstn]
-=======
   connect_bd_intf_net -intf_net axis_register_slice_0_M_AXIS [get_bd_intf_pins M00_AXIS] [get_bd_intf_pins axis_register_slice_0/M_AXIS]
   connect_bd_intf_net -intf_net ethernet_frame_arbit_0_m_axis [get_bd_intf_pins ethernet_frame_arbit_0/m_axis] [get_bd_intf_pins extract_output_side_0/s_axis]
   connect_bd_intf_net -intf_net extract_output_side_0_m_axis [get_bd_intf_pins axis_register_slice_0/S_AXIS] [get_bd_intf_pins extract_output_side_0/m_axis]
@@ -1492,7 +1448,6 @@ proc create_hier_cell_arbiter_0_3 { parentCell nameHier } {
   # Create port connections
   connect_bd_net -net aclk_1 [get_bd_pins aclk] [get_bd_pins axis_register_slice_0/aclk] [get_bd_pins ethernet_frame_arbit_0/clk] [get_bd_pins extract_output_side_0/clk]
   connect_bd_net -net aresetn_1 [get_bd_pins aresetn] [get_bd_pins axis_register_slice_0/aresetn] [get_bd_pins ethernet_frame_arbit_0/rstn] [get_bd_pins extract_output_side_0/rstn]
->>>>>>> dbb0d5b (AIST-TSN Switch V2.0 First commit)
   connect_bd_net -net extract_output_side_0_output_side_ready [get_bd_pins output_side_ready] [get_bd_pins extract_output_side_0/output_side_ready]
 
   # Restore current instance
@@ -1664,7 +1619,6 @@ proc create_hier_cell_packet_based_fifo_7_2 { parentCell nameHier } {
   create_bd_pin -dir I -type rst aresetn
   create_bd_pin -dir I drop_enable
 
-<<<<<<< HEAD
   # Create instance: axis_data_fifo_0, and set properties
   set axis_data_fifo_0 [ create_bd_cell -type ip -vlnv xilinx.com:ip:axis_data_fifo:2.0 axis_data_fifo_0 ]
   set_property -dict [ list \
@@ -1687,7 +1641,6 @@ proc create_hier_cell_packet_based_fifo_7_2 { parentCell nameHier } {
   connect_bd_net -net drop_enable_1 [get_bd_pins drop_enable] [get_bd_pins ethernet_frame_dropp_0/drop_enable]
   connect_bd_net -net proc_sys_reset_sw_peripheral_aresetn [get_bd_pins aresetn] [get_bd_pins axis_data_fifo_0/s_axis_aresetn] [get_bd_pins ethernet_frame_dropp_0/rstn]
   connect_bd_net -net temac_0_tx_mac_aclk [get_bd_pins aclk] [get_bd_pins axis_data_fifo_0/s_axis_aclk] [get_bd_pins ethernet_frame_dropp_0/clk]
-=======
   # Create instance: ethernet_frame_dropp_0, and set properties
   set ethernet_frame_dropp_0 [ create_bd_cell -type ip -vlnv user.org:user:ethernet_frame_dropper:1.0 ethernet_frame_dropp_0 ]
 
@@ -1725,7 +1678,6 @@ proc create_hier_cell_packet_based_fifo_7_2 { parentCell nameHier } {
   connect_bd_net -net fifo_generator_0_axis_prog_full [get_bd_pins ethernet_frame_dropp_0/fifo_is_almost_full] [get_bd_pins fifo_generator_0/axis_prog_full]
   connect_bd_net -net proc_sys_reset_sw_peripheral_aresetn [get_bd_pins aresetn] [get_bd_pins ethernet_frame_dropp_0/rstn] [get_bd_pins fifo_generator_0/s_aresetn]
   connect_bd_net -net temac_0_tx_mac_aclk [get_bd_pins aclk] [get_bd_pins ethernet_frame_dropp_0/clk] [get_bd_pins fifo_generator_0/s_aclk]
->>>>>>> dbb0d5b (AIST-TSN Switch V2.0 First commit)
 
   # Restore current instance
   current_bd_instance $oldCurInst
@@ -1776,7 +1728,6 @@ proc create_hier_cell_packet_based_fifo_6_2 { parentCell nameHier } {
   create_bd_pin -dir I -type rst aresetn
   create_bd_pin -dir I drop_enable
 
-<<<<<<< HEAD
   # Create instance: axis_data_fifo_0, and set properties
   set axis_data_fifo_0 [ create_bd_cell -type ip -vlnv xilinx.com:ip:axis_data_fifo:2.0 axis_data_fifo_0 ]
   set_property -dict [ list \
@@ -1799,7 +1750,6 @@ proc create_hier_cell_packet_based_fifo_6_2 { parentCell nameHier } {
   connect_bd_net -net drop_enable_1 [get_bd_pins drop_enable] [get_bd_pins ethernet_frame_dropp_0/drop_enable]
   connect_bd_net -net proc_sys_reset_sw_peripheral_aresetn [get_bd_pins aresetn] [get_bd_pins axis_data_fifo_0/s_axis_aresetn] [get_bd_pins ethernet_frame_dropp_0/rstn]
   connect_bd_net -net temac_0_tx_mac_aclk [get_bd_pins aclk] [get_bd_pins axis_data_fifo_0/s_axis_aclk] [get_bd_pins ethernet_frame_dropp_0/clk]
-=======
   # Create instance: ethernet_frame_dropp_0, and set properties
   set ethernet_frame_dropp_0 [ create_bd_cell -type ip -vlnv user.org:user:ethernet_frame_dropper:1.0 ethernet_frame_dropp_0 ]
 
@@ -1837,7 +1787,6 @@ proc create_hier_cell_packet_based_fifo_6_2 { parentCell nameHier } {
   connect_bd_net -net fifo_generator_0_axis_prog_full [get_bd_pins ethernet_frame_dropp_0/fifo_is_almost_full] [get_bd_pins fifo_generator_0/axis_prog_full]
   connect_bd_net -net proc_sys_reset_sw_peripheral_aresetn [get_bd_pins aresetn] [get_bd_pins ethernet_frame_dropp_0/rstn] [get_bd_pins fifo_generator_0/s_aresetn]
   connect_bd_net -net temac_0_tx_mac_aclk [get_bd_pins aclk] [get_bd_pins ethernet_frame_dropp_0/clk] [get_bd_pins fifo_generator_0/s_aclk]
->>>>>>> dbb0d5b (AIST-TSN Switch V2.0 First commit)
 
   # Restore current instance
   current_bd_instance $oldCurInst
@@ -1888,7 +1837,6 @@ proc create_hier_cell_packet_based_fifo_5_2 { parentCell nameHier } {
   create_bd_pin -dir I -type rst aresetn
   create_bd_pin -dir I drop_enable
 
-<<<<<<< HEAD
   # Create instance: axis_data_fifo_0, and set properties
   set axis_data_fifo_0 [ create_bd_cell -type ip -vlnv xilinx.com:ip:axis_data_fifo:2.0 axis_data_fifo_0 ]
   set_property -dict [ list \
@@ -1911,7 +1859,6 @@ proc create_hier_cell_packet_based_fifo_5_2 { parentCell nameHier } {
   connect_bd_net -net drop_enable_1 [get_bd_pins drop_enable] [get_bd_pins ethernet_frame_dropp_0/drop_enable]
   connect_bd_net -net proc_sys_reset_sw_peripheral_aresetn [get_bd_pins aresetn] [get_bd_pins axis_data_fifo_0/s_axis_aresetn] [get_bd_pins ethernet_frame_dropp_0/rstn]
   connect_bd_net -net temac_0_tx_mac_aclk [get_bd_pins aclk] [get_bd_pins axis_data_fifo_0/s_axis_aclk] [get_bd_pins ethernet_frame_dropp_0/clk]
-=======
   # Create instance: ethernet_frame_dropp_0, and set properties
   set ethernet_frame_dropp_0 [ create_bd_cell -type ip -vlnv user.org:user:ethernet_frame_dropper:1.0 ethernet_frame_dropp_0 ]
 
@@ -1949,7 +1896,6 @@ proc create_hier_cell_packet_based_fifo_5_2 { parentCell nameHier } {
   connect_bd_net -net fifo_generator_0_axis_prog_full [get_bd_pins ethernet_frame_dropp_0/fifo_is_almost_full] [get_bd_pins fifo_generator_0/axis_prog_full]
   connect_bd_net -net proc_sys_reset_sw_peripheral_aresetn [get_bd_pins aresetn] [get_bd_pins ethernet_frame_dropp_0/rstn] [get_bd_pins fifo_generator_0/s_aresetn]
   connect_bd_net -net temac_0_tx_mac_aclk [get_bd_pins aclk] [get_bd_pins ethernet_frame_dropp_0/clk] [get_bd_pins fifo_generator_0/s_aclk]
->>>>>>> dbb0d5b (AIST-TSN Switch V2.0 First commit)
 
   # Restore current instance
   current_bd_instance $oldCurInst
@@ -2000,7 +1946,6 @@ proc create_hier_cell_packet_based_fifo_4_2 { parentCell nameHier } {
   create_bd_pin -dir I -type rst aresetn
   create_bd_pin -dir I drop_enable
 
-<<<<<<< HEAD
   # Create instance: axis_data_fifo_0, and set properties
   set axis_data_fifo_0 [ create_bd_cell -type ip -vlnv xilinx.com:ip:axis_data_fifo:2.0 axis_data_fifo_0 ]
   set_property -dict [ list \
@@ -2023,7 +1968,6 @@ proc create_hier_cell_packet_based_fifo_4_2 { parentCell nameHier } {
   connect_bd_net -net drop_enable_1 [get_bd_pins drop_enable] [get_bd_pins ethernet_frame_dropp_0/drop_enable]
   connect_bd_net -net proc_sys_reset_sw_peripheral_aresetn [get_bd_pins aresetn] [get_bd_pins axis_data_fifo_0/s_axis_aresetn] [get_bd_pins ethernet_frame_dropp_0/rstn]
   connect_bd_net -net temac_0_tx_mac_aclk [get_bd_pins aclk] [get_bd_pins axis_data_fifo_0/s_axis_aclk] [get_bd_pins ethernet_frame_dropp_0/clk]
-=======
   # Create instance: ethernet_frame_dropp_0, and set properties
   set ethernet_frame_dropp_0 [ create_bd_cell -type ip -vlnv user.org:user:ethernet_frame_dropper:1.0 ethernet_frame_dropp_0 ]
 
@@ -2061,7 +2005,6 @@ proc create_hier_cell_packet_based_fifo_4_2 { parentCell nameHier } {
   connect_bd_net -net fifo_generator_0_axis_prog_full [get_bd_pins ethernet_frame_dropp_0/fifo_is_almost_full] [get_bd_pins fifo_generator_0/axis_prog_full]
   connect_bd_net -net proc_sys_reset_sw_peripheral_aresetn [get_bd_pins aresetn] [get_bd_pins ethernet_frame_dropp_0/rstn] [get_bd_pins fifo_generator_0/s_aresetn]
   connect_bd_net -net temac_0_tx_mac_aclk [get_bd_pins aclk] [get_bd_pins ethernet_frame_dropp_0/clk] [get_bd_pins fifo_generator_0/s_aclk]
->>>>>>> dbb0d5b (AIST-TSN Switch V2.0 First commit)
 
   # Restore current instance
   current_bd_instance $oldCurInst
@@ -2112,7 +2055,6 @@ proc create_hier_cell_packet_based_fifo_3_2 { parentCell nameHier } {
   create_bd_pin -dir I -type rst aresetn
   create_bd_pin -dir I drop_enable
 
-<<<<<<< HEAD
   # Create instance: axis_data_fifo_0, and set properties
   set axis_data_fifo_0 [ create_bd_cell -type ip -vlnv xilinx.com:ip:axis_data_fifo:2.0 axis_data_fifo_0 ]
   set_property -dict [ list \
@@ -2135,7 +2077,6 @@ proc create_hier_cell_packet_based_fifo_3_2 { parentCell nameHier } {
   connect_bd_net -net drop_enable_1 [get_bd_pins drop_enable] [get_bd_pins ethernet_frame_dropp_0/drop_enable]
   connect_bd_net -net proc_sys_reset_sw_peripheral_aresetn [get_bd_pins aresetn] [get_bd_pins axis_data_fifo_0/s_axis_aresetn] [get_bd_pins ethernet_frame_dropp_0/rstn]
   connect_bd_net -net temac_0_tx_mac_aclk [get_bd_pins aclk] [get_bd_pins axis_data_fifo_0/s_axis_aclk] [get_bd_pins ethernet_frame_dropp_0/clk]
-=======
   # Create instance: ethernet_frame_dropp_0, and set properties
   set ethernet_frame_dropp_0 [ create_bd_cell -type ip -vlnv user.org:user:ethernet_frame_dropper:1.0 ethernet_frame_dropp_0 ]
 
@@ -2173,7 +2114,6 @@ proc create_hier_cell_packet_based_fifo_3_2 { parentCell nameHier } {
   connect_bd_net -net fifo_generator_0_axis_prog_full [get_bd_pins ethernet_frame_dropp_0/fifo_is_almost_full] [get_bd_pins fifo_generator_0/axis_prog_full]
   connect_bd_net -net proc_sys_reset_sw_peripheral_aresetn [get_bd_pins aresetn] [get_bd_pins ethernet_frame_dropp_0/rstn] [get_bd_pins fifo_generator_0/s_aresetn]
   connect_bd_net -net temac_0_tx_mac_aclk [get_bd_pins aclk] [get_bd_pins ethernet_frame_dropp_0/clk] [get_bd_pins fifo_generator_0/s_aclk]
->>>>>>> dbb0d5b (AIST-TSN Switch V2.0 First commit)
 
   # Restore current instance
   current_bd_instance $oldCurInst
@@ -2224,7 +2164,6 @@ proc create_hier_cell_packet_based_fifo_2_2 { parentCell nameHier } {
   create_bd_pin -dir I -type rst aresetn
   create_bd_pin -dir I drop_enable
 
-<<<<<<< HEAD
   # Create instance: axis_data_fifo_0, and set properties
   set axis_data_fifo_0 [ create_bd_cell -type ip -vlnv xilinx.com:ip:axis_data_fifo:2.0 axis_data_fifo_0 ]
   set_property -dict [ list \
@@ -2247,7 +2186,6 @@ proc create_hier_cell_packet_based_fifo_2_2 { parentCell nameHier } {
   connect_bd_net -net drop_enable_1 [get_bd_pins drop_enable] [get_bd_pins ethernet_frame_dropp_0/drop_enable]
   connect_bd_net -net proc_sys_reset_sw_peripheral_aresetn [get_bd_pins aresetn] [get_bd_pins axis_data_fifo_0/s_axis_aresetn] [get_bd_pins ethernet_frame_dropp_0/rstn]
   connect_bd_net -net temac_0_tx_mac_aclk [get_bd_pins aclk] [get_bd_pins axis_data_fifo_0/s_axis_aclk] [get_bd_pins ethernet_frame_dropp_0/clk]
-=======
   # Create instance: ethernet_frame_dropp_0, and set properties
   set ethernet_frame_dropp_0 [ create_bd_cell -type ip -vlnv user.org:user:ethernet_frame_dropper:1.0 ethernet_frame_dropp_0 ]
 
@@ -2285,7 +2223,6 @@ proc create_hier_cell_packet_based_fifo_2_2 { parentCell nameHier } {
   connect_bd_net -net fifo_generator_0_axis_prog_full [get_bd_pins ethernet_frame_dropp_0/fifo_is_almost_full] [get_bd_pins fifo_generator_0/axis_prog_full]
   connect_bd_net -net proc_sys_reset_sw_peripheral_aresetn [get_bd_pins aresetn] [get_bd_pins ethernet_frame_dropp_0/rstn] [get_bd_pins fifo_generator_0/s_aresetn]
   connect_bd_net -net temac_0_tx_mac_aclk [get_bd_pins aclk] [get_bd_pins ethernet_frame_dropp_0/clk] [get_bd_pins fifo_generator_0/s_aclk]
->>>>>>> dbb0d5b (AIST-TSN Switch V2.0 First commit)
 
   # Restore current instance
   current_bd_instance $oldCurInst
@@ -2336,7 +2273,6 @@ proc create_hier_cell_packet_based_fifo_1_2 { parentCell nameHier } {
   create_bd_pin -dir I -type rst aresetn
   create_bd_pin -dir I drop_enable
 
-<<<<<<< HEAD
   # Create instance: axis_data_fifo_0, and set properties
   set axis_data_fifo_0 [ create_bd_cell -type ip -vlnv xilinx.com:ip:axis_data_fifo:2.0 axis_data_fifo_0 ]
   set_property -dict [ list \
@@ -2359,7 +2295,6 @@ proc create_hier_cell_packet_based_fifo_1_2 { parentCell nameHier } {
   connect_bd_net -net drop_enable_1 [get_bd_pins drop_enable] [get_bd_pins ethernet_frame_dropp_0/drop_enable]
   connect_bd_net -net proc_sys_reset_sw_peripheral_aresetn [get_bd_pins aresetn] [get_bd_pins axis_data_fifo_0/s_axis_aresetn] [get_bd_pins ethernet_frame_dropp_0/rstn]
   connect_bd_net -net temac_0_tx_mac_aclk [get_bd_pins aclk] [get_bd_pins axis_data_fifo_0/s_axis_aclk] [get_bd_pins ethernet_frame_dropp_0/clk]
-=======
   # Create instance: ethernet_frame_dropp_0, and set properties
   set ethernet_frame_dropp_0 [ create_bd_cell -type ip -vlnv user.org:user:ethernet_frame_dropper:1.0 ethernet_frame_dropp_0 ]
 
@@ -2397,7 +2332,6 @@ proc create_hier_cell_packet_based_fifo_1_2 { parentCell nameHier } {
   connect_bd_net -net fifo_generator_0_axis_prog_full [get_bd_pins ethernet_frame_dropp_0/fifo_is_almost_full] [get_bd_pins fifo_generator_0/axis_prog_full]
   connect_bd_net -net proc_sys_reset_sw_peripheral_aresetn [get_bd_pins aresetn] [get_bd_pins ethernet_frame_dropp_0/rstn] [get_bd_pins fifo_generator_0/s_aresetn]
   connect_bd_net -net temac_0_tx_mac_aclk [get_bd_pins aclk] [get_bd_pins ethernet_frame_dropp_0/clk] [get_bd_pins fifo_generator_0/s_aclk]
->>>>>>> dbb0d5b (AIST-TSN Switch V2.0 First commit)
 
   # Restore current instance
   current_bd_instance $oldCurInst
@@ -2448,7 +2382,6 @@ proc create_hier_cell_packet_based_fifo_0_2 { parentCell nameHier } {
   create_bd_pin -dir I -type rst aresetn
   create_bd_pin -dir I drop_enable
 
-<<<<<<< HEAD
   # Create instance: axis_data_fifo_0, and set properties
   set axis_data_fifo_0 [ create_bd_cell -type ip -vlnv xilinx.com:ip:axis_data_fifo:2.0 axis_data_fifo_0 ]
   set_property -dict [ list \
@@ -2471,7 +2404,6 @@ proc create_hier_cell_packet_based_fifo_0_2 { parentCell nameHier } {
   connect_bd_net -net drop_enable_1 [get_bd_pins drop_enable] [get_bd_pins ethernet_frame_dropp_0/drop_enable]
   connect_bd_net -net proc_sys_reset_sw_peripheral_aresetn [get_bd_pins aresetn] [get_bd_pins axis_data_fifo_0/s_axis_aresetn] [get_bd_pins ethernet_frame_dropp_0/rstn]
   connect_bd_net -net temac_0_tx_mac_aclk [get_bd_pins aclk] [get_bd_pins axis_data_fifo_0/s_axis_aclk] [get_bd_pins ethernet_frame_dropp_0/clk]
-=======
   # Create instance: ethernet_frame_dropp_0, and set properties
   set ethernet_frame_dropp_0 [ create_bd_cell -type ip -vlnv user.org:user:ethernet_frame_dropper:1.0 ethernet_frame_dropp_0 ]
 
@@ -2509,7 +2441,6 @@ proc create_hier_cell_packet_based_fifo_0_2 { parentCell nameHier } {
   connect_bd_net -net fifo_generator_0_axis_prog_full [get_bd_pins ethernet_frame_dropp_0/fifo_is_almost_full] [get_bd_pins fifo_generator_0/axis_prog_full]
   connect_bd_net -net proc_sys_reset_sw_peripheral_aresetn [get_bd_pins aresetn] [get_bd_pins ethernet_frame_dropp_0/rstn] [get_bd_pins fifo_generator_0/s_aresetn]
   connect_bd_net -net temac_0_tx_mac_aclk [get_bd_pins aclk] [get_bd_pins ethernet_frame_dropp_0/clk] [get_bd_pins fifo_generator_0/s_aclk]
->>>>>>> dbb0d5b (AIST-TSN Switch V2.0 First commit)
 
   # Restore current instance
   current_bd_instance $oldCurInst
@@ -2712,10 +2643,8 @@ proc create_hier_cell_arbiter_0_2 { parentCell nameHier } {
   create_bd_pin -dir I -type rst aresetn
   create_bd_pin -dir O output_side_ready
 
-<<<<<<< HEAD
   # Create instance: ethernet_frame_arbit_0, and set properties
   set ethernet_frame_arbit_0 [ create_bd_cell -type ip -vlnv user.org:user:ethernet_frame_arbiter:1.0 ethernet_frame_arbit_0 ]
-=======
   # Create instance: axis_register_slice_0, and set properties
   set axis_register_slice_0 [ create_bd_cell -type ip -vlnv xilinx.com:ip:axis_register_slice:1.1 axis_register_slice_0 ]
 
@@ -2724,7 +2653,6 @@ proc create_hier_cell_arbiter_0_2 { parentCell nameHier } {
   set_property -dict [ list \
    CONFIG.FRAME_GAP {24} \
  ] $ethernet_frame_arbit_0
->>>>>>> dbb0d5b (AIST-TSN Switch V2.0 First commit)
 
   # Create instance: extract_output_side_0, and set properties
   set extract_output_side_0 [ create_bd_cell -type ip -vlnv user.org:user:extract_output_side_ready:1.0 extract_output_side_0 ]
@@ -2738,14 +2666,12 @@ proc create_hier_cell_arbiter_0_2 { parentCell nameHier } {
   connect_bd_intf_net -intf_net S05_AXIS_1 [get_bd_intf_pins S05_AXIS] [get_bd_intf_pins ethernet_frame_arbit_0/s_axis_5]
   connect_bd_intf_net -intf_net S06_AXIS_1 [get_bd_intf_pins S06_AXIS] [get_bd_intf_pins ethernet_frame_arbit_0/s_axis_6]
   connect_bd_intf_net -intf_net S07_AXIS_1 [get_bd_intf_pins S07_AXIS] [get_bd_intf_pins ethernet_frame_arbit_0/s_axis_7]
-<<<<<<< HEAD
   connect_bd_intf_net -intf_net ethernet_frame_arbit_0_m_axis [get_bd_intf_pins ethernet_frame_arbit_0/m_axis] [get_bd_intf_pins extract_output_side_0/s_axis]
   connect_bd_intf_net -intf_net extract_output_side_0_m_axis [get_bd_intf_pins M00_AXIS] [get_bd_intf_pins extract_output_side_0/m_axis]
 
   # Create port connections
   connect_bd_net -net aclk_1 [get_bd_pins aclk] [get_bd_pins ethernet_frame_arbit_0/clk] [get_bd_pins extract_output_side_0/clk]
   connect_bd_net -net aresetn_1 [get_bd_pins aresetn] [get_bd_pins ethernet_frame_arbit_0/rstn] [get_bd_pins extract_output_side_0/rstn]
-=======
   connect_bd_intf_net -intf_net axis_register_slice_0_M_AXIS [get_bd_intf_pins M00_AXIS] [get_bd_intf_pins axis_register_slice_0/M_AXIS]
   connect_bd_intf_net -intf_net ethernet_frame_arbit_0_m_axis [get_bd_intf_pins ethernet_frame_arbit_0/m_axis] [get_bd_intf_pins extract_output_side_0/s_axis]
   connect_bd_intf_net -intf_net extract_output_side_0_m_axis [get_bd_intf_pins axis_register_slice_0/S_AXIS] [get_bd_intf_pins extract_output_side_0/m_axis]
@@ -2753,7 +2679,6 @@ proc create_hier_cell_arbiter_0_2 { parentCell nameHier } {
   # Create port connections
   connect_bd_net -net aclk_1 [get_bd_pins aclk] [get_bd_pins axis_register_slice_0/aclk] [get_bd_pins ethernet_frame_arbit_0/clk] [get_bd_pins extract_output_side_0/clk]
   connect_bd_net -net aresetn_1 [get_bd_pins aresetn] [get_bd_pins axis_register_slice_0/aresetn] [get_bd_pins ethernet_frame_arbit_0/rstn] [get_bd_pins extract_output_side_0/rstn]
->>>>>>> dbb0d5b (AIST-TSN Switch V2.0 First commit)
   connect_bd_net -net extract_output_side_0_output_side_ready [get_bd_pins output_side_ready] [get_bd_pins extract_output_side_0/output_side_ready]
 
   # Restore current instance
@@ -2925,7 +2850,6 @@ proc create_hier_cell_packet_based_fifo_7_1 { parentCell nameHier } {
   create_bd_pin -dir I -type rst aresetn
   create_bd_pin -dir I drop_enable
 
-<<<<<<< HEAD
   # Create instance: axis_data_fifo_0, and set properties
   set axis_data_fifo_0 [ create_bd_cell -type ip -vlnv xilinx.com:ip:axis_data_fifo:2.0 axis_data_fifo_0 ]
   set_property -dict [ list \
@@ -2948,7 +2872,6 @@ proc create_hier_cell_packet_based_fifo_7_1 { parentCell nameHier } {
   connect_bd_net -net drop_enable_1 [get_bd_pins drop_enable] [get_bd_pins ethernet_frame_dropp_0/drop_enable]
   connect_bd_net -net proc_sys_reset_sw_peripheral_aresetn [get_bd_pins aresetn] [get_bd_pins axis_data_fifo_0/s_axis_aresetn] [get_bd_pins ethernet_frame_dropp_0/rstn]
   connect_bd_net -net temac_0_tx_mac_aclk [get_bd_pins aclk] [get_bd_pins axis_data_fifo_0/s_axis_aclk] [get_bd_pins ethernet_frame_dropp_0/clk]
-=======
   # Create instance: ethernet_frame_dropp_0, and set properties
   set ethernet_frame_dropp_0 [ create_bd_cell -type ip -vlnv user.org:user:ethernet_frame_dropper:1.0 ethernet_frame_dropp_0 ]
 
@@ -2986,7 +2909,6 @@ proc create_hier_cell_packet_based_fifo_7_1 { parentCell nameHier } {
   connect_bd_net -net fifo_generator_0_axis_prog_full [get_bd_pins ethernet_frame_dropp_0/fifo_is_almost_full] [get_bd_pins fifo_generator_0/axis_prog_full]
   connect_bd_net -net proc_sys_reset_sw_peripheral_aresetn [get_bd_pins aresetn] [get_bd_pins ethernet_frame_dropp_0/rstn] [get_bd_pins fifo_generator_0/s_aresetn]
   connect_bd_net -net temac_0_tx_mac_aclk [get_bd_pins aclk] [get_bd_pins ethernet_frame_dropp_0/clk] [get_bd_pins fifo_generator_0/s_aclk]
->>>>>>> dbb0d5b (AIST-TSN Switch V2.0 First commit)
 
   # Restore current instance
   current_bd_instance $oldCurInst
@@ -3037,7 +2959,6 @@ proc create_hier_cell_packet_based_fifo_6_1 { parentCell nameHier } {
   create_bd_pin -dir I -type rst aresetn
   create_bd_pin -dir I drop_enable
 
-<<<<<<< HEAD
   # Create instance: axis_data_fifo_0, and set properties
   set axis_data_fifo_0 [ create_bd_cell -type ip -vlnv xilinx.com:ip:axis_data_fifo:2.0 axis_data_fifo_0 ]
   set_property -dict [ list \
@@ -3060,7 +2981,6 @@ proc create_hier_cell_packet_based_fifo_6_1 { parentCell nameHier } {
   connect_bd_net -net drop_enable_1 [get_bd_pins drop_enable] [get_bd_pins ethernet_frame_dropp_0/drop_enable]
   connect_bd_net -net proc_sys_reset_sw_peripheral_aresetn [get_bd_pins aresetn] [get_bd_pins axis_data_fifo_0/s_axis_aresetn] [get_bd_pins ethernet_frame_dropp_0/rstn]
   connect_bd_net -net temac_0_tx_mac_aclk [get_bd_pins aclk] [get_bd_pins axis_data_fifo_0/s_axis_aclk] [get_bd_pins ethernet_frame_dropp_0/clk]
-=======
   # Create instance: ethernet_frame_dropp_0, and set properties
   set ethernet_frame_dropp_0 [ create_bd_cell -type ip -vlnv user.org:user:ethernet_frame_dropper:1.0 ethernet_frame_dropp_0 ]
 
@@ -3098,7 +3018,6 @@ proc create_hier_cell_packet_based_fifo_6_1 { parentCell nameHier } {
   connect_bd_net -net fifo_generator_0_axis_prog_full [get_bd_pins ethernet_frame_dropp_0/fifo_is_almost_full] [get_bd_pins fifo_generator_0/axis_prog_full]
   connect_bd_net -net proc_sys_reset_sw_peripheral_aresetn [get_bd_pins aresetn] [get_bd_pins ethernet_frame_dropp_0/rstn] [get_bd_pins fifo_generator_0/s_aresetn]
   connect_bd_net -net temac_0_tx_mac_aclk [get_bd_pins aclk] [get_bd_pins ethernet_frame_dropp_0/clk] [get_bd_pins fifo_generator_0/s_aclk]
->>>>>>> dbb0d5b (AIST-TSN Switch V2.0 First commit)
 
   # Restore current instance
   current_bd_instance $oldCurInst
@@ -3149,7 +3068,6 @@ proc create_hier_cell_packet_based_fifo_5_1 { parentCell nameHier } {
   create_bd_pin -dir I -type rst aresetn
   create_bd_pin -dir I drop_enable
 
-<<<<<<< HEAD
   # Create instance: axis_data_fifo_0, and set properties
   set axis_data_fifo_0 [ create_bd_cell -type ip -vlnv xilinx.com:ip:axis_data_fifo:2.0 axis_data_fifo_0 ]
   set_property -dict [ list \
@@ -3172,7 +3090,6 @@ proc create_hier_cell_packet_based_fifo_5_1 { parentCell nameHier } {
   connect_bd_net -net drop_enable_1 [get_bd_pins drop_enable] [get_bd_pins ethernet_frame_dropp_0/drop_enable]
   connect_bd_net -net proc_sys_reset_sw_peripheral_aresetn [get_bd_pins aresetn] [get_bd_pins axis_data_fifo_0/s_axis_aresetn] [get_bd_pins ethernet_frame_dropp_0/rstn]
   connect_bd_net -net temac_0_tx_mac_aclk [get_bd_pins aclk] [get_bd_pins axis_data_fifo_0/s_axis_aclk] [get_bd_pins ethernet_frame_dropp_0/clk]
-=======
   # Create instance: ethernet_frame_dropp_0, and set properties
   set ethernet_frame_dropp_0 [ create_bd_cell -type ip -vlnv user.org:user:ethernet_frame_dropper:1.0 ethernet_frame_dropp_0 ]
 
@@ -3210,7 +3127,6 @@ proc create_hier_cell_packet_based_fifo_5_1 { parentCell nameHier } {
   connect_bd_net -net fifo_generator_0_axis_prog_full [get_bd_pins ethernet_frame_dropp_0/fifo_is_almost_full] [get_bd_pins fifo_generator_0/axis_prog_full]
   connect_bd_net -net proc_sys_reset_sw_peripheral_aresetn [get_bd_pins aresetn] [get_bd_pins ethernet_frame_dropp_0/rstn] [get_bd_pins fifo_generator_0/s_aresetn]
   connect_bd_net -net temac_0_tx_mac_aclk [get_bd_pins aclk] [get_bd_pins ethernet_frame_dropp_0/clk] [get_bd_pins fifo_generator_0/s_aclk]
->>>>>>> dbb0d5b (AIST-TSN Switch V2.0 First commit)
 
   # Restore current instance
   current_bd_instance $oldCurInst
@@ -3261,7 +3177,6 @@ proc create_hier_cell_packet_based_fifo_4_1 { parentCell nameHier } {
   create_bd_pin -dir I -type rst aresetn
   create_bd_pin -dir I drop_enable
 
-<<<<<<< HEAD
   # Create instance: axis_data_fifo_0, and set properties
   set axis_data_fifo_0 [ create_bd_cell -type ip -vlnv xilinx.com:ip:axis_data_fifo:2.0 axis_data_fifo_0 ]
   set_property -dict [ list \
@@ -3284,7 +3199,6 @@ proc create_hier_cell_packet_based_fifo_4_1 { parentCell nameHier } {
   connect_bd_net -net drop_enable_1 [get_bd_pins drop_enable] [get_bd_pins ethernet_frame_dropp_0/drop_enable]
   connect_bd_net -net proc_sys_reset_sw_peripheral_aresetn [get_bd_pins aresetn] [get_bd_pins axis_data_fifo_0/s_axis_aresetn] [get_bd_pins ethernet_frame_dropp_0/rstn]
   connect_bd_net -net temac_0_tx_mac_aclk [get_bd_pins aclk] [get_bd_pins axis_data_fifo_0/s_axis_aclk] [get_bd_pins ethernet_frame_dropp_0/clk]
-=======
   # Create instance: ethernet_frame_dropp_0, and set properties
   set ethernet_frame_dropp_0 [ create_bd_cell -type ip -vlnv user.org:user:ethernet_frame_dropper:1.0 ethernet_frame_dropp_0 ]
 
@@ -3322,7 +3236,6 @@ proc create_hier_cell_packet_based_fifo_4_1 { parentCell nameHier } {
   connect_bd_net -net fifo_generator_0_axis_prog_full [get_bd_pins ethernet_frame_dropp_0/fifo_is_almost_full] [get_bd_pins fifo_generator_0/axis_prog_full]
   connect_bd_net -net proc_sys_reset_sw_peripheral_aresetn [get_bd_pins aresetn] [get_bd_pins ethernet_frame_dropp_0/rstn] [get_bd_pins fifo_generator_0/s_aresetn]
   connect_bd_net -net temac_0_tx_mac_aclk [get_bd_pins aclk] [get_bd_pins ethernet_frame_dropp_0/clk] [get_bd_pins fifo_generator_0/s_aclk]
->>>>>>> dbb0d5b (AIST-TSN Switch V2.0 First commit)
 
   # Restore current instance
   current_bd_instance $oldCurInst
@@ -3373,7 +3286,6 @@ proc create_hier_cell_packet_based_fifo_3_1 { parentCell nameHier } {
   create_bd_pin -dir I -type rst aresetn
   create_bd_pin -dir I drop_enable
 
-<<<<<<< HEAD
   # Create instance: axis_data_fifo_0, and set properties
   set axis_data_fifo_0 [ create_bd_cell -type ip -vlnv xilinx.com:ip:axis_data_fifo:2.0 axis_data_fifo_0 ]
   set_property -dict [ list \
@@ -3396,7 +3308,6 @@ proc create_hier_cell_packet_based_fifo_3_1 { parentCell nameHier } {
   connect_bd_net -net drop_enable_1 [get_bd_pins drop_enable] [get_bd_pins ethernet_frame_dropp_0/drop_enable]
   connect_bd_net -net proc_sys_reset_sw_peripheral_aresetn [get_bd_pins aresetn] [get_bd_pins axis_data_fifo_0/s_axis_aresetn] [get_bd_pins ethernet_frame_dropp_0/rstn]
   connect_bd_net -net temac_0_tx_mac_aclk [get_bd_pins aclk] [get_bd_pins axis_data_fifo_0/s_axis_aclk] [get_bd_pins ethernet_frame_dropp_0/clk]
-=======
   # Create instance: ethernet_frame_dropp_0, and set properties
   set ethernet_frame_dropp_0 [ create_bd_cell -type ip -vlnv user.org:user:ethernet_frame_dropper:1.0 ethernet_frame_dropp_0 ]
 
@@ -3434,7 +3345,6 @@ proc create_hier_cell_packet_based_fifo_3_1 { parentCell nameHier } {
   connect_bd_net -net fifo_generator_0_axis_prog_full [get_bd_pins ethernet_frame_dropp_0/fifo_is_almost_full] [get_bd_pins fifo_generator_0/axis_prog_full]
   connect_bd_net -net proc_sys_reset_sw_peripheral_aresetn [get_bd_pins aresetn] [get_bd_pins ethernet_frame_dropp_0/rstn] [get_bd_pins fifo_generator_0/s_aresetn]
   connect_bd_net -net temac_0_tx_mac_aclk [get_bd_pins aclk] [get_bd_pins ethernet_frame_dropp_0/clk] [get_bd_pins fifo_generator_0/s_aclk]
->>>>>>> dbb0d5b (AIST-TSN Switch V2.0 First commit)
 
   # Restore current instance
   current_bd_instance $oldCurInst
@@ -3485,7 +3395,6 @@ proc create_hier_cell_packet_based_fifo_2_1 { parentCell nameHier } {
   create_bd_pin -dir I -type rst aresetn
   create_bd_pin -dir I drop_enable
 
-<<<<<<< HEAD
   # Create instance: axis_data_fifo_0, and set properties
   set axis_data_fifo_0 [ create_bd_cell -type ip -vlnv xilinx.com:ip:axis_data_fifo:2.0 axis_data_fifo_0 ]
   set_property -dict [ list \
@@ -3508,7 +3417,6 @@ proc create_hier_cell_packet_based_fifo_2_1 { parentCell nameHier } {
   connect_bd_net -net drop_enable_1 [get_bd_pins drop_enable] [get_bd_pins ethernet_frame_dropp_0/drop_enable]
   connect_bd_net -net proc_sys_reset_sw_peripheral_aresetn [get_bd_pins aresetn] [get_bd_pins axis_data_fifo_0/s_axis_aresetn] [get_bd_pins ethernet_frame_dropp_0/rstn]
   connect_bd_net -net temac_0_tx_mac_aclk [get_bd_pins aclk] [get_bd_pins axis_data_fifo_0/s_axis_aclk] [get_bd_pins ethernet_frame_dropp_0/clk]
-=======
   # Create instance: ethernet_frame_dropp_0, and set properties
   set ethernet_frame_dropp_0 [ create_bd_cell -type ip -vlnv user.org:user:ethernet_frame_dropper:1.0 ethernet_frame_dropp_0 ]
 
@@ -3546,7 +3454,6 @@ proc create_hier_cell_packet_based_fifo_2_1 { parentCell nameHier } {
   connect_bd_net -net fifo_generator_0_axis_prog_full [get_bd_pins ethernet_frame_dropp_0/fifo_is_almost_full] [get_bd_pins fifo_generator_0/axis_prog_full]
   connect_bd_net -net proc_sys_reset_sw_peripheral_aresetn [get_bd_pins aresetn] [get_bd_pins ethernet_frame_dropp_0/rstn] [get_bd_pins fifo_generator_0/s_aresetn]
   connect_bd_net -net temac_0_tx_mac_aclk [get_bd_pins aclk] [get_bd_pins ethernet_frame_dropp_0/clk] [get_bd_pins fifo_generator_0/s_aclk]
->>>>>>> dbb0d5b (AIST-TSN Switch V2.0 First commit)
 
   # Restore current instance
   current_bd_instance $oldCurInst
@@ -3597,7 +3504,6 @@ proc create_hier_cell_packet_based_fifo_1_1 { parentCell nameHier } {
   create_bd_pin -dir I -type rst aresetn
   create_bd_pin -dir I drop_enable
 
-<<<<<<< HEAD
   # Create instance: axis_data_fifo_0, and set properties
   set axis_data_fifo_0 [ create_bd_cell -type ip -vlnv xilinx.com:ip:axis_data_fifo:2.0 axis_data_fifo_0 ]
   set_property -dict [ list \
@@ -3620,7 +3526,6 @@ proc create_hier_cell_packet_based_fifo_1_1 { parentCell nameHier } {
   connect_bd_net -net drop_enable_1 [get_bd_pins drop_enable] [get_bd_pins ethernet_frame_dropp_0/drop_enable]
   connect_bd_net -net proc_sys_reset_sw_peripheral_aresetn [get_bd_pins aresetn] [get_bd_pins axis_data_fifo_0/s_axis_aresetn] [get_bd_pins ethernet_frame_dropp_0/rstn]
   connect_bd_net -net temac_0_tx_mac_aclk [get_bd_pins aclk] [get_bd_pins axis_data_fifo_0/s_axis_aclk] [get_bd_pins ethernet_frame_dropp_0/clk]
-=======
   # Create instance: ethernet_frame_dropp_0, and set properties
   set ethernet_frame_dropp_0 [ create_bd_cell -type ip -vlnv user.org:user:ethernet_frame_dropper:1.0 ethernet_frame_dropp_0 ]
 
@@ -3658,7 +3563,6 @@ proc create_hier_cell_packet_based_fifo_1_1 { parentCell nameHier } {
   connect_bd_net -net fifo_generator_0_axis_prog_full [get_bd_pins ethernet_frame_dropp_0/fifo_is_almost_full] [get_bd_pins fifo_generator_0/axis_prog_full]
   connect_bd_net -net proc_sys_reset_sw_peripheral_aresetn [get_bd_pins aresetn] [get_bd_pins ethernet_frame_dropp_0/rstn] [get_bd_pins fifo_generator_0/s_aresetn]
   connect_bd_net -net temac_0_tx_mac_aclk [get_bd_pins aclk] [get_bd_pins ethernet_frame_dropp_0/clk] [get_bd_pins fifo_generator_0/s_aclk]
->>>>>>> dbb0d5b (AIST-TSN Switch V2.0 First commit)
 
   # Restore current instance
   current_bd_instance $oldCurInst
@@ -3709,7 +3613,6 @@ proc create_hier_cell_packet_based_fifo_0_1 { parentCell nameHier } {
   create_bd_pin -dir I -type rst aresetn
   create_bd_pin -dir I drop_enable
 
-<<<<<<< HEAD
   # Create instance: axis_data_fifo_0, and set properties
   set axis_data_fifo_0 [ create_bd_cell -type ip -vlnv xilinx.com:ip:axis_data_fifo:2.0 axis_data_fifo_0 ]
   set_property -dict [ list \
@@ -3732,7 +3635,6 @@ proc create_hier_cell_packet_based_fifo_0_1 { parentCell nameHier } {
   connect_bd_net -net drop_enable_1 [get_bd_pins drop_enable] [get_bd_pins ethernet_frame_dropp_0/drop_enable]
   connect_bd_net -net proc_sys_reset_sw_peripheral_aresetn [get_bd_pins aresetn] [get_bd_pins axis_data_fifo_0/s_axis_aresetn] [get_bd_pins ethernet_frame_dropp_0/rstn]
   connect_bd_net -net temac_0_tx_mac_aclk [get_bd_pins aclk] [get_bd_pins axis_data_fifo_0/s_axis_aclk] [get_bd_pins ethernet_frame_dropp_0/clk]
-=======
   # Create instance: ethernet_frame_dropp_0, and set properties
   set ethernet_frame_dropp_0 [ create_bd_cell -type ip -vlnv user.org:user:ethernet_frame_dropper:1.0 ethernet_frame_dropp_0 ]
 
@@ -3770,7 +3672,6 @@ proc create_hier_cell_packet_based_fifo_0_1 { parentCell nameHier } {
   connect_bd_net -net fifo_generator_0_axis_prog_full [get_bd_pins ethernet_frame_dropp_0/fifo_is_almost_full] [get_bd_pins fifo_generator_0/axis_prog_full]
   connect_bd_net -net proc_sys_reset_sw_peripheral_aresetn [get_bd_pins aresetn] [get_bd_pins ethernet_frame_dropp_0/rstn] [get_bd_pins fifo_generator_0/s_aresetn]
   connect_bd_net -net temac_0_tx_mac_aclk [get_bd_pins aclk] [get_bd_pins ethernet_frame_dropp_0/clk] [get_bd_pins fifo_generator_0/s_aclk]
->>>>>>> dbb0d5b (AIST-TSN Switch V2.0 First commit)
 
   # Restore current instance
   current_bd_instance $oldCurInst
@@ -3973,10 +3874,8 @@ proc create_hier_cell_arbiter_0_1 { parentCell nameHier } {
   create_bd_pin -dir I -type rst aresetn
   create_bd_pin -dir O output_side_ready
 
-<<<<<<< HEAD
   # Create instance: ethernet_frame_arbit_0, and set properties
   set ethernet_frame_arbit_0 [ create_bd_cell -type ip -vlnv user.org:user:ethernet_frame_arbiter:1.0 ethernet_frame_arbit_0 ]
-=======
   # Create instance: axis_register_slice_0, and set properties
   set axis_register_slice_0 [ create_bd_cell -type ip -vlnv xilinx.com:ip:axis_register_slice:1.1 axis_register_slice_0 ]
 
@@ -3985,7 +3884,6 @@ proc create_hier_cell_arbiter_0_1 { parentCell nameHier } {
   set_property -dict [ list \
    CONFIG.FRAME_GAP {24} \
  ] $ethernet_frame_arbit_0
->>>>>>> dbb0d5b (AIST-TSN Switch V2.0 First commit)
 
   # Create instance: extract_output_side_0, and set properties
   set extract_output_side_0 [ create_bd_cell -type ip -vlnv user.org:user:extract_output_side_ready:1.0 extract_output_side_0 ]
@@ -3999,14 +3897,12 @@ proc create_hier_cell_arbiter_0_1 { parentCell nameHier } {
   connect_bd_intf_net -intf_net S05_AXIS_1 [get_bd_intf_pins S05_AXIS] [get_bd_intf_pins ethernet_frame_arbit_0/s_axis_5]
   connect_bd_intf_net -intf_net S06_AXIS_1 [get_bd_intf_pins S06_AXIS] [get_bd_intf_pins ethernet_frame_arbit_0/s_axis_6]
   connect_bd_intf_net -intf_net S07_AXIS_1 [get_bd_intf_pins S07_AXIS] [get_bd_intf_pins ethernet_frame_arbit_0/s_axis_7]
-<<<<<<< HEAD
   connect_bd_intf_net -intf_net ethernet_frame_arbit_0_m_axis [get_bd_intf_pins ethernet_frame_arbit_0/m_axis] [get_bd_intf_pins extract_output_side_0/s_axis]
   connect_bd_intf_net -intf_net extract_output_side_0_m_axis [get_bd_intf_pins M00_AXIS] [get_bd_intf_pins extract_output_side_0/m_axis]
 
   # Create port connections
   connect_bd_net -net aclk_1 [get_bd_pins aclk] [get_bd_pins ethernet_frame_arbit_0/clk] [get_bd_pins extract_output_side_0/clk]
   connect_bd_net -net aresetn_1 [get_bd_pins aresetn] [get_bd_pins ethernet_frame_arbit_0/rstn] [get_bd_pins extract_output_side_0/rstn]
-=======
   connect_bd_intf_net -intf_net axis_register_slice_0_M_AXIS [get_bd_intf_pins M00_AXIS] [get_bd_intf_pins axis_register_slice_0/M_AXIS]
   connect_bd_intf_net -intf_net ethernet_frame_arbit_0_m_axis [get_bd_intf_pins ethernet_frame_arbit_0/m_axis] [get_bd_intf_pins extract_output_side_0/s_axis]
   connect_bd_intf_net -intf_net extract_output_side_0_m_axis [get_bd_intf_pins axis_register_slice_0/S_AXIS] [get_bd_intf_pins extract_output_side_0/m_axis]
@@ -4014,7 +3910,6 @@ proc create_hier_cell_arbiter_0_1 { parentCell nameHier } {
   # Create port connections
   connect_bd_net -net aclk_1 [get_bd_pins aclk] [get_bd_pins axis_register_slice_0/aclk] [get_bd_pins ethernet_frame_arbit_0/clk] [get_bd_pins extract_output_side_0/clk]
   connect_bd_net -net aresetn_1 [get_bd_pins aresetn] [get_bd_pins axis_register_slice_0/aresetn] [get_bd_pins ethernet_frame_arbit_0/rstn] [get_bd_pins extract_output_side_0/rstn]
->>>>>>> dbb0d5b (AIST-TSN Switch V2.0 First commit)
   connect_bd_net -net extract_output_side_0_output_side_ready [get_bd_pins output_side_ready] [get_bd_pins extract_output_side_0/output_side_ready]
 
   # Restore current instance
@@ -4186,7 +4081,6 @@ proc create_hier_cell_packet_based_fifo_7 { parentCell nameHier } {
   create_bd_pin -dir I -type rst aresetn
   create_bd_pin -dir I drop_enable
 
-<<<<<<< HEAD
   # Create instance: axis_data_fifo_0, and set properties
   set axis_data_fifo_0 [ create_bd_cell -type ip -vlnv xilinx.com:ip:axis_data_fifo:2.0 axis_data_fifo_0 ]
   set_property -dict [ list \
@@ -4209,7 +4103,6 @@ proc create_hier_cell_packet_based_fifo_7 { parentCell nameHier } {
   connect_bd_net -net drop_enable_1 [get_bd_pins drop_enable] [get_bd_pins ethernet_frame_dropp_0/drop_enable]
   connect_bd_net -net proc_sys_reset_sw_peripheral_aresetn [get_bd_pins aresetn] [get_bd_pins axis_data_fifo_0/s_axis_aresetn] [get_bd_pins ethernet_frame_dropp_0/rstn]
   connect_bd_net -net temac_0_tx_mac_aclk [get_bd_pins aclk] [get_bd_pins axis_data_fifo_0/s_axis_aclk] [get_bd_pins ethernet_frame_dropp_0/clk]
-=======
   # Create instance: ethernet_frame_dropp_0, and set properties
   set ethernet_frame_dropp_0 [ create_bd_cell -type ip -vlnv user.org:user:ethernet_frame_dropper:1.0 ethernet_frame_dropp_0 ]
 
@@ -4247,7 +4140,6 @@ proc create_hier_cell_packet_based_fifo_7 { parentCell nameHier } {
   connect_bd_net -net fifo_generator_0_axis_prog_full [get_bd_pins ethernet_frame_dropp_0/fifo_is_almost_full] [get_bd_pins fifo_generator_0/axis_prog_full]
   connect_bd_net -net proc_sys_reset_sw_peripheral_aresetn [get_bd_pins aresetn] [get_bd_pins ethernet_frame_dropp_0/rstn] [get_bd_pins fifo_generator_0/s_aresetn]
   connect_bd_net -net temac_0_tx_mac_aclk [get_bd_pins aclk] [get_bd_pins ethernet_frame_dropp_0/clk] [get_bd_pins fifo_generator_0/s_aclk]
->>>>>>> dbb0d5b (AIST-TSN Switch V2.0 First commit)
 
   # Restore current instance
   current_bd_instance $oldCurInst
@@ -4298,7 +4190,6 @@ proc create_hier_cell_packet_based_fifo_6 { parentCell nameHier } {
   create_bd_pin -dir I -type rst aresetn
   create_bd_pin -dir I drop_enable
 
-<<<<<<< HEAD
   # Create instance: axis_data_fifo_0, and set properties
   set axis_data_fifo_0 [ create_bd_cell -type ip -vlnv xilinx.com:ip:axis_data_fifo:2.0 axis_data_fifo_0 ]
   set_property -dict [ list \
@@ -4321,7 +4212,6 @@ proc create_hier_cell_packet_based_fifo_6 { parentCell nameHier } {
   connect_bd_net -net drop_enable_1 [get_bd_pins drop_enable] [get_bd_pins ethernet_frame_dropp_0/drop_enable]
   connect_bd_net -net proc_sys_reset_sw_peripheral_aresetn [get_bd_pins aresetn] [get_bd_pins axis_data_fifo_0/s_axis_aresetn] [get_bd_pins ethernet_frame_dropp_0/rstn]
   connect_bd_net -net temac_0_tx_mac_aclk [get_bd_pins aclk] [get_bd_pins axis_data_fifo_0/s_axis_aclk] [get_bd_pins ethernet_frame_dropp_0/clk]
-=======
   # Create instance: ethernet_frame_dropp_0, and set properties
   set ethernet_frame_dropp_0 [ create_bd_cell -type ip -vlnv user.org:user:ethernet_frame_dropper:1.0 ethernet_frame_dropp_0 ]
 
@@ -4359,7 +4249,6 @@ proc create_hier_cell_packet_based_fifo_6 { parentCell nameHier } {
   connect_bd_net -net fifo_generator_0_axis_prog_full [get_bd_pins ethernet_frame_dropp_0/fifo_is_almost_full] [get_bd_pins fifo_generator_0/axis_prog_full]
   connect_bd_net -net proc_sys_reset_sw_peripheral_aresetn [get_bd_pins aresetn] [get_bd_pins ethernet_frame_dropp_0/rstn] [get_bd_pins fifo_generator_0/s_aresetn]
   connect_bd_net -net temac_0_tx_mac_aclk [get_bd_pins aclk] [get_bd_pins ethernet_frame_dropp_0/clk] [get_bd_pins fifo_generator_0/s_aclk]
->>>>>>> dbb0d5b (AIST-TSN Switch V2.0 First commit)
 
   # Restore current instance
   current_bd_instance $oldCurInst
@@ -4410,7 +4299,6 @@ proc create_hier_cell_packet_based_fifo_5 { parentCell nameHier } {
   create_bd_pin -dir I -type rst aresetn
   create_bd_pin -dir I drop_enable
 
-<<<<<<< HEAD
   # Create instance: axis_data_fifo_0, and set properties
   set axis_data_fifo_0 [ create_bd_cell -type ip -vlnv xilinx.com:ip:axis_data_fifo:2.0 axis_data_fifo_0 ]
   set_property -dict [ list \
@@ -4433,7 +4321,6 @@ proc create_hier_cell_packet_based_fifo_5 { parentCell nameHier } {
   connect_bd_net -net drop_enable_1 [get_bd_pins drop_enable] [get_bd_pins ethernet_frame_dropp_0/drop_enable]
   connect_bd_net -net proc_sys_reset_sw_peripheral_aresetn [get_bd_pins aresetn] [get_bd_pins axis_data_fifo_0/s_axis_aresetn] [get_bd_pins ethernet_frame_dropp_0/rstn]
   connect_bd_net -net temac_0_tx_mac_aclk [get_bd_pins aclk] [get_bd_pins axis_data_fifo_0/s_axis_aclk] [get_bd_pins ethernet_frame_dropp_0/clk]
-=======
   # Create instance: ethernet_frame_dropp_0, and set properties
   set ethernet_frame_dropp_0 [ create_bd_cell -type ip -vlnv user.org:user:ethernet_frame_dropper:1.0 ethernet_frame_dropp_0 ]
 
@@ -4471,7 +4358,6 @@ proc create_hier_cell_packet_based_fifo_5 { parentCell nameHier } {
   connect_bd_net -net fifo_generator_0_axis_prog_full [get_bd_pins ethernet_frame_dropp_0/fifo_is_almost_full] [get_bd_pins fifo_generator_0/axis_prog_full]
   connect_bd_net -net proc_sys_reset_sw_peripheral_aresetn [get_bd_pins aresetn] [get_bd_pins ethernet_frame_dropp_0/rstn] [get_bd_pins fifo_generator_0/s_aresetn]
   connect_bd_net -net temac_0_tx_mac_aclk [get_bd_pins aclk] [get_bd_pins ethernet_frame_dropp_0/clk] [get_bd_pins fifo_generator_0/s_aclk]
->>>>>>> dbb0d5b (AIST-TSN Switch V2.0 First commit)
 
   # Restore current instance
   current_bd_instance $oldCurInst
@@ -4522,7 +4408,6 @@ proc create_hier_cell_packet_based_fifo_4 { parentCell nameHier } {
   create_bd_pin -dir I -type rst aresetn
   create_bd_pin -dir I drop_enable
 
-<<<<<<< HEAD
   # Create instance: axis_data_fifo_0, and set properties
   set axis_data_fifo_0 [ create_bd_cell -type ip -vlnv xilinx.com:ip:axis_data_fifo:2.0 axis_data_fifo_0 ]
   set_property -dict [ list \
@@ -4545,7 +4430,6 @@ proc create_hier_cell_packet_based_fifo_4 { parentCell nameHier } {
   connect_bd_net -net drop_enable_1 [get_bd_pins drop_enable] [get_bd_pins ethernet_frame_dropp_0/drop_enable]
   connect_bd_net -net proc_sys_reset_sw_peripheral_aresetn [get_bd_pins aresetn] [get_bd_pins axis_data_fifo_0/s_axis_aresetn] [get_bd_pins ethernet_frame_dropp_0/rstn]
   connect_bd_net -net temac_0_tx_mac_aclk [get_bd_pins aclk] [get_bd_pins axis_data_fifo_0/s_axis_aclk] [get_bd_pins ethernet_frame_dropp_0/clk]
-=======
   # Create instance: ethernet_frame_dropp_0, and set properties
   set ethernet_frame_dropp_0 [ create_bd_cell -type ip -vlnv user.org:user:ethernet_frame_dropper:1.0 ethernet_frame_dropp_0 ]
 
@@ -4583,7 +4467,6 @@ proc create_hier_cell_packet_based_fifo_4 { parentCell nameHier } {
   connect_bd_net -net fifo_generator_0_axis_prog_full [get_bd_pins ethernet_frame_dropp_0/fifo_is_almost_full] [get_bd_pins fifo_generator_0/axis_prog_full]
   connect_bd_net -net proc_sys_reset_sw_peripheral_aresetn [get_bd_pins aresetn] [get_bd_pins ethernet_frame_dropp_0/rstn] [get_bd_pins fifo_generator_0/s_aresetn]
   connect_bd_net -net temac_0_tx_mac_aclk [get_bd_pins aclk] [get_bd_pins ethernet_frame_dropp_0/clk] [get_bd_pins fifo_generator_0/s_aclk]
->>>>>>> dbb0d5b (AIST-TSN Switch V2.0 First commit)
 
   # Restore current instance
   current_bd_instance $oldCurInst
@@ -4634,7 +4517,6 @@ proc create_hier_cell_packet_based_fifo_3 { parentCell nameHier } {
   create_bd_pin -dir I -type rst aresetn
   create_bd_pin -dir I drop_enable
 
-<<<<<<< HEAD
   # Create instance: axis_data_fifo_0, and set properties
   set axis_data_fifo_0 [ create_bd_cell -type ip -vlnv xilinx.com:ip:axis_data_fifo:2.0 axis_data_fifo_0 ]
   set_property -dict [ list \
@@ -4657,7 +4539,6 @@ proc create_hier_cell_packet_based_fifo_3 { parentCell nameHier } {
   connect_bd_net -net drop_enable_1 [get_bd_pins drop_enable] [get_bd_pins ethernet_frame_dropp_0/drop_enable]
   connect_bd_net -net proc_sys_reset_sw_peripheral_aresetn [get_bd_pins aresetn] [get_bd_pins axis_data_fifo_0/s_axis_aresetn] [get_bd_pins ethernet_frame_dropp_0/rstn]
   connect_bd_net -net temac_0_tx_mac_aclk [get_bd_pins aclk] [get_bd_pins axis_data_fifo_0/s_axis_aclk] [get_bd_pins ethernet_frame_dropp_0/clk]
-=======
   # Create instance: ethernet_frame_dropp_0, and set properties
   set ethernet_frame_dropp_0 [ create_bd_cell -type ip -vlnv user.org:user:ethernet_frame_dropper:1.0 ethernet_frame_dropp_0 ]
 
@@ -4695,7 +4576,6 @@ proc create_hier_cell_packet_based_fifo_3 { parentCell nameHier } {
   connect_bd_net -net fifo_generator_0_axis_prog_full [get_bd_pins ethernet_frame_dropp_0/fifo_is_almost_full] [get_bd_pins fifo_generator_0/axis_prog_full]
   connect_bd_net -net proc_sys_reset_sw_peripheral_aresetn [get_bd_pins aresetn] [get_bd_pins ethernet_frame_dropp_0/rstn] [get_bd_pins fifo_generator_0/s_aresetn]
   connect_bd_net -net temac_0_tx_mac_aclk [get_bd_pins aclk] [get_bd_pins ethernet_frame_dropp_0/clk] [get_bd_pins fifo_generator_0/s_aclk]
->>>>>>> dbb0d5b (AIST-TSN Switch V2.0 First commit)
 
   # Restore current instance
   current_bd_instance $oldCurInst
@@ -4746,7 +4626,6 @@ proc create_hier_cell_packet_based_fifo_2 { parentCell nameHier } {
   create_bd_pin -dir I -type rst aresetn
   create_bd_pin -dir I drop_enable
 
-<<<<<<< HEAD
   # Create instance: axis_data_fifo_0, and set properties
   set axis_data_fifo_0 [ create_bd_cell -type ip -vlnv xilinx.com:ip:axis_data_fifo:2.0 axis_data_fifo_0 ]
   set_property -dict [ list \
@@ -4769,7 +4648,6 @@ proc create_hier_cell_packet_based_fifo_2 { parentCell nameHier } {
   connect_bd_net -net drop_enable_1 [get_bd_pins drop_enable] [get_bd_pins ethernet_frame_dropp_0/drop_enable]
   connect_bd_net -net proc_sys_reset_sw_peripheral_aresetn [get_bd_pins aresetn] [get_bd_pins axis_data_fifo_0/s_axis_aresetn] [get_bd_pins ethernet_frame_dropp_0/rstn]
   connect_bd_net -net temac_0_tx_mac_aclk [get_bd_pins aclk] [get_bd_pins axis_data_fifo_0/s_axis_aclk] [get_bd_pins ethernet_frame_dropp_0/clk]
-=======
   # Create instance: ethernet_frame_dropp_0, and set properties
   set ethernet_frame_dropp_0 [ create_bd_cell -type ip -vlnv user.org:user:ethernet_frame_dropper:1.0 ethernet_frame_dropp_0 ]
 
@@ -4807,7 +4685,6 @@ proc create_hier_cell_packet_based_fifo_2 { parentCell nameHier } {
   connect_bd_net -net fifo_generator_0_axis_prog_full [get_bd_pins ethernet_frame_dropp_0/fifo_is_almost_full] [get_bd_pins fifo_generator_0/axis_prog_full]
   connect_bd_net -net proc_sys_reset_sw_peripheral_aresetn [get_bd_pins aresetn] [get_bd_pins ethernet_frame_dropp_0/rstn] [get_bd_pins fifo_generator_0/s_aresetn]
   connect_bd_net -net temac_0_tx_mac_aclk [get_bd_pins aclk] [get_bd_pins ethernet_frame_dropp_0/clk] [get_bd_pins fifo_generator_0/s_aclk]
->>>>>>> dbb0d5b (AIST-TSN Switch V2.0 First commit)
 
   # Restore current instance
   current_bd_instance $oldCurInst
@@ -4858,7 +4735,6 @@ proc create_hier_cell_packet_based_fifo_1 { parentCell nameHier } {
   create_bd_pin -dir I -type rst aresetn
   create_bd_pin -dir I drop_enable
 
-<<<<<<< HEAD
   # Create instance: axis_data_fifo_0, and set properties
   set axis_data_fifo_0 [ create_bd_cell -type ip -vlnv xilinx.com:ip:axis_data_fifo:2.0 axis_data_fifo_0 ]
   set_property -dict [ list \
@@ -4881,7 +4757,6 @@ proc create_hier_cell_packet_based_fifo_1 { parentCell nameHier } {
   connect_bd_net -net drop_enable_1 [get_bd_pins drop_enable] [get_bd_pins ethernet_frame_dropp_0/drop_enable]
   connect_bd_net -net proc_sys_reset_sw_peripheral_aresetn [get_bd_pins aresetn] [get_bd_pins axis_data_fifo_0/s_axis_aresetn] [get_bd_pins ethernet_frame_dropp_0/rstn]
   connect_bd_net -net temac_0_tx_mac_aclk [get_bd_pins aclk] [get_bd_pins axis_data_fifo_0/s_axis_aclk] [get_bd_pins ethernet_frame_dropp_0/clk]
-=======
   # Create instance: ethernet_frame_dropp_0, and set properties
   set ethernet_frame_dropp_0 [ create_bd_cell -type ip -vlnv user.org:user:ethernet_frame_dropper:1.0 ethernet_frame_dropp_0 ]
 
@@ -4919,7 +4794,6 @@ proc create_hier_cell_packet_based_fifo_1 { parentCell nameHier } {
   connect_bd_net -net fifo_generator_0_axis_prog_full [get_bd_pins ethernet_frame_dropp_0/fifo_is_almost_full] [get_bd_pins fifo_generator_0/axis_prog_full]
   connect_bd_net -net proc_sys_reset_sw_peripheral_aresetn [get_bd_pins aresetn] [get_bd_pins ethernet_frame_dropp_0/rstn] [get_bd_pins fifo_generator_0/s_aresetn]
   connect_bd_net -net temac_0_tx_mac_aclk [get_bd_pins aclk] [get_bd_pins ethernet_frame_dropp_0/clk] [get_bd_pins fifo_generator_0/s_aclk]
->>>>>>> dbb0d5b (AIST-TSN Switch V2.0 First commit)
 
   # Restore current instance
   current_bd_instance $oldCurInst
@@ -4970,7 +4844,6 @@ proc create_hier_cell_packet_based_fifo_0 { parentCell nameHier } {
   create_bd_pin -dir I -type rst aresetn
   create_bd_pin -dir I drop_enable
 
-<<<<<<< HEAD
   # Create instance: axis_data_fifo_0, and set properties
   set axis_data_fifo_0 [ create_bd_cell -type ip -vlnv xilinx.com:ip:axis_data_fifo:2.0 axis_data_fifo_0 ]
   set_property -dict [ list \
@@ -4993,7 +4866,6 @@ proc create_hier_cell_packet_based_fifo_0 { parentCell nameHier } {
   connect_bd_net -net drop_enable_1 [get_bd_pins drop_enable] [get_bd_pins ethernet_frame_dropp_0/drop_enable]
   connect_bd_net -net proc_sys_reset_sw_peripheral_aresetn [get_bd_pins aresetn] [get_bd_pins axis_data_fifo_0/s_axis_aresetn] [get_bd_pins ethernet_frame_dropp_0/rstn]
   connect_bd_net -net temac_0_tx_mac_aclk [get_bd_pins aclk] [get_bd_pins axis_data_fifo_0/s_axis_aclk] [get_bd_pins ethernet_frame_dropp_0/clk]
-=======
   # Create instance: ethernet_frame_dropp_0, and set properties
   set ethernet_frame_dropp_0 [ create_bd_cell -type ip -vlnv user.org:user:ethernet_frame_dropper:1.0 ethernet_frame_dropp_0 ]
 
@@ -5031,7 +4903,6 @@ proc create_hier_cell_packet_based_fifo_0 { parentCell nameHier } {
   connect_bd_net -net fifo_generator_0_axis_prog_full [get_bd_pins ethernet_frame_dropp_0/fifo_is_almost_full] [get_bd_pins fifo_generator_0/axis_prog_full]
   connect_bd_net -net proc_sys_reset_sw_peripheral_aresetn [get_bd_pins aresetn] [get_bd_pins ethernet_frame_dropp_0/rstn] [get_bd_pins fifo_generator_0/s_aresetn]
   connect_bd_net -net temac_0_tx_mac_aclk [get_bd_pins aclk] [get_bd_pins ethernet_frame_dropp_0/clk] [get_bd_pins fifo_generator_0/s_aclk]
->>>>>>> dbb0d5b (AIST-TSN Switch V2.0 First commit)
 
   # Restore current instance
   current_bd_instance $oldCurInst
@@ -5234,10 +5105,8 @@ proc create_hier_cell_arbiter_0 { parentCell nameHier } {
   create_bd_pin -dir I -type rst aresetn
   create_bd_pin -dir O output_side_ready
 
-<<<<<<< HEAD
   # Create instance: ethernet_frame_arbit_0, and set properties
   set ethernet_frame_arbit_0 [ create_bd_cell -type ip -vlnv user.org:user:ethernet_frame_arbiter:1.0 ethernet_frame_arbit_0 ]
-=======
   # Create instance: axis_register_slice_0, and set properties
   set axis_register_slice_0 [ create_bd_cell -type ip -vlnv xilinx.com:ip:axis_register_slice:1.1 axis_register_slice_0 ]
 
@@ -5246,7 +5115,6 @@ proc create_hier_cell_arbiter_0 { parentCell nameHier } {
   set_property -dict [ list \
    CONFIG.FRAME_GAP {24} \
  ] $ethernet_frame_arbit_0
->>>>>>> dbb0d5b (AIST-TSN Switch V2.0 First commit)
 
   # Create instance: extract_output_side_0, and set properties
   set extract_output_side_0 [ create_bd_cell -type ip -vlnv user.org:user:extract_output_side_ready:1.0 extract_output_side_0 ]
@@ -5260,14 +5128,12 @@ proc create_hier_cell_arbiter_0 { parentCell nameHier } {
   connect_bd_intf_net -intf_net S05_AXIS_1 [get_bd_intf_pins S05_AXIS] [get_bd_intf_pins ethernet_frame_arbit_0/s_axis_5]
   connect_bd_intf_net -intf_net S06_AXIS_1 [get_bd_intf_pins S06_AXIS] [get_bd_intf_pins ethernet_frame_arbit_0/s_axis_6]
   connect_bd_intf_net -intf_net S07_AXIS_1 [get_bd_intf_pins S07_AXIS] [get_bd_intf_pins ethernet_frame_arbit_0/s_axis_7]
-<<<<<<< HEAD
   connect_bd_intf_net -intf_net ethernet_frame_arbit_0_m_axis [get_bd_intf_pins ethernet_frame_arbit_0/m_axis] [get_bd_intf_pins extract_output_side_0/s_axis]
   connect_bd_intf_net -intf_net extract_output_side_0_m_axis [get_bd_intf_pins M00_AXIS] [get_bd_intf_pins extract_output_side_0/m_axis]
 
   # Create port connections
   connect_bd_net -net aclk_1 [get_bd_pins aclk] [get_bd_pins ethernet_frame_arbit_0/clk] [get_bd_pins extract_output_side_0/clk]
   connect_bd_net -net aresetn_1 [get_bd_pins aresetn] [get_bd_pins ethernet_frame_arbit_0/rstn] [get_bd_pins extract_output_side_0/rstn]
-=======
   connect_bd_intf_net -intf_net axis_register_slice_0_M_AXIS [get_bd_intf_pins M00_AXIS] [get_bd_intf_pins axis_register_slice_0/M_AXIS]
   connect_bd_intf_net -intf_net ethernet_frame_arbit_0_m_axis [get_bd_intf_pins ethernet_frame_arbit_0/m_axis] [get_bd_intf_pins extract_output_side_0/s_axis]
   connect_bd_intf_net -intf_net extract_output_side_0_m_axis [get_bd_intf_pins axis_register_slice_0/S_AXIS] [get_bd_intf_pins extract_output_side_0/m_axis]
@@ -5275,7 +5141,6 @@ proc create_hier_cell_arbiter_0 { parentCell nameHier } {
   # Create port connections
   connect_bd_net -net aclk_1 [get_bd_pins aclk] [get_bd_pins axis_register_slice_0/aclk] [get_bd_pins ethernet_frame_arbit_0/clk] [get_bd_pins extract_output_side_0/clk]
   connect_bd_net -net aresetn_1 [get_bd_pins aresetn] [get_bd_pins axis_register_slice_0/aresetn] [get_bd_pins ethernet_frame_arbit_0/rstn] [get_bd_pins extract_output_side_0/rstn]
->>>>>>> dbb0d5b (AIST-TSN Switch V2.0 First commit)
   connect_bd_net -net extract_output_side_0_output_side_ready [get_bd_pins output_side_ready] [get_bd_pins extract_output_side_0/output_side_ready]
 
   # Restore current instance
@@ -5873,8 +5738,6 @@ proc create_hier_cell_hier_mac_3 { parentCell nameHier } {
      return 1
    }
   
-<<<<<<< HEAD
-=======
   # Create instance: ethernet_frame_dropp_0, and set properties
   set ethernet_frame_dropp_0 [ create_bd_cell -type ip -vlnv user.org:user:ethernet_frame_dropper:1.0 ethernet_frame_dropp_0 ]
 
@@ -5908,7 +5771,6 @@ proc create_hier_cell_hier_mac_3 { parentCell nameHier } {
    CONFIG.TUSER_WIDTH {0} \
  ] $fifo_generator_0
 
->>>>>>> dbb0d5b (AIST-TSN Switch V2.0 First commit)
   # Create instance: temac_3, and set properties
   set temac_3 [ create_bd_cell -type ip -vlnv xilinx.com:ip:tri_mode_ethernet_mac:9.0 temac_3 ]
   set_property -dict [ list \
@@ -5916,13 +5778,11 @@ proc create_hier_cell_hier_mac_3 { parentCell nameHier } {
    CONFIG.SupportLevel {0} \
  ] $temac_3
 
-<<<<<<< HEAD
   # Create interface connections
   connect_bd_intf_net -intf_net axis_data_fifo_sw_3_M_AXIS [get_bd_intf_pins s_axis_tx] [get_bd_intf_pins temac_3/s_axis_tx]
   connect_bd_intf_net -intf_net eth_driver_3_s_axi [get_bd_intf_pins eth_driver_3/s_axi] [get_bd_intf_pins temac_3/s_axi]
   connect_bd_intf_net -intf_net eth_driver_3_tx_axis_mac [get_bd_intf_pins tx_axis_mac] [get_bd_intf_pins eth_driver_3/tx_axis_mac]
   connect_bd_intf_net -intf_net temac_3_m_axis_rx [get_bd_intf_pins eth_driver_3/rx_axis_mac] [get_bd_intf_pins temac_3/m_axis_rx]
-=======
   # Create instance: util_vector_logic_0, and set properties
   set util_vector_logic_0 [ create_bd_cell -type ip -vlnv xilinx.com:ip:util_vector_logic:2.0 util_vector_logic_0 ]
   set_property -dict [ list \
@@ -5940,7 +5800,6 @@ proc create_hier_cell_hier_mac_3 { parentCell nameHier } {
   connect_bd_intf_net -intf_net eth_driver_3_tx_axis_mac [get_bd_intf_pins tx_axis_mac] [get_bd_intf_pins fifo_generator_0/M_AXIS]
   connect_bd_intf_net -intf_net ethernet_frame_dropp_0_m_axis [get_bd_intf_pins ethernet_frame_dropp_0/m_axis] [get_bd_intf_pins fifo_generator_0/S_AXIS]
   connect_bd_intf_net -intf_net temac_3_m_axis_rx [get_bd_intf_pins ethernet_frame_dropp_0/s_axis] [get_bd_intf_pins temac_3/m_axis_rx]
->>>>>>> dbb0d5b (AIST-TSN Switch V2.0 First commit)
   connect_bd_intf_net -intf_net temac_3_mdio_external [get_bd_intf_pins mdio_io_port_3] [get_bd_intf_pins temac_3/mdio_external]
   connect_bd_intf_net -intf_net temac_3_rgmii [get_bd_intf_pins rgmii_port_3] [get_bd_intf_pins temac_3/rgmii]
 
@@ -5960,10 +5819,7 @@ proc create_hier_cell_hier_mac_3 { parentCell nameHier } {
   connect_bd_net -net eth_driver_3_s_axi_resetn [get_bd_pins eth_driver_3/s_axi_resetn] [get_bd_pins temac_3/s_axi_resetn]
   connect_bd_net -net eth_driver_3_tx_axi_rstn [get_bd_pins eth_driver_3/tx_axi_rstn] [get_bd_pins temac_3/tx_axi_rstn]
   connect_bd_net -net eth_driver_3_tx_ifg_delay [get_bd_pins eth_driver_3/tx_ifg_delay] [get_bd_pins temac_3/tx_ifg_delay]
-<<<<<<< HEAD
-=======
   connect_bd_net -net fifo_generator_0_axis_prog_full [get_bd_pins ethernet_frame_dropp_0/fifo_is_almost_full] [get_bd_pins fifo_generator_0/axis_prog_full]
->>>>>>> dbb0d5b (AIST-TSN Switch V2.0 First commit)
   connect_bd_net -net gen_tx_data_1 [get_bd_pins gen_tx_data] [get_bd_pins eth_driver_3/gen_tx_data]
   connect_bd_net -net glbl_rst_1 [get_bd_pins glbl_rst] [get_bd_pins eth_driver_3/glbl_rst]
   connect_bd_net -net hier_flow_control_pause_req_5 [get_bd_pins pause_req_s] [get_bd_pins eth_driver_3/pause_req_s]
@@ -5971,28 +5827,22 @@ proc create_hier_cell_hier_mac_3 { parentCell nameHier } {
   connect_bd_net -net reset_error_1 [get_bd_pins reset_error] [get_bd_pins eth_driver_3/reset_error]
   connect_bd_net -net temac_0_gtx_clk90_out [get_bd_pins gtx_clk90] [get_bd_pins temac_3/gtx_clk90]
   connect_bd_net -net temac_0_gtx_clk_out [get_bd_pins gtx_clk] [get_bd_pins temac_3/gtx_clk]
-<<<<<<< HEAD
   connect_bd_net -net temac_3_rx_mac_aclk [get_bd_pins eth_driver_3/rx_axis_mac_aclk] [get_bd_pins temac_3/rx_mac_aclk]
   connect_bd_net -net temac_3_rx_reset [get_bd_pins eth_driver_3/rx_reset] [get_bd_pins temac_3/rx_reset]
   connect_bd_net -net temac_3_rx_statistics_valid [get_bd_pins eth_driver_3/rx_statistics_valid] [get_bd_pins temac_3/rx_statistics_valid]
   connect_bd_net -net temac_3_rx_statistics_vector [get_bd_pins eth_driver_3/rx_statistics_vector] [get_bd_pins temac_3/rx_statistics_vector]
   connect_bd_net -net temac_3_tx_mac_aclk [get_bd_pins tx_axis_mac_aclk] [get_bd_pins eth_driver_3/tx_axis_mac_aclk] [get_bd_pins temac_3/tx_mac_aclk]
-=======
   connect_bd_net -net temac_3_rx_mac_aclk [get_bd_pins eth_driver_3/rx_axis_mac_aclk] [get_bd_pins ethernet_frame_dropp_0/clk] [get_bd_pins fifo_generator_0/s_aclk] [get_bd_pins temac_3/rx_mac_aclk]
   connect_bd_net -net temac_3_rx_reset [get_bd_pins eth_driver_3/rx_reset] [get_bd_pins temac_3/rx_reset] [get_bd_pins util_vector_logic_0/Op1]
   connect_bd_net -net temac_3_rx_statistics_valid [get_bd_pins eth_driver_3/rx_statistics_valid] [get_bd_pins temac_3/rx_statistics_valid]
   connect_bd_net -net temac_3_rx_statistics_vector [get_bd_pins eth_driver_3/rx_statistics_vector] [get_bd_pins temac_3/rx_statistics_vector]
   connect_bd_net -net temac_3_tx_mac_aclk [get_bd_pins tx_axis_mac_aclk] [get_bd_pins eth_driver_3/tx_axis_mac_aclk] [get_bd_pins fifo_generator_0/m_aclk] [get_bd_pins temac_3/tx_mac_aclk]
->>>>>>> dbb0d5b (AIST-TSN Switch V2.0 First commit)
   connect_bd_net -net temac_3_tx_reset [get_bd_pins tx_reset] [get_bd_pins eth_driver_3/tx_reset] [get_bd_pins temac_3/tx_reset]
   connect_bd_net -net temac_3_tx_statistics_valid [get_bd_pins eth_driver_3/tx_statistics_valid] [get_bd_pins temac_3/tx_statistics_valid]
   connect_bd_net -net temac_3_tx_statistics_vector [get_bd_pins eth_driver_3/tx_statistics_vector] [get_bd_pins temac_3/tx_statistics_vector]
   connect_bd_net -net update_speed_1 [get_bd_pins update_speed] [get_bd_pins eth_driver_3/update_speed]
-<<<<<<< HEAD
-=======
   connect_bd_net -net util_vector_logic_0_Res [get_bd_pins ethernet_frame_dropp_0/rstn] [get_bd_pins fifo_generator_0/s_aresetn] [get_bd_pins util_vector_logic_0/Res]
   connect_bd_net -net xlconstant_0_dout [get_bd_pins ethernet_frame_dropp_0/drop_enable] [get_bd_pins xlconstant_0/dout]
->>>>>>> dbb0d5b (AIST-TSN Switch V2.0 First commit)
 
   # Restore current instance
   current_bd_instance $oldCurInst
@@ -6073,8 +5923,6 @@ proc create_hier_cell_hier_mac_2 { parentCell nameHier } {
      return 1
    }
   
-<<<<<<< HEAD
-=======
   # Create instance: ethernet_frame_dropp_0, and set properties
   set ethernet_frame_dropp_0 [ create_bd_cell -type ip -vlnv user.org:user:ethernet_frame_dropper:1.0 ethernet_frame_dropp_0 ]
 
@@ -6108,7 +5956,6 @@ proc create_hier_cell_hier_mac_2 { parentCell nameHier } {
    CONFIG.TUSER_WIDTH {0} \
  ] $fifo_generator_0
 
->>>>>>> dbb0d5b (AIST-TSN Switch V2.0 First commit)
   # Create instance: temac_2, and set properties
   set temac_2 [ create_bd_cell -type ip -vlnv xilinx.com:ip:tri_mode_ethernet_mac:9.0 temac_2 ]
   set_property -dict [ list \
@@ -6116,13 +5963,11 @@ proc create_hier_cell_hier_mac_2 { parentCell nameHier } {
    CONFIG.SupportLevel {0} \
  ] $temac_2
 
-<<<<<<< HEAD
   # Create interface connections
   connect_bd_intf_net -intf_net axis_data_fifo_sw_2_M_AXIS [get_bd_intf_pins s_axis_tx] [get_bd_intf_pins temac_2/s_axis_tx]
   connect_bd_intf_net -intf_net eth_driver_2_s_axi [get_bd_intf_pins eth_driver_2/s_axi] [get_bd_intf_pins temac_2/s_axi]
   connect_bd_intf_net -intf_net eth_driver_2_tx_axis_mac [get_bd_intf_pins tx_axis_mac] [get_bd_intf_pins eth_driver_2/tx_axis_mac]
   connect_bd_intf_net -intf_net temac_2_m_axis_rx [get_bd_intf_pins eth_driver_2/rx_axis_mac] [get_bd_intf_pins temac_2/m_axis_rx]
-=======
   # Create instance: util_vector_logic_0, and set properties
   set util_vector_logic_0 [ create_bd_cell -type ip -vlnv xilinx.com:ip:util_vector_logic:2.0 util_vector_logic_0 ]
   set_property -dict [ list \
@@ -6140,7 +5985,6 @@ proc create_hier_cell_hier_mac_2 { parentCell nameHier } {
   connect_bd_intf_net -intf_net eth_driver_2_tx_axis_mac [get_bd_intf_pins tx_axis_mac] [get_bd_intf_pins fifo_generator_0/M_AXIS]
   connect_bd_intf_net -intf_net ethernet_frame_dropp_0_m_axis [get_bd_intf_pins ethernet_frame_dropp_0/m_axis] [get_bd_intf_pins fifo_generator_0/S_AXIS]
   connect_bd_intf_net -intf_net temac_2_m_axis_rx [get_bd_intf_pins ethernet_frame_dropp_0/s_axis] [get_bd_intf_pins temac_2/m_axis_rx]
->>>>>>> dbb0d5b (AIST-TSN Switch V2.0 First commit)
   connect_bd_intf_net -intf_net temac_2_mdio_external [get_bd_intf_pins mdio_io_port_2] [get_bd_intf_pins temac_2/mdio_external]
   connect_bd_intf_net -intf_net temac_2_rgmii [get_bd_intf_pins rgmii_port_2] [get_bd_intf_pins temac_2/rgmii]
 
@@ -6160,10 +6004,7 @@ proc create_hier_cell_hier_mac_2 { parentCell nameHier } {
   connect_bd_net -net eth_driver_2_s_axi_resetn [get_bd_pins eth_driver_2/s_axi_resetn] [get_bd_pins temac_2/s_axi_resetn]
   connect_bd_net -net eth_driver_2_tx_axi_rstn [get_bd_pins eth_driver_2/tx_axi_rstn] [get_bd_pins temac_2/tx_axi_rstn]
   connect_bd_net -net eth_driver_2_tx_ifg_delay [get_bd_pins eth_driver_2/tx_ifg_delay] [get_bd_pins temac_2/tx_ifg_delay]
-<<<<<<< HEAD
-=======
   connect_bd_net -net fifo_generator_0_axis_prog_full [get_bd_pins ethernet_frame_dropp_0/fifo_is_almost_full] [get_bd_pins fifo_generator_0/axis_prog_full]
->>>>>>> dbb0d5b (AIST-TSN Switch V2.0 First commit)
   connect_bd_net -net gen_tx_data_1 [get_bd_pins gen_tx_data] [get_bd_pins eth_driver_2/gen_tx_data]
   connect_bd_net -net glbl_rst_1 [get_bd_pins glbl_rst] [get_bd_pins eth_driver_2/glbl_rst]
   connect_bd_net -net hier_flow_control_pause_req_4 [get_bd_pins pause_req_s] [get_bd_pins eth_driver_2/pause_req_s]
@@ -6171,28 +6012,22 @@ proc create_hier_cell_hier_mac_2 { parentCell nameHier } {
   connect_bd_net -net reset_error_1 [get_bd_pins reset_error] [get_bd_pins eth_driver_2/reset_error]
   connect_bd_net -net temac_0_gtx_clk90_out [get_bd_pins gtx_clk90] [get_bd_pins temac_2/gtx_clk90]
   connect_bd_net -net temac_0_gtx_clk_out [get_bd_pins gtx_clk] [get_bd_pins temac_2/gtx_clk]
-<<<<<<< HEAD
   connect_bd_net -net temac_2_rx_mac_aclk [get_bd_pins eth_driver_2/rx_axis_mac_aclk] [get_bd_pins temac_2/rx_mac_aclk]
   connect_bd_net -net temac_2_rx_reset [get_bd_pins eth_driver_2/rx_reset] [get_bd_pins temac_2/rx_reset]
   connect_bd_net -net temac_2_rx_statistics_valid [get_bd_pins eth_driver_2/rx_statistics_valid] [get_bd_pins temac_2/rx_statistics_valid]
   connect_bd_net -net temac_2_rx_statistics_vector [get_bd_pins eth_driver_2/rx_statistics_vector] [get_bd_pins temac_2/rx_statistics_vector]
   connect_bd_net -net temac_2_tx_mac_aclk [get_bd_pins tx_mac_aclk] [get_bd_pins eth_driver_2/tx_axis_mac_aclk] [get_bd_pins temac_2/tx_mac_aclk]
-=======
   connect_bd_net -net temac_2_rx_mac_aclk [get_bd_pins eth_driver_2/rx_axis_mac_aclk] [get_bd_pins ethernet_frame_dropp_0/clk] [get_bd_pins fifo_generator_0/s_aclk] [get_bd_pins temac_2/rx_mac_aclk]
   connect_bd_net -net temac_2_rx_reset [get_bd_pins eth_driver_2/rx_reset] [get_bd_pins temac_2/rx_reset] [get_bd_pins util_vector_logic_0/Op1]
   connect_bd_net -net temac_2_rx_statistics_valid [get_bd_pins eth_driver_2/rx_statistics_valid] [get_bd_pins temac_2/rx_statistics_valid]
   connect_bd_net -net temac_2_rx_statistics_vector [get_bd_pins eth_driver_2/rx_statistics_vector] [get_bd_pins temac_2/rx_statistics_vector]
   connect_bd_net -net temac_2_tx_mac_aclk [get_bd_pins tx_mac_aclk] [get_bd_pins eth_driver_2/tx_axis_mac_aclk] [get_bd_pins fifo_generator_0/m_aclk] [get_bd_pins temac_2/tx_mac_aclk]
->>>>>>> dbb0d5b (AIST-TSN Switch V2.0 First commit)
   connect_bd_net -net temac_2_tx_reset [get_bd_pins tx_reset] [get_bd_pins eth_driver_2/tx_reset] [get_bd_pins temac_2/tx_reset]
   connect_bd_net -net temac_2_tx_statistics_valid [get_bd_pins eth_driver_2/tx_statistics_valid] [get_bd_pins temac_2/tx_statistics_valid]
   connect_bd_net -net temac_2_tx_statistics_vector [get_bd_pins eth_driver_2/tx_statistics_vector] [get_bd_pins temac_2/tx_statistics_vector]
   connect_bd_net -net update_speed_1 [get_bd_pins update_speed] [get_bd_pins eth_driver_2/update_speed]
-<<<<<<< HEAD
-=======
   connect_bd_net -net util_vector_logic_0_Res [get_bd_pins ethernet_frame_dropp_0/rstn] [get_bd_pins fifo_generator_0/s_aresetn] [get_bd_pins util_vector_logic_0/Res]
   connect_bd_net -net xlconstant_0_dout [get_bd_pins ethernet_frame_dropp_0/drop_enable] [get_bd_pins xlconstant_0/dout]
->>>>>>> dbb0d5b (AIST-TSN Switch V2.0 First commit)
 
   # Restore current instance
   current_bd_instance $oldCurInst
@@ -6273,8 +6108,6 @@ proc create_hier_cell_hier_mac_1 { parentCell nameHier } {
      return 1
    }
   
-<<<<<<< HEAD
-=======
   # Create instance: ethernet_frame_dropp_0, and set properties
   set ethernet_frame_dropp_0 [ create_bd_cell -type ip -vlnv user.org:user:ethernet_frame_dropper:1.0 ethernet_frame_dropp_0 ]
 
@@ -6308,7 +6141,6 @@ proc create_hier_cell_hier_mac_1 { parentCell nameHier } {
    CONFIG.TUSER_WIDTH {0} \
  ] $fifo_generator_0
 
->>>>>>> dbb0d5b (AIST-TSN Switch V2.0 First commit)
   # Create instance: temac_1, and set properties
   set temac_1 [ create_bd_cell -type ip -vlnv xilinx.com:ip:tri_mode_ethernet_mac:9.0 temac_1 ]
   set_property -dict [ list \
@@ -6316,13 +6148,11 @@ proc create_hier_cell_hier_mac_1 { parentCell nameHier } {
    CONFIG.SupportLevel {0} \
  ] $temac_1
 
-<<<<<<< HEAD
   # Create interface connections
   connect_bd_intf_net -intf_net axis_data_fifo_sw_1_M_AXIS [get_bd_intf_pins s_axis_tx] [get_bd_intf_pins temac_1/s_axis_tx]
   connect_bd_intf_net -intf_net eth_driver_1_s_axi [get_bd_intf_pins eth_driver_1/s_axi] [get_bd_intf_pins temac_1/s_axi]
   connect_bd_intf_net -intf_net eth_driver_1_tx_axis_mac [get_bd_intf_pins tx_axis_mac] [get_bd_intf_pins eth_driver_1/tx_axis_mac]
   connect_bd_intf_net -intf_net temac_1_m_axis_rx [get_bd_intf_pins eth_driver_1/rx_axis_mac] [get_bd_intf_pins temac_1/m_axis_rx]
-=======
   # Create instance: util_vector_logic_0, and set properties
   set util_vector_logic_0 [ create_bd_cell -type ip -vlnv xilinx.com:ip:util_vector_logic:2.0 util_vector_logic_0 ]
   set_property -dict [ list \
@@ -6340,7 +6170,6 @@ proc create_hier_cell_hier_mac_1 { parentCell nameHier } {
   connect_bd_intf_net -intf_net eth_driver_1_tx_axis_mac [get_bd_intf_pins tx_axis_mac] [get_bd_intf_pins fifo_generator_0/M_AXIS]
   connect_bd_intf_net -intf_net ethernet_frame_dropp_0_m_axis [get_bd_intf_pins ethernet_frame_dropp_0/m_axis] [get_bd_intf_pins fifo_generator_0/S_AXIS]
   connect_bd_intf_net -intf_net temac_1_m_axis_rx [get_bd_intf_pins ethernet_frame_dropp_0/s_axis] [get_bd_intf_pins temac_1/m_axis_rx]
->>>>>>> dbb0d5b (AIST-TSN Switch V2.0 First commit)
   connect_bd_intf_net -intf_net temac_1_mdio_external [get_bd_intf_pins mdio_io_port_1] [get_bd_intf_pins temac_1/mdio_external]
   connect_bd_intf_net -intf_net temac_1_rgmii [get_bd_intf_pins rgmii_port_1] [get_bd_intf_pins temac_1/rgmii]
 
@@ -6360,10 +6189,7 @@ proc create_hier_cell_hier_mac_1 { parentCell nameHier } {
   connect_bd_net -net eth_driver_1_s_axi_resetn [get_bd_pins eth_driver_1/s_axi_resetn] [get_bd_pins temac_1/s_axi_resetn]
   connect_bd_net -net eth_driver_1_tx_axi_rstn [get_bd_pins eth_driver_1/tx_axi_rstn] [get_bd_pins temac_1/tx_axi_rstn]
   connect_bd_net -net eth_driver_1_tx_ifg_delay [get_bd_pins eth_driver_1/tx_ifg_delay] [get_bd_pins temac_1/tx_ifg_delay]
-<<<<<<< HEAD
-=======
   connect_bd_net -net fifo_generator_0_axis_prog_full [get_bd_pins ethernet_frame_dropp_0/fifo_is_almost_full] [get_bd_pins fifo_generator_0/axis_prog_full]
->>>>>>> dbb0d5b (AIST-TSN Switch V2.0 First commit)
   connect_bd_net -net gen_tx_data_1 [get_bd_pins gen_tx_data] [get_bd_pins eth_driver_1/gen_tx_data]
   connect_bd_net -net glbl_rst_1 [get_bd_pins glbl_rst] [get_bd_pins eth_driver_1/glbl_rst]
   connect_bd_net -net hier_flow_control_pause_req_3 [get_bd_pins pause_req_s] [get_bd_pins eth_driver_1/pause_req_s]
@@ -6371,28 +6197,22 @@ proc create_hier_cell_hier_mac_1 { parentCell nameHier } {
   connect_bd_net -net reset_error_1 [get_bd_pins reset_error] [get_bd_pins eth_driver_1/reset_error]
   connect_bd_net -net temac_0_gtx_clk90_out [get_bd_pins gtx_clk90] [get_bd_pins temac_1/gtx_clk90]
   connect_bd_net -net temac_0_gtx_clk_out [get_bd_pins gtx_clk] [get_bd_pins temac_1/gtx_clk]
-<<<<<<< HEAD
   connect_bd_net -net temac_1_rx_mac_aclk [get_bd_pins eth_driver_1/rx_axis_mac_aclk] [get_bd_pins temac_1/rx_mac_aclk]
   connect_bd_net -net temac_1_rx_reset [get_bd_pins eth_driver_1/rx_reset] [get_bd_pins temac_1/rx_reset]
   connect_bd_net -net temac_1_rx_statistics_valid [get_bd_pins eth_driver_1/rx_statistics_valid] [get_bd_pins temac_1/rx_statistics_valid]
   connect_bd_net -net temac_1_rx_statistics_vector [get_bd_pins eth_driver_1/rx_statistics_vector] [get_bd_pins temac_1/rx_statistics_vector]
   connect_bd_net -net temac_1_tx_mac_aclk [get_bd_pins tx_mac_aclk] [get_bd_pins eth_driver_1/tx_axis_mac_aclk] [get_bd_pins temac_1/tx_mac_aclk]
-=======
   connect_bd_net -net temac_1_rx_mac_aclk [get_bd_pins eth_driver_1/rx_axis_mac_aclk] [get_bd_pins ethernet_frame_dropp_0/clk] [get_bd_pins fifo_generator_0/s_aclk] [get_bd_pins temac_1/rx_mac_aclk]
   connect_bd_net -net temac_1_rx_reset [get_bd_pins eth_driver_1/rx_reset] [get_bd_pins temac_1/rx_reset] [get_bd_pins util_vector_logic_0/Op1]
   connect_bd_net -net temac_1_rx_statistics_valid [get_bd_pins eth_driver_1/rx_statistics_valid] [get_bd_pins temac_1/rx_statistics_valid]
   connect_bd_net -net temac_1_rx_statistics_vector [get_bd_pins eth_driver_1/rx_statistics_vector] [get_bd_pins temac_1/rx_statistics_vector]
   connect_bd_net -net temac_1_tx_mac_aclk [get_bd_pins tx_mac_aclk] [get_bd_pins eth_driver_1/tx_axis_mac_aclk] [get_bd_pins fifo_generator_0/m_aclk] [get_bd_pins temac_1/tx_mac_aclk]
->>>>>>> dbb0d5b (AIST-TSN Switch V2.0 First commit)
   connect_bd_net -net temac_1_tx_reset [get_bd_pins tx_reset] [get_bd_pins eth_driver_1/tx_reset] [get_bd_pins temac_1/tx_reset]
   connect_bd_net -net temac_1_tx_statistics_valid [get_bd_pins eth_driver_1/tx_statistics_valid] [get_bd_pins temac_1/tx_statistics_valid]
   connect_bd_net -net temac_1_tx_statistics_vector [get_bd_pins eth_driver_1/tx_statistics_vector] [get_bd_pins temac_1/tx_statistics_vector]
   connect_bd_net -net update_speed_1 [get_bd_pins update_speed] [get_bd_pins eth_driver_1/update_speed]
-<<<<<<< HEAD
-=======
   connect_bd_net -net util_vector_logic_0_Res [get_bd_pins ethernet_frame_dropp_0/rstn] [get_bd_pins fifo_generator_0/s_aresetn] [get_bd_pins util_vector_logic_0/Res]
   connect_bd_net -net xlconstant_0_dout [get_bd_pins ethernet_frame_dropp_0/drop_enable] [get_bd_pins xlconstant_0/dout]
->>>>>>> dbb0d5b (AIST-TSN Switch V2.0 First commit)
 
   # Restore current instance
   current_bd_instance $oldCurInst
@@ -6476,8 +6296,6 @@ proc create_hier_cell_hier_mac_0 { parentCell nameHier } {
      return 1
    }
   
-<<<<<<< HEAD
-=======
   # Create instance: ethernet_frame_dropp_0, and set properties
   set ethernet_frame_dropp_0 [ create_bd_cell -type ip -vlnv user.org:user:ethernet_frame_dropper:1.0 ethernet_frame_dropp_0 ]
 
@@ -6511,7 +6329,6 @@ proc create_hier_cell_hier_mac_0 { parentCell nameHier } {
    CONFIG.TUSER_WIDTH {0} \
  ] $fifo_generator_0
 
->>>>>>> dbb0d5b (AIST-TSN Switch V2.0 First commit)
   # Create instance: temac_0, and set properties
   set temac_0 [ create_bd_cell -type ip -vlnv xilinx.com:ip:tri_mode_ethernet_mac:9.0 temac_0 ]
   set_property -dict [ list \
@@ -6519,13 +6336,11 @@ proc create_hier_cell_hier_mac_0 { parentCell nameHier } {
    CONFIG.SupportLevel {1} \
  ] $temac_0
 
-<<<<<<< HEAD
   # Create interface connections
   connect_bd_intf_net -intf_net axis_data_fifo_sw_0_M_AXIS [get_bd_intf_pins s_axis_tx] [get_bd_intf_pins temac_0/s_axis_tx]
   connect_bd_intf_net -intf_net eth_driver_0_s_axi [get_bd_intf_pins eth_driver_0/s_axi] [get_bd_intf_pins temac_0/s_axi]
   connect_bd_intf_net -intf_net eth_driver_0_tx_axis_mac [get_bd_intf_pins tx_axis_mac] [get_bd_intf_pins eth_driver_0/tx_axis_mac]
   connect_bd_intf_net -intf_net temac_0_m_axis_rx [get_bd_intf_pins eth_driver_0/rx_axis_mac] [get_bd_intf_pins temac_0/m_axis_rx]
-=======
   # Create instance: util_vector_logic_0, and set properties
   set util_vector_logic_0 [ create_bd_cell -type ip -vlnv xilinx.com:ip:util_vector_logic:2.0 util_vector_logic_0 ]
   set_property -dict [ list \
@@ -6543,7 +6358,6 @@ proc create_hier_cell_hier_mac_0 { parentCell nameHier } {
   connect_bd_intf_net -intf_net ethernet_frame_dropp_0_m_axis [get_bd_intf_pins ethernet_frame_dropp_0/m_axis] [get_bd_intf_pins fifo_generator_0/S_AXIS]
   connect_bd_intf_net -intf_net fifo_generator_0_M_AXIS [get_bd_intf_pins tx_axis_mac] [get_bd_intf_pins fifo_generator_0/M_AXIS]
   connect_bd_intf_net -intf_net temac_0_m_axis_rx [get_bd_intf_pins ethernet_frame_dropp_0/s_axis] [get_bd_intf_pins temac_0/m_axis_rx]
->>>>>>> dbb0d5b (AIST-TSN Switch V2.0 First commit)
   connect_bd_intf_net -intf_net temac_0_mdio_external [get_bd_intf_pins mdio_io_port_0] [get_bd_intf_pins temac_0/mdio_external]
   connect_bd_intf_net -intf_net temac_0_rgmii [get_bd_intf_pins rgmii_port_0] [get_bd_intf_pins temac_0/rgmii]
 
@@ -6564,10 +6378,7 @@ proc create_hier_cell_hier_mac_0 { parentCell nameHier } {
   connect_bd_net -net eth_driver_0_s_axi_resetn [get_bd_pins eth_driver_0/s_axi_resetn] [get_bd_pins temac_0/s_axi_resetn]
   connect_bd_net -net eth_driver_0_tx_axi_rstn [get_bd_pins eth_driver_0/tx_axi_rstn] [get_bd_pins temac_0/tx_axi_rstn]
   connect_bd_net -net eth_driver_0_tx_ifg_delay [get_bd_pins eth_driver_0/tx_ifg_delay] [get_bd_pins temac_0/tx_ifg_delay]
-<<<<<<< HEAD
-=======
   connect_bd_net -net fifo_generator_0_axis_prog_full [get_bd_pins ethernet_frame_dropp_0/fifo_is_almost_full] [get_bd_pins fifo_generator_0/axis_prog_full]
->>>>>>> dbb0d5b (AIST-TSN Switch V2.0 First commit)
   connect_bd_net -net gen_tx_data_1 [get_bd_pins gen_tx_data] [get_bd_pins eth_driver_0/gen_tx_data]
   connect_bd_net -net glbl_rst_1 [get_bd_pins glbl_rst] [get_bd_pins eth_driver_0/glbl_rst]
   connect_bd_net -net hier_flow_control_pause_req_2 [get_bd_pins pause_req_s] [get_bd_pins eth_driver_0/pause_req_s]
@@ -6575,28 +6386,22 @@ proc create_hier_cell_hier_mac_0 { parentCell nameHier } {
   connect_bd_net -net reset_error_1 [get_bd_pins reset_error] [get_bd_pins eth_driver_0/reset_error]
   connect_bd_net -net temac_0_gtx_clk90_out [get_bd_pins gtx_clk90_out] [get_bd_pins temac_0/gtx_clk90_out]
   connect_bd_net -net temac_0_gtx_clk_out [get_bd_pins gtx_clk_out] [get_bd_pins temac_0/gtx_clk_out]
-<<<<<<< HEAD
   connect_bd_net -net temac_0_rx_mac_aclk [get_bd_pins rx_mac_aclk] [get_bd_pins eth_driver_0/rx_axis_mac_aclk] [get_bd_pins temac_0/rx_mac_aclk]
   connect_bd_net -net temac_0_rx_reset [get_bd_pins rx_reset] [get_bd_pins eth_driver_0/rx_reset] [get_bd_pins temac_0/rx_reset]
   connect_bd_net -net temac_0_rx_statistics_valid [get_bd_pins eth_driver_0/rx_statistics_valid] [get_bd_pins temac_0/rx_statistics_valid]
   connect_bd_net -net temac_0_rx_statistics_vector [get_bd_pins eth_driver_0/rx_statistics_vector] [get_bd_pins temac_0/rx_statistics_vector]
   connect_bd_net -net temac_0_tx_mac_aclk [get_bd_pins tx_mac_aclk] [get_bd_pins eth_driver_0/tx_axis_mac_aclk] [get_bd_pins temac_0/tx_mac_aclk]
-=======
   connect_bd_net -net temac_0_rx_mac_aclk [get_bd_pins rx_mac_aclk] [get_bd_pins eth_driver_0/rx_axis_mac_aclk] [get_bd_pins ethernet_frame_dropp_0/clk] [get_bd_pins fifo_generator_0/s_aclk] [get_bd_pins temac_0/rx_mac_aclk]
   connect_bd_net -net temac_0_rx_reset [get_bd_pins rx_reset] [get_bd_pins eth_driver_0/rx_reset] [get_bd_pins temac_0/rx_reset] [get_bd_pins util_vector_logic_0/Op1]
   connect_bd_net -net temac_0_rx_statistics_valid [get_bd_pins eth_driver_0/rx_statistics_valid] [get_bd_pins temac_0/rx_statistics_valid]
   connect_bd_net -net temac_0_rx_statistics_vector [get_bd_pins eth_driver_0/rx_statistics_vector] [get_bd_pins temac_0/rx_statistics_vector]
   connect_bd_net -net temac_0_tx_mac_aclk [get_bd_pins tx_mac_aclk] [get_bd_pins eth_driver_0/tx_axis_mac_aclk] [get_bd_pins fifo_generator_0/m_aclk] [get_bd_pins temac_0/tx_mac_aclk]
->>>>>>> dbb0d5b (AIST-TSN Switch V2.0 First commit)
   connect_bd_net -net temac_0_tx_reset [get_bd_pins tx_reset] [get_bd_pins eth_driver_0/tx_reset] [get_bd_pins temac_0/tx_reset]
   connect_bd_net -net temac_0_tx_statistics_valid [get_bd_pins eth_driver_0/tx_statistics_valid] [get_bd_pins temac_0/tx_statistics_valid]
   connect_bd_net -net temac_0_tx_statistics_vector [get_bd_pins eth_driver_0/tx_statistics_vector] [get_bd_pins temac_0/tx_statistics_vector]
   connect_bd_net -net update_speed_1 [get_bd_pins update_speed] [get_bd_pins eth_driver_0/update_speed]
-<<<<<<< HEAD
-=======
   connect_bd_net -net util_vector_logic_0_Res [get_bd_pins ethernet_frame_dropp_0/rstn] [get_bd_pins fifo_generator_0/s_aresetn] [get_bd_pins util_vector_logic_0/Res]
   connect_bd_net -net xlconstant_0_dout [get_bd_pins ethernet_frame_dropp_0/drop_enable] [get_bd_pins xlconstant_0/dout]
->>>>>>> dbb0d5b (AIST-TSN Switch V2.0 First commit)
 
   # Restore current instance
   current_bd_instance $oldCurInst
@@ -6879,12 +6684,9 @@ proc create_hier_cell_hier_fdb { parentCell nameHier } {
   create_bd_pin -dir I -type clk aclk
   create_bd_pin -dir I -type rst aresetn
 
-<<<<<<< HEAD
-=======
   # Create instance: axis_register_slice_in, and set properties
   set axis_register_slice_in [ create_bd_cell -type ip -vlnv xilinx.com:ip:axis_register_slice:1.1 axis_register_slice_in ]
 
->>>>>>> dbb0d5b (AIST-TSN Switch V2.0 First commit)
   # Create instance: axis_switch_0, and set properties
   set axis_switch_0 [ create_bd_cell -type ip -vlnv xilinx.com:ip:axis_switch:1.1 axis_switch_0 ]
   set_property -dict [ list \
@@ -6892,7 +6694,6 @@ proc create_hier_cell_hier_fdb { parentCell nameHier } {
    CONFIG.NUM_SI {4} \
  ] $axis_switch_0
 
-<<<<<<< HEAD
   # Create instance: channel_in_mod_0, and set properties
   set block_name channel_in_mod
   set block_cell_name channel_in_mod_0
@@ -6959,7 +6760,6 @@ proc create_hier_cell_hier_fdb { parentCell nameHier } {
      catch {common::send_gid_msg -ssname BD::TCL -id 2095 -severity "ERROR" "Unable to add referenced block <$block_name>. Please add the files for ${block_name}'s definition into the project."}
      return 1
    } elseif { $mactable_0 eq "" } {
-=======
   # Create instance: channel_in_opt_0, and set properties
   set channel_in_opt_0 [ create_bd_cell -type ip -vlnv user.org:user:channel_in_opt:1.0 channel_in_opt_0 ]
 
@@ -6988,18 +6788,14 @@ proc create_hier_cell_hier_fdb { parentCell nameHier } {
      catch {common::send_gid_msg -ssname BD::TCL -id 2095 -severity "ERROR" "Unable to add referenced block <$block_name>. Please add the files for ${block_name}'s definition into the project."}
      return 1
    } elseif { $mactable_mod_0 eq "" } {
->>>>>>> dbb0d5b (AIST-TSN Switch V2.0 First commit)
      catch {common::send_gid_msg -ssname BD::TCL -id 2096 -severity "ERROR" "Unable to referenced block <$block_name>. Please add the files for ${block_name}'s definition into the project."}
      return 1
    }
     set_property -dict [ list \
    CONFIG.MODE {dynamic} \
    CONFIG.PORT_WIDTH {2} \
-<<<<<<< HEAD
  ] $mactable_0
-=======
  ] $mactable_mod_0
->>>>>>> dbb0d5b (AIST-TSN Switch V2.0 First commit)
 
   # Create instance: xlconstant_val_0, and set properties
   set xlconstant_val_0 [ create_bd_cell -type ip -vlnv xilinx.com:ip:xlconstant:1.1 xlconstant_val_0 ]
@@ -7009,7 +6805,6 @@ proc create_hier_cell_hier_fdb { parentCell nameHier } {
  ] $xlconstant_val_0
 
   # Create interface connections
-<<<<<<< HEAD
   connect_bd_intf_net -intf_net axis_data_fifo_swin_0_M_AXIS1 [get_bd_intf_pins s_axis0] [get_bd_intf_pins channel_in_mod_0/s_axis]
   connect_bd_intf_net -intf_net axis_data_fifo_swin_1_M_AXIS [get_bd_intf_pins s_axis1] [get_bd_intf_pins channel_in_mod_1/s_axis]
   connect_bd_intf_net -intf_net axis_data_fifo_swin_2_M_AXIS [get_bd_intf_pins s_axis2] [get_bd_intf_pins channel_in_mod_2/s_axis]
@@ -7031,7 +6826,6 @@ proc create_hier_cell_hier_fdb { parentCell nameHier } {
   connect_bd_net -net proc_sys_reset_sw_peripheral_aresetn [get_bd_pins aresetn] [get_bd_pins axis_switch_0/aresetn] [get_bd_pins channel_in_mod_0/aresetn] [get_bd_pins channel_in_mod_1/aresetn] [get_bd_pins channel_in_mod_2/aresetn] [get_bd_pins channel_in_mod_3/aresetn] [get_bd_pins mactable_0/aresetn]
   connect_bd_net -net temac_0_tx_mac_aclk [get_bd_pins aclk] [get_bd_pins axis_switch_0/aclk] [get_bd_pins channel_in_mod_0/aclk] [get_bd_pins channel_in_mod_1/aclk] [get_bd_pins channel_in_mod_2/aclk] [get_bd_pins channel_in_mod_3/aclk] [get_bd_pins mactable_0/aclk]
   connect_bd_net -net xlconstant_0_dout [get_bd_pins axis_switch_0/s_req_suppress] [get_bd_pins mactable_0/s_axis_table_config_tvalid] [get_bd_pins xlconstant_val_0/dout]
-=======
   connect_bd_intf_net -intf_net axis_register_slice_in_M_AXIS [get_bd_intf_pins axis_register_slice_in/M_AXIS] [get_bd_intf_pins mactable_mod_0/s_axis_table_request]
   connect_bd_intf_net -intf_net axis_switch_0_M00_AXIS [get_bd_intf_pins axis_register_slice_in/S_AXIS] [get_bd_intf_pins axis_switch_0/M00_AXIS]
   connect_bd_intf_net -intf_net channel_in_opt_0_m_axis [get_bd_intf_pins M00_AXIS] [get_bd_intf_pins channel_in_opt_0/m_axis]
@@ -7054,7 +6848,6 @@ proc create_hier_cell_hier_fdb { parentCell nameHier } {
   connect_bd_net -net proc_sys_reset_sw_peripheral_aresetn [get_bd_pins aresetn] [get_bd_pins axis_register_slice_in/aresetn] [get_bd_pins axis_switch_0/aresetn] [get_bd_pins channel_in_opt_0/aresetn] [get_bd_pins channel_in_opt_1/aresetn] [get_bd_pins channel_in_opt_2/aresetn] [get_bd_pins channel_in_opt_3/aresetn] [get_bd_pins mactable_mod_0/aresetn]
   connect_bd_net -net temac_0_tx_mac_aclk [get_bd_pins aclk] [get_bd_pins axis_register_slice_in/aclk] [get_bd_pins axis_switch_0/aclk] [get_bd_pins channel_in_opt_0/aclk] [get_bd_pins channel_in_opt_1/aclk] [get_bd_pins channel_in_opt_2/aclk] [get_bd_pins channel_in_opt_3/aclk] [get_bd_pins mactable_mod_0/aclk]
   connect_bd_net -net xlconstant_0_dout [get_bd_pins axis_switch_0/s_req_suppress] [get_bd_pins mactable_mod_0/s_axis_table_config_tvalid] [get_bd_pins xlconstant_val_0/dout]
->>>>>>> dbb0d5b (AIST-TSN Switch V2.0 First commit)
 
   # Restore current instance
   current_bd_instance $oldCurInst
@@ -7126,7 +6919,6 @@ proc create_hier_cell_hier_eth_switch_7 { parentCell nameHier } {
    CONFIG.HAS_ACLKEN {0} \
    CONFIG.M00_AXIS_BASETDEST {0x00000000} \
    CONFIG.M00_AXIS_HIGHTDEST {0x00000000} \
-<<<<<<< HEAD
    CONFIG.M01_AXIS_BASETDEST {0x00000001} \
    CONFIG.M01_AXIS_HIGHTDEST {0x00000001} \
    CONFIG.M02_AXIS_BASETDEST {0x00000002} \
@@ -7136,7 +6928,6 @@ proc create_hier_cell_hier_eth_switch_7 { parentCell nameHier } {
    CONFIG.NUM_MI {4} \
    CONFIG.NUM_SI {4} \
    CONFIG.ROUTING_MODE {0} \
-=======
    CONFIG.M00_HAS_REGSLICE {1} \
    CONFIG.M01_AXIS_BASETDEST {0x00000001} \
    CONFIG.M01_AXIS_HIGHTDEST {0x00000001} \
@@ -7154,7 +6945,6 @@ proc create_hier_cell_hier_eth_switch_7 { parentCell nameHier } {
    CONFIG.S01_HAS_REGSLICE {1} \
    CONFIG.S02_HAS_REGSLICE {1} \
    CONFIG.S03_HAS_REGSLICE {1} \
->>>>>>> dbb0d5b (AIST-TSN Switch V2.0 First commit)
  ] $axis_interconnect_0
 
   # Create interface connections
@@ -7241,7 +7031,6 @@ proc create_hier_cell_hier_eth_switch_6 { parentCell nameHier } {
    CONFIG.HAS_ACLKEN {0} \
    CONFIG.M00_AXIS_BASETDEST {0x00000000} \
    CONFIG.M00_AXIS_HIGHTDEST {0x00000000} \
-<<<<<<< HEAD
    CONFIG.M01_AXIS_BASETDEST {0x00000001} \
    CONFIG.M01_AXIS_HIGHTDEST {0x00000001} \
    CONFIG.M02_AXIS_BASETDEST {0x00000002} \
@@ -7251,7 +7040,6 @@ proc create_hier_cell_hier_eth_switch_6 { parentCell nameHier } {
    CONFIG.NUM_MI {4} \
    CONFIG.NUM_SI {4} \
    CONFIG.ROUTING_MODE {0} \
-=======
    CONFIG.M00_HAS_REGSLICE {1} \
    CONFIG.M01_AXIS_BASETDEST {0x00000001} \
    CONFIG.M01_AXIS_HIGHTDEST {0x00000001} \
@@ -7269,7 +7057,6 @@ proc create_hier_cell_hier_eth_switch_6 { parentCell nameHier } {
    CONFIG.S01_HAS_REGSLICE {1} \
    CONFIG.S02_HAS_REGSLICE {1} \
    CONFIG.S03_HAS_REGSLICE {1} \
->>>>>>> dbb0d5b (AIST-TSN Switch V2.0 First commit)
  ] $axis_interconnect_0
 
   # Create interface connections
@@ -7356,7 +7143,6 @@ proc create_hier_cell_hier_eth_switch_5 { parentCell nameHier } {
    CONFIG.HAS_ACLKEN {0} \
    CONFIG.M00_AXIS_BASETDEST {0x00000000} \
    CONFIG.M00_AXIS_HIGHTDEST {0x00000000} \
-<<<<<<< HEAD
    CONFIG.M01_AXIS_BASETDEST {0x00000001} \
    CONFIG.M01_AXIS_HIGHTDEST {0x00000001} \
    CONFIG.M02_AXIS_BASETDEST {0x00000002} \
@@ -7366,7 +7152,6 @@ proc create_hier_cell_hier_eth_switch_5 { parentCell nameHier } {
    CONFIG.NUM_MI {4} \
    CONFIG.NUM_SI {4} \
    CONFIG.ROUTING_MODE {0} \
-=======
    CONFIG.M00_HAS_REGSLICE {1} \
    CONFIG.M01_AXIS_BASETDEST {0x00000001} \
    CONFIG.M01_AXIS_HIGHTDEST {0x00000001} \
@@ -7384,7 +7169,6 @@ proc create_hier_cell_hier_eth_switch_5 { parentCell nameHier } {
    CONFIG.S01_HAS_REGSLICE {1} \
    CONFIG.S02_HAS_REGSLICE {1} \
    CONFIG.S03_HAS_REGSLICE {1} \
->>>>>>> dbb0d5b (AIST-TSN Switch V2.0 First commit)
  ] $axis_interconnect_0
 
   # Create interface connections
@@ -7471,7 +7255,6 @@ proc create_hier_cell_hier_eth_switch_4 { parentCell nameHier } {
    CONFIG.HAS_ACLKEN {0} \
    CONFIG.M00_AXIS_BASETDEST {0x00000000} \
    CONFIG.M00_AXIS_HIGHTDEST {0x00000000} \
-<<<<<<< HEAD
    CONFIG.M01_AXIS_BASETDEST {0x00000001} \
    CONFIG.M01_AXIS_HIGHTDEST {0x00000001} \
    CONFIG.M02_AXIS_BASETDEST {0x00000002} \
@@ -7481,7 +7264,6 @@ proc create_hier_cell_hier_eth_switch_4 { parentCell nameHier } {
    CONFIG.NUM_MI {4} \
    CONFIG.NUM_SI {4} \
    CONFIG.ROUTING_MODE {0} \
-=======
    CONFIG.M00_HAS_REGSLICE {1} \
    CONFIG.M01_AXIS_BASETDEST {0x00000001} \
    CONFIG.M01_AXIS_HIGHTDEST {0x00000001} \
@@ -7499,7 +7281,6 @@ proc create_hier_cell_hier_eth_switch_4 { parentCell nameHier } {
    CONFIG.S01_HAS_REGSLICE {1} \
    CONFIG.S02_HAS_REGSLICE {1} \
    CONFIG.S03_HAS_REGSLICE {1} \
->>>>>>> dbb0d5b (AIST-TSN Switch V2.0 First commit)
  ] $axis_interconnect_0
 
   # Create interface connections
@@ -7586,7 +7367,6 @@ proc create_hier_cell_hier_eth_switch_3 { parentCell nameHier } {
    CONFIG.HAS_ACLKEN {0} \
    CONFIG.M00_AXIS_BASETDEST {0x00000000} \
    CONFIG.M00_AXIS_HIGHTDEST {0x00000000} \
-<<<<<<< HEAD
    CONFIG.M01_AXIS_BASETDEST {0x00000001} \
    CONFIG.M01_AXIS_HIGHTDEST {0x00000001} \
    CONFIG.M02_AXIS_BASETDEST {0x00000002} \
@@ -7596,7 +7376,6 @@ proc create_hier_cell_hier_eth_switch_3 { parentCell nameHier } {
    CONFIG.NUM_MI {4} \
    CONFIG.NUM_SI {4} \
    CONFIG.ROUTING_MODE {0} \
-=======
    CONFIG.M00_HAS_REGSLICE {1} \
    CONFIG.M01_AXIS_BASETDEST {0x00000001} \
    CONFIG.M01_AXIS_HIGHTDEST {0x00000001} \
@@ -7614,7 +7393,6 @@ proc create_hier_cell_hier_eth_switch_3 { parentCell nameHier } {
    CONFIG.S01_HAS_REGSLICE {1} \
    CONFIG.S02_HAS_REGSLICE {1} \
    CONFIG.S03_HAS_REGSLICE {1} \
->>>>>>> dbb0d5b (AIST-TSN Switch V2.0 First commit)
  ] $axis_interconnect_0
 
   # Create interface connections
@@ -7701,7 +7479,6 @@ proc create_hier_cell_hier_eth_switch_2 { parentCell nameHier } {
    CONFIG.HAS_ACLKEN {0} \
    CONFIG.M00_AXIS_BASETDEST {0x00000000} \
    CONFIG.M00_AXIS_HIGHTDEST {0x00000000} \
-<<<<<<< HEAD
    CONFIG.M01_AXIS_BASETDEST {0x00000001} \
    CONFIG.M01_AXIS_HIGHTDEST {0x00000001} \
    CONFIG.M02_AXIS_BASETDEST {0x00000002} \
@@ -7711,7 +7488,6 @@ proc create_hier_cell_hier_eth_switch_2 { parentCell nameHier } {
    CONFIG.NUM_MI {4} \
    CONFIG.NUM_SI {4} \
    CONFIG.ROUTING_MODE {0} \
-=======
    CONFIG.M00_HAS_REGSLICE {1} \
    CONFIG.M01_AXIS_BASETDEST {0x00000001} \
    CONFIG.M01_AXIS_HIGHTDEST {0x00000001} \
@@ -7729,7 +7505,6 @@ proc create_hier_cell_hier_eth_switch_2 { parentCell nameHier } {
    CONFIG.S01_HAS_REGSLICE {1} \
    CONFIG.S02_HAS_REGSLICE {1} \
    CONFIG.S03_HAS_REGSLICE {1} \
->>>>>>> dbb0d5b (AIST-TSN Switch V2.0 First commit)
  ] $axis_interconnect_0
 
   # Create interface connections
@@ -7816,7 +7591,6 @@ proc create_hier_cell_hier_eth_switch_1 { parentCell nameHier } {
    CONFIG.HAS_ACLKEN {0} \
    CONFIG.M00_AXIS_BASETDEST {0x00000000} \
    CONFIG.M00_AXIS_HIGHTDEST {0x00000000} \
-<<<<<<< HEAD
    CONFIG.M01_AXIS_BASETDEST {0x00000001} \
    CONFIG.M01_AXIS_HIGHTDEST {0x00000001} \
    CONFIG.M02_AXIS_BASETDEST {0x00000002} \
@@ -7826,7 +7600,6 @@ proc create_hier_cell_hier_eth_switch_1 { parentCell nameHier } {
    CONFIG.NUM_MI {4} \
    CONFIG.NUM_SI {4} \
    CONFIG.ROUTING_MODE {0} \
-=======
    CONFIG.M00_HAS_REGSLICE {1} \
    CONFIG.M01_AXIS_BASETDEST {0x00000001} \
    CONFIG.M01_AXIS_HIGHTDEST {0x00000001} \
@@ -7844,7 +7617,6 @@ proc create_hier_cell_hier_eth_switch_1 { parentCell nameHier } {
    CONFIG.S01_HAS_REGSLICE {1} \
    CONFIG.S02_HAS_REGSLICE {1} \
    CONFIG.S03_HAS_REGSLICE {1} \
->>>>>>> dbb0d5b (AIST-TSN Switch V2.0 First commit)
  ] $axis_interconnect_0
 
   # Create interface connections
@@ -7931,7 +7703,6 @@ proc create_hier_cell_hier_eth_switch_0 { parentCell nameHier } {
    CONFIG.HAS_ACLKEN {0} \
    CONFIG.M00_AXIS_BASETDEST {0x00000000} \
    CONFIG.M00_AXIS_HIGHTDEST {0x00000000} \
-<<<<<<< HEAD
    CONFIG.M01_AXIS_BASETDEST {0x00000001} \
    CONFIG.M01_AXIS_HIGHTDEST {0x00000001} \
    CONFIG.M02_AXIS_BASETDEST {0x00000002} \
@@ -7941,7 +7712,6 @@ proc create_hier_cell_hier_eth_switch_0 { parentCell nameHier } {
    CONFIG.NUM_MI {4} \
    CONFIG.NUM_SI {4} \
    CONFIG.ROUTING_MODE {0} \
-=======
    CONFIG.M00_HAS_REGSLICE {1} \
    CONFIG.M01_AXIS_BASETDEST {0x00000001} \
    CONFIG.M01_AXIS_HIGHTDEST {0x00000001} \
@@ -7959,7 +7729,6 @@ proc create_hier_cell_hier_eth_switch_0 { parentCell nameHier } {
    CONFIG.S01_HAS_REGSLICE {1} \
    CONFIG.S02_HAS_REGSLICE {1} \
    CONFIG.S03_HAS_REGSLICE {1} \
->>>>>>> dbb0d5b (AIST-TSN Switch V2.0 First commit)
  ] $axis_interconnect_0
 
   # Create interface connections
@@ -8626,8 +8395,6 @@ proc create_root_design { parentCell } {
   set reset_port_3 [ create_bd_port -dir O -type rst reset_port_3 ]
   set update_speed [ create_bd_port -dir I update_speed ]
 
-<<<<<<< HEAD
-=======
   # Create instance: axi_gpio_parameters_0, and set properties
   set axi_gpio_parameters_0 [ create_bd_cell -type ip -vlnv user.org:user:axi_gpio_parameters:1.0 axi_gpio_parameters_0 ]
   set_property -dict [ list \
@@ -8645,7 +8412,6 @@ proc create_root_design { parentCell } {
    CONFIG.REG_W {1} \
  ] $axi_register_slice_0
 
->>>>>>> dbb0d5b (AIST-TSN Switch V2.0 First commit)
   # Create instance: axis_clock_converter_0, and set properties
   set axis_clock_converter_0 [ create_bd_cell -type ip -vlnv xilinx.com:ip:axis_clock_converter:1.1 axis_clock_converter_0 ]
 
@@ -8803,11 +8569,8 @@ proc create_root_design { parentCell } {
   # Create instance: smartconnect_0, and set properties
   set smartconnect_0 [ create_bd_cell -type ip -vlnv xilinx.com:ip:smartconnect:1.0 smartconnect_0 ]
   set_property -dict [ list \
-<<<<<<< HEAD
    CONFIG.NUM_MI {9} \
-=======
    CONFIG.NUM_MI {10} \
->>>>>>> dbb0d5b (AIST-TSN Switch V2.0 First commit)
    CONFIG.NUM_SI {1} \
  ] $smartconnect_0
 
@@ -8856,10 +8619,7 @@ proc create_root_design { parentCell } {
  ] $util_vector_logic_3
 
   # Create interface connections
-<<<<<<< HEAD
-=======
   connect_bd_intf_net -intf_net axi_register_slice_0_M_AXI [get_bd_intf_pins axi_register_slice_0/M_AXI] [get_bd_intf_pins smartconnect_0/S00_AXI]
->>>>>>> dbb0d5b (AIST-TSN Switch V2.0 First commit)
   connect_bd_intf_net -intf_net axis_clock_converter_0_M_AXIS [get_bd_intf_pins axis_clock_converter_0/M_AXIS] [get_bd_intf_pins hier_mac_0/s_axis_tx]
   connect_bd_intf_net -intf_net axis_clock_converter_1_M_AXIS [get_bd_intf_pins axis_clock_converter_1/M_AXIS] [get_bd_intf_pins hier_mac_1/s_axis_tx]
   connect_bd_intf_net -intf_net axis_clock_converter_2_M_AXIS [get_bd_intf_pins axis_clock_converter_2/M_AXIS] [get_bd_intf_pins hier_mac_2/s_axis_tx]
@@ -8914,11 +8674,8 @@ proc create_root_design { parentCell } {
   connect_bd_intf_net -intf_net hier_fdb_M01_AXIS [get_bd_intf_pins hier_fdb/M01_AXIS] [get_bd_intf_pins switcher_1/s_axis]
   connect_bd_intf_net -intf_net hier_fdb_M02_AXIS [get_bd_intf_pins hier_fdb/M02_AXIS] [get_bd_intf_pins switcher_2/s_axis]
   connect_bd_intf_net -intf_net hier_fdb_M03_AXIS [get_bd_intf_pins hier_fdb/M03_AXIS] [get_bd_intf_pins switcher_3/s_axis]
-<<<<<<< HEAD
   connect_bd_intf_net -intf_net jtag_axi_0_M_AXI [get_bd_intf_pins jtag_axi_0/M_AXI] [get_bd_intf_pins smartconnect_0/S00_AXI]
-=======
   connect_bd_intf_net -intf_net jtag_axi_0_M_AXI [get_bd_intf_pins axi_register_slice_0/S_AXI] [get_bd_intf_pins jtag_axi_0/M_AXI]
->>>>>>> dbb0d5b (AIST-TSN Switch V2.0 First commit)
   connect_bd_intf_net -intf_net ref_clk_1 [get_bd_intf_ports ref_clk] [get_bd_intf_pins clk_wiz_0/CLK_IN1_D]
   connect_bd_intf_net -intf_net s_axis0_1 [get_bd_intf_pins axis_data_fifo_swin_0/M_AXIS] [get_bd_intf_pins hier_fdb/s_axis0]
   connect_bd_intf_net -intf_net s_axis1_1 [get_bd_intf_pins axis_data_fifo_swin_1/M_AXIS] [get_bd_intf_pins hier_fdb/s_axis1]
@@ -8929,10 +8686,7 @@ proc create_root_design { parentCell } {
   connect_bd_intf_net -intf_net smartconnect_0_M02_AXI [get_bd_intf_pins hier_cbs_2/S_AXI] [get_bd_intf_pins smartconnect_0/M02_AXI]
   connect_bd_intf_net -intf_net smartconnect_0_M03_AXI [get_bd_intf_pins hier_cbs_3/S_AXI] [get_bd_intf_pins smartconnect_0/M03_AXI]
   connect_bd_intf_net -intf_net smartconnect_0_M04_AXI [get_bd_intf_pins hier_flow_control/S_AXI] [get_bd_intf_pins smartconnect_0/M04_AXI]
-<<<<<<< HEAD
-=======
   connect_bd_intf_net -intf_net smartconnect_0_M09_AXI [get_bd_intf_pins axi_gpio_parameters_0/S_AXI] [get_bd_intf_pins smartconnect_0/M09_AXI]
->>>>>>> dbb0d5b (AIST-TSN Switch V2.0 First commit)
   connect_bd_intf_net -intf_net switcher_0_M00_AXIS [get_bd_intf_pins hier_eth_switch_0/s_axis0] [get_bd_intf_pins switcher_0/M00_AXIS]
   connect_bd_intf_net -intf_net switcher_0_M01_AXIS [get_bd_intf_pins hier_eth_switch_1/s_axis0] [get_bd_intf_pins switcher_0/M01_AXIS]
   connect_bd_intf_net -intf_net switcher_0_M02_AXIS [get_bd_intf_pins hier_eth_switch_2/s_axis0] [get_bd_intf_pins switcher_0/M02_AXIS]
@@ -9003,21 +8757,15 @@ proc create_root_design { parentCell } {
   connect_bd_net -net hier_flow_control_pause_req_4 [get_bd_pins hier_flow_control/pause_req_2] [get_bd_pins hier_mac_2/pause_req_s]
   connect_bd_net -net hier_flow_control_pause_req_5 [get_bd_pins hier_flow_control/pause_req_3] [get_bd_pins hier_mac_3/pause_req_s]
   connect_bd_net -net mac_speed_1 [get_bd_ports mac_speed] [get_bd_pins hier_mac_0/mac_speed] [get_bd_pins hier_mac_1/mac_speed] [get_bd_pins hier_mac_2/mac_speed] [get_bd_pins hier_mac_3/mac_speed]
-<<<<<<< HEAD
   connect_bd_net -net proc_sys_reset_sw_peripheral_aresetn [get_bd_pins axis_data_fifo_swin_0/s_axis_aresetn] [get_bd_pins hier_cbs_0/aresetn] [get_bd_pins hier_cbs_1/aresetn] [get_bd_pins hier_cbs_2/aresetn] [get_bd_pins hier_cbs_3/aresetn] [get_bd_pins hier_eth_switch_0/aresetn] [get_bd_pins hier_eth_switch_1/aresetn] [get_bd_pins hier_eth_switch_2/aresetn] [get_bd_pins hier_eth_switch_3/aresetn] [get_bd_pins hier_eth_switch_4/aresetn] [get_bd_pins hier_eth_switch_5/aresetn] [get_bd_pins hier_eth_switch_6/aresetn] [get_bd_pins hier_eth_switch_7/aresetn] [get_bd_pins hier_fdb/aresetn] [get_bd_pins jtag_axi_0/aresetn] [get_bd_pins proc_sys_reset_sw/peripheral_aresetn] [get_bd_pins smartconnect_0/aresetn] [get_bd_pins switcher_0/aresetn] [get_bd_pins switcher_1/aresetn] [get_bd_pins switcher_2/aresetn] [get_bd_pins switcher_3/aresetn]
-=======
   connect_bd_net -net proc_sys_reset_sw_peripheral_aresetn [get_bd_pins axi_gpio_parameters_0/rstn] [get_bd_pins axi_register_slice_0/aresetn] [get_bd_pins axis_data_fifo_swin_0/s_axis_aresetn] [get_bd_pins hier_cbs_0/aresetn] [get_bd_pins hier_cbs_1/aresetn] [get_bd_pins hier_cbs_2/aresetn] [get_bd_pins hier_cbs_3/aresetn] [get_bd_pins hier_eth_switch_0/aresetn] [get_bd_pins hier_eth_switch_1/aresetn] [get_bd_pins hier_eth_switch_2/aresetn] [get_bd_pins hier_eth_switch_3/aresetn] [get_bd_pins hier_eth_switch_4/aresetn] [get_bd_pins hier_eth_switch_5/aresetn] [get_bd_pins hier_eth_switch_6/aresetn] [get_bd_pins hier_eth_switch_7/aresetn] [get_bd_pins hier_fdb/aresetn] [get_bd_pins jtag_axi_0/aresetn] [get_bd_pins proc_sys_reset_sw/peripheral_aresetn] [get_bd_pins smartconnect_0/aresetn] [get_bd_pins switcher_0/aresetn] [get_bd_pins switcher_1/aresetn] [get_bd_pins switcher_2/aresetn] [get_bd_pins switcher_3/aresetn]
->>>>>>> dbb0d5b (AIST-TSN Switch V2.0 First commit)
   connect_bd_net -net ref_clk_fsel_dout [get_bd_ports ref_clk_fsel] [get_bd_pins ref_clk_fsel/dout]
   connect_bd_net -net ref_clk_oe_dout [get_bd_ports ref_clk_oe] [get_bd_pins ref_clk_oe/dout]
   connect_bd_net -net reset_error_1 [get_bd_ports reset_error] [get_bd_pins hier_mac_0/reset_error] [get_bd_pins hier_mac_1/reset_error] [get_bd_pins hier_mac_2/reset_error] [get_bd_pins hier_mac_3/reset_error]
   connect_bd_net -net temac_0_gtx_clk90_out [get_bd_pins hier_mac_0/gtx_clk90_out] [get_bd_pins hier_mac_1/gtx_clk90] [get_bd_pins hier_mac_2/gtx_clk90] [get_bd_pins hier_mac_3/gtx_clk90]
   connect_bd_net -net temac_0_gtx_clk_out [get_bd_pins hier_mac_0/gtx_clk_out] [get_bd_pins hier_mac_1/gtx_clk] [get_bd_pins hier_mac_2/gtx_clk] [get_bd_pins hier_mac_3/gtx_clk]
-<<<<<<< HEAD
   connect_bd_net -net temac_0_tx_mac_aclk [get_bd_pins axis_clock_converter_0/m_axis_aclk] [get_bd_pins axis_clock_converter_0/s_axis_aclk] [get_bd_pins axis_clock_converter_1/s_axis_aclk] [get_bd_pins axis_clock_converter_2/s_axis_aclk] [get_bd_pins axis_clock_converter_3/s_axis_aclk] [get_bd_pins axis_data_fifo_swin_0/m_axis_aclk] [get_bd_pins axis_data_fifo_swin_0/s_axis_aclk] [get_bd_pins axis_data_fifo_swin_1/m_axis_aclk] [get_bd_pins axis_data_fifo_swin_2/m_axis_aclk] [get_bd_pins axis_data_fifo_swin_3/m_axis_aclk] [get_bd_pins hier_cbs_0/aclk] [get_bd_pins hier_cbs_1/aclk] [get_bd_pins hier_cbs_2/aclk] [get_bd_pins hier_cbs_3/aclk] [get_bd_pins hier_eth_switch_0/aclk] [get_bd_pins hier_eth_switch_1/aclk] [get_bd_pins hier_eth_switch_2/aclk] [get_bd_pins hier_eth_switch_3/aclk] [get_bd_pins hier_eth_switch_4/aclk] [get_bd_pins hier_eth_switch_5/aclk] [get_bd_pins hier_eth_switch_6/aclk] [get_bd_pins hier_eth_switch_7/aclk] [get_bd_pins hier_fdb/aclk] [get_bd_pins hier_flow_control/fifo_wr_clk] [get_bd_pins hier_mac_0/tx_mac_aclk] [get_bd_pins jtag_axi_0/aclk] [get_bd_pins proc_sys_reset_sw/slowest_sync_clk] [get_bd_pins smartconnect_0/aclk] [get_bd_pins switcher_0/aclk] [get_bd_pins switcher_1/aclk] [get_bd_pins switcher_2/aclk] [get_bd_pins switcher_3/aclk]
-=======
   connect_bd_net -net temac_0_tx_mac_aclk [get_bd_pins axi_gpio_parameters_0/clk] [get_bd_pins axi_register_slice_0/aclk] [get_bd_pins axis_clock_converter_0/m_axis_aclk] [get_bd_pins axis_clock_converter_0/s_axis_aclk] [get_bd_pins axis_clock_converter_1/s_axis_aclk] [get_bd_pins axis_clock_converter_2/s_axis_aclk] [get_bd_pins axis_clock_converter_3/s_axis_aclk] [get_bd_pins axis_data_fifo_swin_0/m_axis_aclk] [get_bd_pins axis_data_fifo_swin_0/s_axis_aclk] [get_bd_pins axis_data_fifo_swin_1/m_axis_aclk] [get_bd_pins axis_data_fifo_swin_2/m_axis_aclk] [get_bd_pins axis_data_fifo_swin_3/m_axis_aclk] [get_bd_pins hier_cbs_0/aclk] [get_bd_pins hier_cbs_1/aclk] [get_bd_pins hier_cbs_2/aclk] [get_bd_pins hier_cbs_3/aclk] [get_bd_pins hier_eth_switch_0/aclk] [get_bd_pins hier_eth_switch_1/aclk] [get_bd_pins hier_eth_switch_2/aclk] [get_bd_pins hier_eth_switch_3/aclk] [get_bd_pins hier_eth_switch_4/aclk] [get_bd_pins hier_eth_switch_5/aclk] [get_bd_pins hier_eth_switch_6/aclk] [get_bd_pins hier_eth_switch_7/aclk] [get_bd_pins hier_fdb/aclk] [get_bd_pins hier_flow_control/fifo_wr_clk] [get_bd_pins hier_mac_0/tx_mac_aclk] [get_bd_pins jtag_axi_0/aclk] [get_bd_pins proc_sys_reset_sw/slowest_sync_clk] [get_bd_pins smartconnect_0/aclk] [get_bd_pins switcher_0/aclk] [get_bd_pins switcher_1/aclk] [get_bd_pins switcher_2/aclk] [get_bd_pins switcher_3/aclk]
->>>>>>> dbb0d5b (AIST-TSN Switch V2.0 First commit)
   connect_bd_net -net temac_0_tx_reset [get_bd_pins hier_mac_0/tx_reset] [get_bd_pins proc_sys_reset_sw/ext_reset_in] [get_bd_pins util_vector_logic_0/Op1]
   connect_bd_net -net temac_1_tx_mac_aclk [get_bd_pins axis_clock_converter_1/m_axis_aclk] [get_bd_pins axis_data_fifo_swin_1/s_axis_aclk] [get_bd_pins hier_mac_1/tx_mac_aclk]
   connect_bd_net -net temac_1_tx_reset [get_bd_pins hier_mac_1/tx_reset] [get_bd_pins util_vector_logic_1/Op1]
@@ -9053,10 +8801,7 @@ proc create_root_design { parentCell } {
   assign_bd_address -offset 0x400B0000 -range 0x00010000 -target_address_space [get_bd_addr_spaces jtag_axi_0/Data] [get_bd_addr_segs hier_cbs_2/registers_0/axi_gpio_cbs_7_1/S_AXI/Reg] -force
   assign_bd_address -offset 0x400F0000 -range 0x00010000 -target_address_space [get_bd_addr_spaces jtag_axi_0/Data] [get_bd_addr_segs hier_cbs_3/registers_0/axi_gpio_cbs_7_1/S_AXI/Reg] -force
   assign_bd_address -offset 0x40100000 -range 0x00010000 -target_address_space [get_bd_addr_spaces jtag_axi_0/Data] [get_bd_addr_segs hier_flow_control/axi_gpio_flow_control/S_AXI/Reg] -force
-<<<<<<< HEAD
-=======
   assign_bd_address -offset 0x00100000 -range 0x00000080 -target_address_space [get_bd_addr_spaces jtag_axi_0/Data] [get_bd_addr_segs axi_gpio_parameters_0/S_AXI/reg0] -force
->>>>>>> dbb0d5b (AIST-TSN Switch V2.0 First commit)
   assign_bd_address -offset 0x00000000 -range 0x00001000 -target_address_space [get_bd_addr_spaces hier_mac_0/eth_driver_0/s_axi] [get_bd_addr_segs hier_mac_0/temac_0/s_axi/Reg] -force
   assign_bd_address -offset 0x00000000 -range 0x00001000 -target_address_space [get_bd_addr_spaces hier_mac_1/eth_driver_1/s_axi] [get_bd_addr_segs hier_mac_1/temac_1/s_axi/Reg] -force
   assign_bd_address -offset 0x00000000 -range 0x00001000 -target_address_space [get_bd_addr_spaces hier_mac_2/eth_driver_2/s_axi] [get_bd_addr_segs hier_mac_2/temac_2/s_axi/Reg] -force

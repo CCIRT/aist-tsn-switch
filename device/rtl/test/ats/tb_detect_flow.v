@@ -6,29 +6,22 @@
 `timescale 1ns / 1ns
 
 `default_nettype none
-<<<<<<< HEAD
-=======
 `include "fatal.vh"
->>>>>>> dbb0d5b (AIST-TSN Switch V2.0 First commit)
 
 module tb_detect_flow;
   parameter PCAP_FILENAME = "";
   parameter VCD_FILENAME = "";
   parameter integer REPEAT_NUM = 1;
   parameter integer INPUT_FRAME_LENGTH = 0;
-<<<<<<< HEAD
-=======
   parameter integer EXPECTED_FLOW = 0;
   parameter integer DATA_WIDTH = 8;
   parameter integer FLOW_MATCH_RATE = 1;
   parameter integer FRAME_LENGTH_WIDTH = 16;            // Must be aligned to DATA_WIDTH
   parameter integer TIMESTAMP_WIDTH = 72;               // Must be aligned to DATA_WIDTH
->>>>>>> dbb0d5b (AIST-TSN Switch V2.0 First commit)
 
   localparam integer ENABLE_RANDAMIZE = 1;
   localparam integer TIMEOUT_CYCLE = 20000;
   localparam integer RESET_CYCLE = 10;
-<<<<<<< HEAD
   localparam integer M_AXIS_TVALID_OUT_CYCLE = 20;
   localparam integer S_AXIS_TREADY_OUT_CYCLE = 50;
 
@@ -38,7 +31,6 @@ module tb_detect_flow;
   localparam FRAME_LENGTH_WIDTH = 16;                   // Must be aligned to DATA_WIDTH
   localparam ETHERNET_FRAME_WIDTH = 1600 * DATA_WIDTH;  // Must be aligned to DATA_WIDTH
   localparam TIMESTAMP_WIDTH = 72;                      // Must be aligned to DATA_WIDTH
-=======
   localparam integer M_AXIS_TVALID_OUT_CYCLE = 400;
   localparam integer S_AXIS_TREADY_OUT_CYCLE = 50;
 
@@ -50,7 +42,6 @@ module tb_detect_flow;
   localparam NUM_OF_REGISTERS = 60;
   localparam C_S_AXI_ADDR_WIDTH = $clog2(NUM_OF_REGISTERS * (C_S_AXI_DATA_WIDTH / 8));
   localparam OFFSET_BIT = $clog2((C_S_AXI_DATA_WIDTH / 8));
->>>>>>> dbb0d5b (AIST-TSN Switch V2.0 First commit)
 
   //-------------------------
   // Port definition
@@ -59,7 +50,6 @@ module tb_detect_flow;
   // clock, negative-reset
   reg  clk;
   reg  rstn;
-<<<<<<< HEAD
 
   // Condition of flow detection
   // MSB [src_ip(32bit)]/[src_port(16bit)]/[dst_ip(32bit)]/[dst_port(16bit)] LSB
@@ -78,7 +68,6 @@ module tb_detect_flow;
   wire [95:0] cond_flow_13 = {96{1'b1}};
   wire [95:0] cond_flow_14 = {96{1'b1}};
   wire [95:0] cond_flow_15 = {8'd192, 8'd168, 8'd1, 8'd1, 16'd0, 32'd0, 16'd0};
-=======
   reg  init_done;
 
   // Condition of flow detection
@@ -91,15 +80,11 @@ module tb_detect_flow;
     end
     cond_flow[14] = {8'd192, 8'd168, 8'd1, 8'd1, 16'd0, 32'd0, 16'd0};
   end
->>>>>>> dbb0d5b (AIST-TSN Switch V2.0 First commit)
 
   // AXI4-Stream In with timestamp
   // [Ethernet Frame]/[Timestamp]
   wire [DATA_WIDTH-1:0] s_axis_tdata;
-<<<<<<< HEAD
-=======
   wire [KEEP_WIDTH-1:0] s_axis_tkeep;
->>>>>>> dbb0d5b (AIST-TSN Switch V2.0 First commit)
   wire                  s_axis_tvalid;
   wire                  s_axis_tready;
   wire                  s_axis_tlast;
@@ -107,10 +92,7 @@ module tb_detect_flow;
   // AXI4-Stream Out without timestamp
   // [Ethernet Frame]
   wire [DATA_WIDTH-1:0] m_axis_tdata;
-<<<<<<< HEAD
-=======
   wire [KEEP_WIDTH-1:0] m_axis_tkeep;
->>>>>>> dbb0d5b (AIST-TSN Switch V2.0 First commit)
   wire                  m_axis_tvalid;
   wire                  m_axis_tready;
   wire                  m_axis_tlast;
@@ -120,8 +102,6 @@ module tb_detect_flow;
   wire                  m_axis_flow_tvalid;
   reg                   m_axis_flow_tready = 1'b0;
 
-<<<<<<< HEAD
-=======
   reg [C_S_AXI_ADDR_WIDTH-1:0] S_AXI_AWADDR = 0;
   reg [2:0]                    S_AXI_AWPROT = 0;
   reg                          S_AXI_AWVALID = 0;
@@ -142,7 +122,6 @@ module tb_detect_flow;
   wire                             S_AXI_RVALID;
   wire                             S_AXI_RREADY = rstn && init_done;
 
->>>>>>> dbb0d5b (AIST-TSN Switch V2.0 First commit)
   //-------------------------
   // Timer
   //-------------------------
@@ -159,12 +138,10 @@ module tb_detect_flow;
       if (i == S_AXIS_TREADY_OUT_CYCLE) begin
         m_axis_flow_tready = 1'b1;
       end
-<<<<<<< HEAD
     end
 
     $display("Error: Timeout");
     $fatal();
-=======
 
       if (m_axis_flow_tvalid && m_axis_flow_tready) begin
         if (m_axis_flow_tdata != EXPECTED_FLOW) begin
@@ -176,7 +153,6 @@ module tb_detect_flow;
 
     $display("Error: Timeout");
     `FATAL;
->>>>>>> dbb0d5b (AIST-TSN Switch V2.0 First commit)
   end
 
   //-------------------------
@@ -185,8 +161,6 @@ module tb_detect_flow;
   always clk = #10 ~clk;
 
   //-------------------------
-<<<<<<< HEAD
-=======
   // Test tasks
   //-------------------------
   task write_register(input [31:0] awaddr,
@@ -252,7 +226,6 @@ module tb_detect_flow;
   end
 
   //-------------------------
->>>>>>> dbb0d5b (AIST-TSN Switch V2.0 First commit)
   // Utility modules
   //-------------------------
   pcap_to_stream #(
@@ -269,14 +242,11 @@ module tb_detect_flow;
     .TIMESTAMP_VAL(0)
   ) pcap_to_stream_i (
     clk,
-<<<<<<< HEAD
     rstn,
     s_axis_tdata,
-=======
     rstn & init_done,
     s_axis_tdata,
     s_axis_tkeep,
->>>>>>> dbb0d5b (AIST-TSN Switch V2.0 First commit)
     s_axis_tvalid,
     s_axis_tready,
     s_axis_tlast
@@ -298,14 +268,11 @@ module tb_detect_flow;
     .TIMESTAMP_VAL(0)
   ) compare_stream_with_pcap_i (
     clk,
-<<<<<<< HEAD
     rstn,
     m_axis_tdata,
-=======
     rstn & init_done,
     m_axis_tdata,
     m_axis_tkeep,
->>>>>>> dbb0d5b (AIST-TSN Switch V2.0 First commit)
     m_axis_tvalid,
     m_axis_tready,
     m_axis_tlast
@@ -314,7 +281,6 @@ module tb_detect_flow;
   //-------------------------
   // Test module
   //-------------------------
-<<<<<<< HEAD
   detect_flow_core #(
     .DATA_WIDTH(DATA_WIDTH),
     .FLOW_NUM(FLOW_NUM),
@@ -338,7 +304,6 @@ module tb_detect_flow;
     cond_flow_14,
     cond_flow_15,
     s_axis_tdata,
-=======
   detect_flow #(
     .C_AXIS_TDATA_WIDTH(DATA_WIDTH),
     .C_AXIS_TKEEP_WIDTH(KEEP_WIDTH),
@@ -372,15 +337,11 @@ module tb_detect_flow;
     S_AXI_RREADY,
     s_axis_tdata,
     s_axis_tkeep,
->>>>>>> dbb0d5b (AIST-TSN Switch V2.0 First commit)
     s_axis_tvalid,
     s_axis_tready,
     s_axis_tlast,
     m_axis_tdata,
-<<<<<<< HEAD
-=======
     m_axis_tkeep,
->>>>>>> dbb0d5b (AIST-TSN Switch V2.0 First commit)
     m_axis_tvalid,
     m_axis_tready,
     m_axis_tlast,

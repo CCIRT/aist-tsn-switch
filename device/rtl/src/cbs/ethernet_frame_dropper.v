@@ -5,7 +5,6 @@
 
 `default_nettype none
 
-<<<<<<< HEAD
 module ethernet_frame_dropper (
   // clock, negative-reset
   input  wire clk,
@@ -30,7 +29,6 @@ module ethernet_frame_dropper (
   input  wire       m_axis_tready,
   output wire       m_axis_tlast,
   output wire       m_axis_tuser
-=======
 module ethernet_frame_dropper #(
   parameter C_AXIS_TDATA_WIDTH = 8,
   parameter C_AXIS_TKEEP_WIDTH = C_AXIS_TDATA_WIDTH / 8
@@ -58,7 +56,6 @@ module ethernet_frame_dropper #(
   output wire                          m_axis_tvalid,
   input  wire                          m_axis_tready,
   output wire                          m_axis_tlast
->>>>>>> dbb0d5b (AIST-TSN Switch V2.0 First commit)
 );
 
   // Important registers
@@ -72,17 +69,14 @@ module ethernet_frame_dropper #(
 
   // AXI4-Stream connection
   assign m_axis_tdata = s_axis_tdata;
-<<<<<<< HEAD
   assign m_axis_tvalid = (drop_frame)? 1'b0: s_axis_tvalid;
   assign s_axis_tready = (drop_frame)? 1'b1: m_axis_tready;
   assign m_axis_tlast = s_axis_tlast;
   assign m_axis_tuser = s_axis_tuser;
-=======
   assign m_axis_tkeep = s_axis_tkeep;
   assign m_axis_tvalid = (drop_frame)? 1'b0: s_axis_tvalid;
   assign s_axis_tready = (drop_frame)? 1'b1: m_axis_tready;
   assign m_axis_tlast = s_axis_tlast;
->>>>>>> dbb0d5b (AIST-TSN Switch V2.0 First commit)
 
   // Control drop_frame_reg
   always @ (posedge clk) begin

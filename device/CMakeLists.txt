@@ -25,10 +25,7 @@ set(FPGA_PART xczu7ev-ffvc1156-2-e)
 set(BUILD_DIR ${CMAKE_CURRENT_BINARY_DIR})
 set(RTL_DIR ${CMAKE_CURRENT_SOURCE_DIR}/rtl)
 set(IP_DIR ${CMAKE_CURRENT_SOURCE_DIR}/ip)
-<<<<<<< HEAD
-=======
 set(CONSTRAINT_DIR ${CMAKE_CURRENT_SOURCE_DIR}/constraints)
->>>>>>> dbb0d5b (AIST-TSN Switch V2.0 First commit)
 set(3RDPARTY_DIR ${CMAKE_CURRENT_SOURCE_DIR}/../3rdparty)
 
 add_subdirectory(rtl)

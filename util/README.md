@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 # TCL scripts
 
 This directory contains TCL scripts that facilitate register modification in FPGA.
@@ -33,7 +32,6 @@ xsdb% targets
 ```
 ├── ats    : TCL scripts for ATS
 └── cbs    : TCL scripts for CBS
-=======
 # Python scripts
 
 This directory contains Python scripts that facilitate register modification in FPGA.
@@ -44,7 +42,6 @@ This directory contains Python scripts that facilitate register modification in 
 ├── ats        : Python scripts for ATS
 ├── cbs        : Python scripts for CBS
 └── python     : Python modules for CBS/ATS
->>>>>>> dbb0d5b (AIST-TSN Switch V2.0 First commit)
 ```
 
 ## Files

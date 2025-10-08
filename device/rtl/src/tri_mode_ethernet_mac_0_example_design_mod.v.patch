@@ -80,17 +80,14 @@
 >       input        rx_statistics_valid,
 > 
 >       // rx mac AXI-Stream interface
-<<<<<<< HEAD
 >       input    [7:0]    rx_axis_mac_tdata,
 >       input             rx_axis_mac_tvalid,
 >       input             rx_axis_mac_tlast,
 >       input             rx_axis_mac_tuser,
-=======
 >       // input    [7:0]    rx_axis_mac_tdata,
 >       // input             rx_axis_mac_tvalid,
 >       // input             rx_axis_mac_tlast,
 >       // input             rx_axis_mac_tuser,
->>>>>>> dbb0d5b (AIST-TSN Switch V2.0 First commit)
 > 
 >       // Transmitter Statistics Interface
 >       //------------------------------------------
@@ -101,19 +98,16 @@
 >       input        tx_statistics_valid,
 > 
 >       // tx mac AXI-Stream interface
-<<<<<<< HEAD
 >       output   [7:0]    tx_axis_mac_tdata,
 >       output            tx_axis_mac_tvalid,
 >       output            tx_axis_mac_tlast,
 >       input             tx_axis_mac_tready,
 >       output            tx_axis_mac_tuser,
-=======
 >       // output   [7:0]    tx_axis_mac_tdata,
 >       // output            tx_axis_mac_tvalid,
 >       // output            tx_axis_mac_tlast,
 >       // input             tx_axis_mac_tready,
 >       // output            tx_axis_mac_tuser,
->>>>>>> dbb0d5b (AIST-TSN Switch V2.0 First commit)
 > 
 >       // AXI-Lite Interface
 >       //---------------
@@ -311,7 +305,6 @@
 <    tri_mode_ethernet_mac_0_axi_lite_sm axi_lite_controller (
 ---
 >    tri_mode_ethernet_mac_0_axi_lite_sm_mod axi_lite_controller (
-<<<<<<< HEAD
 635c721
 <   tri_mode_ethernet_mac_0_fifo_block trimac_fifo_block (
 ---
@@ -374,7 +367,6 @@
 >       // .pause_req                    (pause_req),
 >       // .pause_val                    (pause_val),
 688,698c784,797
-=======
 635,636c721,722
 <   tri_mode_ethernet_mac_0_fifo_block trimac_fifo_block (
 <       .gtx_clk                      (gtx_clk_bufg),
@@ -544,7 +536,6 @@
 >   //     .axi_tresetn                  (tx_fifo_resetn),
 >   //     .check_resetn                 (chk_resetn),
 688,698c843,851
->>>>>>> dbb0d5b (AIST-TSN Switch V2.0 First commit)
 <       // GMII Interface
 <       //-----------------
 <       .gmii_txd                     (gmii_txd),
@@ -557,7 +548,6 @@
 <       .gmii_rx_clk                  (gmii_rx_clk),
 <       .mii_tx_clk                   (mii_tx_clk),
 ---
-<<<<<<< HEAD
 >       // RGMII Interface
 >       //------------------
 >       // .rgmii_txd                    (rgmii_txd),
@@ -579,7 +569,6 @@
 >       // .mdio                         (mdio),
 >       // .mdc                          (mdc),
 708,730c807,829
-=======
 >   //     .enable_pat_gen               (gen_tx_data_sync_gtx_clk),
 >   //     .enable_pat_chk               (chk_tx_data_sync_gtx_clk),
 >   //     .enable_address_swap          (1'b0),
@@ -602,7 +591,6 @@
 < 
 <       // AXI-Lite Interface
 <       //---------------
->>>>>>> dbb0d5b (AIST-TSN Switch V2.0 First commit)
 <       .s_axi_aclk                   (s_axi_aclk),
 <       .s_axi_resetn                 (s_axi_resetn),
 < 
@@ -626,7 +614,6 @@
 <       .s_axi_rresp                  (s_axi_rresp),
 <       .s_axi_rvalid                 (s_axi_rvalid),
 <       .s_axi_rready                 (s_axi_rready)
-<<<<<<< HEAD
 ---
 >       // .s_axi_aclk                   (s_axi_aclk),
 >       // .s_axi_resetn                 (s_axi_resetn),
@@ -655,7 +642,6 @@
 <       .enable_address_swap          (enable_address_swap),
 ---
 >       .enable_address_swap          (1'b0),
-=======
 < 
 <    );
 < 
@@ -691,6 +677,5 @@
 >   //     .frame_error                  (int_frame_error),
 >   //     .activity_flash               (int_activity_flash)
 >   //  );
->>>>>>> dbb0d5b (AIST-TSN Switch V2.0 First commit)
 767d865
 < 

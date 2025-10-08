@@ -3,23 +3,18 @@
 # This software is released under the MIT License.
 # http://opensource.org/licenses/mit-license.php
 
-<<<<<<< HEAD
 function(module_test MODULE_NAME PCAP_NAME REPEAT_NUM MODULE_DIR TB_DIR UTIL_FILES INPUT_FRAME_LENGTH)
 
   set(TB_NAME    "tb_${MODULE_NAME}")
   set(TEST_NAME  "${TB_NAME}.${PCAP_NAME}")
-=======
 function(module_test MODULE_NAME PCAP_NAME REPEAT_NUM MODULE_DIR TB_DIR UTIL_FILES INPUT_FRAME_LENGTH CUSTOM_PARAM_LIST TEST_NAME_SUFFIX)
 
   set(TB_NAME    "tb_${MODULE_NAME}")
   set(TEST_NAME  "${TB_NAME}.${PCAP_NAME}${TEST_NAME_SUFFIX}")
->>>>>>> dbb0d5b (AIST-TSN Switch V2.0 First commit)
   set(PCAP_FILE  "${CMAKE_BINARY_DIR}/script/${PCAP_NAME}.pcap")
   set(VCD_FILE   "${CMAKE_CURRENT_BINARY_DIR}/${TEST_NAME}.vcd")
   set(BIN_FILE   "${CMAKE_CURRENT_BINARY_DIR}/${TEST_NAME}.out")
 
-<<<<<<< HEAD
-=======
   set(CUSTOM_PARAMS "")
   list(LENGTH CUSTOM_PARAM_LIST CUSTOM_PARAM_LEN)
   if (${CUSTOM_PARAM_LEN} GREATER 0)
@@ -33,7 +28,6 @@ function(module_test MODULE_NAME PCAP_NAME REPEAT_NUM MODULE_DIR TB_DIR UTIL_FIL
     # message("${TEST_NAME}: add test parameters.\n\"${CUSTOM_PARAMS}\"")
   endif()
 
->>>>>>> dbb0d5b (AIST-TSN Switch V2.0 First commit)
   add_custom_target(build_${TEST_NAME}
     DEPENDS generate_pcap
     COMMAND
@@ -42,17 +36,14 @@ function(module_test MODULE_NAME PCAP_NAME REPEAT_NUM MODULE_DIR TB_DIR UTIL_FIL
         -P ${TB_NAME}.VCD_FILENAME='"${VCD_FILE}"'
         -P ${TB_NAME}.REPEAT_NUM=${REPEAT_NUM}
         -P ${TB_NAME}.INPUT_FRAME_LENGTH=${INPUT_FRAME_LENGTH}
-<<<<<<< HEAD
         -o ${BIN_FILE}
         "${CMAKE_SOURCE_DIR}/rtl/src/util/axi4_lite_slave.v"
-=======
         ${CUSTOM_PARAMS}
         -o ${BIN_FILE}
         -g 2012
         -I "${CMAKE_SOURCE_DIR}/rtl/test/util"
         "${CMAKE_SOURCE_DIR}/rtl/src/util/axi4_lite_slave.v"
         "${CMAKE_SOURCE_DIR}/rtl/src/util/axi4_lite_slave_if.v"
->>>>>>> dbb0d5b (AIST-TSN Switch V2.0 First commit)
         ${UTIL_FILES}
         ${MODULE_DIR}/${MODULE_NAME}.v
         ${TB_DIR}/${TB_NAME}.v

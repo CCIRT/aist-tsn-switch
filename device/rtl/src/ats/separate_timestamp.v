@@ -5,7 +5,6 @@
 
 `default_nettype none
 
-<<<<<<< HEAD
 module separate_timestamp #(
   parameter DATA_WIDTH = 8,
   parameter FRAME_LENGTH_WIDTH = 16,                  // Must be aligned to DATA_WIDTH
@@ -133,7 +132,6 @@ module separate_timestamp #(
       endcase
     end
   end
-=======
 module separate_timestamp_core #(
   parameter C_AXIS_TDATA_WIDTH = 8,
   parameter C_AXIS_TKEEP_WIDTH = C_AXIS_TDATA_WIDTH / 8,
@@ -623,7 +621,6 @@ module separate_timestamp #(
       );
     end // else: !if(OPT_LEVEL >= 1)
   endgenerate
->>>>>>> dbb0d5b (AIST-TSN Switch V2.0 First commit)
 
 endmodule
 

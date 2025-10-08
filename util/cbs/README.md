@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 # TCL scripts for CBS
 
 This directory contains TCL scripts that facilitate register modification in FPGA.
@@ -20,7 +19,6 @@ This directory contains TCL scripts that facilitate register modification in FPG
   - Usage: xsdb set_traffic_class.tcl <priority_mapper_no-vlan-tag> (<priority_mapper_pcp3>) (<priority_mapper_pcp2>)
     - Bracketed items are optional
     - Usage example: `xsdb set_traffic_class.tcl 5 7 6`
-=======
 # Python scripts for CBS
 
 This directory contains Python scripts that facilitate register modification in FPGA.
@@ -269,4 +267,3 @@ options:
   --board {kc705}
                         Target board
 ```
->>>>>>> dbb0d5b (AIST-TSN Switch V2.0 First commit)

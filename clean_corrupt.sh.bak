@@ -1,0 +1,17 @@
+#!/bin/bash
+# Cleans merge markers and corrupted commit text from all files
+
+# Find all affected files
+files=$(grep -rl '<<<<<<< HEAD\|>>>>>>> \|dbb0d5b (AIST-TSN Switch V2.0 First commit)' .)
+
+for f in $files; do
+    echo "Cleaning $f"
+    # Remove merge markers and corrupted commit fragments
+    sed -i.bak -e '/<<<<<<< HEAD/d' \
+               -e '/=======/d' \
+               -e '/>>>>>>>/d' \
+               -e '/dbb0d5b (AIST-TSN Switch V2.0 First commit)/d' "$f"
+done
+
+echo "Cleaning complete. Backup files with .bak extension were created."
+

@@ -1,12 +1,9 @@
-<<<<<<< HEAD
 # Specifications of cbs-switch
 
 This document describes specifications of the 4-port L2 switch with CBS implemented on FPGA.
-=======
 # Specifications of 1GbE cbs-switch
 
 This document describes specifications of the 1GbE, 4-port L2 switch with CBS implemented on FPGA.
->>>>>>> dbb0d5b (AIST-TSN Switch V2.0 First commit)
 
 ## Basic specifications
 
@@ -20,10 +17,7 @@ This document describes specifications of the 1GbE, 4-port L2 switch with CBS im
 - Support FDB
 - Support CBS
   - Only when priority is 7 or 6
-<<<<<<< HEAD
-=======
 - Support auto negotiation
->>>>>>> dbb0d5b (AIST-TSN Switch V2.0 First commit)
 
 ### CBS behavior
 
@@ -40,7 +34,6 @@ This document describes specifications of the 1GbE, 4-port L2 switch with CBS im
   - So, minimum value is -2147483648 and maximum value is 2147483647
   - They are managed so that no positive/negative overflow occurs
 
-<<<<<<< HEAD
 ### Table of PCP vs priority
 
 | PCP in vlan tag | Priority (= Traffic class) |
@@ -108,7 +101,6 @@ This document describes specifications of the 1GbE, 4-port L2 switch with CBS im
 | priority_mapper_1                          | 0x5001_0000 | -                       | -             | ⚠️ Must be same as priority_mapper_0                         |
 | priority_mapper_2                          | 0x5002_0000 | -                       | -             | ⚠️ Must be same as priority_mapper_0                         |
 | priority_mapper_3                          | 0x5003_0000 | -                       | -             | ⚠️ Must be same as priority_mapper_0                         |
-=======
 ## How to perform register settings
 
 Please use [our utility scripts](../../util).
@@ -132,4 +124,3 @@ Same as the 1GbE version.
 
 Please use [our utility scripts](../../util).
 
->>>>>>> dbb0d5b (AIST-TSN Switch V2.0 First commit)

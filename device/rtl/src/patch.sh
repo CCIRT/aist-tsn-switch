@@ -15,15 +15,12 @@ TEMAC_DIR=$1
 patch -o $CURRENT_DIR/channel_in_mod.v \
          $CURRENT_DIR/../../../3rdparty/eth_switch/hdl/channel_in.v \
          $CURRENT_DIR/channel_in_mod.v.patch
-<<<<<<< HEAD
-=======
 patch -o $CURRENT_DIR/mactable_mod.v \
          $CURRENT_DIR/../../../3rdparty/eth_switch/hdl/mactable.v \
          $CURRENT_DIR/mactable_mod.v.patch
 patch -o $CURRENT_DIR/mactable_dpcam_mod.v \
          $CURRENT_DIR/../../../3rdparty/eth_switch/hdl/mactable_dpcam.v \
          $CURRENT_DIR/mactable_dpcam_mod.v.patch
->>>>>>> dbb0d5b (AIST-TSN Switch V2.0 First commit)
 patch -o $CURRENT_DIR/tri_mode_ethernet_mac_0_axi_lite_sm_mod.v \
          $TEMAC_DIR/imports/tri_mode_ethernet_mac_0_axi_lite_sm.v \
          $CURRENT_DIR/tri_mode_ethernet_mac_0_axi_lite_sm_mod.v.patch

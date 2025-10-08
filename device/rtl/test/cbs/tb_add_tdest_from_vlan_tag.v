@@ -6,22 +6,17 @@
 `timescale 1ns / 1ns
 
 `default_nettype none
-<<<<<<< HEAD
-=======
 `include "fatal.vh"
->>>>>>> dbb0d5b (AIST-TSN Switch V2.0 First commit)
 
 module tb_add_tdest_from_vlan_tag;
   parameter PCAP_FILENAME = "";
   parameter VCD_FILENAME = "";
   parameter integer REPEAT_NUM = 1;
-<<<<<<< HEAD
 
   localparam integer TIMEOUT_CYCLE = 20000;
   localparam integer RESET_CYCLE = 10;
   localparam integer M_AXIS_TVALID_OUT_CYCLE = 20;
   localparam integer S_AXIS_TREADY_OUT_CYCLE = 50;
-=======
   parameter integer EXPECTED_TDEST = 0;
   parameter integer OPT_LEVEL = 1;
   parameter integer DATA_WIDTH = 8;
@@ -36,7 +31,6 @@ module tb_add_tdest_from_vlan_tag;
   localparam C_S_AXI_ADDR_WIDTH = $clog2(NUM_OF_REGISTERS * (C_S_AXI_DATA_WIDTH / 8));
   localparam OFFSET_BIT = $clog2((C_S_AXI_DATA_WIDTH / 8));
   localparam integer KEEP_WIDTH = DATA_WIDTH / 8;
->>>>>>> dbb0d5b (AIST-TSN Switch V2.0 First commit)
 
   //-------------------------
   // Port definition
@@ -45,7 +39,6 @@ module tb_add_tdest_from_vlan_tag;
   // clock, negative-reset
   reg  clk;
   reg  rstn;
-<<<<<<< HEAD
 
   // AXI4-Stream In
   wire [7:0] s_axis_tdata;
@@ -61,7 +54,6 @@ module tb_add_tdest_from_vlan_tag;
   wire       m_axis_tlast;
   wire [1:0] m_axis_tuser;
   wire [2:0] m_axis_tdest;
-=======
   reg  init_done;
 
   // AXI4-Stream In
@@ -100,7 +92,6 @@ module tb_add_tdest_from_vlan_tag;
   wire [1:0]                       S_AXI_RRESP;
   wire                             S_AXI_RVALID;
   wire                             S_AXI_RREADY = rstn && init_done;
->>>>>>> dbb0d5b (AIST-TSN Switch V2.0 First commit)
 
   //-------------------------
   // Timer
@@ -118,11 +109,8 @@ module tb_add_tdest_from_vlan_tag;
     end
 
     $display("Error: Timeout");
-<<<<<<< HEAD
     $fatal();
-=======
     `FATAL;
->>>>>>> dbb0d5b (AIST-TSN Switch V2.0 First commit)
   end
 
   //-------------------------
@@ -131,8 +119,6 @@ module tb_add_tdest_from_vlan_tag;
   always clk = #10 ~clk;
 
   //-------------------------
-<<<<<<< HEAD
-=======
   // Test tasks
   //-------------------------
   task write_register(input [31:0] awaddr,
@@ -200,26 +186,19 @@ module tb_add_tdest_from_vlan_tag;
   end
 
   //-------------------------
->>>>>>> dbb0d5b (AIST-TSN Switch V2.0 First commit)
   // Utility modules
   //-------------------------
   pcap_to_stream #(
     .PCAP_FILENAME(PCAP_FILENAME),
     .REPEAT_NUM(REPEAT_NUM),
-<<<<<<< HEAD
     .M_AXIS_TVALID_OUT_CYCLE(M_AXIS_TVALID_OUT_CYCLE)
-=======
     .M_AXIS_TVALID_OUT_CYCLE(M_AXIS_TVALID_OUT_CYCLE),
     .DATA_WIDTH(DATA_WIDTH)
->>>>>>> dbb0d5b (AIST-TSN Switch V2.0 First commit)
   ) pcap_to_stream_i (
     clk,
     rstn,
     s_axis_tdata,
-<<<<<<< HEAD
-=======
     s_axis_tkeep,
->>>>>>> dbb0d5b (AIST-TSN Switch V2.0 First commit)
     s_axis_tvalid,
     s_axis_tready,
     s_axis_tlast
@@ -228,28 +207,20 @@ module tb_add_tdest_from_vlan_tag;
   compare_stream_with_pcap #(
     .PCAP_FILENAME(PCAP_FILENAME),
     .REPEAT_NUM(REPEAT_NUM),
-<<<<<<< HEAD
     .S_AXIS_TREADY_OUT_CYCLE(S_AXIS_TREADY_OUT_CYCLE)
-=======
     .S_AXIS_TREADY_OUT_CYCLE(S_AXIS_TREADY_OUT_CYCLE),
     .DATA_WIDTH(DATA_WIDTH)
->>>>>>> dbb0d5b (AIST-TSN Switch V2.0 First commit)
   ) compare_stream_with_pcap_i (
     clk,
     rstn,
     m_axis_tdata,
-<<<<<<< HEAD
-=======
     m_axis_tkeep,
->>>>>>> dbb0d5b (AIST-TSN Switch V2.0 First commit)
     m_axis_tvalid,
     m_axis_tready,
     m_axis_tlast
   );
 
   //-------------------------
-<<<<<<< HEAD
-=======
   // Verify tdest
   //-------------------------
   always @(posedge clk) begin
@@ -262,12 +233,10 @@ module tb_add_tdest_from_vlan_tag;
   end
 
   //-------------------------
->>>>>>> dbb0d5b (AIST-TSN Switch V2.0 First commit)
   // Test module
   //-------------------------
   assign s_axis_tuser = 2'b00;
 
-<<<<<<< HEAD
   add_tdest_from_vlan_tag_core
   add_tdest_from_vlan_tag_core_i (
     clk,
@@ -282,7 +251,6 @@ module tb_add_tdest_from_vlan_tag;
     3'd5,
     3'd1,
     s_axis_tdata,
-=======
   add_tdest_from_vlan_tag #(
     .OPT_LEVEL(OPT_LEVEL),
     .C_AXIS_TDATA_WIDTH(DATA_WIDTH),
@@ -311,16 +279,12 @@ module tb_add_tdest_from_vlan_tag;
     S_AXI_RREADY,
     s_axis_tdata,
     s_axis_tkeep,
->>>>>>> dbb0d5b (AIST-TSN Switch V2.0 First commit)
     s_axis_tvalid,
     s_axis_tready,
     s_axis_tlast,
     s_axis_tuser,
     m_axis_tdata,
-<<<<<<< HEAD
-=======
     m_axis_tkeep,
->>>>>>> dbb0d5b (AIST-TSN Switch V2.0 First commit)
     m_axis_tvalid,
     m_axis_tready,
     m_axis_tlast,
@@ -334,11 +298,8 @@ module tb_add_tdest_from_vlan_tag;
   initial
   begin
     $dumpfile(VCD_FILENAME);
-<<<<<<< HEAD
     $dumpvars(0, add_tdest_from_vlan_tag_core_i);
-=======
     $dumpvars(0, add_tdest_from_vlan_tag_i);
->>>>>>> dbb0d5b (AIST-TSN Switch V2.0 First commit)
   end
 
 endmodule
