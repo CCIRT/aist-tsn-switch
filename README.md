@@ -101,6 +101,15 @@ Bitstreams will be generated below.
       <img src="./docs/img/sw_settings_zedboard.jpg" width="25%">
 
 
+## Demo
+
+To provide users an easy understanding and simplified intoroduction of TSN, we provide a [Demo](./docs/cbs-switch/with_probes/design_top.md) page where we demonstrate the capabilities of an AIST-TSN switch supporting CBS.
+The provided CBS Switch includes probes allowing users to output data streaming signal from PMOD port.
+The data streaming signal can be used to detect frames with external devices such as an oscilloscope.
+
+ZedBoard is the only board that can be used with this design. KC705 is not supported.
+
+
 ## Directories
 
 - [3rdparty](3rdparty): 3rd-party projects
