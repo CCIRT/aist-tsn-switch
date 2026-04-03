@@ -129,6 +129,7 @@ ZedBoard is the only board that can be used with this design. KC705 is not suppo
 ## Release notes
 
 - Upcoming
+  - Enable board identification by device-specific ID
   - Enable FDB learning from broadcast frames (Fix communication issue in multi-hop switch setup)
 - v2.0_10-2025
   - Added FPGA design of 1GbE, L2 switch with CBS for ZedBoard

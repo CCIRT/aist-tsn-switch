@@ -4,6 +4,14 @@ This directory contains python module to control our switches.
 This directory also contains python module for our another project, [EFCC](https://github.com/CCIRT/aist-tsn-efcc).
 EFCC (Ethernet Frame Crafter & Capture) is useful for testing functionality of our switches, and it is used in [evaluation2](../../evaluation2).
 
+## Prerequisite
+
+Install python3-tk.
+
+```
+sudo apt install python3-tk
+```
+
 ## Directories
 
 ```
