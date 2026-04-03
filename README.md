@@ -98,7 +98,7 @@ Bitstreams will be generated below.
 
       <img src="./docs/img/sw_settings_kc705.jpg" width="25%">
 
-- Zedboard
+- ZedBoard
   - Switch settings
     - To match VADJ to OP031-2V5, please short the jumper on J18 to the 2V5 position.
     - Set the SW1 toggle switch to the upper position as shown in the photo.
@@ -109,7 +109,7 @@ Bitstreams will be generated below.
 
 ## Demo
 
-To provide users an easy understanding and simplified intoroduction of TSN, we provide a [Demo](./docs/cbs-switch/with_probes/design_top.md) page where we demonstrate the capabilities of an AIST-TSN switch supporting CBS.
+To provide users an easy understanding and simplified introduction of TSN, we provide a [Demo](./docs/cbs-switch/with_probes/design_top.md) page where we demonstrate the capabilities of an AIST-TSN switch supporting CBS.
 The provided CBS Switch includes probes allowing users to output data streaming signal from PMOD port.
 The data streaming signal can be used to detect frames with external devices such as an oscilloscope.
 
@@ -126,12 +126,12 @@ ZedBoard is the only board that can be used with this design. KC705 is not suppo
 - [evaluation2](evaluation2): Evaluation data with [EFCC](https://github.com/CCIRT/aist-tsn-efcc). See [evaluation2/README.md](evaluation2/README.md) for more info.
 - [util](util): Scripts for FPGA register modification and python modules to use our switches.
 
-## Release notes
+## Version notes
 
 - Upcoming
   - Enable board identification by device-specific ID
   - Enable FDB learning from broadcast frames (Fix communication issue in multi-hop switch setup)
-- v2.0_10-2025
+- v2.0 (Oct 2025)
   - Added FPGA design of 1GbE, L2 switch with CBS for ZedBoard
   - Added FPGA design of 1GbE, L2 switch with ATS for ZedBoard
   - Added python modules to make our switches easier to use.
@@ -139,7 +139,7 @@ ZedBoard is the only board that can be used with this design. KC705 is not suppo
     - Obsoleted TCL scripts
   - Added evaluation scripts and results with our hardware-based measurement tool called EFCC. The evaluation is done in more complicated input patterns, and is easier to reproduce.
   - Optimized RTL implementation to reduce resources and latency.
-- v1.0_09-2024
+- v1.0 (Sep 2024)
   - Initial release
   - FPGA design of 1GbE, L2 switch with CBS for KC705
   - FPGA design of 1GbE, L2 switch with ATS for KC705
