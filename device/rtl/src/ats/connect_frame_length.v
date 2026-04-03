@@ -6,7 +6,8 @@
 `default_nettype none
 
 module connect_frame_length #(
-  parameter DATA_WIDTH = 8
+  parameter C_AXIS_TDATA_WIDTH = 8,
+  parameter C_AXIS_TKEEP_WIDTH = C_AXIS_TDATA_WIDTH / 8
 ) (
   // clock, negative-reset
   input  wire clk,
@@ -14,24 +15,26 @@ module connect_frame_length #(
 
   // AXI4-Stream In without frame_length
   // [Ethernet Frame]
-  input  wire [DATA_WIDTH-1:0] s_axis_tdata,
-  input  wire                  s_axis_tvalid,
-  output wire                  s_axis_tready,
-  input  wire                  s_axis_tlast,
+  input  wire [C_AXIS_TDATA_WIDTH-1:0] s_axis_tdata,
+  input  wire [C_AXIS_TKEEP_WIDTH-1:0] s_axis_tkeep,
+  input  wire                          s_axis_tvalid,
+  output wire                          s_axis_tready,
+  input  wire                          s_axis_tlast,
 
   // AXI4-Stream In only frame_length
   // [Frame length]
-  input  wire [DATA_WIDTH-1:0] s_axis_frame_length_tdata,
-  input  wire                  s_axis_frame_length_tvalid,
-  output wire                  s_axis_frame_length_tready,
-  input  wire                  s_axis_frame_length_tlast,
+  input  wire [C_AXIS_TDATA_WIDTH-1:0] s_axis_frame_length_tdata,
+  input  wire                          s_axis_frame_length_tvalid,
+  output wire                          s_axis_frame_length_tready,
+  input  wire                          s_axis_frame_length_tlast,
 
   // AXI4-Stream Out with frame_length
   // [Frame length]/[Ethernet Frame]
-  output wire [DATA_WIDTH-1:0] m_axis_tdata,
-  output wire                  m_axis_tvalid,
-  input  wire                  m_axis_tready,
-  output wire                  m_axis_tlast
+  output wire [C_AXIS_TDATA_WIDTH-1:0] m_axis_tdata,
+  output wire [C_AXIS_TKEEP_WIDTH-1:0] m_axis_tkeep,
+  output wire                          m_axis_tvalid,
+  input  wire                          m_axis_tready,
+  output wire                          m_axis_tlast
 );
 
   // Important registers
@@ -40,6 +43,7 @@ module connect_frame_length #(
   // AXI4-Stream connection
   //// Common
   assign m_axis_tdata  = (is_frame_length_beat)? s_axis_frame_length_tdata : s_axis_tdata;
+  assign m_axis_tkeep  = (is_frame_length_beat)? {C_AXIS_TKEEP_WIDTH{1'b1}} : s_axis_tkeep;
   assign m_axis_tvalid = (is_frame_length_beat)? s_axis_frame_length_tvalid: s_axis_tvalid;
   assign m_axis_tlast  = (is_frame_length_beat)? 1'b0: s_axis_tlast;
   //// Data

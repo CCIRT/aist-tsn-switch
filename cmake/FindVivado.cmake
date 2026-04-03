@@ -153,6 +153,14 @@ function(define_vivado project)
       ENV_DESIGN=${ARG_DESIGN}
       ENV_RTL="${RTL_ABS}"
       ENV_CONSTRAINT="${CONSTRAINT_ABS}"
+      ${CMAKE_COMMAND} -E echo "INFO: skip xg_mac IP build, directory not found"
+    COMMAND
+      bash ${CMAKE_SOURCE_DIR}/../cmake/scripts/generate_commit_id_xdc.sh ${CMAKE_CURRENT_BINARY_DIR}/commit_id.xdc
+    COMMAND
+      # Define global
+      ENV_DESIGN=${ARG_DESIGN}
+      ENV_RTL="${RTL_ABS}"
+      ENV_CONSTRAINT="${CONSTRAINT_ABS};${CMAKE_CURRENT_BINARY_DIR}/commit_id.xdc"
       ENV_IP="${IP_ABS}"
       ENV_TCL0="${TCL0_ABS}"
       ENV_TCL1="${TCL1_ABS}"

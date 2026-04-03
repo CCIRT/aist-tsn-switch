@@ -6,25 +6,33 @@
 `timescale 1ns / 1ns
 
 `default_nettype none
+`include "fatal.vh"
 
 module tb_detect_flow;
   parameter PCAP_FILENAME = "";
   parameter VCD_FILENAME = "";
   parameter integer REPEAT_NUM = 1;
   parameter integer INPUT_FRAME_LENGTH = 0;
+  parameter integer EXPECTED_FLOW = 0;
+  parameter integer DATA_WIDTH = 8;
+  parameter integer FLOW_MATCH_RATE = 1;
+  parameter integer FRAME_LENGTH_WIDTH = 16;            // Must be aligned to DATA_WIDTH
+  parameter integer TIMESTAMP_WIDTH = 72;               // Must be aligned to DATA_WIDTH
 
   localparam integer ENABLE_RANDAMIZE = 1;
   localparam integer TIMEOUT_CYCLE = 20000;
   localparam integer RESET_CYCLE = 10;
-  localparam integer M_AXIS_TVALID_OUT_CYCLE = 20;
+  localparam integer M_AXIS_TVALID_OUT_CYCLE = 400;
   localparam integer S_AXIS_TREADY_OUT_CYCLE = 50;
 
-  localparam DATA_WIDTH = 8;
+  localparam KEEP_WIDTH = DATA_WIDTH / 8;
   localparam FLOW_NUM = 16;
   localparam FLOW_WIDTH = 8;
-  localparam FRAME_LENGTH_WIDTH = 16;                   // Must be aligned to DATA_WIDTH
   localparam ETHERNET_FRAME_WIDTH = 1600 * DATA_WIDTH;  // Must be aligned to DATA_WIDTH
-  localparam TIMESTAMP_WIDTH = 72;                      // Must be aligned to DATA_WIDTH
+  localparam C_S_AXI_DATA_WIDTH = 32;
+  localparam NUM_OF_REGISTERS = 60;
+  localparam C_S_AXI_ADDR_WIDTH = $clog2(NUM_OF_REGISTERS * (C_S_AXI_DATA_WIDTH / 8));
+  localparam OFFSET_BIT = $clog2((C_S_AXI_DATA_WIDTH / 8));
 
   //-------------------------
   // Port definition
@@ -33,28 +41,23 @@ module tb_detect_flow;
   // clock, negative-reset
   reg  clk;
   reg  rstn;
+  reg  init_done;
 
   // Condition of flow detection
   // MSB [src_ip(32bit)]/[src_port(16bit)]/[dst_ip(32bit)]/[dst_port(16bit)] LSB
-  wire [95:0] cond_flow_1 = {8'd192, 8'd168, 8'd1, 8'd2, 16'd0, 32'd0, 16'd0};
-  wire [95:0] cond_flow_2 = {96{1'b1}};
-  wire [95:0] cond_flow_3 = {96{1'b1}};
-  wire [95:0] cond_flow_4 = {96{1'b1}};
-  wire [95:0] cond_flow_5 = {96{1'b1}};
-  wire [95:0] cond_flow_6 = {96{1'b1}};
-  wire [95:0] cond_flow_7 = {96{1'b1}};
-  wire [95:0] cond_flow_8 = {96{1'b1}};
-  wire [95:0] cond_flow_9 = {96{1'b1}};
-  wire [95:0] cond_flow_10 = {96{1'b1}};
-  wire [95:0] cond_flow_11 = {96{1'b1}};
-  wire [95:0] cond_flow_12 = {96{1'b1}};
-  wire [95:0] cond_flow_13 = {96{1'b1}};
-  wire [95:0] cond_flow_14 = {96{1'b1}};
-  wire [95:0] cond_flow_15 = {8'd192, 8'd168, 8'd1, 8'd1, 16'd0, 32'd0, 16'd0};
+  reg [95:0] cond_flow[14:0];
+  initial begin
+    cond_flow[0] = {8'd192, 8'd168, 8'd1, 8'd2, 16'd0, 32'd0, 16'd0};
+    for (int i = 1; i < 14; i += 1) begin
+      cond_flow[i] = {96{1'b1}};
+    end
+    cond_flow[14] = {8'd192, 8'd168, 8'd1, 8'd1, 16'd0, 32'd0, 16'd0};
+  end
 
   // AXI4-Stream In with timestamp
   // [Ethernet Frame]/[Timestamp]
   wire [DATA_WIDTH-1:0] s_axis_tdata;
+  wire [KEEP_WIDTH-1:0] s_axis_tkeep;
   wire                  s_axis_tvalid;
   wire                  s_axis_tready;
   wire                  s_axis_tlast;
@@ -62,6 +65,7 @@ module tb_detect_flow;
   // AXI4-Stream Out without timestamp
   // [Ethernet Frame]
   wire [DATA_WIDTH-1:0] m_axis_tdata;
+  wire [KEEP_WIDTH-1:0] m_axis_tkeep;
   wire                  m_axis_tvalid;
   wire                  m_axis_tready;
   wire                  m_axis_tlast;
@@ -70,6 +74,26 @@ module tb_detect_flow;
   wire [FLOW_WIDTH-1:0] m_axis_flow_tdata;
   wire                  m_axis_flow_tvalid;
   reg                   m_axis_flow_tready = 1'b0;
+
+  reg [C_S_AXI_ADDR_WIDTH-1:0] S_AXI_AWADDR = 0;
+  reg [2:0]                    S_AXI_AWPROT = 0;
+  reg                          S_AXI_AWVALID = 0;
+  wire                         S_AXI_AWREADY;
+  reg [C_S_AXI_DATA_WIDTH-1:0] S_AXI_WDATA = 0;
+  reg [(C_S_AXI_DATA_WIDTH/8)-1:0] S_AXI_WSTRB = 0;
+  reg                              S_AXI_WVALID = 0;
+  wire                             S_AXI_WREADY;
+  wire [1:0]                       S_AXI_BRESP;
+  wire                             S_AXI_BVALID;
+  reg                              S_AXI_BREADY = 0;
+  reg [C_S_AXI_ADDR_WIDTH-1:0]     S_AXI_ARADDR = 0;
+  reg [2:0]                        S_AXI_ARPROT = 0;
+  wire                             S_AXI_ARVALID = rstn && init_done;
+  wire                             S_AXI_ARREADY;
+  wire [C_S_AXI_DATA_WIDTH-1:0]    S_AXI_RDATA;
+  wire [1:0]                       S_AXI_RRESP;
+  wire                             S_AXI_RVALID;
+  wire                             S_AXI_RREADY = rstn && init_done;
 
   //-------------------------
   // Timer
@@ -87,16 +111,88 @@ module tb_detect_flow;
       if (i == S_AXIS_TREADY_OUT_CYCLE) begin
         m_axis_flow_tready = 1'b1;
       end
+
+      if (m_axis_flow_tvalid && m_axis_flow_tready) begin
+        if (m_axis_flow_tdata != EXPECTED_FLOW) begin
+          $display("Error: Got flow %d, but expect %d", m_axis_flow_tdata, EXPECTED_FLOW);
+          `FATAL;
+        end
+      end
     end
 
     $display("Error: Timeout");
-    $fatal();
+    `FATAL;
   end
 
   //-------------------------
   // Generate clock
   //-------------------------
   always clk = #10 ~clk;
+
+  //-------------------------
+  // Test tasks
+  //-------------------------
+  task write_register(input [31:0] awaddr,
+                      input [31:0] wdata);
+    // write address and data
+    S_AXI_AWADDR <= {awaddr, {OFFSET_BIT{1'b0}}};
+    S_AXI_AWPROT <= 0;
+    S_AXI_WDATA <= wdata;
+    S_AXI_WSTRB <= 32'hffff_ffff;
+    S_AXI_BREADY <= 1'b0;
+    S_AXI_AWVALID <= 1;
+    S_AXI_WVALID <= 1;
+    @(posedge clk);
+
+    // wait write
+    while (S_AXI_AWVALID || S_AXI_WVALID) begin
+      if (S_AXI_AWREADY) begin
+        S_AXI_AWVALID <= 1'b0;
+      end
+
+      if (S_AXI_WREADY) begin
+        S_AXI_WVALID <= 1'b0;
+      end
+
+      @(posedge clk);
+    end
+
+    // wait b
+    while (!S_AXI_BVALID) begin
+      @(posedge clk);
+    end
+
+    S_AXI_BREADY <= 1'b1;
+    @(posedge clk);
+
+    S_AXI_BREADY <= 1'b0;
+    @(posedge clk);
+  endtask
+
+  //-------------------------
+  // Initialize registers
+  //-------------------------
+  initial begin
+    init_done = 0;
+
+    // wait device reset
+    @(posedge clk);
+    @(posedge rstn);
+
+    // wait 5 cycle
+    repeat (5) @(posedge clk);
+
+    // src ip -> src port -> dst ip -> dst port
+    for (int i = 0; i < 15; i += 1) begin
+      write_register(i * 4 + 0, cond_flow[i][64 +: 32]);
+      write_register(i * 4 + 1, cond_flow[i][48 +: 16]);
+      write_register(i * 4 + 2, cond_flow[i][16 +: 32]);
+      write_register(i * 4 + 3, cond_flow[i][0  +: 16]);
+    end
+
+    init_done <= 1;
+    @(posedge clk);
+  end
 
   //-------------------------
   // Utility modules
@@ -115,8 +211,9 @@ module tb_detect_flow;
     .TIMESTAMP_VAL(0)
   ) pcap_to_stream_i (
     clk,
-    rstn,
+    rstn & init_done,
     s_axis_tdata,
+    s_axis_tkeep,
     s_axis_tvalid,
     s_axis_tready,
     s_axis_tlast
@@ -138,8 +235,9 @@ module tb_detect_flow;
     .TIMESTAMP_VAL(0)
   ) compare_stream_with_pcap_i (
     clk,
-    rstn,
+    rstn & init_done,
     m_axis_tdata,
+    m_axis_tkeep,
     m_axis_tvalid,
     m_axis_tready,
     m_axis_tlast
@@ -148,33 +246,44 @@ module tb_detect_flow;
   //-------------------------
   // Test module
   //-------------------------
-  detect_flow_core #(
-    .DATA_WIDTH(DATA_WIDTH),
+  detect_flow #(
+    .C_AXIS_TDATA_WIDTH(DATA_WIDTH),
+    .C_AXIS_TKEEP_WIDTH(KEEP_WIDTH),
     .FLOW_NUM(FLOW_NUM),
-    .FLOW_WIDTH(FLOW_WIDTH)
+    .FLOW_WIDTH(FLOW_WIDTH),
+    .FLOW_MATCH_RATE(FLOW_MATCH_RATE),
+    .C_S_AXI_DATA_WIDTH(C_S_AXI_DATA_WIDTH),
+    .NUM_OF_REGISTERS(NUM_OF_REGISTERS),
+    .C_S_AXI_ADDR_WIDTH(C_S_AXI_ADDR_WIDTH)
   ) detect_flow_core_i (
     clk,
     rstn,
-    cond_flow_1,
-    cond_flow_2,
-    cond_flow_3,
-    cond_flow_4,
-    cond_flow_5,
-    cond_flow_6,
-    cond_flow_7,
-    cond_flow_8,
-    cond_flow_9,
-    cond_flow_10,
-    cond_flow_11,
-    cond_flow_12,
-    cond_flow_13,
-    cond_flow_14,
-    cond_flow_15,
+    S_AXI_AWADDR,
+    S_AXI_AWPROT,
+    S_AXI_AWVALID,
+    S_AXI_AWREADY,
+    S_AXI_WDATA,
+    S_AXI_WSTRB,
+    S_AXI_WVALID,
+    S_AXI_WREADY,
+    S_AXI_BRESP,
+    S_AXI_BVALID,
+    S_AXI_BREADY,
+    S_AXI_ARADDR,
+    S_AXI_ARPROT,
+    S_AXI_ARVALID,
+    S_AXI_ARREADY,
+    S_AXI_RDATA,
+    S_AXI_RRESP,
+    S_AXI_RVALID,
+    S_AXI_RREADY,
     s_axis_tdata,
+    s_axis_tkeep,
     s_axis_tvalid,
     s_axis_tready,
     s_axis_tlast,
     m_axis_tdata,
+    m_axis_tkeep,
     m_axis_tvalid,
     m_axis_tready,
     m_axis_tlast,

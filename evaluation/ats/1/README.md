@@ -55,7 +55,7 @@ none.
 
 ### evaluation 1B-2a (TC7)
 - Modify FPGA registers to treat communication without VLAN TAG as TC7.
-- Set CommittedInformationRate for Port0 input and Port1 output flows to 100 Mbps.
+- Set CommittedInformationRate for flows from Port0 to Port1 to 100 Mbps.
 - Change `<filesize>` from 64 Bytes to 1500 Bytes and do the following.
   - Host B plget-RX
     ```shell
@@ -68,7 +68,7 @@ none.
 
 ### evaluation 1B-2a (TC7)
 - Modify FPGA registers to treat communication without VLAN TAG as TC7.
-- Set CommittedInformationRate for Port0 input and Port1 output flows to 10 Mbps.
+- Set CommittedInformationRate for flows from Port0 to Port1 to 10 Mbps.
 - Change `<filesize>` from 64 Bytes to 1500 Bytes and do the following.
   - Host B plget-RX
     ```shell
@@ -81,7 +81,7 @@ none.
 
 ### evaluation 1F
 - Modify FPGA registers to treat communication without VLAN TAG as TC7.
-- Set CommittedInformationRate for Port0 input and Port1 output flows to 100 Mbps.
+- Set CommittedInformationRate for flows from Port0 to Port1 to 100 Mbps.
 - Set ProcessingDelayMax to 0 ps or 50000000 ps or more.
 - Change `<filesize>` to 64Byte and 1500Byte and do the following.
   - Host B plget-RX

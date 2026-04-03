@@ -24,12 +24,15 @@ This document describes design of the 4-port L2 switch with CBS implemented on F
 - The inside consists of the following modules
   - TEMAC: AMD/Xilinx official IP for MAC layer of Ethernet
   - eth_driver: The contoller for the MAC IP.
+  - FIFO + Frame Dropper: AMD/Xilinx AXI4-Stream Data FIFO IP and our own Frame Dropper IP. This is used to drop the entire frame if the FIFO has no space to store the frame.
+    - FIFO depth is 4096
 
 ### FIFO block
 
 - The FIFO for clock conversion between MAC side and FPGA core side
+  - FIFO depth is 4096
 - They are set to Packet Mode
-  - The Packet Mode configuration delays the start of packet (burst) transmission until the end (LAST beat) of the packet is received
+  - The Packet Mode configuration delays the start of frame (burst) transmission until the end (LAST beat) of the frame is received
 - So, latency increases depending on the length of the stream (it is same as frame length)
 - Note: It seems that Packet Mode is not required, so change the settings if you want to reduce latency
 
@@ -62,3 +65,23 @@ This document describes design of the 4-port L2 switch with CBS implemented on F
 - This block works as a simple clock converter.
 - Unlike FIFO, it does not hold data internally, so latency is very low.
 
+## Feature Matrix
+
+| group         | feature                     | KC705                      | ZedBoard                   |
+|---------------|-----------------------------|----------------------------|----------------------------|
+| Basic spec.   |                             |                            |                            |
+|               | Link modes                  | 1000Base-T                 | 1000Base-T                 |
+|               | Clock frequency             | 125 MHz                    | 125 MHz                    |
+|               | Max MTU                     | 1500                       | 1500                       |
+|               | Supported TCs               | TC0-TC7                    | TC0-TC7                    |
+|               | TC Scheduling (TC6, TC7)    | CBS                        | CBS                        |
+|               | TC Scheduling (Others)      | Strict Priority            | Strict Priority            |
+| Internal FIFO |                             |                            |                            |
+|               | MAC block (\*1)             | 4096 bytes (default)       | 4096 bytes (default)       |
+|               | FIFO block (\*1)            | 4096 bytes (packet)        | 4096 bytes (packet)        |
+|               | Switch with FDB block (\*1) | 2048 bytes (default)       | 2048 bytes (default)       |
+|               | CBS block (\*1)             | 16384 bytes / TC (default) | 16384 bytes / TC (default) |
+| FDB           |                             |                            |                            |
+|               | num of entries              | **256**                    | **64**                     |
+    
+- \*1: The FIFO mode is described in parentheses: "default" means no delay. "packet" means that an entire frame is first stored into FIFO and then forwarded.

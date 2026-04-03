@@ -1,28 +1,28 @@
-# AIST-TSN
+# AIST-TSN Switch
 
-AIST-TSN is an open source project developed by the National Institute of Advanced Industrial Science and Technology (AIST), Japan.
-It introduces the hardware design of an L2 network switch supporting Time Sensitive Networks (TSN).
+This repository is part of the [AIST TSN](https://github.com/CCIRT/aist-tsn) project. It introduces the hardware design of an L2 network switch supporting Time Sensitive Networks (TSN).
 We aim to provide an open platform that can be used as a reference design so scientists can implement their desired functionalities and make the different evaluations and comparisons to highlight the appropriate design choices for a given TSN system.
 
 ## Designs
 
-This repository includes two flavors of an L2 TSN switch supporting two different scheduling algorithms. Both designs are implemented and validated on an AMD Xilinx KC705 FPGA evaluation board which was attached to an [Opsero OP031-2V5 Ethernet FMC](https://ethernetfmc.com/docs/ethernet-fmc/compatibility/#series-7-boards) via the "FMC HPC" connector:
+This repository includes two flavors of an L2 TSN switch supporting two different scheduling algorithms. Both designs are implemented and validated on an AMD Xilinx KC705 FPGA evaluation board and an Avnet ZedBoard which were attached to an [Opsero OP031-2V5 Ethernet FMC](https://ethernetfmc.com/docs/ethernet-fmc/compatibility/#series-7-boards) via FMC connector:
 
-- L2 switch supporting CBS:
+- 1GbE L2 switch supporting CBS:
   - [Specification](./docs/cbs-switch/specification.md)
   - [FPGA design docs](./docs/cbs-switch/design_top.md)
 
 ![alt text](./docs/cbs-switch/img/overwiew_cbs-switch.drawio.svg)
 
-- L2 switch supporting ATS:
+- 1GbE L2 switch supporting ATS:
   - [Specification](./docs/ats-switch/specification.md)
   - [FPGA design docs](./docs/ats-switch/design_top.md)
 
 ![alt text](./docs/ats-switch/img/overwiew_ats-switch.drawio.svg)
 
+
 ## Licensing
 
-Copyright (c) 2024 National Institute of Advanced Industrial Science and Technology (AIST)
+Copyright (c) 2024-2025 National Institute of Advanced Industrial Science and Technology (AIST)
 All rights reserved.
 
 This software is released under the [MIT License](LICENSE).
@@ -30,45 +30,16 @@ This software is released under the [MIT License](LICENSE).
 When using the provided designs in this repository, please refer to the following citations:
 
 CBS:
-> Akram BEN AHMED, Takahiro HIROFUCHI, and Takaaki FUKAI "FPGA-based Network Switch Architecture Supporting Credit Based Shaper for Time Sensitive Networks", The 29th IEEE International Conference on Emerging Technologies and Factory Automation - [ETFA2024](./docs/IEEEAccess_June2024_Published_corrected.pdf), pp. 1-8, Sep 2024
+> Akram BEN AHMED, Takahiro HIROFUCHI, and Takaaki FUKAI "FPGA-based Network Switch Architecture Supporting Credit Based Shaper for Time Sensitive Networks", The 29th IEEE International Conference on Emerging Technologies and Factory Automation (ETFA2024), Sep 2024
+>
+> [Paper](docs/papers/ETFA2024_paper.pdf); [Slides](docs/papers/ETFA2024_slides.pdf)
+
 
 ATS:
 > Akram BEN AHMED, Takahiro HIROFUCHI, and Takaaki FUKAI, "Hardware design and Evaluation of an FPGA-based Network Switch Supporting Asynchronous Traffic Shaping for Time Sensitive Networking", [IEEE Access](https://ieeexplore.ieee.org/document/10658978), vol. 12, pp. 123149-123165, Aug 2024 
+>
+> [Revised paper](docs/papers/IEEEAccess_June2024_Published_corrected.pdf) ([errata](docs/papers/errata.md) corrected)
 
-### Erratum Notice
-Unfortunately, we have discovered the presence of a couple of typos in the above published IEEE Access article.
-We urge readers to pay attention to these typos and refer to the [Corrected version](./docs/IEEEAccess_June2024_Published_corrected.pdf) as they may compromise the correct understanding of our proposed approach. The discovered typos are summarized as follow:
-
-**Page 5, Section IV.A:** 
-> Physical Coding Sublayer (PCS) <br>
-
-Must be corrected to:<br>
-
-> Frame Check Sequence (FCS)
-
-**Page 6, Algoithm 1:** 
-> BucketFullTime = BucketEmptyTime **/** EmptyToFullDuration; <br>
-> SchedulerEligibilityTime = BucketEmptyTime **/** LengthRecoveryDuration; <br>
-
-Must be corrected to:<br>
-
-> BucketFullTime = BucketEmptyTime **+** EmptyToFullDuration; <br>
-> SchedulerEligibilityTime = BucketEmptyTime **+** LengthRecoveryDuration; 
-
-**Page 7, End of Section IV-C-2:**
-> In our prototype, ... the Input Ethernet frame embedded in the **Ethernet** Header, <br>
-
-Must be corrected to:<br>
-
-> In our prototype, ... the Input Ethernet frame embedded in the **IP** Header 
-
-**Page 8, End of Section IV-E:**
-> If EligibilityTime **<** (t), ... <br>
-> EligibilityTime **≥** (t), ...
-
-Must be corrected to:
-> If  (t) **<** EligibilityTime, ... <br>
->  (t) **≥** EligibilityTime, ...
 
 We would be happy to hear from you when you use the deliverables from this repository in your project.
 It will be our encouragement.
@@ -77,20 +48,24 @@ It will be our encouragement.
 
 The design was implemented and validated using the following environment
 
-### Hardware
+### Hardware 
 
-- AMD Kintex 7 FPGA KC705 Evaluation Kit
-- Opsero OP031 Ethernet FMC
-  - Connect to the "FMC HPC" connector on KC705
+- AMD Kintex 7 FPGA KC705 Evaluation Kit or Avnet ZedBoard
+- Opsero OP031-2V5 Ethernet FMC
+  - Connect to the "FMC HPC" connector (KC705)
+  - Connect to the "FMC LPC" connector (ZedBoard)
 
 ### Software
 
 - Ubuntu 20.04.3 LTS
 - Vivado v2022.1
   - Set the `PATH` environment variable for Vivado properly
+  - If you do not plan to generate a bitstream file (i.e., the binary file to program the FPGA) yourself, Lab Edition will be sufficient.
 - CMake 3.14 or later
 
 ## How to build the device
+
+You can download a pre-built bitstream file from [the Releases section](https://github.com/CCIRT/aist-tsn-switch/releases). If you want to generate the bitstream on your own, please follow the steps below.
 
 A license for AMD Tri-mode Ethernet MAC (TEMAC) IP is required to synthesize the Vivado project. You can obtain the evaluation license free of charge.
 
@@ -100,15 +75,46 @@ All designs will be built by running the command below.
 
 ```sh
 cd <Repository top>
+# KC705 design
 ./build_device.sh impl_all
+# ZedBoard design
+./build_device.sh impl_all-zedboard
 ```
 
 Bitstreams will be generated below.
 
 - L2 switch with ATS
-  - `./build-device/vivado/ats-switch/ats-switch.prj/ats-switch.runs/impl_1/design_1_wrapper.bit`
+  - `./build-device/vivado/ats-switch/ats-switch.prj/ats-switch.runs/impl_1/design_1_wrapper.bit` (KC705)
+  - `./build-device/vivado/ats-switch/ats-switch-zedboard.prj/ats-switch-zedboard.runs/impl_1/design_1_wrapper.bit` (ZedBoard)
 - L2 switch with CBS
-  - `build-device/vivado/cbs-switch/cbs-switch.prj/cbs-switch.runs/impl_1/design_1_wrapper.bit`
+  - `build-device/vivado/cbs-switch/cbs-switch.prj/cbs-switch.runs/impl_1/design_1_wrapper.bit` (KC705)
+  - `build-device/vivado/cbs-switch/cbs-switch-zedboard.prj/cbs-switch-zedboard.runs/impl_1/design_1_wrapper.bit` (ZedBoard)
+
+## Notes for each FPGA board
+- KC705
+  - Switch settings
+    - Set DIP switch 2, labeled SW11, to the upper position as shown in the photo.
+    - The status of the other switches does not matter.
+
+      <img src="./docs/img/sw_settings_kc705.jpg" width="25%">
+
+- Zedboard
+  - Switch settings
+    - To match VADJ to OP031-2V5, please short the jumper on J18 to the 2V5 position.
+    - Set the SW1 toggle switch to the upper position as shown in the photo.
+    - The status of the other switches does not matter.
+
+      <img src="./docs/img/sw_settings_zedboard.jpg" width="25%">
+
+
+## Demo
+
+To provide users an easy understanding and simplified intoroduction of TSN, we provide a [Demo](./docs/cbs-switch/with_probes/design_top.md) page where we demonstrate the capabilities of an AIST-TSN switch supporting CBS.
+The provided CBS Switch includes probes allowing users to output data streaming signal from PMOD port.
+The data streaming signal can be used to detect frames with external devices such as an oscilloscope.
+
+ZedBoard is the only board that can be used with this design. KC705 is not supported.
+
 
 ## Directories
 
@@ -117,11 +123,29 @@ Bitstreams will be generated below.
 - [device](device): Source code. See [device/README.md](device/README.md).
 - [docs](docs): Documentation (e.g., design overviews and register maps)
 - [evaluation](evaluation): Evaluation data for the papers. See [evaluation/README.md](evaluation/README.md) for more info.
-- [util](util): Scripts for FPGA register modification
+- [evaluation2](evaluation2): Evaluation data with [EFCC](https://github.com/CCIRT/aist-tsn-efcc). See [evaluation2/README.md](evaluation2/README.md) for more info.
+- [util](util): Scripts for FPGA register modification and python modules to use our switches.
+
+## Release notes
+
+- v2.0_10-2025
+  - Added FPGA design of 1GbE, L2 switch with CBS for ZedBoard
+  - Added FPGA design of 1GbE, L2 switch with ATS for ZedBoard
+  - Added python modules to make our switches easier to use.
+    - Added python scripts to perform register settings that are more useful than TCL scripts.
+    - Obsoleted TCL scripts
+  - Added evaluation scripts and results with our hardware-based measurement tool called EFCC. The evaluation is done in more complicated input patterns, and is easier to reproduce.
+  - Optimized RTL implementation to reduce resources and latency.
+- v1.0_09-2024
+  - Initial release
+  - FPGA design of 1GbE, L2 switch with CBS for KC705
+  - FPGA design of 1GbE, L2 switch with ATS for KC705
+  - Evaluation scripts and results for the papers
+  - TCL script to perform register settings
 
 ## Contact
 
-The Continuum Computing Infrastructure Research Team (CCIRT), the Digital Architecture Research Center (DigiARC), the National Institute of Advanced Industrial Science and Technology (AIST), Japan.
+The Continuum Computing Architecture Research Group (CCARG), Intelligent Platforms Research Institute (IPRI), the National Institute of Advanced Industrial Science and Technology (AIST), Japan.
 
 E-mail: <M-digiarc-ccirt-contact-ml@aist.go.jp>
 

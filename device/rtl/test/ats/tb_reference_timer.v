@@ -9,12 +9,11 @@
 
 module tb_reference_timer;
   parameter VCD_FILENAME = "";
+  parameter integer TIMESTAMP_WIDTH = 72;               // Must be aligned to DATA_WIDTH
+  parameter integer CLOCK_PERIOD_PS = 8000;
 
   localparam integer TIMEOUT_CYCLE = 20000;
   localparam integer RESET_CYCLE = 10;
-
-  localparam TIMESTAMP_WIDTH = 72;
-  localparam CLOCK_PERIOD_PS = 8000;
 
   //-------------------------
   // Port definition

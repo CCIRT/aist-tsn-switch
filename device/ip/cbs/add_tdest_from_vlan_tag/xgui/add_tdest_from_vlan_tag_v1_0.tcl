@@ -1,8 +1,15 @@
+
+# Loading additional proc with user specified bodies to compute parameter values.
+source [file join [file dirname [file dirname [info script]]] gui/add_tdest_from_vlan_tag_v1_0.gtcl]
+
 # Definitional proc to organize widgets for parameters.
 proc init_gui { IPINST } {
   ipgui::add_param $IPINST -name "Component_Name"
   #Adding Page
   set Page_0 [ipgui::add_page $IPINST -name "Page 0"]
+  ipgui::add_param $IPINST -name "C_AXIS_TDATA_WIDTH" -parent ${Page_0}
+  ipgui::add_param $IPINST -name "C_AXIS_TKEEP_WIDTH" -parent ${Page_0}
+  ipgui::add_param $IPINST -name "C_AXIS_TUSER_WIDTH" -parent ${Page_0}
   ipgui::add_param $IPINST -name "C_S_AXI_ADDR_WIDTH" -parent ${Page_0}
   ipgui::add_param $IPINST -name "C_S_AXI_DATA_WIDTH" -parent ${Page_0}
   ipgui::add_param $IPINST -name "INIT_VAL_OF_PRIORITY_MAPPER_0" -parent ${Page_0}
@@ -15,8 +22,41 @@ proc init_gui { IPINST } {
   ipgui::add_param $IPINST -name "INIT_VAL_OF_PRIORITY_MAPPER_7" -parent ${Page_0}
   ipgui::add_param $IPINST -name "INIT_VAL_OF_PRIORITY_MAPPER_DEFAULT" -parent ${Page_0}
   ipgui::add_param $IPINST -name "NUM_OF_REGISTERS" -parent ${Page_0}
+  ipgui::add_param $IPINST -name "OPT_LEVEL" -parent ${Page_0} -widget comboBox
 
 
+}
+
+proc update_PARAM_VALUE.C_AXIS_TKEEP_WIDTH { PARAM_VALUE.C_AXIS_TKEEP_WIDTH PARAM_VALUE.C_AXIS_TDATA_WIDTH } {
+	# Procedure called to update C_AXIS_TKEEP_WIDTH when any of the dependent parameters in the arguments change
+	
+	set C_AXIS_TKEEP_WIDTH ${PARAM_VALUE.C_AXIS_TKEEP_WIDTH}
+	set C_AXIS_TDATA_WIDTH ${PARAM_VALUE.C_AXIS_TDATA_WIDTH}
+	set values(C_AXIS_TDATA_WIDTH) [get_property value $C_AXIS_TDATA_WIDTH]
+	set_property value [gen_USERPARAMETER_C_AXIS_TKEEP_WIDTH_VALUE $values(C_AXIS_TDATA_WIDTH)] $C_AXIS_TKEEP_WIDTH
+}
+
+proc validate_PARAM_VALUE.C_AXIS_TKEEP_WIDTH { PARAM_VALUE.C_AXIS_TKEEP_WIDTH } {
+	# Procedure called to validate C_AXIS_TKEEP_WIDTH
+	return true
+}
+
+proc update_PARAM_VALUE.C_AXIS_TDATA_WIDTH { PARAM_VALUE.C_AXIS_TDATA_WIDTH } {
+	# Procedure called to update C_AXIS_TDATA_WIDTH when any of the dependent parameters in the arguments change
+}
+
+proc validate_PARAM_VALUE.C_AXIS_TDATA_WIDTH { PARAM_VALUE.C_AXIS_TDATA_WIDTH } {
+	# Procedure called to validate C_AXIS_TDATA_WIDTH
+	return true
+}
+
+proc update_PARAM_VALUE.C_AXIS_TUSER_WIDTH { PARAM_VALUE.C_AXIS_TUSER_WIDTH } {
+	# Procedure called to update C_AXIS_TUSER_WIDTH when any of the dependent parameters in the arguments change
+}
+
+proc validate_PARAM_VALUE.C_AXIS_TUSER_WIDTH { PARAM_VALUE.C_AXIS_TUSER_WIDTH } {
+	# Procedure called to validate C_AXIS_TUSER_WIDTH
+	return true
 }
 
 proc update_PARAM_VALUE.C_S_AXI_ADDR_WIDTH { PARAM_VALUE.C_S_AXI_ADDR_WIDTH } {
@@ -127,6 +167,15 @@ proc validate_PARAM_VALUE.NUM_OF_REGISTERS { PARAM_VALUE.NUM_OF_REGISTERS } {
 	return true
 }
 
+proc update_PARAM_VALUE.OPT_LEVEL { PARAM_VALUE.OPT_LEVEL } {
+	# Procedure called to update OPT_LEVEL when any of the dependent parameters in the arguments change
+}
+
+proc validate_PARAM_VALUE.OPT_LEVEL { PARAM_VALUE.OPT_LEVEL } {
+	# Procedure called to validate OPT_LEVEL
+	return true
+}
+
 
 proc update_MODELPARAM_VALUE.INIT_VAL_OF_PRIORITY_MAPPER_0 { MODELPARAM_VALUE.INIT_VAL_OF_PRIORITY_MAPPER_0 PARAM_VALUE.INIT_VAL_OF_PRIORITY_MAPPER_0 } {
 	# Procedure called to set VHDL generic/Verilog parameter value(s) based on TCL parameter value
@@ -186,5 +235,25 @@ proc update_MODELPARAM_VALUE.NUM_OF_REGISTERS { MODELPARAM_VALUE.NUM_OF_REGISTER
 proc update_MODELPARAM_VALUE.C_S_AXI_ADDR_WIDTH { MODELPARAM_VALUE.C_S_AXI_ADDR_WIDTH PARAM_VALUE.C_S_AXI_ADDR_WIDTH } {
 	# Procedure called to set VHDL generic/Verilog parameter value(s) based on TCL parameter value
 	set_property value [get_property value ${PARAM_VALUE.C_S_AXI_ADDR_WIDTH}] ${MODELPARAM_VALUE.C_S_AXI_ADDR_WIDTH}
+}
+
+proc update_MODELPARAM_VALUE.OPT_LEVEL { MODELPARAM_VALUE.OPT_LEVEL PARAM_VALUE.OPT_LEVEL } {
+	# Procedure called to set VHDL generic/Verilog parameter value(s) based on TCL parameter value
+	set_property value [get_property value ${PARAM_VALUE.OPT_LEVEL}] ${MODELPARAM_VALUE.OPT_LEVEL}
+}
+
+proc update_MODELPARAM_VALUE.C_AXIS_TDATA_WIDTH { MODELPARAM_VALUE.C_AXIS_TDATA_WIDTH PARAM_VALUE.C_AXIS_TDATA_WIDTH } {
+	# Procedure called to set VHDL generic/Verilog parameter value(s) based on TCL parameter value
+	set_property value [get_property value ${PARAM_VALUE.C_AXIS_TDATA_WIDTH}] ${MODELPARAM_VALUE.C_AXIS_TDATA_WIDTH}
+}
+
+proc update_MODELPARAM_VALUE.C_AXIS_TKEEP_WIDTH { MODELPARAM_VALUE.C_AXIS_TKEEP_WIDTH PARAM_VALUE.C_AXIS_TKEEP_WIDTH } {
+	# Procedure called to set VHDL generic/Verilog parameter value(s) based on TCL parameter value
+	set_property value [get_property value ${PARAM_VALUE.C_AXIS_TKEEP_WIDTH}] ${MODELPARAM_VALUE.C_AXIS_TKEEP_WIDTH}
+}
+
+proc update_MODELPARAM_VALUE.C_AXIS_TUSER_WIDTH { MODELPARAM_VALUE.C_AXIS_TUSER_WIDTH PARAM_VALUE.C_AXIS_TUSER_WIDTH } {
+	# Procedure called to set VHDL generic/Verilog parameter value(s) based on TCL parameter value
+	set_property value [get_property value ${PARAM_VALUE.C_AXIS_TUSER_WIDTH}] ${MODELPARAM_VALUE.C_AXIS_TUSER_WIDTH}
 }
 

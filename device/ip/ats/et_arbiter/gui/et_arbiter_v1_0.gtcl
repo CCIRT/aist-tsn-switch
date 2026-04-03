@@ -1,0 +1,2 @@
+# This file is automatically written.  Do not modify.
+proc gen_USERPARAMETER_KEEP_WIDTH_VALUE {DATA_WIDTH } {expr $DATA_WIDTH / 8}

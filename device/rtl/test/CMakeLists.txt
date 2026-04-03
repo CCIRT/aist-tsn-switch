@@ -8,3 +8,4 @@ set(UTIL_FILES "${CMAKE_SOURCE_DIR}/rtl/test/util/pcap_to_stream.v"
 
 add_subdirectory(ats)
 add_subdirectory(cbs)
+add_subdirectory(util)

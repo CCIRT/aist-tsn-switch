@@ -8,6 +8,7 @@ TARGET_VIVADO_VERSION=2022.1
 
 #---------------------------------------------------
 all_targets="impl_ats-switch impl_cbs-switch"
+all_targets_zedboard="impl_ats-switch-zedboard impl_cbs-switch-zedboard"
 
 _usage() {
     echo -e "Usage: $0 [-b <Dir>] [-h] [-V <Vivado Root Dir>] <make targets>..."
@@ -23,6 +24,21 @@ _usage() {
     echo -e "\t                   impl_cbs-switch: build the design of L2 switch with CBS"
     echo -e "\t                   open_ats-switch: open the design of L2 switch with ATS"
     echo -e "\t                   open_cbs-switch: open the design of L2 switch with CBS"
+    echo -e "\t                     - L2 switch with ATS (KC705)"
+    echo -e "\t                     - L2 switch with CBS (KC705)"
+    echo -e "\t                   impl_all-zedboard: build following designs"
+    echo -e "\t                     - L2 switch with ATS (ZedBoard)"
+    echo -e "\t                     - L2 switch with CBS (ZedBoard)"
+    echo -e "\t                   impl_ats-switch: build the design of L2 switch with ATS for KC705"
+    echo -e "\t                   impl_cbs-switch: build the design of L2 switch with CBS for KC705"
+    echo -e "\t                   impl_ats-switch-zedboard: build the design of L2 switch with ATS for ZedBoard"
+    echo -e "\t                   impl_cbs-switch-zedboard: build the design of L2 switch with CBS for ZedBoard"
+    echo -e "\t                   impl_cbs-switch-zedboard-with-probes: build the design of L2 switch with CBS for ZedBoard with probes"
+    echo -e "\t                   open_ats-switch: open the design of L2 switch with ATS for KC705"
+    echo -e "\t                   open_cbs-switch: open the design of L2 switch with CBS for KC705"
+    echo -e "\t                   open_ats-switch-zedboard: open the design of L2 switch with ATS for ZedBoard"
+    echo -e "\t                   open_cbs-switch-zedboard: open the design of L2 switch with CBS for ZedBoard"
+    echo -e "\t                   open_cbs-switch-zedboard-with-probes: open the design of L2 switch with CBS for ZedBoard with probes"
     echo -e "\t                   run_tb_ats_modules: run test bench for ATS modules"
     echo -e "\t                   run_tb_cbs_modules: run test bench for CBS modules"
     echo -e "\t                   run_tb_<test_name>: run test bench of the specified module"
@@ -122,6 +138,8 @@ make_target=$(echo $make_target)
 if [ ! -z $make_target ]; then
   if [ "$make_target" = "impl_all" ]; then
     make $all_targets
+  elif [ "$make_target" = "impl_all-zedboard" ]; then
+    make $all_targets_zedboard
   else
     make $make_target
   fi

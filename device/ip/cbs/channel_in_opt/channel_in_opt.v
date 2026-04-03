@@ -1,0 +1,1 @@
+../../../rtl/src/cbs/channel_in_opt.v

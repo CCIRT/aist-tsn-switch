@@ -1,0 +1,20 @@
+41c41
+< module mactable #(
+---
+> module mactable_mod #(
+43c43
+< 	parameter PORT_WIDTH = 8,
+---
+> 	parameter PORT_WIDTH = 4,
+56c56
+< 	output wire [3:0]m_axis_table_response_tdata,
+---
+> 	output wire [7:0]m_axis_table_response_tdata,
+110c110
+< assign m_axis_table_response_tdata = status;
+---
+> assign m_axis_table_response_tdata = {4'h0, status};
+221c221
+< mactable_dpcam #(
+---
+> mactable_dpcam_mod #(

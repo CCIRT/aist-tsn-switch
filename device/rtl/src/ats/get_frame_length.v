@@ -6,11 +6,13 @@
 `default_nettype none
 
 module get_frame_length #(
-  parameter DATA_WIDTH = 8,
-  parameter FRAME_LENGTH_WIDTH = 16,                  // Must be aligned to DATA_WIDTH
-  parameter ETHERNET_FRAME_WIDTH = 1600 * DATA_WIDTH, // Must be aligned to DATA_WIDTH
+  parameter C_AXIS_TDATA_WIDTH = 8,
+  parameter C_AXIS_TKEEP_WIDTH = C_AXIS_TDATA_WIDTH / 8,
+  parameter FRAME_LENGTH_WIDTH = 16,
+  parameter ETHERNET_FRAME_WIDTH = 1600,
   parameter ENABLE_TIMESTAMP_FOOTER = 1,
-  parameter TIMESTAMP_WIDTH = 72                      // Must be aligned to DATA_WIDTH
+  parameter TIMESTAMP_WIDTH = 72,
+  parameter L1_LENGTH_OFFSET = 24                     // Offset to modify L2 frame length to L1 frame length. Default to 24 (FCS + preamble + IPG)
 ) (
   // clock, negative-reset
   input  wire clk,
@@ -18,17 +20,19 @@ module get_frame_length #(
 
   // AXI4-Stream Data In
   // [Ethernet Frame]/([Timestamp])
-  input  wire [DATA_WIDTH-1:0] s_axis_tdata,
-  input  wire                  s_axis_tvalid,
-  output wire                  s_axis_tready,
-  input  wire                  s_axis_tlast,
+  input  wire [C_AXIS_TDATA_WIDTH-1:0] s_axis_tdata,
+  input  wire [C_AXIS_TKEEP_WIDTH-1:0] s_axis_tkeep,
+  input  wire                          s_axis_tvalid,
+  output wire                          s_axis_tready,
+  input  wire                          s_axis_tlast,
 
   // AXI4-Stream Data Out
   // [Ethernet Frame]/([Timestamp])
-  output wire [DATA_WIDTH-1:0] m_axis_tdata,
-  output wire                  m_axis_tvalid,
-  input  wire                  m_axis_tready,
-  output wire                  m_axis_tlast,
+  output wire [C_AXIS_TDATA_WIDTH-1:0] m_axis_tdata,
+  output wire [C_AXIS_TKEEP_WIDTH-1:0] m_axis_tkeep,
+  output wire                          m_axis_tvalid,
+  input  wire                          m_axis_tready,
+  output wire                          m_axis_tlast,
 
   // AXI4-Stream Frame length Out
   // [Frame length]
@@ -38,18 +42,29 @@ module get_frame_length #(
 );
 
   // Parameter for ethernet_frame
-  localparam ETHERNET_FRAME_BEAT_NUM = ETHERNET_FRAME_WIDTH / DATA_WIDTH;
-  localparam ETHERNET_FRAME_COUNTER_WIDTH = $clog2(ETHERNET_FRAME_BEAT_NUM);
+  localparam ETHERNET_FRAME_COUNTER_WIDTH = $clog2(ETHERNET_FRAME_WIDTH);
   // Parameter for timestamp
   localparam TIMESTAMP_BYTES = (ENABLE_TIMESTAMP_FOOTER)? TIMESTAMP_WIDTH / 8: 0;
   // AXI4-Stream connection
   assign m_axis_tdata  = s_axis_tdata;
+  assign m_axis_tkeep  = s_axis_tkeep;
   assign m_axis_tvalid = (state == STATE_COUNT_FRAME_LENGTH)? s_axis_tvalid: 1'b0;
   assign s_axis_tready = (state == STATE_COUNT_FRAME_LENGTH)? m_axis_tready: 1'b0;
   assign m_axis_tlast  = s_axis_tlast;
 
   assign m_axis_frame_length_tdata  = ethernet_frame_counter;
   assign m_axis_frame_length_tvalid = (state == STATE_WRITE_FRAME_LENGTH);
+
+  reg [$clog2(C_AXIS_TKEEP_WIDTH):0]           num_bytes;
+  integer                              i;
+  always @ (*) begin
+    num_bytes = 0;
+    for (i = 0; i < C_AXIS_TKEEP_WIDTH; i = i + 1) begin
+      if (s_axis_tkeep[i]) begin
+        num_bytes = i + 1;
+      end
+    end
+  end
 
   // Main state
   reg [STATE_WIDTH-1:0] state = 'd0;
@@ -61,17 +76,17 @@ module get_frame_length #(
   // State machine
   always @ (posedge clk) begin
     if (!rstn) begin
-      ethernet_frame_counter <= 'd0;
+      ethernet_frame_counter <= L1_LENGTH_OFFSET;
       state <= STATE_COUNT_FRAME_LENGTH;
     end else begin
       case (state)
         STATE_COUNT_FRAME_LENGTH: begin
           if (s_axis_tvalid & s_axis_tready) begin
             if (s_axis_tlast) begin
-              ethernet_frame_counter <= ethernet_frame_counter + 'd1 - TIMESTAMP_BYTES;
+              ethernet_frame_counter <= ethernet_frame_counter + num_bytes - TIMESTAMP_BYTES;
               state <= STATE_WRITE_FRAME_LENGTH;
             end else begin
-              ethernet_frame_counter <= ethernet_frame_counter + 'd1;
+              ethernet_frame_counter <= ethernet_frame_counter + C_AXIS_TKEEP_WIDTH;
               // Keep state
             end
           end else begin
@@ -80,14 +95,14 @@ module get_frame_length #(
         end
         STATE_WRITE_FRAME_LENGTH: begin
           if (m_axis_frame_length_tvalid & m_axis_frame_length_tready) begin
-            ethernet_frame_counter <= 'd0;
+            ethernet_frame_counter <= L1_LENGTH_OFFSET;
             state <= STATE_COUNT_FRAME_LENGTH;
           end else begin
             // Do nothing
           end
         end
         default: begin
-          ethernet_frame_counter <= 'd0;
+          ethernet_frame_counter <= L1_LENGTH_OFFSET;
           state <= STATE_COUNT_FRAME_LENGTH;
         end
       endcase

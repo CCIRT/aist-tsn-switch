@@ -1,0 +1,2 @@
+# This file is automatically written.  Do not modify.
+proc gen_USERPARAMETER_C_AXIS_TKEEP_WIDTH_VALUE {C_AXIS_TDATA_WIDTH } {expr $C_AXIS_TDATA_WIDTH / 8}
