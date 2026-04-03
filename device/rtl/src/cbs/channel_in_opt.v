@@ -29,12 +29,12 @@ module channel_in_opt #(
   output wire                           m_axis_tlast,
   // Table read request
   output wire [95:0]                    m_axis_table_request_tdata,
-  output wire [PORT_WIDTH-1:0]          m_axis_table_request_tuser,
+  output wire [PORT_WIDTH:0]            m_axis_table_request_tuser,
   output wire                           m_axis_table_request_tvalid,
   input wire                            m_axis_table_request_tready,
   // Table read response
   input wire [7:0]                      s_axis_table_response_tdata,
-  input wire [PORT_WIDTH*2-1:0]         s_axis_table_response_tuser,
+  input wire [PORT_WIDTH*2:0]           s_axis_table_response_tuser,
   input wire                            s_axis_table_response_tvalid,
   // Status: {frames, dropped, error_crc, error_len}
   output wire [127:0]                   m_axis_status_tdata,
@@ -342,7 +342,7 @@ module channel_in_receiver #(
   output reg                          m_axis_broadcast_tlast,
   // Table read request
   output reg [95:0]                   m_axis_table_request_tdata,
-  output reg [PORT_WIDTH-1:0]         m_axis_table_request_tuser,
+  output reg [PORT_WIDTH:0]           m_axis_table_request_tuser,
   output reg                          m_axis_table_request_tvalid,
   input wire                          m_axis_table_request_tready
 );
@@ -439,6 +439,7 @@ module channel_in_receiver #(
   //----------------------
   wire is_selecting = (state == STATE_SELECTING);
   wire is_regular = (state == STATE_REGULAR);
+  wire is_broadcast = (state == STATE_BROADCAST);
   reg  d_is_selecting;
   always @(posedge aclk) begin
     d_is_selecting <= is_selecting;
@@ -450,10 +451,15 @@ module channel_in_receiver #(
       m_axis_table_request_tvalid <= 0;
       m_axis_table_request_tuser <= 0;
     end else begin
-      if (is_regular && d_is_selecting) begin
+      if ((is_regular || is_broadcast) && d_is_selecting) begin
         m_axis_table_request_tdata <= words[0 +: MAC_WIDTH * 2];
         m_axis_table_request_tvalid <= 1'b1;
-        m_axis_table_request_tuser <= PORT_ADDR;
+        m_axis_table_request_tuser[PORT_WIDTH-1:0] <= PORT_ADDR;
+        if (is_regular) begin
+          m_axis_table_request_tuser[PORT_WIDTH] <= 1'b1;
+        end else begin
+          m_axis_table_request_tuser[PORT_WIDTH] <= 1'b0;
+        end
       end else if (!stall_by_req) begin
         // request is accepted
         m_axis_table_request_tvalid <= 1'b0;
@@ -543,7 +549,7 @@ module channel_in_regular #(
   input wire                            s_axis_tlast,
   // Table read response
   input wire [7:0]                      s_axis_table_response_tdata,
-  input wire [PORT_WIDTH*2-1:0]         s_axis_table_response_tuser,
+  input wire [PORT_WIDTH*2:0]           s_axis_table_response_tuser,
   input wire                            s_axis_table_response_tvalid,
   // Outcome frames
   output reg [C_AXIS_TDATA_WIDTH-1:0]   m_axis_tdata,
@@ -557,14 +563,15 @@ module channel_in_regular #(
   // worst case: 1500 bytes -> 64 bytes * N
   // received N responses when sending 1500 bytes
   wire [7:0]                            tmp_table_response_tdata;
-  wire [PORT_WIDTH*2-1:0]               tmp_table_response_tuser;
+  wire [PORT_WIDTH*2:0]                 tmp_table_response_tuser;
   wire                                  tmp_table_response_tvalid;
   wire                                  tmp_table_response_tready;
 
   // only accept responses which is sent to this port.
-  wire [PORT_WIDTH-1:0]                port_src_in = s_axis_table_response_tuser[PORT_WIDTH +: PORT_WIDTH];
-  wire                                 accept_response = s_axis_table_response_tvalid && (port_src_in == PORT_ADDR);
-  channel_in_fifo #(.DWIDTH(8 + PORT_WIDTH * 2),
+  wire [PORT_WIDTH-1:0]                 port_src_in     = s_axis_table_response_tuser[PORT_WIDTH +: PORT_WIDTH];
+  wire                                  not_broadcast   = s_axis_table_response_tuser[PORT_WIDTH*2];
+  wire                                  accept_response = s_axis_table_response_tvalid && (port_src_in == PORT_ADDR) && not_broadcast;
+  channel_in_fifo #(.DWIDTH(8 + PORT_WIDTH * 2 + 1),
                     .AWIDTH(6 + $clog2(C_AXIS_TKEEP_WIDTH)))
   channel_in_fifo_inst (
                         // Outputs
@@ -598,7 +605,7 @@ module channel_in_regular #(
     end else begin
       case (state)
         ST_WAIT_RESPONSE: begin
-          if (tmp_table_response_tvalid && tmp_table_response_tready) begin
+          if (tmp_table_response_tvalid && tmp_table_response_tready && tmp_table_response_tuser[PORT_WIDTH*2]) begin
             if (status == RESP_OK) begin
               if (port_dst == PORT_ADDR) begin
                 state <= ST_DROP;

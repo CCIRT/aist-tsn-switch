@@ -256,7 +256,7 @@ module tb_channel_in_receiver
   wire                          m_axis_broadcast_tlast;
   // Table read request
   wire [95:0]                   m_axis_table_request_tdata;
-  wire [PORT_WIDTH-1:0]         m_axis_table_request_tuser;
+  wire [PORT_WIDTH:0]           m_axis_table_request_tuser;
   wire                          m_axis_table_request_tvalid;
   reg                           m_axis_table_request_tready;
 
@@ -441,7 +441,7 @@ module tb_channel_in_receiver
       $display("ERROR: expected src_mac: 0x%012x", src_mac);
       `FATAL;
     end
-    if (m_axis_table_request_tuser != PORT_ADDR) begin
+    if (m_axis_table_request_tuser[PORT_WIDTH-1:0] != PORT_ADDR) begin
       $display("ERROR: expected port_addr: %d", PORT_ADDR);
       `FATAL;
     end
@@ -484,6 +484,9 @@ module tb_channel_in_receiver
       end
       begin
         pop_broadcast(48'h001122334455, 48'hffffffffffff, 1500, 0);
+      end
+      begin
+        pop_request(48'h001122334455, 48'hffffffffffff, 0);
       end
     join
 
@@ -580,6 +583,11 @@ module tb_channel_in_receiver
         pop_broadcast(48'h001122334455, 48'hffffffffffff, 64, 3);
         pop_broadcast(48'h001122334455, 48'hffffffffffff, 64, 3);
       end
+      begin
+        pop_request(48'h001122334455, 48'hffffffffffff, 0);
+        pop_request(48'h001122334455, 48'hffffffffffff, 0);
+        pop_request(48'h001122334455, 48'hffffffffffff, 0);
+      end
     join
 
     test_done <= 1;
@@ -605,7 +613,7 @@ module tb_channel_in_receiver
                          .m_axis_broadcast_tvalid    (m_axis_broadcast_tvalid),
                          .m_axis_broadcast_tlast     (m_axis_broadcast_tlast),
                          .m_axis_table_request_tdata (m_axis_table_request_tdata[95:0]),
-                         .m_axis_table_request_tuser (m_axis_table_request_tuser[PORT_WIDTH-1:0]),
+                         .m_axis_table_request_tuser (m_axis_table_request_tuser[PORT_WIDTH:0]),
                          .m_axis_table_request_tvalid(m_axis_table_request_tvalid),
                          // Inputs
                          .aclk                       (aclk),
@@ -640,7 +648,7 @@ module tb_channel_in_regular
   reg                            s_axis_tlast;
   // Table read response
   reg [7:0]                      s_axis_table_response_tdata;
-  reg [PORT_WIDTH*2-1:0]         s_axis_table_response_tuser;
+  reg [PORT_WIDTH*2:0]           s_axis_table_response_tuser;
   reg                            s_axis_table_response_tvalid;
   // Outcome frames
   wire [C_AXIS_TDATA_WIDTH-1:0]  m_axis_tdata;
@@ -684,11 +692,11 @@ module tb_channel_in_regular
     end
 
     s_axis_table_response_tdata <= status;
-    s_axis_table_response_tuser <= {src_port, dst_port};
+    s_axis_table_response_tuser <= {1'b1, src_port, dst_port}; // not broadcast -> process response
     s_axis_table_response_tvalid <= 1;
     @(posedge aclk);
     s_axis_table_response_tdata <= status;
-    s_axis_table_response_tuser <= {src_port, dst_port};
+    s_axis_table_response_tuser <= {1'b1, src_port, dst_port}; // not broadcast -> process response
     s_axis_table_response_tvalid <= 0;
   endtask
 
@@ -912,7 +920,7 @@ module tb_channel_in_regular
                         .s_axis_tvalid               (s_axis_tvalid),
                         .s_axis_tlast                (s_axis_tlast),
                         .s_axis_table_response_tdata (s_axis_table_response_tdata[7:0]),
-                        .s_axis_table_response_tuser (s_axis_table_response_tuser[PORT_WIDTH*2-1:0]),
+                        .s_axis_table_response_tuser (s_axis_table_response_tuser[PORT_WIDTH*2:0]),
                         .s_axis_table_response_tvalid(s_axis_table_response_tvalid),
                         .m_axis_tready               (m_axis_tready));
 endmodule
@@ -1448,12 +1456,12 @@ module tb_channel_in_opt_all
   wire                           m_axis_tlast;
   // Table read request
   wire [95:0]                    m_axis_table_request_tdata;
-  wire [PORT_WIDTH-1:0]          m_axis_table_request_tuser;
+  wire [PORT_WIDTH:0]            m_axis_table_request_tuser;
   wire                           m_axis_table_request_tvalid;
   reg                            m_axis_table_request_tready;
   // Table read response
   reg [7:0]                      s_axis_table_response_tdata;
-  reg [PORT_WIDTH*2-1:0]         s_axis_table_response_tuser;
+  reg [PORT_WIDTH*2:0]           s_axis_table_response_tuser;
   reg                            s_axis_table_response_tvalid;
   // Status: {frames, dropped, error_crc, error_len}
   wire [127:0]                   m_axis_status_tdata;
@@ -1527,7 +1535,7 @@ module tb_channel_in_opt_all
       $display("ERROR: expected src_mac: 0x%012x", src_mac);
       `FATAL;
     end
-    if (m_axis_table_request_tuser != PORT_ADDR) begin
+    if (m_axis_table_request_tuser[PORT_WIDTH-1:0] != PORT_ADDR) begin
       $display("ERROR: expected port_addr: %d", PORT_ADDR);
       `FATAL;
     end
@@ -1538,7 +1546,47 @@ module tb_channel_in_opt_all
     end
 
     s_axis_table_response_tdata <= status;
-    s_axis_table_response_tuser <= {src_port, dst_port};
+    s_axis_table_response_tuser <= {1'b1, src_port, dst_port}; // not broadcast -> process response
+    s_axis_table_response_tvalid <= 1;
+    @(posedge aclk);
+    s_axis_table_response_tvalid <= 0;
+  endtask
+
+  task process_request_broadcast(input [47:0] src_mac, input [47:0] dst_mac, input [7:0] status, input [PORT_WIDTH-1:0] src_port, input [PORT_WIDTH-1:0] dst_port, input [31:0] delay_cycles, input [31:0] resp_delay_cycles);
+    for (int delay = 0; delay < delay_cycles; delay = delay + 1) begin
+      @(posedge aclk);
+    end
+
+    m_axis_table_request_tready <= 1;
+    @(posedge aclk);
+    while (!m_axis_table_request_tvalid) begin
+      @(posedge aclk);
+    end
+    m_axis_table_request_tready <= 0;
+    @(posedge aclk);
+
+    // $display("all: send request. src_mac=0x%012x, dst_mac=0x%012x, port=%d",
+    //          m_axis_table_request_tdata[48 +: 48], m_axis_table_request_tdata[0 +: 48], m_axis_table_request_tuser);
+    if (m_axis_table_request_tdata[0 +: 48] != dst_mac) begin
+      $display("ERROR: expected dst_mac: 0x%012x", dst_mac);
+      `FATAL;
+    end
+    if (m_axis_table_request_tdata[48 +: 48] != src_mac) begin
+      $display("ERROR: expected src_mac: 0x%012x", src_mac);
+      `FATAL;
+    end
+    if (m_axis_table_request_tuser[PORT_WIDTH-1:0] != PORT_ADDR) begin
+      $display("ERROR: expected port_addr: %d", PORT_ADDR);
+      `FATAL;
+    end
+
+    // send response
+    for (int delay = 0; delay < resp_delay_cycles; delay = delay + 1) begin
+      @(posedge aclk);
+    end
+
+    s_axis_table_response_tdata <= status;
+    s_axis_table_response_tuser <= {1'b0, src_port, dst_port}; // broadcast -> ignore response
     s_axis_table_response_tvalid <= 1;
     @(posedge aclk);
     s_axis_table_response_tvalid <= 0;
@@ -1653,7 +1701,8 @@ module tb_channel_in_opt_all
         push_frame(src_mac, dst_broadcast, 1500, 0);
       end
       begin
-        // no resolve request
+        // 10 cycle delay for resolving destination port
+        process_request_broadcast(src_mac, dst_broadcast, TABLE_STATUS_OK, PORT_ADDR, PORT_ADDR, 0, 10);
       end
       begin
         for (int port = 0; port <= PORT_HIGH; port += 1) begin
@@ -1775,7 +1824,7 @@ module tb_channel_in_opt_all
                     .m_axis_tvalid               (m_axis_tvalid),
                     .m_axis_tlast                (m_axis_tlast),
                     .m_axis_table_request_tdata  (m_axis_table_request_tdata[95:0]),
-                    .m_axis_table_request_tuser  (m_axis_table_request_tuser[PORT_WIDTH-1:0]),
+                    .m_axis_table_request_tuser  (m_axis_table_request_tuser[PORT_WIDTH:0]),
                     .m_axis_table_request_tvalid (m_axis_table_request_tvalid),
                     .m_axis_status_tdata         (m_axis_status_tdata[127:0]),
                     .m_axis_status_tvalid        (m_axis_status_tvalid),
@@ -1789,7 +1838,7 @@ module tb_channel_in_opt_all
                     .m_axis_tready               (m_axis_tready),
                     .m_axis_table_request_tready (m_axis_table_request_tready),
                     .s_axis_table_response_tdata (s_axis_table_response_tdata[7:0]),
-                    .s_axis_table_response_tuser (s_axis_table_response_tuser[PORT_WIDTH*2-1:0]),
+                    .s_axis_table_response_tuser (s_axis_table_response_tuser[PORT_WIDTH*2:0]),
                     .s_axis_table_response_tvalid(s_axis_table_response_tvalid));
 
 endmodule

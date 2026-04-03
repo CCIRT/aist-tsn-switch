@@ -6,15 +6,33 @@
 < 	parameter PORT_WIDTH = 8,
 ---
 > 	parameter PORT_WIDTH = 4,
-56c56
+52c52
+< 	input wire [PORT_WIDTH-1:0]s_axis_table_request_tuser,
+---
+> 	input wire [PORT_WIDTH:0]s_axis_table_request_tuser,
+56,57c56,57
 < 	output wire [3:0]m_axis_table_response_tdata,
+< 	output wire [PORT_WIDTH*2-1:0]m_axis_table_response_tuser,
 ---
 > 	output wire [7:0]m_axis_table_response_tdata,
-110c110
+> 	output wire [PORT_WIDTH*2:0]m_axis_table_response_tuser,
+91a92
+> reg not_broadcast;
+110,111c111,112
 < assign m_axis_table_response_tdata = status;
+< assign m_axis_table_response_tuser = {port_src,port_dst};
 ---
 > assign m_axis_table_response_tdata = {4'h0, status};
-221c221
+> assign m_axis_table_response_tuser = {not_broadcast, port_src, port_dst};
+135a137
+> 		not_broadcast <= 1'b1;
+142c144
+< 				port_src <= s_axis_table_request_tuser;
+---
+> 				port_src <= s_axis_table_request_tuser[PORT_WIDTH-1:0];
+144a147
+> 				not_broadcast <= s_axis_table_request_tuser[PORT_WIDTH];
+221c224
 < mactable_dpcam #(
 ---
 > mactable_dpcam_mod #(
