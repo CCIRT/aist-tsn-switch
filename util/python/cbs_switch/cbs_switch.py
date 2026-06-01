@@ -115,7 +115,7 @@ class CbsSwitch:
         Args:
             xsdb (pyxsdb.PyXsdb): PyXsdb object (connect() method must be called before)
             xsdb_target (int): The AXI JTAG target of CBS Switch.
-            design (str): Design name. Available designs: ['kc705', 'zedboard', 'zedboard_with_probes']
+            design (str): Design name. Available designs: ['kc705', 'zedboard', 'zedboard_with_probes', 'u45n']
         """
         self._xsdb = xsdb
         self._xsdb_target = xsdb_target
@@ -123,7 +123,8 @@ class CbsSwitch:
         avail_designs = {
             'kc705': default_cbs_switch_address_table(),
             'zedboard': default_cbs_switch_address_table_zedboard(),
-            'zedboard_with_probes': cbs_switch_address_table_zedboard_with_probes()
+            'zedboard_with_probes': cbs_switch_address_table_zedboard_with_probes(),
+            'u45n': default_cbs_switch_address_table_10g()
         }
 
         if design not in avail_designs:

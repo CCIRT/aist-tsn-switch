@@ -4,3 +4,7 @@
 [submodule "3rdparty/plget"]
 	path = 3rdparty/plget
 	url = https://github.com/ikhorn/plget.git
+[submodule "3rdparty/xg_mac"]
+	path = 3rdparty/xg_mac
+	url = https://github.com/fixstars/xg_mac
+	ignore = dirty

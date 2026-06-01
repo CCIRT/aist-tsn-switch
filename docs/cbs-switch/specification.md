@@ -35,3 +35,22 @@ This document describes specifications of the 1GbE, 4-port L2 switch with CBS im
 
 Please use [our utility scripts](../../util).
 
+# Specifications of 10GbE cbs-switch
+
+This document describes specifications of the 10GbE, 4-port L2 switch with CBS implemented on FPGA.
+
+## Basic specifications
+
+Same as the 1GbE version except for the following.
+- Support 10000BASE-R
+  - Maximum designed speed is 10 Gbps
+- Does not support auto negotiation
+
+### CBS behavior
+
+Same as the 1GbE version.
+
+## How to perform register settings
+
+Please use [our utility scripts](../../util).
+

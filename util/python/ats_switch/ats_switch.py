@@ -22,14 +22,15 @@ class AtsSwitch:
         Args:
             xsdb (pyxsdb.PyXsdb): PyXsdb object (connect() method must be called before)
             xsdb_target (int): The AXI JTAG target of ATS Switch.
-            design (str): Design name. Available designs: ['kc705', 'zedboard']
+            design (str): Design name. Available designs: ['kc705', 'zedboard', 'u45n']
         """
         self._xsdb = xsdb
         self._xsdb_target = xsdb_target
 
         avail_designs = {
             'kc705': ats_switch_address_table_1g(),
-            'zedboard': ats_switch_address_table_1g_zedboard()
+            'zedboard': ats_switch_address_table_1g_zedboard(),
+            'u45n': ats_switch_address_table_10g()
         }
 
         if design not in avail_designs:

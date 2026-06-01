@@ -9,6 +9,7 @@ TARGET_VIVADO_VERSION=2022.1
 #---------------------------------------------------
 all_targets="impl_ats-switch impl_cbs-switch"
 all_targets_zedboard="impl_ats-switch-zedboard impl_cbs-switch-zedboard"
+all_targets_10g="impl_ats-switch-10g impl_cbs-switch-10g"
 
 _usage() {
     echo -e "Usage: $0 [-b <Dir>] [-h] [-V <Vivado Root Dir>] <make targets>..."
@@ -18,27 +19,28 @@ _usage() {
     echo -e "\t-h, --help     : show this help"
     echo -e "\t<make targets> : Make target list"
     echo -e "\t                   impl_all: build following designs"
-    echo -e "\t                     - L2 switch with ATS"
-    echo -e "\t                     - L2 switch with CBS"
-    echo -e "\t                   impl_ats-switch: build the design of L2 switch with ATS"
-    echo -e "\t                   impl_cbs-switch: build the design of L2 switch with CBS"
-    echo -e "\t                   open_ats-switch: open the design of L2 switch with ATS"
-    echo -e "\t                   open_cbs-switch: open the design of L2 switch with CBS"
     echo -e "\t                     - L2 switch with ATS (KC705)"
     echo -e "\t                     - L2 switch with CBS (KC705)"
     echo -e "\t                   impl_all-zedboard: build following designs"
     echo -e "\t                     - L2 switch with ATS (ZedBoard)"
     echo -e "\t                     - L2 switch with CBS (ZedBoard)"
+    echo -e "\t                   impl_all-10g: build following designs"
+    echo -e "\t                     - 10G L2 switch with ATS (U45N)"
+    echo -e "\t                     - 10G L2 switch with CBS (U45N)"
     echo -e "\t                   impl_ats-switch: build the design of L2 switch with ATS for KC705"
     echo -e "\t                   impl_cbs-switch: build the design of L2 switch with CBS for KC705"
     echo -e "\t                   impl_ats-switch-zedboard: build the design of L2 switch with ATS for ZedBoard"
     echo -e "\t                   impl_cbs-switch-zedboard: build the design of L2 switch with CBS for ZedBoard"
     echo -e "\t                   impl_cbs-switch-zedboard-with-probes: build the design of L2 switch with CBS for ZedBoard with probes"
+    echo -e "\t                   impl_ats-switch-10g: build the design of 10G L2 switch with ATS for U45N"
+    echo -e "\t                   impl_cbs-switch-10g: build the design of 10G L2 switch with CBS for U45N"
     echo -e "\t                   open_ats-switch: open the design of L2 switch with ATS for KC705"
     echo -e "\t                   open_cbs-switch: open the design of L2 switch with CBS for KC705"
     echo -e "\t                   open_ats-switch-zedboard: open the design of L2 switch with ATS for ZedBoard"
     echo -e "\t                   open_cbs-switch-zedboard: open the design of L2 switch with CBS for ZedBoard"
     echo -e "\t                   open_cbs-switch-zedboard-with-probes: open the design of L2 switch with CBS for ZedBoard with probes"
+    echo -e "\t                   open_ats-switch-10g: open the design of 10G L2 switch with ATS for U45N"
+    echo -e "\t                   open_cbs-switch-10g: open the design of 10G L2 switch with CBS for U45N"
     echo -e "\t                   run_tb_ats_modules: run test bench for ATS modules"
     echo -e "\t                   run_tb_cbs_modules: run test bench for CBS modules"
     echo -e "\t                   run_tb_<test_name>: run test bench of the specified module"
@@ -140,6 +142,8 @@ if [ ! -z $make_target ]; then
     make $all_targets
   elif [ "$make_target" = "impl_all-zedboard" ]; then
     make $all_targets_zedboard
+  elif [ "$make_target" = "impl_all-10g" ]; then
+    make $all_targets_10g
   else
     make $make_target
   fi

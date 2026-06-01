@@ -7,6 +7,7 @@ In detail, refer to [main.md](../../../docs/ats-switch/main.md)
 
 - [CMakeLists.txt](./CMakeLists.txt): CMake file
 - [design_1.tcl](./design_1.tcl): Block design file for 1GbE ATS Switch
+- [design_1_10g.tcl](./design_1_10g.tcl): Block design file for 10GbE ATS Switch
 - [design_1_legacy.tcl](./design_1_legacy.tcl): Block design file for 1GbE ATS Switch (resource-saving version)
 - [impl_strategy_zedboard.tcl](./impl_strategy_zedboard.tcl): Patch file for implementation strategy on the ZedBoard
 - [patch_for_zedboard.tcl](./patch_for_zedboard.tcl): Patch file for block design on the ZedBoard

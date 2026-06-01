@@ -149,11 +149,7 @@ function(define_vivado project)
     COMMAND
       bash ${CMAKE_SOURCE_DIR}/rtl/src/patch.sh ${TEMAC_EXAMPLE_PROJ}
     COMMAND
-      # Define global
-      ENV_DESIGN=${ARG_DESIGN}
-      ENV_RTL="${RTL_ABS}"
-      ENV_CONSTRAINT="${CONSTRAINT_ABS}"
-      ${CMAKE_COMMAND} -E echo "INFO: skip xg_mac IP build, directory not found"
+      bash ${CMAKE_SOURCE_DIR}/../cmake/scripts/build_xg_mac_ip.sh
     COMMAND
       bash ${CMAKE_SOURCE_DIR}/../cmake/scripts/generate_commit_id_xdc.sh ${CMAKE_CURRENT_BINARY_DIR}/commit_id.xdc
     COMMAND

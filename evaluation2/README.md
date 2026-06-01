@@ -61,7 +61,7 @@ For details, see [../evaluation/README.md](../evaluation/README.md).
 
 ### Environment setup
 
-#### Hardware Setup
+#### Hardware Setup (1GbE)
 
 In our experiment, the following hardware devices are required.
 
@@ -73,6 +73,22 @@ In our experiment, the following hardware devices are required.
 Then, connect them as following.
 
 - Insert FMC to each boards and connect Ethernet port each other.
+- Connect USB cable from the host machine to 2 FPGA boards.
+
+#### Hardware Setup (10GbE)
+
+In our experiment, the following hardware devices are required.
+
+- 1 U45N or U250 FPGA board (for EFCC)
+- 1 U45N FPGA board (for TSN Switch)
+- 1 QSFP28 cable or 1 QSFP+ cable
+- 1 Host machine
+
+Then, connect them as following.
+
+- Connect the two FPGAs' QSFP28 slots with a cable.
+   - For U45N, use the QSFP28 slot that is closer to the PCIe edge.
+   - For U250, use the QSFP28 slot that is farther from the PCIe edge.
 - Connect USB cable from the host machine to 2 FPGA boards.
 
 #### Write bitstreams
@@ -127,7 +143,7 @@ The experiment is done by the following commands.
 
 ```
 cd <experiment_dir>
-python3 eval.py --efcc-jtag-target <efcc_jtag_target> --switch-jtag-target <switch_jtag_target> --board <kc705 or zedboard>
+python3 eval.py --efcc-jtag-target <efcc_jtag_target> --switch-jtag-target <switch_jtag_target> --board <kc705, zedboard or u45n>
 python3 plot.py
 ```
 

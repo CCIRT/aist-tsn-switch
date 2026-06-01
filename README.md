@@ -19,10 +19,21 @@ This repository includes two flavors of an L2 TSN switch supporting two differen
 
 ![alt text](./docs/ats-switch/img/overwiew_ats-switch.drawio.svg)
 
+- 10GbE L2 switch supporting CBS:
+  - [Specification](./docs/cbs-switch/specification.md)
+  - [FPGA design docs](./docs/cbs-switch/design_top_10g.md)
+
+![alt text](./docs/cbs-switch/img/overwiew_cbs-switch-10g.drawio.svg)
+
+- 10GbE L2 switch supporting ATS:
+  - [Specification](./docs/ats-switch/specification.md)
+  - [FPGA design docs](./docs/ats-switch/design_top_10g.md)
+
+![alt text](./docs/ats-switch/img/overwiew_ats-switch-10g.drawio.svg)
 
 ## Licensing
 
-Copyright (c) 2024-2025 National Institute of Advanced Industrial Science and Technology (AIST)
+Copyright (c) 2024-2026 National Institute of Advanced Industrial Science and Technology (AIST)
 All rights reserved.
 
 This software is released under the [MIT License](LICENSE).
@@ -48,12 +59,21 @@ It will be our encouragement.
 
 The design was implemented and validated using the following environment
 
-### Hardware 
+### Hardware (1G)
 
 - AMD Kintex 7 FPGA KC705 Evaluation Kit or Avnet ZedBoard
 - Opsero OP031-2V5 Ethernet FMC
   - Connect to the "FMC HPC" connector (KC705)
   - Connect to the "FMC LPC" connector (ZedBoard)
+
+### Hardware (10G)
+
+- AMD Alveo U45N
+- Cable corresponding to the destination slot
+  - SFP+ (10GbE NIC, etc.)
+    - Breakout cable: QSFP28 to SFP28 or QSFP+ to SFP+
+  - QSFP28 or QSFP+ (FPGA or 100GbE NIC, etc.)
+    - QSFP28 cable or QSFP+ cable
 
 ### Software
 
@@ -79,6 +99,8 @@ cd <Repository top>
 ./build_device.sh impl_all
 # ZedBoard design
 ./build_device.sh impl_all-zedboard
+# U45N design
+./build_device.sh impl_all-10g
 ```
 
 Bitstreams will be generated below.
@@ -86,9 +108,11 @@ Bitstreams will be generated below.
 - L2 switch with ATS
   - `./build-device/vivado/ats-switch/ats-switch.prj/ats-switch.runs/impl_1/design_1_wrapper.bit` (KC705)
   - `./build-device/vivado/ats-switch/ats-switch-zedboard.prj/ats-switch-zedboard.runs/impl_1/design_1_wrapper.bit` (ZedBoard)
+  - `./build-device/vivado/ats-switch/ats-switch-10g.prj/ats-switch-10g.runs/impl_1/design_1_wrapper.bit` (U45N)
 - L2 switch with CBS
   - `build-device/vivado/cbs-switch/cbs-switch.prj/cbs-switch.runs/impl_1/design_1_wrapper.bit` (KC705)
   - `build-device/vivado/cbs-switch/cbs-switch-zedboard.prj/cbs-switch-zedboard.runs/impl_1/design_1_wrapper.bit` (ZedBoard)
+  - `build-device/vivado/cbs-switch/cbs-switch-10g.prj/cbs-switch-10g.runs/impl_1/design_1_wrapper.bit` (U45N)
 
 ## Notes for each FPGA board
 - KC705
@@ -106,15 +130,14 @@ Bitstreams will be generated below.
 
       <img src="./docs/img/sw_settings_zedboard.jpg" width="25%">
 
+- U45N
+  - Connecting breakout cable
+    - The FPGA has two QSFP28 slots.
+    - Use the QSFP28 slot near the PCIe edge:.
 
-## Demo
+      <img src="./docs/img/qsfp28_cage_u45n.jpg" width="25%">
 
-To provide users an easy understanding and simplified introduction of TSN, we provide a [Demo](./docs/cbs-switch/with_probes/design_top.md) page where we demonstrate the capabilities of an AIST-TSN switch supporting CBS.
-The provided CBS Switch includes probes allowing users to output data streaming signal from PMOD port.
-The data streaming signal can be used to detect frames with external devices such as an oscilloscope.
-
-ZedBoard is the only board that can be used with this design. KC705 is not supported.
-
+    - Connect the QSFP+ end of the breakout cable to the FPGA and the SFP+ end to a device such as a 10G NIC.
 
 ## Directories
 
@@ -129,6 +152,8 @@ ZedBoard is the only board that can be used with this design. KC705 is not suppo
 ## Version notes
 
 - Upcoming
+  - Added FPGA design of 10GbE, L2 switch with CBS for U45N
+  - Added FPGA design of 10GbE, L2 switch with ATS for U45N
   - Enable board identification by device-specific ID
   - Enable FDB learning from broadcast frames (Fix communication issue in multi-hop switch setup)
 - v2.0 (Oct 2025)
@@ -150,7 +175,7 @@ ZedBoard is the only board that can be used with this design. KC705 is not suppo
 
 The Continuum Computing Architecture Research Group (CCARG), Intelligent Platforms Research Institute (IPRI), the National Institute of Advanced Industrial Science and Technology (AIST), Japan.
 
-E-mail: <M-digiarc-ccirt-contact-ml@aist.go.jp>
+Research Group Leader: Takahiro Hirofuchi, Ph.D.
 
 We are hiring postdocs and technical staffs. Collaborations are also welcome.
 

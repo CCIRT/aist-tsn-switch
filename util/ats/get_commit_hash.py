@@ -11,7 +11,7 @@ from ats_switch import AtsSwitch
 def main():
     parser = argparse.ArgumentParser('get_commit_hash', description='Get commit hash used to implement the current bitstream')
     parser.add_argument('--jtag_target', type=int, default=-1, help='AXI JTAG target. If omitted, select interactively')
-    parser.add_argument('--board', default='kc705', choices=['kc705', 'zedboard'], help='Target board')
+    parser.add_argument('--board', default='kc705', choices=['kc705', 'zedboard', 'u45n'], help='Target board')
     args = parser.parse_args()
 
     # Open xsdb connection

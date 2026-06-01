@@ -51,3 +51,29 @@ This document describes specifications of the 1GbE, 4-port L2 switch with ATS im
 
 Please use [our utility scripts](../../util).
 
+# Specifications of 10GbE ats-switch
+
+This document describes specifications of the 10GbE, 8-port L2 switch with ATS implemented on FPGA.
+
+## Basic specifications
+
+Same as the 1GbE version except for the following.
+- Support 10000BASE-R
+  - Maximum designed speed is 10 Gbps
+- Does not support auto negotiation
+
+### Flow detection
+
+Same as the 1GbE version.
+
+### ATS behavior
+
+Same as the 1GbE version except for the following.
+- Internally, time is managed as unsigned integer 72 bit
+  - The value is zero when the power is turned on, and is incremented by 6,400 every 6.4 ns
+  - Overflow will occur, but only 149 years after the power is turned on
+    - 2^72 ps = 4.72+21 ps = 4.72+9 s = 54,657 days = 149 years
+
+## How to perform register settings
+
+Please use [our utility scripts](../../util).

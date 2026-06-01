@@ -313,7 +313,7 @@ Get commit hash used to implement the current bitstream.
 ```sh
 $ python3 get_commit_hash.py -h
 usage: get_commit_hash [-h] [--jtag_target JTAG_TARGET]
-                       [--board {kc705,zedboard}]
+                       [--board {kc705,zedboard, u45n}]
 
 Get commit hash used to implement the current bitstream
 
@@ -322,6 +322,6 @@ options:
   --jtag_target JTAG_TARGET
                         AXI JTAG target. If omitted, select
                         interactively
-  --board {kc705,zedboard}
+  --board {kc705,zedboard,u45n}
                         Target board
 ```

@@ -58,3 +58,17 @@ define_vivado(cbs-switch-zedboard-with-probes
               ${CMAKE_CURRENT_SOURCE_DIR}/patch_for_with_probes.tcl
   DESIGN      design_1.tcl
 )
+
+define_vivado(cbs-switch-10g
+  TOP         design_1_wrapper
+  BOARD       xcu26-vsva1365-2LV-e
+  RTL         ${RTL_DIR}/src/mactable_mod.v
+              ${RTL_DIR}/src/mactable_dpcam_mod.v
+              ${3RDPARTY_DIR}/eth_switch/hdl/
+  CONSTRAINT  ${CONSTRAINT_DIR}/u45n.xdc
+              ${CONSTRAINT_DIR}/u45n_bitstream_config.xdc
+              ${CONSTRAINT_DIR}/u45n_timing.xdc
+  IP          ${IP_DIR}
+              ${3RDPARTY_DIR}/xg_mac/xg_mac
+  DESIGN      design_1_10g.tcl
+)
