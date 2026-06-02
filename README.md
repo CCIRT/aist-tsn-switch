@@ -121,6 +121,66 @@ Bitstreams will be generated below.
   - `build-device/vivado/cbs-switch/cbs-switch-zedboard.prj/cbs-switch-zedboard.runs/impl_1/design_1_wrapper.bit` (ZedBoard)
   - `build-device/vivado/cbs-switch/cbs-switch-10g.prj/cbs-switch-10g.runs/impl_1/design_1_wrapper.bit` (U45N)
 
+## Program a bitstream to the board
+Note: If you prefer to use a GUI, launch Vivado and program the board using the Hardware Manager. The following instructions explain the command-line procedure using xsdb.
+
+1. Set PYTHONPATH
+```sh
+export PYTHONPATH=$(pwd)/util/python
+```
+2. Get a list of devices with their unique IDs, and note the number displayed to the left of your target device. If multiple identical devices are connected, distinguish them using the unique JTAG ID shown at the end within the parentheses.
+  - ZedBoard: `xc7z020`
+  - KC705: `xc7k325t`
+  - U45N: `xcu26_ux35`
+```sh
+python3 util/common/describe_xsdb_target.py
+xsdb server launched.
+1: xc7k325t (Digilent JTAG-SMT1 210203AB909BA)
+    2: Legacy Debug Hub (Digilent JTAG-SMT1 210203AB909BA)
+        3: JTAG2AXI (Digilent JTAG-SMT1 210203AB909BA)
+4: APU (Digilent Zed 210248687025)
+    5: ARM Cortex-A9 MPCore #0 (Digilent Zed 210248687025)
+    6: ARM Cortex-A9 MPCore #1 (Digilent Zed 210248687025)
+7: xc7z020 (Digilent Zed 210248687025)
+    8: Legacy Debug Hub (Digilent Zed 210248687025)
+        9: JTAG2AXI (Digilent Zed 210248687025)
+10: xcu26_ux35 (Xilinx Alveo-ADK-2-0 FT4232H 507711333S04AA)
+    11: Legacy Debug Hub (Xilinx Alveo-ADK-2-0 FT4232H 507711333S04AA)
+```
+3. Start xsdb.
+```sh
+(after vivado setting. e.g. "source <VIVADO_ROOT>/settings64.sh")
+xsdb
+```
+4. Connect to the hw_server.
+```sh
+xsdb% conn
+```
+5. List the available JTAG targets.
+```sh
+xsdb% target
+  1  xc7k325t
+     2  Legacy Debug Hub
+        3  JTAG2AXI
+  4  APU
+     5  ARM Cortex-A9 MPCore #0 (Running)
+     6  ARM Cortex-A9 MPCore #1 (Running)
+  7  xc7z020
+     8  Legacy Debug Hub
+        9  JTAG2AXI
+ 10  xcu26_ux35
+    11  Legacy Debug Hub
+```
+6. Specify the number you noted in step 2.
+```sh
+# Example: Selecting the KC705 from the target list above
+xsdb% target 1
+```
+7. Program the bitstream by specifying its path.
+```sh
+xsdb% fpga <bitstream_path>
+```
+
 ## Notes for each FPGA board
 - KC705
   - Switch settings
