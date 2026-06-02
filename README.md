@@ -91,6 +91,13 @@ A license for AMD Tri-mode Ethernet MAC (TEMAC) IP is required to synthesize the
 
 - Set the `XILINXD_LICENSE_FILE` environment variable properly to refer to the license file.
 
+Change the PATH search order to avoid using the old cmake included in the Vivado directory.
+
+```sh
+(after vivado setting. e.g. "source <VIVADO_ROOT>/settings64.sh")
+export PATH=/usr/local/bin:/usr/bin:$PATH
+```
+
 All designs will be built by running the command below.
 
 ```sh
@@ -152,6 +159,7 @@ Bitstreams will be generated below.
 ## Version notes
 
 - Upcoming
+  - Avoid accidental use of Vivado-bundled CMake
   - Added FPGA design of 10GbE, L2 switch with CBS for U45N
   - Added FPGA design of 10GbE, L2 switch with ATS for U45N
   - Enable board identification by device-specific ID

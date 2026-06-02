@@ -51,7 +51,7 @@ _usage() {
     echo -e "\t                     - ex: display_tb_connect_frame_length.ethernet_frame"
 }
 # -------------------------------------------------
-set -e
+
 build=build-device
 mgtavcc=""
 evmmode=""
@@ -132,6 +132,12 @@ if [ ! -f CMakeCache.txt ]; then
   cmake ../device \
     $mgtavcc $evmmode \
     -DVIVADO_ROOT=$vroot
+  if [ $? -ne 0 ]; then
+    echo "Build failed"
+    cd ..
+    rm -rf ${build}
+    exit 1
+  fi
 fi
 
 # trim space
@@ -139,13 +145,13 @@ make_target=$(echo $make_target)
 
 if [ ! -z $make_target ]; then
   if [ "$make_target" = "impl_all" ]; then
-    make $all_targets
+    cmake --build . --target $all_targets
   elif [ "$make_target" = "impl_all-zedboard" ]; then
-    make $all_targets_zedboard
+    cmake --build . --target $all_targets_zedboard
   elif [ "$make_target" = "impl_all-10g" ]; then
-    make $all_targets_10g
+    cmake --build . --target $all_targets_10g
   else
-    make $make_target
+    cmake --build . --target $make_target
   fi
 else
   echo ""
